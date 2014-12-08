@@ -239,7 +239,7 @@ void printSongData(data data){
 }
 
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
-  int deltaTime = deltaTimeToNodeLength;
+  int deltaTime = deltaTimeTomodeLength;
   switch(data.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5; break;
@@ -280,22 +280,22 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
 
 /* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
 void insertMoods(moodWeighting moodArray[]){
-  moodArray[glad].node           = 3;
+  moodArray[glad].mode           = 3;
   moodArray[glad].tempo          = 4;
   moodArray[glad].toneLength     = 2;
   moodArray[glad].pitch          = 1;
 
-  moodArray[sad].node            = -4;
+  moodArray[sad].mode            = -4;
   moodArray[sad].tempo           = -5;
   moodArray[sad].toneLength      = -3;
   moodArray[sad].pitch           = 0;
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
-int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLength, int pitch){
+int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch){
   int result[AMOUNT_OF_MOODS] = {0};
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
-    result[i] += (moodArray[i].node * node);
+    result[i] += (moodArray[i].mode * mode);
     result[i] += (moodArray[i].tempo * tempo);
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
@@ -312,6 +312,6 @@ int sortResult(const void *pa, const void *pb){
 }
 
 /* Find note length */
-int deltaTimeToNodeLength (int ticks, int ppqn){
+int deltaTimeTomodeLength (int ticks, int ppqn){
   return (int) (round((4*ticks)/ppqn));
 }
