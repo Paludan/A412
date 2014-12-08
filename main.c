@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
 #define CHARS 1000
 #define AMOUNT_OF_MOODS 2
 
@@ -297,5 +298,5 @@ int sortResult(const void *a, const void *b){
 
 /* Find note length */
 int deltaTimeToNodeLength (int ticks, int ppqn){
-	return (ticks/ppqn)*4;
+	return (int) (round((4*ticks)/ppqn));
 }
