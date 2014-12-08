@@ -5,7 +5,7 @@
  * Jonas Stolberg
  * Jacob Mortensen
  * Esben Kirkegaard
- * Arne Rasmussen Da Champ
+ * Arne Rasmussen
  * Tobias Morell
 */
 
@@ -33,12 +33,7 @@ typedef struct{
 } data;
 
 typedef struct{
-  char *parameter;
-  int point;
-} points;
-
-typedef struct{
-  int mode;
+  int node;
   int tempo;
   int toneLength;
   int pitch;
@@ -55,13 +50,15 @@ void printSongData(data);
 void insertMoods(moodWeighting []);
 int weightingMatrix(moodWeighting [], int, int, int, int);
 void findEvents(int, int [], note []);
+void settingPoints(int*, int*, int*, int*, data);
 int sortResult(const void *, const void *);
 
 int main(int argc, const char *argv[]){
   /*Variables*/
-  int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
+  int numbersInText = 0, notes, i = 0;
   /* PLACEHOLDER FIX THIS */
-  int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
+  int mode = 5, tempo = 5, toneLength = 0, pitch = 0;
+  /* END PLACEHOLDER */
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data;
   FILE *f = fopen(argv[1],"r");
@@ -84,14 +81,15 @@ int main(int argc, const char *argv[]){
   insertMoods(moodArray);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, data);
+  int moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
   printSongData(data);
-  moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
+  printf("%d\n", moodOfMelodi);
 
   /*Clean up and close*/
   fclose(f);
   free(hex);
   free(noteAr);
-
   return 0;
 }
 
@@ -112,11 +110,11 @@ int getHex(FILE *f, int hexAr[]){
 
 /**A function to count the number of notes in the entire song
   *@param[int] hex[]: an array with the stored information from the file
-  *@param[int] amount: an integer holding the total number of characters in the array
+  *@param[int] ammount: an integer holding the total number of characters in the array
  */
-int countNotes(int hex[], int amount){
+int countNotes(int hex[], int ammount){
   int i = 0, res = 0;
-  for(i = 0; i < amount; i++){
+  for(i = 0; i < ammount; i++){
     if(hex[i] == 0x90){
       res++;
     }
@@ -127,7 +125,7 @@ int countNotes(int hex[], int amount){
 /**A function, that fills out the song data
   *@param[data*] data: a pointer to a structure containing the tempo and mode of the song
   *@param[int] hex[]:the array of integers read from the file
-  *@param[int] numbersInText: the total amount of integers in the array
+  *@param[int] numbersInText: the total ammount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
   int j;
@@ -236,59 +234,61 @@ void printSongData(data data){
   putchar('\n');
 }
 
-void settingPoints(data data, note note){
-  points pointsData[4];
-  pointsData[0].parameter = "mode"; pointsData[1].parameter = "tempo";
-  pointsData[2].parameter = "length"; pointsData[3].parameter = "octave";
+void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
   switch(data.mode){
-    case minor: pointsData[0].point = -5; break;
-    case major: pointsData[0].point = 5; break;
+    case minor: *mode = -5; break;
+    case major: *mode = 5; break;
   }
   if(data.tempo < 60)
-    pointsData[1].point = -5;
+    *tempo = -5;
   else if(data.tempo >= 60 && data.tempo < 70)
-    pointsData[1].point = -4;
+    *tempo = -4;
   else if(data.tempo >= 70 && data.tempo < 80)
-    pointsData[1].point = -3;  
+    *tempo = -3;  
   else if(data.tempo >= 80 && data.tempo < 90)
-    pointsData[1].point = -2;
+    *tempo = -2;
   else if(data.tempo >= 90 && data.tempo < 100)
-    pointsData[1].point = -1;
+    *tempo = -1;
   else if(data.tempo >= 100 && data.tempo < 120)
-    pointsData[1].point =  0;  
+    *tempo =  0;  
   else if(data.tempo >= 120 && data.tempo < 130)
-    pointsData[1].point =  1;
+    *tempo =  1;
   else if(data.tempo >= 130 && data.tempo < 140)
-    pointsData[1].point =  2;
+    *tempo =  2;
   else if(data.tempo >= 140 && data.tempo < 150)
-    pointsData[1].point =  3;
+    *tempo =  3;
   else if(data.tempo >= 150 && data.tempo < 160)
-    pointsData[1].point =  4;
-  else if(data.tempo >  160)
-    pointsData[1].point =  5;
+    *tempo =  4;
+  else if(data.tempo >=  160)
+    *tempo =  5;
 }
 
-/* Inserts the weighting of each mood in the weighting matrix */
-void insertMoods(moodWeighting moodArray[]){
-  moodArray[glad].mode           = 3;
-  moodArray[glad].tempo          = 4;
-  moodArray[glad].toneLength     = 2;
-  moodArray[glad].pitch          = 1;
 
-  moodArray[sad].mode            = -4;
-  moodArray[sad].tempo           = -5;
-  moodArray[sad].toneLength      = -3;
-  moodArray[sad].pitch           = 0;
+/* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
+void insertMoods(moodWeighting moodArray[]){
+  moodArray[0].node           = 3;
+  moodArray[0].tempo          = 4;
+  moodArray[0].toneLength     = 2;
+  moodArray[0].pitch          = 1;
+
+  moodArray[1].node            = -4;
+  moodArray[1].tempo           = -5;
+  moodArray[1].toneLength      = -3;
+  moodArray[1].pitch           = 0;
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
-int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch){
+int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLength, int pitch){
   int result[AMOUNT_OF_MOODS] = {0};
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
-    result[i] += (moodArray[i].mode * mode);
+    result[i] += (moodArray[i].node * node);
     result[i] += (moodArray[i].tempo * tempo);
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
+    if (i == 0)
+      printf("Happy: %d\n", result[0]);
+    else if (i == 1)
+      printf("Sad: %d\n", result[1]);
   }
   qsort(result, AMOUNT_OF_MOODS, sizeof(int), sortResult);
   return result[0];
@@ -298,7 +298,7 @@ int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLeng
 int sortResult(const void *pa, const void *pb){
   int a = *(const int*)pa;
   int b = *(const int*)pb;
-  return (a-b);
+  return (b-a);
 }
 
 /* Find note length */
