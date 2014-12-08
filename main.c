@@ -13,32 +13,35 @@
 #include <stdlib.h>
 #include <math.h>
 #define CHARS 1000
+#define FOUR 4
 
 /*Enums and structs*/
-enum mode {major, minor};
-typedef enum mode mode;
+typedef enum mode {major, minor} mode;
+typedef enum tone {C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B} tone;
+typedef enum mood {glad, sad, relaxed, sleepy} mood;
 
-enum tone {C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B};
-typedef enum tone tone;
-
-struct note{
+typedef struct{
   int tone;
   int octave;
   int lenght;
-};
-typedef struct note note;
+} note;
 
-struct songData{
+typedef struct{
   unsigned int tempo;
   mode mode;
-};
-typedef struct songData data;
+} data;
 
-struct pointSystem{
+typedef struct{
   char *parameter;
   int point;
-};
-typedef struct pointSystem points;
+} points;
+
+typedef struct{
+  int node;
+  int tempo;
+  int toneLength;
+  int pitch;
+} moodWeighting;
 
 /*Prototypes*/
 void findNoteLength(double x, int *, int *);
@@ -48,10 +51,14 @@ void fillSongData(data*, int[], int);
 int countNotes(int[], int);
 void fillNote(int, note*);
 void printSongData(data);
+void insertMoods(moodWeighting []);
+int weightingMatrix(int, int, int, int);
+void findEvents(int, int [], note []);
 
 int main(int argc, const char *argv[]){
   /*Variables*/
-  int j, numbersInText = 0, notes, i = 0;
+  int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
+  moodWeighting moodArray[FOUR];
   data data;
   FILE *f = fopen(argv[1],"r");
   int *hex = (int *) malloc(CHARS * sizeof(int));
@@ -69,42 +76,12 @@ int main(int argc, const char *argv[]){
     printf("Memory allocation failed, bye!");
     exit(EXIT_FAILURE);
   }
-  // Variables
-  int note = 0x01, eventType = 0x01, counter = 0;
-
-  /*Read and proces the hex array*/
-  for(j = 0; j < numbersInText; j++){
-    // Hops over any noto-on, note-off or metaevent start
-    // Also stores the tones read after a note-on
-    if(hex[j] == 0x00 && (hex[j + 1] == 0x90 || hex[j + 1] == 0xff)){
-      counter = 1;
-      j += 3;
-      if(hex[j - 2] == 0x90){
-        note = hex[j - 1];
-        fillNote(hex[j - 1], &noteAr[i]);
-        i++;
-      }
-      else{
-        eventType = hex[j - 1];
-      }
-    }
-    else if(hex[j] == 0x80 && hex[j + 1] == note){
-      j += 2;
-      note = 0x01;
-      counter = 0;
-    }
-    if(counter){
-      // Here you can check for parameters inside a meta-event or MIDI-event
-    }
-    else{
-      // Here you can check for parameters outside a meta-event or MIDI-event
-      // e.g. between a note-off and the next MIDI-event or a meta-event
-    }
-  }
-  
+  findEvents(numbersInText, hex, noteAr);
+  insertMoods(moodArray);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
   printSongData(data);
+  moodOfMelodi = weightingMatrix(node, tempo, toneLength, pitch);
 
   /*Clean up and close*/
   fclose(f);
@@ -160,6 +137,38 @@ void fillSongData(data *data, int hex[], int numbersInText){
   }
 }
 
+void findEvents(int numbersInText, int hex[], note noteAr[]){
+  int note = 0x01, eventType = 0x01, counter = 0;
+  /*Read and proces the hex array*/
+  for(int j = 0; j < numbersInText; j++){
+    /* Hops over any noto-on, note-off or metaevent start
+       Also stores the tones read after a note-on         */
+    if(hex[j] == 0x00 && (hex[j + 1] == 0x90 || hex[j + 1] == 0xff)){
+      counter = 1;
+      j += 3;
+      if(hex[j - 2] == 0x90){
+        note = hex[j - 1];
+        fillNote(hex[j - 1], &noteAr[i]);
+        i++;
+      }
+      else{
+        eventType = hex[j - 1];
+      }
+    }
+    else if(hex[j] == 0x80 && hex[j + 1] == note){
+      j += 2;
+      note = 0x01;
+      counter = 0;
+    }
+    if(counter){
+      /* Here you can check for parameters inside a meta-event or MIDI-event */
+    }
+    else{
+      /* Here you can check for parameters outside a meta-event or MIDI-event
+         e.g. between a note-off and the next MIDI-event or a meta-event      */
+    }
+  }
+}
 
 /**A function to calculate the notelenght - tba
 */
@@ -253,4 +262,45 @@ void settingPoints(data data, note note){
     pointsData[1].point =  4;
   else if(data.tempo >  160)
     pointsData[1].point =  5;
+}
+
+/* Inserts the weighting of each mood in the weighting matrix */
+void insertMoods(moodWeighting moodArray[]){
+  moodArray[glad].node           = 3;
+  moodArray[glad].tempo          = 4;
+  moodArray[glad].toneLength     = 2;
+  moodArray[glad].pitch          = 1;
+
+  moodArray[sad].node            = -4;
+  moodArray[sad].tempo           = -5;
+  moodArray[sad].toneLength      = -3;
+  moodArray[sad].pitch           = 0;
+
+  moodArray[relaxed].node        = 1;
+  moodArray[relaxed].tempo       = -4;
+  moodArray[relaxed].toneLength  = -4;
+  moodArray[relaxed].pitch       = 0;
+
+  moodArray[sleepy].node         = -2;
+  moodArray[sleepy].tempo        = -5;
+  moodArray[sleepy].toneLength   = -4;
+  moodArray[sleepy].pitch        = 0;
+}
+
+/* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
+int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLength, int pitch){
+  int result[FOUR] = {0};
+  for(int i = 0; i < FOUR; i++){
+    result[i] += (moodArray[i].node * node);
+    result[i] += (moodArray[i].tempo * tempo);
+    result[i] += (moodArray[i].toneLength * toneLength);
+    result[i] += (moodArray[i].pitch * pitch);
+  }
+  qsort(result, FOUR, sizeof(int), sortResult);
+  return result[0];
+}
+
+/* Sort rows highest first */
+int sortResult(const void *a, const void *b){
+  return ( *(int *)a - *(int *)b );
 }
