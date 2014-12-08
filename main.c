@@ -145,14 +145,14 @@ void findEvents(int numbersInText, int hex[], note noteAr[]){
        Also stores the tones read after a note-on         */
     if(hex[j] == 0x00 && (hex[j + 1] == 0x90 || hex[j + 1] == 0xff)){
       counter = 1;
-      j += 3;
-      if(hex[j - 2] == 0x90){
-        note = hex[j - 1];
-        fillNote(hex[j - 1], &noteAr[i]);
+      j += 4;
+      if(hex[j - 3] == 0x90){
+        note = hex[j - 2];
+        fillNote(hex[j - 2], &noteAr[i]);
         i++;
       }
       else{
-        eventType = hex[j - 1];
+        eventType = hex[j - 2];
       }
     }
     else if(hex[j] == 0x80 && hex[j + 1] == note){
