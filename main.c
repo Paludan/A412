@@ -13,12 +13,12 @@
 #include <stdlib.h>
 #include <math.h>
 #define CHARS 1000
-#define FOUR 4
+#define AMOUNT_OF_MOODS 2
 
 /*Enums and structs*/
 typedef enum mode {major, minor} mode;
-typedef enum tone {C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B} tone;
-typedef enum mood {glad, sad, relaxed, sleepy} mood;
+typedef enum tone {C, Csharp, D, Dsharp, E, F = 6, Fsharp, G, Gsharp, A, Asharp, B} tone;
+typedef enum mood {glad, sad} mood;
 
 typedef struct{
   int tone;
@@ -58,7 +58,7 @@ void findEvents(int, int [], note []);
 int main(int argc, const char *argv[]){
   /*Variables*/
   int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
-  moodWeighting moodArray[FOUR];
+  moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data;
   FILE *f = fopen(argv[1],"r");
   int *hex = (int *) malloc(CHARS * sizeof(int));
@@ -275,28 +275,18 @@ void insertMoods(moodWeighting moodArray[]){
   moodArray[sad].tempo           = -5;
   moodArray[sad].toneLength      = -3;
   moodArray[sad].pitch           = 0;
-
-  moodArray[relaxed].node        = 1;
-  moodArray[relaxed].tempo       = -4;
-  moodArray[relaxed].toneLength  = -4;
-  moodArray[relaxed].pitch       = 0;
-
-  moodArray[sleepy].node         = -2;
-  moodArray[sleepy].tempo        = -5;
-  moodArray[sleepy].toneLength   = -4;
-  moodArray[sleepy].pitch        = 0;
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
 int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLength, int pitch){
-  int result[FOUR] = {0};
-  for(int i = 0; i < FOUR; i++){
+  int result[AMOUNT_OF_MOODS] = {0};
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     result[i] += (moodArray[i].node * node);
     result[i] += (moodArray[i].tempo * tempo);
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
   }
-  qsort(result, FOUR, sizeof(int), sortResult);
+  qsort(result, AMOUNT_OF_MOODS, sizeof(int), sortResult);
   return result[0];
 }
 
