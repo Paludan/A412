@@ -1,0 +1,42 @@
+
+<mpfile> ::= <global>* <trk>+
+
+<global> ::=  "meter" <meter> | "tempo" <bpm> | <ppqn> \d+ |
+              "duty" <percent>| "velocity" <7bit> | "globaloose" \d+ "," \d+ |
+             "globalvelvar" \d+ "," \d+ | "globalguiton" | "key" <key>
+
+<trk> ::= '|' \d? <event>+
+
+<event> ::= <note> | <defnote> | <number> | <chord> | <rest> |<cmd> |
+            <number> '='* | <octup> | <octdown>
+
+<rest> ::= '-'
+
+<defnote> ::= 'o' <pitch>? <length>
+
+<note> ::= <stress>? <pitch> <length>
+
+<pitch> ::= [a-g] <accid>? <octave>?   | 
+            'n' 't'? [+\-]? <midinote> |
+            'x'
+
+<chord> ::= '[' [^\]]+ ']' <length>
+
+<octup> ::= '/'
+<octdown> ::= '\\'
+
+<length> ::= ('/' <digit>+)? '='*
+<octave> ::= <digit>+
+<accid>  ::= [#b+\-]
+<stress> ::= [\',]
+<midinote> ::= <digit>+
+
+
+<meter> ::= \N ('/' \N)? | "none" | '(' \N ('+' \N)* ')' 
+<ppqn> ::= "ppqn" | "resolution"
+<bpm>  ::= "0" | "1" | "2" | "3" | \d\d+
+
+<percent> ::= 0..100
+<7bit> := 0..127
+
+<key> ::= [a-g]<accid>? ("min" | "maj")?

@@ -1,0 +1,98 @@
+[Config]
+Compilator.FileName=C:\d\personal\middl\mk.bat
+Compilator.PSPar=%Dir% %Input%
+Compilator.SaveAll=1
+Compilator.Capture=1
+Compilator.ParsLog=%F:%L
+Compilator.HideOutput=1
+Compilator.LogType=0
+DefaultDir=.
+DefaultCPIndex=0
+LogtoEnd=1
+DontOpen=0
+AbsolutePath=0
+FileFormat=1
+ProjectFilesOnly=0
+[Project tree]
+New project
+	+midll
+		+examples
+			-mpad
+				+l01c
+					examples\mpad\l01c\Valentine.mp
+					examples\mpad\l01c\sth.mp
+					examples\mpad\l01c\Polyfun2.mp
+					examples\mpad\l01c\Polyfun1.mp
+					examples\mpad\l01c\Meshuggah War.mp
+					examples\mpad\l01c\Meshuggah I.mp
+					examples\mpad\l01c\mbv.mp
+					examples\mpad\l01c\Bird I.mp
+					examples\mpad\l01c\9.mp
+					examples\mpad\l01c\8.mp
+					examples\mpad\l01c\7.mp
+					examples\mpad\l01c\6.mp
+					examples\mpad\l01c\5.mp
+					examples\mpad\l01c\4.mp
+					examples\mpad\l01c\3.mp
+					examples\mpad\l01c\2.mp
+					examples\mpad\l01c\14.mp
+					examples\mpad\l01c\13.mp
+					examples\mpad\l01c\12.mp
+					examples\mpad\l01c\11.mp
+					examples\mpad\l01c\10.mp
+					examples\mpad\l01c\1.mp
+				examples\mpad\mpad.c
+				examples\mpad\makefile
+		+src
+			src\mf_write.c
+			src\mf_start.h
+			src\mf_read.c
+			src\mf_priv.h
+			src\mf_instruments.c
+			src\mf_instruments.h
+			src\mf_handlers.c
+			src\mf_control.c
+			src\mf_control.h
+			src\mf_chords.c
+			src\mf_chords.h
+			src\makefile
+		targets.mk
+		mk.bat
+		config.mk
+		-test
+[Open project files]
+0=src\mf_read.c
+1=src\mf_priv.h
+2=src\mf_write.c
+3=src\mf_control.c
+4=src\mf_control.h
+5=src\mf_start.h
+6=src\mf_read.h
+7=test\mf_read_ut.c
+[Selected Project Files]
+Main=
+Selected=src\mf_read.c
+[src\mf_read.c]
+TopLine=292
+Caret=2,407
+[src\mf_priv.h]
+TopLine=10
+Caret=1,29
+[src\mf_write.c]
+TopLine=9
+Caret=14,29
+[src\mf_control.c]
+TopLine=88
+Caret=13,90
+[src\mf_control.h]
+TopLine=1
+Caret=1,1
+[src\mf_start.h]
+TopLine=19
+Caret=1,35
+[src\mf_read.h]
+TopLine=1
+Caret=17,11
+[test\mf_read_ut.c]
+TopLine=1
+Caret=1,23

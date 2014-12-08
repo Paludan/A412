@@ -1,0 +1,1099 @@
+musicpad - the "I" project
+
+back to musicpad
+
+"I" is a song by Meshuggah published in an EP in July 2004. It's 21 minutes long exactly.
+
+Below you'll find "I", musicpad style... Still a Work in Progress, 75% completed.
+
+Kudos to the Tandjent Meshforum's mad transcriptshuggers.
+
+You may be interested in the complete tab, of maybe the summary ?
+intro 00:00 - 01:33
+
+# Meshuggah I, intro 00:00 - 01:33
+
+tempo97
+
+m$intro(
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 
+'xxx='xxx='xxxxx= 'xxxxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxxxx= 'xxx='xxx='xxx= 'xxxxx='xxxxx= 'xxxxx='xxxxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxxxx=
+'xxxxx='xxxxx= 'xxxxx='xxxxx='xxxxx= 'xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxxxx='xxxxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx=
+'xxx='xxxxx= 'xxx='xxx='xxx='xxxxx= 'xxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx=
+'xxxxx='xxxxx='xxxxx= 'xxxxx='xxxxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxx='xxxxx= 'xxx='xxxxx= 'xxx='xxx='xxx='xxxxx= 'xxx='xxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxxxx= 'xxxxx='xxxxx='xxxxx=
+'xxx='xxx='xxx= 'xxx='xxx='xxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxx=
+'xxxxx='xxxxx= 'xxxxx='xxxxx= 'xxx='xxx=  'xxxxx='xxxxx= 'xxx='xxx='xxx= 'xxxxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxxxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxxxx='xxx='xxx=
+'xxxxx='xxxxx= 'xxx='xxx='xxxxx= 'xxx='xxxxx= 'xxx='xxx='xxxxx= 'xxxxx='xxxxx='xxxxx=
+'xxx='xxx='xxxxx= 'xxxx== 
+)
+
+m$introB(
+---x---x-----x ---x---x-----x ---x---x-----x ---x---x-----x
+---x---x-----x ---x---x-----x ---x---x-----x ---x---x-----x 
+---x---x-----x -----x-----x ---x---x-----x ---x-----x
+---x---x-----x ---x-----x ---x---x---x -----x-----x -----x-----x-----x
+---x---x-----x ---x---x-----x ---x-----x ---x---x-----x ---x-----x
+-----x-----x -----x-----x-----x ---x-----x ---x---x-----x ---x-----x
+---x---x-----x ---x---x-----x ---x---x-----x ---x---x-----x
+---x---x-----x ---x---x-----x ---x---x-----x -----x-----x-----x
+---x---x-----x ---x---x-------x ---x---x-----x ---x---x-----x
+---x-----x ---x---x---x-----x ---x-----x
+---x---x-----x ---x---x-----x ---x---x-----x
+-----x-----x-----x -----x-----x-----x
+---x---x-----x ---x---x---x-----x ---x-----x ---x---x---x-----x ---x---x
+---x---x-----x ---x---x-----x ---x-----x -----x-----x-----x
+---x---x---x ---x---x---x
+---x---x-----x ---x---x-----x ---x---x-----x ---x---x---x
+-----x-----x -----x-----x ---x---x  -----x-----x ---x---x---x -----x-----x
+---x---x-----x ---x---x-----x ---x---x-----x ---x---x-----x
+---x---x-----x ---x---x-----x ---x---x-----x ---x---x-----x
+---x---x-----x -----x-----x
+---x---x-----x ---x---x-----x ---x---x-----x ---x---x-----x -----x---x---x
+-----x-----x ---x---x-----x ---x-----x ---x---x-----x -----x-----x-----x
+---x---x-----x ----xx 
+)
+
+|0 iT5 o/32 | iBD o/32 | iSD 
+|5 ch1 i34 oD#2/32 | ch2 i81 oD#3/32     #instruments def
+
+|0 $intro | $introB | P/1*37 P/32*26 8
+|5 $intro x/8 | $intro x/8
+
+
+chaos 01:33 - 01:55
+
+# Meshuggah I, chaos 01:33 - 01:55
+
+tempo97
+
+|0 iCC o/32 | iBD o/32 |  
+|5 ch1 i34 oD2/32 | ch2 i81 oD3/32     #instruments def
+
+|0 32*128 | 32*128 |5 32*128 | 32*128 |
+|0 32*128 | 32*128 |5 oA2/32 32*128 | 32*128  |
+
+
+theme1 first part 01:55 - 02:54
+
+# Meshuggah "I", theme1 first part 01:55 - 02:54
+
+
+tempo97
+
+# Basic patterns
+
+m$1b0( o/32 xxx-*1 )
+m$1b1( o/32 xxx-*1 P/8 )
+m$1b2( o/32 xxx-*2 P/8 )
+m$1b3( o/32 xxx-*3 P/8 )
+m$1b4( o/32 xxx-*4 P/8 )
+m$1b5( o/32 xxx-*5 P/8 )
+m$1b6( o/32 xxx-*6 P/8 )
+m$1b7( o/32 xxx-*7 P/8 )
+m$1b7b( o/32 xxx-*7 )
+m$1b8( o/32 xxx-*8 P/8 )
+m$1b9( o/32 xxx-*9 P/8 )
+
+# First part pattern, 128/8
+
+m$1bA( 
+$1b3 P/8                             
+$1b1 $1b3 $1b1 $1b1 $1b4 P/8         
+$1b1 $1b4 $1b1 $1b2 $1b1 $1b4 P/8    
+$1b1 $1b7 $1b5 P/8                   
+$1b1 $1b2 $1b1 $1b1 $1b4 P/8         
+$1b1 $1b4 $1b1 $1b2 $1b1 $1b4 P/8    
+$1b1 $1b7 $1b5 P/8                   
+$1b1 $1b2 $1b8 P/8                   
+$1b1 )                          
+
+# Second part pattern 64/8
+# Problem is, guitars change key after 1/8 only, so I must decompose
+
+m$1bBa( 
+$1b1 $1b1 $1b2 P/8 
+$1b4 $1b2 P/8 
+$1b3 P/8 
+$1b1 $1b1 $1b3 P/8 
+$1b1 $1b1 $1b1 $1b3 $1b3 P/8 
+$1b1 $1b2 P/8
+$1b7b
+)
+
+m$1bB(    $1b4          P/8 $1bBa ) # bass drum 
+m$1gB( oC $1b0 oC+ $1b3 P/8 $1bBa ) # guitars with key change
+
+# Drums
+#  Cymbal     | Snare             | Kick | Tom (s)
+|0 iCC        | iSD               | iBD  | iT5           #instruments def
+|0 8*128      | (P/16 x)*128      | $1bA | P/1*16        #part A
+|0 8*57 P/8*7 | (P/16 x)*57 P/8*7 | $1bB | P/1*7 P/8 $1b7b   #part B key change
+
+# Guitars
+#  bass     |   guitar     |  solo 1        |    solo 2
+|5 ch1 i34  | ch2 i81      | ch3 i30 o5 v80 | ch4 i30 v60 o5 #instruments def
+|5 oC2 $1bA | oC3 $1bA     | P/1*16         | P/1*16         #part A
+|5 $1gB     | $1gB         | P/1*8          | P/1*8          #part B key change
+
+
+theme1 solo 02:54 - 03:34
+
+# Meshuggah I, theme1 solo 02:54 - 03:34
+
+tempo97
+
+# Basic patterns with long ends.
+
+m$1b0( xxx= )
+m$1b1( xxx= ==== )
+m$1b2( xxx=*2 ==== )
+m$1b3( xxx=*3 ==== )
+m$1b4( xxx=*4 ==== )
+m$1b5( xxx=*5 ==== )
+m$1b6( xxx=*6 ==== )
+m$1b7( xxx=*7 ==== )
+
+# Third part pattern, 128/8
+
+m$1bC( 
+o/32
+$1b3 $1b5 ====                             
+$1b1 $1b2 $1b1 $1b1 $1b4 ====
+$1b1 $1b6 $1b1 $1b1 $1b4 ====
+$1b1 $1b4 $1b1 $1b2 $1b1 $1b4 ====
+$1b1 $1b7 $1b5 ====
+$1b1 $1b2 $1b1 $1b1 $1b4 ====
+$1b1 $1b4 $1b1 $1b2 $1b1 $1b4 ====
+$1b1 $1b7 $1b0                    
+)    
+
+# Third part Solo, (5-5-5-7)*4 5-5-5-3 = 128
+
+m$1sA (
+o/16
+(
+D# E  D# =  C# D# C# =  =  = 
+D# E  D# =  C  C# C  =  =  = 
+D# E  D# =  C# D# C# =  =  =
+D# E  F# =  C# D# C# =  C  C# C  =  =  =
+)*5
+D# E  D# =  C# D# C# =  =  = 
+D# E  D# =  C  C# C  =  =  =
+D# E  D# =  C# D# C# =  =  =
+C  C# C  =  =  =
+)
+
+m$1sB (
+P/16*6 
+(o/8 F#==== G==== F#====== G====)*5
+     F#==== G==== F#= G==
+)
+
+# Drums
+#  Cymbal     | Snare             | Kick | Tom (s)
+|0 iCC        | iSD               | iBD  | iT5           #instruments def
+|0 8*128      | (P/16 x)*128      | $1bC | P/1*16        #part C, solo
+|0 2          | P/2               | 2    | P/2           #break
+
+
+# Guitars
+#  bass     |   guitar     |  solo 1        |    solo 2
+|5 ch1 i34  | ch2 i81      | ch3 i30 o5 v80 | ch4 i30 v60 o5 #instruments def
+|5 oC2 $1bC | oC3 $1bC     | $1sA           | $1sB           #part C, solo
+|5 P/2      | A2/8 G# G F# | P/2            | P/2            #break
+
+
+
+theme2 03:35 - 04:50
+
+# Meshuggah I, theme2 03:35 - 04:50
+
+tempo200
+
+#  Cymbal | Hihat | Snare | Kick
+|0 iCC o/16   | iOH o/16  | iSD o/16  | iBD o/16
+
+#  bass          |   guitar      | solo guitar
+|4 ch1 i34 o1/16 | ch2 i81 o2/16 | ch3 i81 o5/16 v80
+
+|0x---------------x-----------------------------------------------
+| --------x---x---------x---x---x---x-----x---x---x---x-x---------
+| ----------------------x-------------------------x-----x---------
+| x---x---xxxxxxxxx---x-x---x---x---xxxxxxx---x---x---x-x---xxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| P/1*4
+
+|0x-------------x-----------------------------------------x-------
+| --------x-------------x---------x-------x---x---x---x-------x---
+| --------x-----x-------x-----------------x-----------------------
+| x---x---x---x-x---x---x---xxxxxxx---x---x---xxxxxxxxxxxxx---x---
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxA===F===
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxA===F===
+| P/1*4
+
+|0x---------------x-----------------------------------------------
+| ----x---x---x-------x-x---x---x---x-----x---x---x-----x---------
+| ----------------------x-------------------------x-----x---------
+| x---x---xxxxxxxxx---x-x---x---x---xxxxxxx---x---x---x-x---xxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| P/1*4
+
+|0x-------------x-----------------------------------------x-------
+| --------x-------------x---------x-------x---x---x---x-------x---
+| --------x-------------x-----------------x-----------------------
+| x---x---x---x-x---x---x---xxxxxxx---x---x---xxxxxxxxxxxxx---x---
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxA===F===
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxA===F===
+| P/1*4
+
+|0--------------x-----------------------------------------x-------
+| x-------x-------------x---------x-------x---x---x---x---------x-
+| --------x-------------x-----------------x---------------------x-
+| x---x---x-----x---x---x---xxxxxxx---x---x---xxxxxxxxxxxxx---x-x-
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxF===A=/ Ab===\
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxF===A=/ Ab===\
+| c/16===============================\ b===============================/
+
+|0------x---------------------------------------------------------
+| --x-------------x---x-x---x---x---x---------x-------x---x-----x-
+| ----------------------x-------x---x-----------------x---x-----x-
+| --x---x---xxxxxxx---x-x---x---x---x---xxxxxxx---x---x---x---x-x-
+| F===A===FxxxxxA===F=/ Ab===\ A===/ Ab===Ab===\ FxxxxxA===F===/ Ab===Ab===\ F=/ Ab===
+| F===A===FxxxxxA===F=/ Ab===\ A===/ Ab===Ab===\ FxxxxxA===F===/ Ab===Ab===\ F=/ Ab===
+| c===============================c#===============================
+
+|0------------------------------------------------x-------x-------
+| --x---x---------x---x-x---x-----x---x---x---x-------x-------x---
+| --x---x---------------x-----------------x-----------------------
+| --x---x---xxxxxxx---x-x---xxxxxxx---x---x---xxxxx---x---x---x---
+| Ab===Ab===\ FxxxxxA===F=/ Ab===\ FxxxxxA===F===/ Ab===\ FxxxA===F===F#===F===
+| Ab===Ab===\ FxxxxxA===F=/ Ab===\ FxxxxxA===F===/ Ab===\ FxxxA===F===F#===F===
+| c===============================\ b===============================/
+
+|0--------x-----------------------------------------------x-------
+| x---x-------x-x---x---x---x-----x---x---x---x-x-----------------
+| --------------x-------------------------x-----x-----------------
+| xxxxxxxxx---x-x---x---x---xxxxxxx---x---x---x-x---xxxxxxx---x---
+| FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===FxxxxxF===A===
+| FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===FxxxxxF===A===
+| c===============================c#===============================
+
+|0------x-----------------------------------------x-------------x-
+| x-------------x---------x-------x---x---x---x---------x---x-----
+| x-------------x-----------------x---------------------x---------
+| x---x-x---x---x---xxxxxxx---x---x---xxxxxxxxxxxxx---x-x---x---x-
+| / Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxF===A=/ Ab===\ F===A===
+| / Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxF===A=/ Ab===\ F===A===
+| c===============================\ b===============================/
+
+|0----------------------------------------------------------------
+| --------x---x-x---x---x---x---------x-------x---x-----x---x---x-
+| --------------x-------x---x-----------------x---x-----x---x---x-
+| --xxxxxxx---x-x---x---x---x---xxxxxxx---x---x---x---x-x---x---x-
+| FxxxxxA===F=/ Ab===\ A===/ Ab===Ab===\ FxxxxxA===F===/ Ab===Ab===\ F=/ Ab===Ab===Ab===\
+| FxxxxxA===F=/ Ab===\ A===/ Ab===Ab===\ FxxxxxA===F===/ Ab===Ab===\ F=/ Ab===Ab===Ab===\
+| c===============================c#===============================
+
+|0----------------------------------------x-------x---------------
+| --------x-----x---x-----x---x---x---x-------x-------x---x---x---
+| --------------x-----------------x-------------------------------
+| --xxxxxxx---x-x---xxxxxxx---x---x---xxxxx---x---x---x---xxxxxxxx
+| FxxxxxA===F=/ Ab===\ FxxxxxA===F===/ Ab===\ FxxxA===F===F#===F===Fxxxxxxx
+| FxxxxxA===F=/ Ab===\ FxxxxxA===F===/ Ab===\ FxxxA===F===F#===F===Fxxxxxxx
+| c===============================\ b===============================/
+
+|0x-----------------------x-------------x-------------------------
+| ----x-x---x---x---x-------------x-------------x---------x-------
+| ------x-------------------------x-------------x-----------------
+| x---x-x---x---x---xxxxxxx---x---x---x-x---x---x---xxxxxxx---x---
+| A===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===
+| A===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===
+| c===============================c#===============================
+
+|0x---------------x-----------------------------------------------
+| ----x---x---x-------x-x---x---x---------x---x---x---x-x---------
+| ----------------------x-------------------------x-----x---------
+| x---x---xxxxxxxxx---x-x---x---x---xxxxxxx---x---x---x-x---xxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| P/1*4
+
+|0x-------------x-------------------------x-----------------------
+| --------x-------------x---------x---x-------x---x---x---x---x---
+| --------x-------------x-----------------x-----------------------
+| x---x---x---x-x---x---x---xxxxxxx---x---x---xxxxxxxxxxxxx---x---
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxA===F===
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxA===F===
+| P/1*4
+
+|0----x-----------x-----------------------------------------------
+| x-------x-----------x-x---x---x---x-----x---x---x---x-x---------
+| ----------------------x-------------------------x-----x---------
+| x---x---xxxxxxxxx---x-x---x---x---xxxxxxx---x---x---x-x---xxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| F#===F===FxxxxxxxA===F=/ Ab===\ F===F===FxxxxxF===A===/ Ab===\ F=A===Fxxxxx
+| P/1*4
+
+|0x-------------x-----------------------------------------x-----x-
+| --------x-------------x---------x-------x---x---x---x-----------
+| --------x-------------x-----------------x---------------------x-
+| x---x---x---x-x---x---x---xxxxxxx---x---x---xxxxxxxxxxxxx---x-x-
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxF===F=/ Ab/1===
+| F===A===/ Ab===\ F=A===/ Ab===\ A===FxxxxxF===A===/ Ab===\ FxxxxxxxxxxxF===F=/ Ab/1===
+
+
+theme3 04:50 - 05:40
+
+# Meshuggah I, theme3 04:50 - 05:40
+
+tempo103
+
+#instruments def
+
+#  Cymbal   | Snare    | Kick     | Tom (s)
+|0 iCC o/16 | iSD o/16 | iBD o/16 | iT5 o/16 
+
+#  bass          |   guitar
+|4 ch1 i34 o1/16 | ch2 i81 o2/16
+
+m$3a(
+|0 x-------------------------------------------------------------x-------
+|  --------------------------------------------------------------x-------
+|  -x--x-x-x---x-x-x--x--x--x--x--x-x-x--x-x----x--x---x-x-x--x-x--------
+|  x-xx-x-x-xxx-x-x-xx-xx-xx-xx-xx-x-x-xx-x-xxxx-xx-xxx-x-x-xx-x---------
+| Bb=xx=x=x=xxx=x=x=xx=xx=xx=xx=xx=x=x=xx=x=xxxx=xx=xxx=x=x=xx=x=/ Ab=======\
+| Bb=xx=x=x=xxx=x=x=xx=xx=xx=xx=xx=x=x=xx=x=xxxx=xx=xxx=x=x=xx=x=/ Ab=======\
+)
+
+m$3b(
+|0 x----------------------------------------------------------
+|  x----------------------------------------------------------
+|  -x--x--x-x-x---x--x-x-x--x-x-x-x----x---x--x--x--x---x-x-x-
+|  x-xx-xx-x-x-xxx-xx-x-x-xx-x-x-x-xxxx-xxx-xx-xx-xx-xxx-x-x-x
+| Bb=xx=xx=x=x=xxx=xx=x=x=xx=x=x=x=xxxx=xxx=xx=xx=xx=xxx=x=x=x
+| Bb=xx=xx=x=x=xxx=xx=x=x=xx=x=x=x=xxxx=xxx=xx=xx=xx=xxx=x=x=x
+)
+
+m$3c(
+|0 --------------------------------------------------------x------- 
+|  --------------------------------------------------------x-------
+|  -x-x-x-x----x---x--x--x--x--x-x--x-x-x---x--x-x-x--x-x-x--------
+|  x-x-x-x-xxxx-xxx-xx-xx-xx-xx-x-xx-x-x-xxx-xx-x-x-xx-x-x---------
+| Bb=x=x=x=xxxx=xxx=xx=xx=xx=xx=x=xx=x=x=xxx=xx=x=x=xx=x=x=/ Ab=======\
+| Bb=x=x=x=xxxx=xxx=xx=xx=xx=xx=x=xx=x=x=xxx=xx=x=x=xx=x=x=/ Ab=======\
+)
+
+$3a $3b $3a $3b $3c
+
+
+theme4-5 05:40 - 07:09
+
+# Meshuggah I, theme4-5 05:40 - 07:09
+
+tempo200
+
+
+#  Cymbal | Hihat | Snare | Kick
+|0 iCC o/16   | iOH o/16  | iSD o/16  | iBD o/16
+
+#  bass          |   guitar      
+|4 ch1 i34 o/16 | ch2 i81 o/16 
+
+
+m$4i(
+|0 x-----------
+|  ----x---x---
+|  ------x--x--
+|  x---xxxxxxxx
+|  x===xxxxxxxx
+|  x===xxxxxxxx
+)
+
+m$4(
+|0 ------------
+|  x---x---x---
+|  x--x--x--x--
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+)
+
+m$4c1(
+|0 x-----------
+|  ----x---x---
+|  x--x--x--x--
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+)
+
+m$4c2(
+|0 ----x-------
+|  x-------x---
+|  x--x--x--x--
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+)
+
+m$4c3(
+|0 --------x---
+|  x---x-------
+|  x--x--x--x--
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+|  xxxxxxxxxxxx
+)
+
+m$4e1(
+|0 ----
+|  x---
+|  x--x
+|  xxxx
+|  xxxx
+|  xxxx
+)
+
+m$4i2(
+|0 x-------
+|  ----x---
+|  --x--x--
+|  xxxxxxxx
+|  xxxxxxxx
+|  xxxxxxxx
+)
+
+m$4e2(
+|0 --------
+|  x---x---
+|  x--x--x-
+|  xxxxxxxx
+|  xxxxxxxx
+|  xxxxxxxx
+)
+
+|4 oF2 | oF3
+
+$4i $4*4 $4c2 $4*11 $4c1 $4*3 $4e1
+
+|4 oC2 | oC3
+
+$4i2 $4*15 $4c2 $4*3 $4c2 $4e2
+
+|4 oA#1 | oA#2
+
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  --x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x-
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--------xxxxxxxxxxxxxxxx----
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--------xxxxxxxxxxxxxxxx----
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--------xxxxxxxxxxxxxxxx----
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  -x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--
+|  --------------xxxxxxxxxxxxxxxxxx--------------------xxxxxxxxxxxx
+|  --------------xxxxxxxxxxxxxxxxxx--------------------xxxxxxxxxxxx
+|  --------------xxxxxxxxxxxxxxxxxx--------------------xxxxxxxxxxxx
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x
+|  x---------xxxxxxxxxxxxxxx---------------xxxxxxxxxxxxxxxxxxxxxxxx
+|  x---------xxxxxxxxxxxxxxx---------------xxxxxxxxxxxxxxxxxxxxxxxx
+|  x---------xxxxxxxxxxxxxxx---------------xxxxxxxxxxxxxxxxxxxxxxxx
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  --x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x-
+|  xxxxxxxxxxxxxxx---------------xxxxxxxxxxxxxxx-----------xxxxxxxx
+|  xxxxxxxxxxxxxxx---------------xxxxxxxxxxxxxxx-----------xxxxxxxx
+|  xxxxxxxxxxxxxxx---------------xxxxxxxxxxxxxxx-----------xxxxxxxx
+
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  -x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+|4 oF2 | oF3
+
+$4i $4*21 $4e1
+
+
+theme6 07:09 - 07:47
+
+# Meshuggah I, theme6 07:09 - 07:47
+
+tempo200
+
+#  Cymbal | Hihat | Snare | Kick
+|0 iCC o/16   | iOH o/16  | iSD o/16  | iBD o/16
+
+#  bass          |   guitar      
+|4 ch1 i34 o2/16 | ch1 o3/16 | ch2 i81 o3/16 | ch2 o4/16
+
+
+(
+
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  --x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x-
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  F#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxGxxxF#xxx
+|  ----gxxxgxxx------------f#xxxf#xxx----f#xxxf#xxx--------fxxx--------
+|  F#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxGxxxF#xxx
+|  ----gxxxgxxx------------f#xxxf#xxx----f#xxxf#xxx--------fxxx--------
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  -x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  F#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxGxxxF#xxx
+|  ----gxxxgxxx------------f#xxxf#xxx----f#xxxf#xxx--------fxxx--------
+|  F#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxGxxxF#xxx
+|  ----gxxxgxxx------------f#xxxf#xxx----f#xxxf#xxx--------fxxx--------
+)*2
+
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  --x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x-
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  F#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxxxxxA#xxx
+|  ----gxxxgxxx------------f#xxxf#xxx----f#xxxf#xxx--------gxxxgxxx----
+|  F#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxxxxxA#xxx
+|  ----gxxxgxxx------------f#xxxf#xxx----f#xxxf#xxx--------gxxxgxxx----
+  
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  -x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  AxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxGxxxF#xxxxxxxxxxxA#xxxAxxx
+|  --------f#xxxf#xxx----f#xxxf#xxx--------fxxx--------gxxxgxxx--------
+|  AxxxG#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxGxxxF#xxxxxxxxxxxA#xxxAxxx
+|  --------f#xxxf#xxx----f#xxxf#xxx--------fxxx--------gxxxgxxx--------
+  
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  --x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x-
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  G#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxx
+|  ----f#xxxf#xxx----f#xxxf#xxx--------gxxxgxxx------------f#xxxf#xxx----
+|  G#xxxxxxxxxxxGxxxxxxxxxxxFxxxF#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxx
+|  ----f#xxxf#xxx----f#xxxf#xxx--------gxxxgxxx------------f#xxxf#xxx----
+  
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  -x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--x--
+|  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+|  xxxxxxxxFxxxF#xxxxxxxGxxxF#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxx
+|  f#xxxf#xxx--------fxxx--------gxxxgxxx------------f#xxxf#xxx----f#xxx
+|  xxxxxxxxFxxxF#xxxxxxxGxxxF#xxxxxxxxxxxA#xxxAxxxG#xxxxxxxxxxxGxxxxxxx
+|  f#xxxf#xxx--------fxxx--------gxxxgxxx------------f#xxxf#xxx----f#xxx
+
+
+theme7 08:40 - 10:33
+
+# Meshuggah "I", theme7 08:40 - 10:33
+
+tempo201
+
+# Drums
+
+|0 iC2  | iCC | iSD | iBD  | iT5           #instruments def
+
+m$7d0( o/16 xxxx*1 )
+m$7d1( |0 4 4 | P/4*2 | P/4 4 | 16*4 P/4 | P/4*2 )
+m$7d1a( |0 P/4 4 | 4 P | P/4 4 | 16*4 P/4 | P/4*2 )
+m$7d1b( |0 4 P | P/4 4 | P/4 4 | 16*4 P/4 | P/4*2 )
+m$7d2( |0 4 4 4 | P/4*3 | P/4 4 4 | 16*4 P/4*2 | P/4*3 )
+m$7d2a( |0 4 4 P | P/4*2 4 | P/4 4 4 | 16*4 P/4*2 | P/4*3 )
+m$7d2b( |0 4 P P | P/4 4 4 | P/4 4 4 | 16*4 P/4*2 | P/4*3 )
+m$7d3( |0 4 4 4 4 | P/4*4 | P/4 4 4 4 | 16*4 P/4*3 | P/4*4 )
+m$7d3b( |0 4 4 P P | P/4*2 4*2 | P/4 4 4 4 | 16*4 P/4*3 | P/4*4 )
+m$7d3fill( |0 4 P/4*2 4 | P/4*4 | P/8 16*2 P/4*2 4 | 16*2 P/8*4 16*2 P/4 | P/4 16*6 P/8 P/4)
+
+$7d1a $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2b $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2b $7d1  $7d2  $7d1  $7d2b
+$7d1  $7d2  $7d1  $7d2  $7d2b $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2b $7d1  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2b $7d1  $7d3b $7d1  $7d3fill
+$7d1b $7d1b $7d2b $7d1  $7d2a $7d1b $7d2  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b $7d1 $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d2 $7d2 $7d1 $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d2  $7d2  $7d1  $7d3b
+$7d1  $7d2  $7d1  $7d1
+
+# Rythm Guitars
+
+|5 ch1 i34 o2 | ch2 i81 o3
+
+m$7g1( |5 G/16*4 / G/4 \   | G/16*4 / G#/4 \ )
+m$7g2( |5 G/16*4 / G/8 P G/4 \ | G/16*4 / G#/8 P G#/4 \ )
+m$7g3( |5 G/16*4 / G/8 P G/8 P G/4 \ | G/16*4 / G#/8 P G#/8 P G#/4 \ )
+m$7g3fill( |5 G/16*12 G/4  | G/16*12 G/4 )
+
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g2  $7g1  $7g2 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3  $7g1  $7g3fill
+$7g1  $7g1  $7g2  $7g1  $7g2  $7g1  $7g2  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3  $7g1 $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g2  $7g2 $7g1 $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g2  $7g2  $7g1  $7g3 
+$7g1  $7g2  $7g1  $7g1
+
+# solo
+
+|7 ch3 i30 o5 v60 | ch3 o5 v60| ch3 o5 v60 #instruments def
+
+|7 P/1*32 G/16*512 | P/1*32 P/1*16 G#/16*256 | P/1*32 P/1*24 F/16*128 
+
+
+theme8 10:33 - 12:01
+
+# Meshuggah I, theme8 10:33 - 12:01
+
+tempo200
+
+#  Cymbal | Hihat | Snare | Kick
+|0 iCC o/12   | iOH o/12  | iSD o/12  | iBD o/12
+
+#  bass          |   guitar      
+|4 ch1 i34 o1/12 | ch2 i81 o2/12 | ch2 o3/12 | ch3 i81 o5/12
+
+m$8a(
+|0 ------------------------
+|  x-----x-----x-----x-----
+|  ------x-----------x-----
+|  'xxx'x--'xxx'x--'xxx'x--'xxx'x--
+|  Fxxx==Fxxx==Fxxx==Fxxx==
+|  Fxxx==Fxxx==Fxxx==Fxxx==
+|  d#xxe==d#xxe==d#xxe==d#xxe== )
+
+m$8ac(
+|0 x-----x-----x-----x-----
+|  x-----x-----x-----x-----
+|  ------------------------
+|  'xxx'x--'xxx'x--'xxx'x--'xxx'x--
+|  Fxxx==Fxxx==Fxxx==Fxxx==
+|  Fxxx==Fxxx==Fxxx==Fxxx==
+|  d#xxe==d#xxe==d#xxe==d#xxe== )
+
+m$8b(
+|0 ------------------------
+|  x-----x-----x-----x-----
+|  ------x-----------x-----
+|  'xxx'x--'xxx'x--'xxx'x--'xxx'x--
+|  Fxxx==Fxxx==Fxxx==Fxxx==
+|  Fxxx==Fxxx==Fxxx==Fxxx==
+|  ------------------------ )
+
+m$8end(
+|0 o/1 x===
+|  o/1 ----
+|  o/1 ----
+|  o/1 x===
+|  F/1 x===
+|  F/1 x=== )
+
+m$8nosolo(
+|7 ------------------------------------------------)
+
+m$8solo(
+|7 F ======== F# ======== Fb =============================)
+
+$8ac 
+($8b $8a)*3 $8b $8ac*2 
+(($8b $8a)*3 $8b $8ac)*2
+($8b $8a)*3 $8b $8ac*2 
+$8end
+
+$8nosolo*13 $8solo*4
+
+theme9 12:01 - 13:15
+
+# Meshuggah I, theme9 12:01 - 13:15
+
+tempo110
+
+#  Cymbal | Hihat | Snare | Kick
+|0 iCC o/16   | iOH o/16  | iSD o/16  | iBD o/16
+
+#  bass          |   guitar      
+|4 ch1 i34 o1/16 | ch2 i81 o3/16 | ch2 o2/16 | ch3 i81 o4/16 v60
+
+|0 x---------------------------------------------------------------
+|  ---x--x-x-x--x--x-x-x--x--x-x-x--x--x-x-x-x-x--x-x-x--x-x-x--x--
+|  -------x---------x-x-------x--------------------x------x--------
+|  x--x--x-x-x--x--x-x-x--x--x-x-x--x--x-x-x-x-x--x-x-x--x-x-x--x--
+|  F==F==F=F=F==F==F=F=F==F==F=F=F==F==F=F=F=F=F==F=F=F==F=F=F==F==
+|  ----------e==----------e==----------e=---------e=---------e==---
+|  F==F==F=F=F==F==F=F=F==F==F=F=F==F==F=F=F=F=F==F=F=F==F=F=F==F==
+|  f========e==============--------f========e==============--------
+
+|0 ----------------------------------------------------------------
+|  x-x-x--x-x-x--x-x-x--x-x-x--x-x-x-x-x--x-x-x--x--x-x-x--x--x-x--
+|  --------x------x------x------x----------x---------x---------x---
+|  x-x-x--x-x-x--x-x-x--x-x-x--x-x-x-x-x--x-x-x--x--x-x-x--x--x-x--
+|  F=F=F==F=F=F==F=F=F==F=F=F==F=F=F=F=F==F=F=F==F==F=F=F==F==F=F==
+|  -------e=---------e==---------e=---------e=----------e==--------
+|  F=F=F==F=F=F==F=F=F==F=F=F==F=F=F=F=F==F=F=F==F==F=F=F==F==F=F==
+|  f========e==============--------f========e==============--------
+
+|0 x---------------------------------------------------------------
+|  ---x-x--x--x-x-x--x--x-x-x-x--x--x-x-x--x--x-x-x--x-x-x--x-x-x--
+|  ----x-------------------x---------x---------x------x------x-----
+|  x--x-x--x--x-x-x--x--x-x-x-x--x--x-x-x--x--x-x-x--x-x-x--x-x-x--
+|  F==F=F==F==F=F=F==F==F=F=F=F==F==F=F=F==F==F=F=F==F=F=F==F=F=F==
+|  e==e=----------e==---------e==----------e==---------e=----------
+|  F==F=F==F==F=F=F==F==F=F=F=F==F==F=F=F==F==F=F=F==F=F=F==F=F=F==
+|  f========e==============--------f========e==============--------
+
+|0 ----------------------------------------------------------------
+|  x-x-x--x--x-x-x--x--x--x-x--x--x-x-x--x-x-x--x--x--x-x-x-x-x--x-
+|  -x---------x---------------------------x------------x---x-------
+|  x-x-x--x--x-x-x--x--x--x-x--x--x-x-x--x-x-x--x--x--x-x-x-x-x--x-
+|  F=F=F==F==F=F=F==F==F==F=F==F==F=F=F==F=F=F==F==F==F=F=F=F=F==F=
+|  e=----------e=-----------e==----------e=-----------e=---------e=
+|  F=F=F==F==F=F=F==F==F==F=F==F==F=F=F==F=F=F==F==F==F=F=F=F=F==F=
+|  f========e==============--------f========e==============--------
+
+|0 x-------------------------------
+|  --------------------------------
+|  --------------------------------
+|  x-------------------------------
+|  F===============================
+|  --------------------------------
+|  F===============================
+|  --------------------------------
+
+
+|0 x---------------------------------------------------------------
+|  ---x--x-x-x--x--x-x-x--x--x-x-x--x--x-x-x-x-x--x-x-x--x-x-x--x--
+|  -------x---------x-x-------x--------------------x------x--------
+|  x--x--x-x-x--x--x-x-x--x--x-x-x--x--x-x-x-x-x--x-x-x--x-x-x--x--
+|  F==F==F=F=F==F==F=F=F==F==F=F=F==F==F=F=F=F=F==F=F=F==F=F=F==F==
+|  ----------e==----------e==----------e=---------e=---------e==---
+|  F==F==F=F=F==F==F=F=F==F==F=F=F==F==F=F=F=F=F==F=F=F==F=F=F==F==
+|  f========e==============--------f========e==============--------
+
+|0 ----------------------------------------------------------------
+|  x-x-x--x-x-x--x-x-x--x-x-x--x-x-x-x-x--x-x-x--x--x-x-x--x--x-x--
+|  --------x------x------x------x----------x---------x---------x---
+|  x-x-x--x-x-x--x-x-x--x-x-x--x-x-x-x-x--x-x-x--x--x-x-x--x--x-x--
+|  F=F=F==F=F=F==F=F=F==F=F=F==F=F=F=F=F==F=F=F==F==F=F=F==F==F=F==
+|  -------e=---------e==---------e=---------e=----------e==--------
+|  F=F=F==F=F=F==F=F=F==F=F=F==F=F=F=F=F==F=F=F==F==F=F=F==F==F=F==
+|  f========e==============--------f========e==============--------
+
+|0 x---------------------------------------------------------------
+|  ---x-x--x--x-x-x--x--x-x-x-x--x--x-x-x--x--x-x-x--x-x-x--x-x-x--
+|  ----x-------------------x---------x---------x------x------x-----
+|  x--x-x--x--x-x-x--x--x-x-x-x--x--x-x-x--x--x-x-x--x-x-x--x-x-x--
+|  F==F=F==F==F=F=F==F==F=F=F=F==F==F=F=F==F==F=F=F==F=F=F==F=F=F==
+|  e==e=----------e==---------e==----------e==---------e=----------
+|  F==F=F==F==F=F=F==F==F=F=F=F==F==F=F=F==F==F=F=F==F=F=F==F=F=F==
+|  f========e==============--------f========e==============--------
+
+|0 ----------------------------------------------------------------
+|  x-x-x--x--x-x-x--x--x--x-x--x--x-x-x--x-x-x--x--x--x-x-x-x-x-x--
+|  -x---------x---------------------------x------------x---x---x---
+|  x-x-x--x--x-x-x--x--x--x-x--x--x-x-x--x-x-x--x--x--x-x-x-x-x- 1
+|  F=F=F==F==F=F=F==F==F==F=F==F==F=F=F==F=F=F==F==F==F=F=G# f# F# = G f# g# --
+|  e=----------e=-----------e==----------e=-----------e=---  f# -  - - f# g# --
+|  F=F=F==F==F=F=F==F==F==F=F==F==F=F=F==F=F=F==F==F==F=F=G# =  F# = G =  -  --
+|  f========e==============--------f========e==============--------
+
+
+
+theme10 13:15 - 14:07
+
+# Meshuggah I, theme10 13:15 - 14:07
+
+tempo110
+
+#  Cymbal | Hihat | Snare | Kick
+|0 iCC o/16   | iOH o/16  | iSD o/16  | iBD o/16
+
+#  bass          |   guitar      
+|4 ch1 i34 o1/16 | ch2 i81 o2/16  | ch3 i81 o5/16 v60
+
+|0 x---------------------------------------------------------------
+|  x--x--x-x-x-x--x-x-x-x--x--x-x--x-x--x-x-x--x--x-x-x-x--x--x-x--
+|  -------x----------x---------x---------x-----------x---------x---
+|  x--x --x   -    x -x-x --x-x    -   x -x--x --x   -    x-- x -x--x    -   x -x--x --x-x    -   x -x--x --x   -    x --
+|  A==A#==B / a# \ F#=G=G#==A=A# / a \ F#=G==G#==A / g# \ F#==F#=G==G# / g \ F#=G==G#==A=A# / a \ F#=G==G#==A / g# \ F#==
+|  A==A#==B / a# \ F#=G=G#==A=A# / a \ F#=G==G#==A / g# \ F#==F#=G==G# / g \ F#=G==G#==A=A# / a \ F#=G==G#==A / g# \ F#==
+|  d#===========================d=== \ b=============================== /
+
+|0 ----------------------------------------------------------------
+|  x--x--x--x-x--x-x-x-x-x--x--x--x-x-x--x-x-x-x--x-x--x--x-x-x----
+|  ---------------x----------------x------x--------x-------x---xx--
+|  x--x --x--x -x--   x -   x-x -x-   x--x --x--x    -     x -x--x    -   x -x-x --x   -    x --x--x    -   x -x   - - --
+|  G==G#==A==A#=B== / C b \ A=A#=B= / C==C#==D==D# / d \ \ F#=G==G# / g \ F#=G=G#==A / g# \ F#==G==G# / g \ F#=G / g a -- \
+|  G==G#==A==A#=B== / C b \ A=A#=B= / C==C#==D==D# / d \ \ F#=G==G# / g \ F#=G=G#==A / g# \ F#==G==G# / g \ F#=G / g a -- \
+|  d#===========================d=== \ b=============================-- /
+
+|0 x---------------------------------------------------------------
+|  x--x--x-x-x-x--x--x-x--x-x-x--x-x--x-x--x--x-x-x--x-x-x--x-x-x--
+|  -------x-----------x-----------x--x---------x------x------x-----
+|  x--x--x-x-x-x--x--x-x--x-x-x--x-x--x-x--x--x-x-x--x-x-x--x-x-x--
+|  A==A#==B / a# \ F#=G=G#==A==A# / a \ F#==G=G#=A==A# / a \ F#= / f \ F#=G==G#==A / g# \ F#=G==G# / g \ F#=G==G# / g \ F#=G==
+|  A==A#==B / a# \ F#=G=G#==A==A# / a \ F#==G=G#=A==A# / a \ F#= / f \ F#=G==G#==A / g# \ F#=G==G# / g \ F#=G==G# / g \ F#=G==
+|  d#===========================d=== \ b=============================== /
+
+|0 x---------------------------------------------------------------
+|  ---x--x--x-x--x--x-x-x--x-x-x-x--x-x--x--x-x--x-x-x--x-x-x--x-x-
+|  ------------------x------x--------x-------x-----------x------x--
+|  x--x--x--x-x--x--x-x-x--x-x-x-x--x-x--x--x-x--x-x-x--x-x-x--x-x-
+|  G#==A==A#==B= / C==C#==D / c# \ \ A=A#==B / a# \ A=A#=B== / C b \ F#==G==G# / g \ F#==G=G#=A==A# / a \ F#=G==G# / g \ F#=
+|  G#==A==A#==B= / C==C#==D / c# \ \ A=A#==B / a# \ A=A#=B== / C b \ F#==G==G# / g \ F#==G=G#=A==A# / a \ F#=G==G# / g \ F#=
+|  d#===========================d=== \ b=============================== /
+
+|0 x---------------------------------------------------------------
+|  ---x-x--x--x-x-x--x--x-x-x-x--x--x-x-x--x--x-x-x--x-x-x--x-x-x--
+|  ----x-------------------x---------x---------x------x------x-----
+|  x--x-x--x--x-x-x--x--x-x-x-x--x--x-x-x--x--x-x-x--x-x-x--x-x-x--
+|  G==G# / g \ F#==G==G#=A=A#==B== / C=C# / c \ \ F#=G==G#==A / g# \ F#=G==G#==A / g# \ F#=G==G# / g \ F#=G==G# / g \ F#=G==
+|  G==G# / g \ F#==G==G#=A=A#==B== / C=C# / c \ \ F#=G==G#==A / g# \ F#=G==G#==A / g# \ F#=G==G# / g \ F#=G==G# / g \ F#=G==
+|  d#===========================d=== \ b=============================== /
+
+|0 ----------------------------------------------------------------
+|  x-x-x--x--x-x-x--x--x--x-x--x--x-x-x--x-x-x--x--x--x-x-x-x--x---
+|  -x---------x---------------------------x------------x---x---- 1
+|  x-x-x--x--x-x-x--x--x--x-x--x--x-x-x--x-x-x--x--x--x-x-x-x--x---
+|  G# / g \ F#=G==G#==A / g# \ F#=G==G#==A==A#=B== / C==C#=D=D#==E / d# \ \ A=A#==B== / C==C# / c \ \ A=A# / a \ F#==G / f# --
+|  G# / g \ F#=G==G#==A / g# \ F#=G==G#==A==A#=B== / C==C#=D=D#==E / d# \ \ A=A#==B== / C==C# / c \ \ A=A# / a \ F#==G / f# --
+|  d#===========================d=== \ b=============================-- /
+
+
+theme13 16:58 - 18:21 (thanks bigxlongxnow!)
+
+# Meshuggah I, theme13
+
+tempo59
+
+# Drums
+
+|0 iCC o/32 | iC2 o/32 | iSD o/32 | iBD o/32             #instruments def
+
+#  bass          |   guitar      | solo guitar
+|4 ch1 i34 o1/32 | ch2 i81 o2/32 | ch3 i81 o2/32 v35
+
+|0 x-----x-----x-----------------------------------
+|  ----------------x---x---x---x---x---x---x---x---
+|  ------------------------x---------------x---x---
+|  x---x-x---x-x-----xx-----x----xx--xx-----x---x--
+|  F#=====/ / D#===== \ \  Gx====G#x====/ F# \ F#====Gx==G#x====/ F# \ G==/ F# \ G#==
+|  F#=====/ / D#===== \ \  Gx====G#x====/ F# \ F#====Gx==G#x====/ F# \ G==/ F# \ G#==
+|  F#=====/ / C#===== \ \  Gx====G#x====/ F# \ F#====Gx==G#x====/ F# \ G==/ F# \ G#==
+
+
+|0 x-------------------------------x---------------
+|  ----x---x---x---x---x---x---x-------x---x---x---
+|  x--------------------x----------x---------------
+|  -x------xx----xx----x-----xx-----x------xx--xx--
+|  / F# \ G======Gx====G#x====G / F#==== \ Gx====/ F# \ G#======Gx==G#x==
+|  / F# \ G======Gx====G#x====G / F#==== \ Gx====/ F# \ G#======Gx==G#x==
+|  / F# \ G======Gx====G#x====G / F#==== \ Gx====/ F# \ G#======Gx==G#x==
+
+
+|0 ----------------------------------------x-------
+|  x---x---x---x---x---x---x---x---x---x-------x---
+|  ------------x---x------------x----------x-------
+|  xx--xx--xx---x---x------xx----x-----xx---x------
+|  F#x==G#x==Gx==/ F# \ G==/ F# \ G#======Gx===/ F# \ G#=====G#x==/ F# \ F#======
+|  F#x==G#x==Gx==/ F# \ G==/ F# \ G#======Gx===/ F# \ G#=====G#x==/ F# \ F#======
+|  F#x==G#x==Gx==/ F# \ G==/ F# \ G#======Gx===/ F# \ G#=====G#x==/ F# \ F#======
+
+|0 x-------x---------------------------------------x---------------
+|  ----x-------x---x---x---x---x---x---x---x---x-------x---x---x---
+|  --------x-------------------x---x---x---x---x---x---------------
+|  xx------xx----------xx--xx---x---x---x---x---x---x------xx----xx
+|  Gx======G#x==========Gx==G#x==/ F# \ F#==/ F# \ G==/ F# \ F==/ F# \ A==/ F# \ G#==/ F# \ G======Gx====G#x
+|  Gx======G#x==========Gx==G#x==/ F# \ F#==/ F# \ G==/ F# \ F==/ F# \ A==/ F# \ G#==/ F# \ G======Gx====G#x
+|  Gx======G#x==========Gx==G#x==/ F# \ F#==/ F# \ G==/ F# \ F==/ F# \ A==/ F# \ G#==/ F# \ G======Gx====G#x
+
+
+|0 ----x-----------------------------------------------------------
+|  x-------x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  ----x-------------------x----x------------x---------x-----------
+|  -----x--xx------xx--xx---x----x-----xx-----x----xx---x------xx--
+|  ====/ F# \ A==F#x======Gx==G#x==/ F# \ F#===/ F# \ G#=====Gx====/ F# \ G#====Gx==/ F# \ F#======G#x==
+|  ====/ F# \ A==F#x======Gx==G#x==/ F# \ F#===/ F# \ G#=====Gx====/ F# \ G#====Gx==/ F# \ F#======G#x==
+|  ====/ F# \ A==F#x======Gx==G#x==/ F# \ F#===/ F# \ G#=====Gx====/ F# \ G#====Gx==/ F# \ F#======G#x==
+
+
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  ------------x---x--------------------x----------------------x---
+|  xx------xx---x---x--xx--xx------------x-----xx------xx-------x--
+|  Gx======G#x==/ F# \ A==/ F# \ G#==F#x==Gx===========/ F# \ A=====Gx======G#x======/ F# \ G#==
+|  Gx======G#x==/ F# \ A==/ F# \ G#==F#x==Gx===========/ F# \ A=====Gx======G#x======/ F# \ G#==
+|  Gx======G#x==/ F# \ A==/ F# \ G#==F#x==Gx===========/ F# \ A=====Gx======G#x======/ F# \ G#==
+
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  --------x---x-------------------x---x-----------x--------x------
+|  xx--xx---x---x--xx--xx--xx--xx---x---x------xx---x--------x-----
+|  Gx==G#x==/ F# \ A==/ F# \ A#==Gx==G#x==F#x==Gx==/ F# \ G#==/ F# \ A======Gx==/ F# \ G#=======/ F# \ A=====
+|  Gx==G#x==/ F# \ A==/ F# \ A#==Gx==G#x==F#x==Gx==/ F# \ G#==/ F# \ A======Gx==/ F# \ G#=======/ F# \ A=====
+|  Gx==G#x==/ F# \ A==/ F# \ A#==Gx==G#x==F#x==Gx==/ F# \ G#==/ F# \ A======Gx==/ F# \ G#=======/ F# \ A=====
+
+
+|0 iCC o/32 | iTC o/32 | iSD o/32 | iBD o/32      #
+
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  ------------x-------------x-------------x---------x---------x---
+|  xx----xx-----x----xx--xx---x----xx-------x----xx---x----xx---x--
+|  F#x====Ax====/ F# \ F====F#x==Gx==/ F# \ F====F#x======/ F# \ G#====Gx==/ F# \ F====F#x==/ F# \ G==
+|  F#x====Ax====/ F# \ F====F#x==Gx==/ F# \ F====F#x======/ F# \ G#====Gx==/ F# \ F====F#x==/ F# \ G==
+|  F#x====Ax====/ F# \ F====F#x==Gx==/ F# \ F====F#x======/ F# \ G#====Gx==/ F# \ F====F#x==/ F# \ G==
+
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  --------x-----x-------------------------x-----x---------x-------
+|  --xx-----x-----x----xx--xx--xx--xx--xx---x-----x----xx---x------
+|  ==F#x====/ F# \ G#====/ F# \ A====Gx==Gx==Gx==Gx==Gx==/ F# \ F#====/ F# \ G====F#x==/ F# \ G======
+|  ==F#x====/ F# \ G#====/ F# \ A====Gx==Gx==Gx==Gx==Gx==/ F# \ F#====/ F# \ G====F#x==/ F# \ G======
+|  ==F#x====/ F# \ G#====/ F# \ A====Gx==Gx==Gx==Gx==Gx==/ F# \ F#====/ F# \ G====F#x==/ F# \ G======
+
+|0 x---------------------------------------------------------------
+|  ----x---x---x---x---x---x---x---x---x---x---x---x---x---x---x---
+|  x-------x---x---x---x---x---x---x---x-----------------x---------
+|  -x-------x---x---x---x---x---x---x---x------xx----xx---x----xx--
+|  / F# \ G#======/ F# \ F#==/ F# \ G==/ F# \ G#==/ F# \ A==/ F# \ G==/ F# \ G#==/ F# \ G#==/ F# \ A======F#x====Gx==/ F# \ G#====Gx==
+|  / F# \ G#======/ F# \ F#==/ F# \ G==/ F# \ G#==/ F# \ A==/ F# \ G==/ F# \ G#==/ F# \ G#==/ F# \ A======F#x====Gx==/ F# \ G#====Gx==
+|  / F# \ G#======/ F# \ F#==/ F# \ G==/ F# \ G#==/ F# \ A==/ F# \ G==/ F# \ G#==/ F# \ G#==/ F# \ A======F#x====Gx==/ F# \ G#====Gx==
+
+|0 ----------------------------------------------------------------
+|  x---x---x---x---x---x---x---x---x---x---x---x---x---x---x-------
+|  -----x--------------x-----x-----------------x---x---------xx----
+|  ------x-----xx-------x-----x----xx--xx-------x---x----xx--------
+|  =====/ F# \ A=====F#x======/ F# \ G#====/ F# \ A====Fx==F#x======/ F# \ A==/ F# \ A#====Gx==Gx----
+|  =====/ F# \ A=====F#x======/ F# \ G#====/ F# \ A====Fx==F#x======/ F# \ A==/ F# \ A#====Gx==Gx----
+|  =====/ F# \ A=====F#x======/ F# \ G#====/ F# \ A====Fx==F#x======/ F# \ A==/ F# \ A#====Gx==Gx----
+
+
+# solo
+
+|9 ch4 i30 o4 v45 #instruments def
+
+P/32*144
+( o/64
+C+*16 D*12 \ B*12 / F*24
+C+*16 D*8  \ B*8  / F*32
+)*4
+
+
+theme14 18:21 - 20:18
+
+# Meshuggah I, theme14 18:21 - 20:18
+
+tempo59
+
+# Drums
+
+|0 iCC o/32 | iC2 o/32 | iSD o/32 | iBD o/32             #instruments def
+
+m$14dA(
+|0 x-------x-----------------------x-------------------x-------------------------------------------
+|  x---x-------x---x---x---x---x-------x---x---x---x-------x---x---x---x---x---x---x---x---x---x---
+|  --------x-------------------x---x-------------------x-------------------x----x------------x-----
+|  xx-------x----------xx--xx---x---x------xx----xx-----x--xx------xx--xx---x----x-----xx-----x----
+)
+
+m$14dB(
+|0 --------------------x-----------
+|  x---x---x---x---x---------------
+|  --------------------x-----------
+|  xx--xx--xx--xx------------------
+)
+
+m$14dC(
+|0 ----------------------------x-----------------------x-----------
+|  x---x---x---x---x---x---x-------x---x---x---x---x---------------
+|  ----x------------x----------x-----------------------x-----------
+|  xx---x------xx--x-----xx-----x------xx--xx--xx------------------
+)
+
+$14dA $14dB ($14dA $14dC)*5
+
+# Rythm Guitars
+
+|5 ch1 i34  | ch2 i81 | ch3 i81
+
+m$14gA( o/32 xx==----xx==--------xx==xx==xx==xx==----xx==--xx==--xx==xx==----xx==xx==xx==-xx==---xx==--xx==-- )
+
+m$14gB( o/32 xx==xx==xx==xx====== G=========== )
+
+m$14gC( o/32 xx==xx==----xx==xx==--xx==--xx==----xx==xx==xx====== G=========== )
+
+m$14gD( o/32 xx==xx==----xx==xx==--xx==--xx==----xx==xx==xx====== F#/1 )
+
+  |5 oF#2 $14gA $14gB | oG2 $14gA $14gB | oF#2 $14gA $14gB
+( |5 oF#2 $14gA $14gC | oG2 $14gA $14gC | oF#2 $14gA $14gC ) *4
+  |5 oF#2 $14gA $14gD | oG2 $14gA $14gD | oF#2 $14gA $14gD
+
+# solo
+
+|8 ch3 i30 o4 v60 #instruments def
+
+P/1*4 
+( o/64
+C+*16 D*12 \ B*12 / F*24
+C+*16 D*8  \ B*8  / F*32
+)*12
+
+
+back to musicpad
+
+musicpad Œ loic prot 2004. largely inspired by polymath.cgi, Œ jens johansson 2001

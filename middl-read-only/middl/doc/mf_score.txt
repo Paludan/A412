@@ -1,0 +1,79 @@
+
+notey = globals*  track*
+
+globals = (value | macro-def)
+
+value = "@" ("cc:"\d+ | par-name ) ":" (\d+ | string) note-len?
+
+track = "|"\d+ SPC  event*
+
+event = note | chord | value | syllable | "(" event+ ")*" \d+
+
+
+note-pitch = [A-Ga-g]("#"|"b")?(\d | "'" | ",")?
+note-len   = "/"(\d?[wheqst]\d?)?
+note       = (note-pitch | ) note-len?
+
+
+note-default = ":" note | note-len
+
+chord = "[" chord-spec "]" note-len?
+
+chord-spec = note-pitch? chord-type?     |
+             note-pitch "," note-pitch+  |
+            \d+ 
+
+
+chord-type =  ( "11" |   "4" |    "5" |    "6" |        "7" | "7sus" | "7sus9" | "7(5b)" |
+                 "9" | "aug" | "aug7" |  "dim" |     "dim7" | "dim9" |   "maj" |  "maj7" |
+              "maj9" | "min" | "min6" | "min7" | "min7(5b)" | "min9" |   "sus" | "sus9" )? (":"\d)?
+
+
+repeat-start = "("
+repeat-end = ")*" \d+
+
+
+
+identifier = [_A-Za-z][_A-Za-z0-9-]*
+
+SPC = [ \t\n\r]+
+
+string = "\"" ([^"] | "\\\")* "\""
+
+syllable = string note_len?
+
+par-name = "bpm" | "ch" | "pan" | "vol" | "instr" | "title" | "author" | "meter"
+
+=chord-channel:"1 2 3 4 5 6 7 8 9"
+=strings:"E3 A3 D4 G4 B4 E5"
+
+=drums:"hi-hat"
+
+  |1 :q3 =pan:40  =vol:80 =instr:"Mandolin String"
+  |2 :e  =pan:60  =vol:80 =instr:"Mandolin String"
+  |3 :w  =pan:25  =vol:6  =instr:"Synth"
+
+  |1 ( (F3 a)*6 ; (=v:90 C' =v:80 F )*6  (G3 C')*6  (=v:90 a =v:80 C')*6 )*1 
+  |2 ( (a2 C)*8 ; (G2 b )*4         (G2     b  )*4 )*1
+  |3 (  F2:2w   ; e2:w                d2:w                 )*1               
+
+
+  
+  
+  1;E4  0:w
+  2;A4  3:q 5:q 7:q x:q
+  3;D3
+  
+  
+  
+notey-0 = globals-0*  track-0*
+
+globals-0 = (macro-def | text-0)
+
+track-0 = |\d+ SPC (macro-ref | text-0)*
+
+
+macro-ref   = "$" macro-name
+
+macro-def   = "=" macro-name "{" macro-body "}" 
+macro-body  = [^}]*

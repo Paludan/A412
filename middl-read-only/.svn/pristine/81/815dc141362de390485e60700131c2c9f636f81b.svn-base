@@ -1,0 +1,101 @@
+
+                 ___ ___ ___  ________  ______ ____
+                 )  \)  \)  \/        \/      \)   )
+                /   /   /   /  ________)  ___     /
+               /           /\       \/   /   )   /
+              /   /   /   /__\____   \  (___/   /
+             /   /   /   //          /         /
+            (___(___(___/(__________/____     /
+            ____________________________ )   /___
+          _____________________________ /   /___
+                                       /   /
+                                      (___/
+
+
+==================================
+msq - a midifile sequencer library
+==================================
+
+
+
+Quick Reference
+===============
+
+Notes
+~~~~~
+   note ::
+   pitched notes   [A-G][b#]?[0-9]?([])?
+
+
+Key
+===
+
+Key can be specified with the following
+
+
+Introduction
+============
+
+The name of the library (``msq``) is pronounced as the french word *musique*
+but, in reality, stands for "Midifile Sequencer"
+
+This is a library to read and write Standard MIDI files. It is not
+the first one of this genre but it has been created with the following
+requirements:
+
+
+
+Levels of API
+=============
+  There are two main functions
+  mfread()       mfwrite()
+
+::
+                        READ            WRITE
+                                    +------------+
+   3      sequencer                 |            |
+                                    +------------+
+                     +------------+ +------------+
+   2    midi events  |            | |            |
+                     +------------+ +------------+
+                     +------------+ +------------+
+   1     raw events  |            | |            |
+                     +------------+ +------------+
+                     +------------+
+   0       handlers  |            |
+                     +------------+
+
+Handlers
+========
+
+A *handler* is a function that is called when a specific event occurs.
+There are 6 handlers defined:
+
+
+
+Reading a Midifile
+==================
+
+
+
+Writing a Midifile
+==================
+
+
+
+
+Licence
+=======
+
+    (C) 2008 by Remo Dentato (rdentato@users.sourceforge.net)
+
+   Permission to use, copy, modify and distribute this code and
+   its documentation for any purpose is hereby granted without
+   fee, provided that the above copyright notice, or equivalent
+   attribution acknowledgement, appears in all copies and
+   supporting documentation.
+
+   Copyright holder makes no representations about the suitability
+   of this software for any purpose. It is provided "as is" without
+   express or implied warranty.
+

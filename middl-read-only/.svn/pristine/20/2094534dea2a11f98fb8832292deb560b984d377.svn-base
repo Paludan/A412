@@ -1,0 +1,71 @@
+ -1 0 1  2 3  4 5 6  7 8  9 10 11
+ Cb C Db D Eb E F Gb G Ab A Bb B C
+ B  C C# D D# E F F# G G# A A# B B#
+ 
+ -7 -1 Cb major
+ -6  6 Gb major
+ -5  1 Db major
+ -4  8 Ab major
+ -3  3 Eb major
+ -2 10 Bb major
+ -1  5 F  major
+  0  0 C  major
+  1  7 G  major
+  2  2 D  major
+  3  9 A  major
+  4  4 E  major
+  5 11 B  major
+  6  6 F# major
+  7  1 C# major
+
+-7  8 Ab minor
+-6  3 Eb minor
+-5 10 Bb minor
+-4  5 F  minor
+-3  0 C  minor
+-2  7 G  minor
+-1  2 D  minor
+ 0  9 A minor
+ 1  4 E minor
+ 2 11 B minor
+ 3  6 F# minor
+ 4  1 C# minor
+ 5  8 G# minor
+ 6  3 D# minor
+ 7 10 A# minor
+ 
+ 
+
+ -7 -1 Cb major      -7  8 Ab minor
+ -6  6 Gb major      -6  3 Eb minor
+ -5  1 Db major      -5 10 Bb minor
+ -4  8 Ab major      -4  5 F  minor 
+ -3  3 Eb major      -3  0 C  minor
+ -2 10 Bb major      -2  7 G  minor
+ -1  5 F  major      -1  2 D  minor
+  0  0 C  major       0  9 A minor  
+  1  7 G  major       1  4 E minor  
+  2  2 D  major       2 11 B minor  
+  3  9 A  major       3  6 F# minor 
+  4  4 E  major       4  1 C# minor  
+  5 11 B  major       5  8 G# minor 
+  6  6 F# major       6  3 D# minor 
+  7  1 C# major       7 10 A# minor 
+                     
+                     
+                     
+
+  -7 -6 -5 -4 -3 -2 -1 0  1  2  3  4  5  6  7
+   
+
+
+
+000	007	002	011	004	013	006	001	010	003	012	005	014	007	002
+011	004	013	006	001	010	003	012	005	014	007	002	011	004	013
+
+
+
+
+
+
+

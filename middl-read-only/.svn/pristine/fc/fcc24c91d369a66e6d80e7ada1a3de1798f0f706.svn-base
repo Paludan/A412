@@ -1,0 +1,51 @@
+
+  score-pre  = (comment | string | macro-def | macro-ref)*
+  comment    = '%' text NL
+  macro-def  = '$' id '{' text '}'
+  macro-ref  = '$' id
+  string     = Q ('\\' Q | NQ)* Q
+
+  --------------------------
+
+
+
+  score = header?  track*
+
+  header = info+
+
+  info = '@' info-cmd value+
+
+  info-cmd = 'auth' | 'key' | 'meter' | 'title'
+
+
+  param
+
+  param = '@' param-name value*
+
+  value = ':' (NUM | STR | NQ+)
+
+
+  track = '|' \d? event+
+
+  event = param | note notelen? | rest notelen? |
+          rpt_start | rpt_end |
+          trgt_start | trgt_mid | trgt_end
+
+  note  = [A-G] [b#]? octave? |
+          DIG+ | [Xx] ([+-] DIG+)? | '$' DIG
+
+  octave = DIG | 'N' | '\''+ | ','+
+
+  notelen = '/' [whqest]? DIG*
+
+  rpt_start = '('
+  rpt_end = ')' ('*' DIG+)?
+
+  trgt_start = '&('
+  trgt_mid   = '&&'
+  trgt_end   = ')&' notelen?
+
+  trgt_set   = '&' DIG
+  trgt_back  = '&' ('<' DIG)?
+
+  rest = [Rr]

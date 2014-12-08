@@ -1,0 +1,15 @@
+% a b c d
+
+=meter:4/4 =key:+2  % ritest
+
+|1 =vol:95 =bpm:120 =instr:kalimba
+
+  @0 =ch:1 C/2  D/4  E   F    <0
+     =ch:2 G3/2 F/4  A C4     
+
+     
+ =bpm:90 
+  @0 =ch:1  C/2  D/4  E   F    <0
+     =ch:2  G3/2 F/4  A C4     <0
+
+

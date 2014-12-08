@@ -1,0 +1,86 @@
+#
+# robodoc.rc file for midll.
+#
+options:
+    --doc doc/api
+    --src src
+    --html
+    --multidoc
+    --documenttitle ""
+    --index
+    --cmode
+    --css doc/msq_api.css
+    --nosort
+    --tabsize 2
+#    --nopre
+    --sections
+source items:
+    SYNOPSIS
+items:
+    SOURCE
+    NAME
+    COPYRIGHT
+    SYNOPSIS
+    USAGE
+    FUNCTION
+    DESCRIPTION 
+    PURPOSE
+    AUTHOR
+    CREATION DATE
+    MODIFICATION HISTORY
+    HISTORY
+    INPUTS
+    INPUT
+    ARGUMENTS
+    OPTIONS
+    PARAMETERS
+    SWITCHES
+    OUTPUT
+    SIDE EFFECTS
+    RESULTS
+    RESULT
+    RETURN VALUE
+    EXAMPLE
+    NOTE
+    NOTES
+    DIAGNOSTICS
+    WARNINGS
+    ERRORS
+    BUGS
+    TODO
+    IDEAS
+    PORTABILITY
+    SEE ALSO
+    METHODS
+    NEW METHODS
+    ATTRIBUTES
+    NEW ATTRIBUTES
+    TAGS
+    COMMANDS
+    DERIVED FROM
+    DERIVED BY
+    USES
+    CHILDREN
+    USED BY
+    PARENTS
+ignore items:
+    HISTORY
+headertypes:
+    u  "Unit tests"        msq_unittest
+    e  "Makefile entries"  msq_mk_entries
+    p  "Sections"          msq_pages
+ignore files:
+    CVS
+    .svn
+accept files:
+    msq_*.c
+    msq_*.h
+    makefile
+    robodoc.txt
+remark begin markers:
+    /*
+    #
+remark end markers:
+    */
+    #
+

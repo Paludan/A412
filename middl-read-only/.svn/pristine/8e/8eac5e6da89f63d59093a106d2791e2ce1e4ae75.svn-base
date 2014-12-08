@@ -1,0 +1,17 @@
+@key:+5
+$intro{
+C G E'
+}
+% will this survive?
+$A{
+G B D'
+}
+
+$B{
+F A C'
+}
+
+@meter:3/4
+$intro $A D' $B C $B E $A
+
+B

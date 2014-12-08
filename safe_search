@@ -1,0 +1,25 @@
+// Variables
+int k = 0, tone = 0x01, eventType = 0x01, tones[HUGE +/- something];
+
+  /*Read and proces the hex array*/
+  for(j = 0; j < numbers_in_text; j++){
+
+    // Hops over any noto-on, note-off or metaevent start
+    // Also stores the tones read after a note-on
+    if(hex[j] == 0x00 && (hex[j + 1] == 0x90 || hex[j + 1] == 0xff)){
+      j += 3;
+      if(hex[j - 2] == 0x90)
+        tone = hex[j - 1];
+      else
+        eventType = hex[j - 1];
+    }
+    else if(hex[j] == 0x80 && hex[j + 1] == tone){
+      j += 2;
+      tones[k] = tone;
+      k++;
+      tone = 0x01;
+    }
+
+    // Code which finds notes, tempo and the like
+    Her søges efter toner, osv. uden risiko for at det man søger efter er en note on eller event start
+  }

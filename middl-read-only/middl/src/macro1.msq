@@ -1,0 +1,6 @@
+
+% Test macro
+
+$ma{ A B C } $mb{ D E F }
+
+|1 $ma $mb $ma

@@ -1,0 +1,10 @@
+@meter:4/4
+@npct:100
+%|1 @instr:asnare :x/h
+%|2 @instr:ohihat :x/h
+
+|1 &( @instr:asnare :x/h    x-x- x-x- x-x-
+   && @instr:ohihat :x/h    x--- x--- x---
+   )&
+
+|2 :x/h A, B, C D E F
