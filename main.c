@@ -191,12 +191,12 @@ void findNoteLength (double x, int *high, int *low){
 }
 
 /**A function to fill out each of the structures of type note
-  *@param[int] iTone: the value of the hexadecimal collected on the "tone"-spot
+  *@param[int] inputTone: the value of the hexadecimal collected on the "tone"-spot
   *@param[note*] note: a pointer to a note-structure
 */
-void fillNote(int iTone, note *note){
-  note->tone = iTone % 12;
-  note->octave = iTone / 12;
+void fillNote(int inputTone, note *note){
+  note->tone = inputTone % 12;
+  note->octave = inputTone / 12;
 }
 
 /**A function to print the note
