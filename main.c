@@ -135,8 +135,10 @@ void fillSongData(data *data, int hex[], int numbersInText){
   data->mode = minor;
   for(j = 0; j < numbersInText; j++){
     /* finds the tempo */
-    if(hex[j] == 0x51){
-      data->tempo =  60000000/((hex[j+2] << 16) | (hex[j+3] << 8) | (hex[j+4]));
+    if(hex[j] == 0xff){
+      if(hex[j+1] == 0x51){
+        data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
+      }
     }
   }
 }
@@ -237,6 +239,7 @@ void printSongData(data data){
 }
 
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
+  int deltaTime = deltaTimeToNodeLength;
   switch(data.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5; break;
@@ -263,20 +266,29 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
     *tempo =  4;
   else if(data.tempo >=  160)
     *tempo =  5;
+
+  switch(deltaTime){
+    case 1: *length = -5; break;
+    case 2: *length = -4; break;
+    case 4: *length = -2; break;
+    case 8: *length =  0; break;
+    case 16: *length = 3; break;
+    case 32: *length = 5; break;
+  }
 }
 
 
 /* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
 void insertMoods(moodWeighting moodArray[]){
-  moodArray[0].node           = 3;
-  moodArray[0].tempo          = 4;
-  moodArray[0].toneLength     = 2;
-  moodArray[0].pitch          = 1;
+  moodArray[glad].node           = 3;
+  moodArray[glad].tempo          = 4;
+  moodArray[glad].toneLength     = 2;
+  moodArray[glad].pitch          = 1;
 
-  moodArray[1].node            = -4;
-  moodArray[1].tempo           = -5;
-  moodArray[1].toneLength      = -3;
-  moodArray[1].pitch           = 0;
+  moodArray[sad].node            = -4;
+  moodArray[sad].tempo           = -5;
+  moodArray[sad].toneLength      = -3;
+  moodArray[sad].pitch           = 0;
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
@@ -287,10 +299,6 @@ int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLeng
     result[i] += (moodArray[i].tempo * tempo);
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
-    if (i == 0)
-      printf("Happy: %d\n", result[0]);
-    else if (i == 1)
-      printf("Sad: %d\n", result[1]);
   }
   qsort(result, AMOUNT_OF_MOODS, sizeof(int), sortResult);
   return result[0];
