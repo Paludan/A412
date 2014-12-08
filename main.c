@@ -294,3 +294,8 @@ int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLeng
 int sortResult(const void *a, const void *b){
   return ( *(int *)a - *(int *)b );
 }
+
+/* Find note length */
+int deltaTimeToNodeLength (int ticks, int ppqn){
+	return (ticks/ppqn)*4;
+}
