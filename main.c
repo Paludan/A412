@@ -38,7 +38,7 @@ typedef struct{
 } points;
 
 typedef struct{
-  int node;
+  int mode;
   int tempo;
   int toneLength;
   int pitch;
@@ -61,7 +61,7 @@ int main(int argc, const char *argv[]){
   /*Variables*/
   int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
   /* PLACEHOLDER FIX THIS */
-  int node = 5, tempo = 5, toneLength = 5, pitch = 5;
+  int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data;
   FILE *f = fopen(argv[1],"r");
@@ -85,7 +85,7 @@ int main(int argc, const char *argv[]){
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
   printSongData(data);
-  moodOfMelodi = weightingMatrix(moodArray, node, tempo, toneLength, pitch);
+  moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
 
   /*Clean up and close*/
   fclose(f);
@@ -112,11 +112,11 @@ int getHex(FILE *f, int hexAr[]){
 
 /**A function to count the number of notes in the entire song
   *@param[int] hex[]: an array with the stored information from the file
-  *@param[int] ammount: an integer holding the total number of characters in the array
+  *@param[int] amount: an integer holding the total number of characters in the array
  */
-int countNotes(int hex[], int ammount){
+int countNotes(int hex[], int amount){
   int i = 0, res = 0;
-  for(i = 0; i < ammount; i++){
+  for(i = 0; i < amount; i++){
     if(hex[i] == 0x90){
       res++;
     }
@@ -127,7 +127,7 @@ int countNotes(int hex[], int ammount){
 /**A function, that fills out the song data
   *@param[data*] data: a pointer to a structure containing the tempo and mode of the song
   *@param[int] hex[]:the array of integers read from the file
-  *@param[int] numbersInText: the total ammount of integers in the array
+  *@param[int] numbersInText: the total amount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
   int j;
@@ -270,22 +270,22 @@ void settingPoints(data data, note note){
 
 /* Inserts the weighting of each mood in the weighting matrix */
 void insertMoods(moodWeighting moodArray[]){
-  moodArray[glad].node           = 3;
+  moodArray[glad].mode           = 3;
   moodArray[glad].tempo          = 4;
   moodArray[glad].toneLength     = 2;
   moodArray[glad].pitch          = 1;
 
-  moodArray[sad].node            = -4;
+  moodArray[sad].mode            = -4;
   moodArray[sad].tempo           = -5;
   moodArray[sad].toneLength      = -3;
   moodArray[sad].pitch           = 0;
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
-int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLength, int pitch){
+int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch){
   int result[AMOUNT_OF_MOODS] = {0};
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
-    result[i] += (moodArray[i].node * node);
+    result[i] += (moodArray[i].mode * mode);
     result[i] += (moodArray[i].tempo * tempo);
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
