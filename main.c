@@ -53,12 +53,15 @@ int countNotes(int[], int);
 void fillNote(int, note*);
 void printSongData(data);
 void insertMoods(moodWeighting []);
-int weightingMatrix(int, int, int, int);
+int weightingMatrix(moodWeighting [], int, int, int, int);
 void findEvents(int, int [], note []);
+int sortResult(const void *, const void *);
 
 int main(int argc, const char *argv[]){
   /*Variables*/
   int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
+  /* PLACEHOLDER FIX THIS */
+  int node = 5, tempo = 5, toneLength = 5, pitch = 5;
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data;
   FILE *f = fopen(argv[1],"r");
@@ -82,7 +85,7 @@ int main(int argc, const char *argv[]){
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
   printSongData(data);
-  moodOfMelodi = weightingMatrix(node, tempo, toneLength, pitch);
+  moodOfMelodi = weightingMatrix(moodArray, node, tempo, toneLength, pitch);
 
   /*Clean up and close*/
   fclose(f);
@@ -139,7 +142,7 @@ void fillSongData(data *data, int hex[], int numbersInText){
 }
 
 void findEvents(int numbersInText, int hex[], note noteAr[]){
-  int note = 0x01, eventType = 0x01, counter = 0;
+  int note = 0x01, eventType = 0x01, counter = 0, i = 0;
   /*Read and proces the hex array*/
   for(int j = 0; j < numbersInText; j++){
     /* Hops over any noto-on, note-off or metaevent start
@@ -292,11 +295,13 @@ int weightingMatrix(moodWeighting moodArray[], int node, int tempo, int toneLeng
 }
 
 /* Sort rows highest first */
-int sortResult(const void *a, const void *b){
-  return ( *(int *)a - *(int *)b );
+int sortResult(const void *pa, const void *pb){
+  int a = *(const int*)pa;
+  int b = *(const int*)pb;
+  return (a-b);
 }
 
 /* Find note length */
 int deltaTimeToNodeLength (int ticks, int ppqn){
-	return (int) (round((4*ticks)/ppqn));
+  return (int) (round((4*ticks)/ppqn));
 }
