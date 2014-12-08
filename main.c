@@ -56,6 +56,7 @@ void insertMoods(moodWeighting []);
 int weightingMatrix(moodWeighting [], int, int, int, int);
 void findEvents(int, int [], note []);
 int sortResult(const void *, const void *);
+int deltaTimeToNoteLength (int, int);
 
 int main(int argc, const char *argv[]){
   /*Variables*/
@@ -239,7 +240,7 @@ void printSongData(data data){
 }
 
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
-  int deltaTime = deltaTimeTomodeLength;
+  int deltaTime = deltaTimeToNoteLength(480, 960);
   switch(data.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5; break;
@@ -312,6 +313,6 @@ int sortResult(const void *pa, const void *pb){
 }
 
 /* Find note length */
-int deltaTimeTomodeLength (int ticks, int ppqn){
+int deltaTimeToNoteLength (int ticks, int ppqn){
   return (int) (round((4*ticks)/ppqn));
 }
