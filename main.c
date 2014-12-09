@@ -321,17 +321,16 @@ int deltaTimeToNoteLength (int ticks, int ppqn){
   double noteLength= ((double) (ticks)) / ((double) (ppqn/8));
 
 	if (noteLength < 1.5 && noteLength >= 0)
-					noteLength = 1;
-	else if (noteLength < 3 && noteLenght >= 1.5)
-					noteLength = 2;
+		noteLength = 1;
+	else if (noteLength < 3 && noteLength >= 1.5)
+		noteLength = 2;
 	else if (noteLength < 6 && noteLength >= 3)
-					noteLength = 4;
+		noteLength = 4;
 	else if (noteLength < 12 && noteLength >= 6)
-					noteLength = 8;
+		noteLength = 8;
 	else if (noteLength < 24 && noteLength >= 12)
-					noteLength = 16;
+		noteLength = 16;
 	else
-					noteLength = 32;
-
+		noteLength = 32;
 	return noteLength;
 }
