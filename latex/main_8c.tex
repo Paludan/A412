@@ -1,0 +1,678 @@
+\hypertarget{main_8c}{\section{main.\+c filreference}
+\label{main_8c}\index{main.\+c@{main.\+c}}
+}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+\subsection*{Datastrukturer}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structnote}{note}
+\item 
+struct \hyperlink{structdata}{data}
+\item 
+struct \hyperlink{structpoints}{points}
+\item 
+struct \hyperlink{structmood_weighting}{mood\+Weighting}
+\end{DoxyCompactItemize}
+\subsection*{\#Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{C\+H\+A\+R\+S}~1000
+\item 
+\#define \hyperlink{main_8c_a3c99ae50e5cdc492183ec7bcfdea8a00}{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}~2
+\end{DoxyCompactItemize}
+\subsection*{Typedefinitioner}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} \hyperlink{main_8c_abcec22444f1b2fc64f59764d40244d9f}{mode}
+\item 
+typedef enum \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone} \hyperlink{main_8c_aac01cecf1f254ffa121e2715527a6a5a}{tone}
+\item 
+typedef enum \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7f}{mood} \hyperlink{main_8c_a3e304bbd72e3a576384c6e8cdb661eb4}{mood}
+\end{DoxyCompactItemize}
+\subsection*{Enumerationer}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} \{ \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}, 
+\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}
+ \}
+\item 
+enum \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone} \{ \\*
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}, 
+\\*
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F} = 6, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}, 
+\\*
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}, 
+\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}
+ \}
+\item 
+enum \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7f}{mood} \{ \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}, 
+\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Funktioner}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{main_8c_ab56a62ec1c82722ba291a717b2afca5b}{find\+Note\+Length} (double x, int $\ast$, int $\ast$)
+\item 
+void \hyperlink{main_8c_aa9c735ae880cee4e1272bcf387462c9a}{print\+Note} (\hyperlink{structnote}{note})
+\item 
+int \hyperlink{main_8c_a7e86822405cc3ff43db316d113a1fb6d}{get\+Hex} (F\+I\+L\+E $\ast$, int\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{main_8c_a6406eca72b9402b7240ed0e453e8db46}{fill\+Song\+Data} (\hyperlink{structdata}{data} $\ast$, int\mbox{[}$\,$\mbox{]}, int)
+\item 
+int \hyperlink{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}{count\+Notes} (int\mbox{[}$\,$\mbox{]}, int)
+\item 
+void \hyperlink{main_8c_ad88978d32a0f080f58ed31ffe9c51396}{fill\+Note} (int, \hyperlink{structnote}{note} $\ast$)
+\item 
+void \hyperlink{main_8c_a96686ff783072b26aa8666d0281d053c}{print\+Song\+Data} (\hyperlink{structdata}{data})
+\item 
+void \hyperlink{main_8c_adab1118f3db622ab5570732f04ed61aa}{insert\+Moods} (\hyperlink{structmood_weighting}{mood\+Weighting}\mbox{[}$\,$\mbox{]})
+\item 
+int \hyperlink{main_8c_ade6b8acc6a7f498b910c155b43d442b1}{weighting\+Matrix} (\hyperlink{structmood_weighting}{mood\+Weighting}\mbox{[}$\,$\mbox{]}, int, int, int, int)
+\item 
+void \hyperlink{main_8c_aae60d3a40db2ce033ce3541f2cfcc178}{find\+Events} (int, int\mbox{[}$\,$\mbox{]}, \hyperlink{structnote}{note}\mbox{[}$\,$\mbox{]})
+\item 
+int \hyperlink{main_8c_ac6a3184d104e99d57824eecaabab8ed5}{sort\+Result} (const void $\ast$, const void $\ast$)
+\item 
+int \hyperlink{main_8c_ae485c2568d192a3bfd673be0994f935f}{delta\+Time\+To\+Note\+Length} (int, int)
+\item 
+int \hyperlink{main_8c_ac0f2228420376f4db7e1274f2b41667c}{main} (int argc, const char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{main_8c_a413774197396bb250ab5aa9c07be3223}{setting\+Points} (int $\ast$\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode}, int $\ast$tempo, int $\ast$length, int $\ast$octave, \hyperlink{structdata}{data} \hyperlink{structdata}{data})
+\end{DoxyCompactItemize}
+
+
+\subsection{\#Define-\/dokumentation}
+\hypertarget{main_8c_a3c99ae50e5cdc492183ec7bcfdea8a00}{\index{main.\+c@{main.\+c}!A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S@{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}}
+\index{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S@{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}!main.\+c@{main.\+c}}
+\subsubsection[{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S~2}}\label{main_8c_a3c99ae50e5cdc492183ec7bcfdea8a00}
+
+
+Defineret på linje 18 i filen main.\+c.
+
+\hypertarget{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{\index{main.\+c@{main.\+c}!C\+H\+A\+R\+S@{C\+H\+A\+R\+S}}
+\index{C\+H\+A\+R\+S@{C\+H\+A\+R\+S}!main.\+c@{main.\+c}}
+\subsubsection[{C\+H\+A\+R\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+H\+A\+R\+S~1000}}\label{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}
+
+
+Defineret på linje 17 i filen main.\+c.
+
+
+
+\subsection{Dokumentation af typedefinitioner}
+\hypertarget{main_8c_abcec22444f1b2fc64f59764d40244d9f}{\index{main.\+c@{main.\+c}!mode@{mode}}
+\index{mode@{mode}!main.\+c@{main.\+c}}
+\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf mode}  {\bf mode}}}\label{main_8c_abcec22444f1b2fc64f59764d40244d9f}
+\hypertarget{main_8c_a3e304bbd72e3a576384c6e8cdb661eb4}{\index{main.\+c@{main.\+c}!mood@{mood}}
+\index{mood@{mood}!main.\+c@{main.\+c}}
+\subsubsection[{mood}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf mood}  {\bf mood}}}\label{main_8c_a3e304bbd72e3a576384c6e8cdb661eb4}
+\hypertarget{main_8c_aac01cecf1f254ffa121e2715527a6a5a}{\index{main.\+c@{main.\+c}!tone@{tone}}
+\index{tone@{tone}!main.\+c@{main.\+c}}
+\subsubsection[{tone}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf tone}  {\bf tone}}}\label{main_8c_aac01cecf1f254ffa121e2715527a6a5a}
+
+
+\subsection{Dokumentation af enumerations-\/typer}
+\hypertarget{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{\index{main.\+c@{main.\+c}!mode@{mode}}
+\index{mode@{mode}!main.\+c@{main.\+c}}
+\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf mode}}}\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}
+\begin{Desc}
+\item[Enumerationsværdier]\par
+\begin{description}
+\index{major@{major}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!major@{major}}\item[{\em 
+\hypertarget{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}
+}]\index{minor@{minor}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!minor@{minor}}\item[{\em 
+\hypertarget{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}
+}]\end{description}
+\end{Desc}
+
+
+Defineret på linje 21 i filen main.\+c.
+
+
+\begin{DoxyCode}
+21 \{\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}, \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}\} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode};
+\end{DoxyCode}
+\hypertarget{main_8c_a845e01d4d631be8d8fac14b162607e7f}{\index{main.\+c@{main.\+c}!mood@{mood}}
+\index{mood@{mood}!main.\+c@{main.\+c}}
+\subsubsection[{mood}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf mood}}}\label{main_8c_a845e01d4d631be8d8fac14b162607e7f}
+\begin{Desc}
+\item[Enumerationsværdier]\par
+\begin{description}
+\index{glad@{glad}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!glad@{glad}}\item[{\em 
+\hypertarget{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}\label{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}
+}]\index{sad@{sad}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!sad@{sad}}\item[{\em 
+\hypertarget{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}\label{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}
+}]\end{description}
+\end{Desc}
+
+
+Defineret på linje 23 i filen main.\+c.
+
+
+\begin{DoxyCode}
+23 \{\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}, \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}\} \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7f}{mood};
+\end{DoxyCode}
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919f}{\index{main.\+c@{main.\+c}!tone@{tone}}
+\index{tone@{tone}!main.\+c@{main.\+c}}
+\subsubsection[{tone}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tone}}}\label{main_8c_aeb761eda34d47c3e64ca804875fd919f}
+\begin{Desc}
+\item[Enumerationsværdier]\par
+\begin{description}
+\index{C@{C}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!C@{C}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}
+}]\index{Csharp@{Csharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Csharp@{Csharp}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}
+}]\index{D@{D}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!D@{D}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}
+}]\index{Dsharp@{Dsharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Dsharp@{Dsharp}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}
+}]\index{E@{E}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!E@{E}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}
+}]\index{F@{F}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!F@{F}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F}\label{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}
+}]\index{Fsharp@{Fsharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Fsharp@{Fsharp}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}
+}]\index{G@{G}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!G@{G}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}
+}]\index{Gsharp@{Gsharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Gsharp@{Gsharp}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}
+}]\index{A@{A}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!A@{A}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}
+}]\index{Asharp@{Asharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Asharp@{Asharp}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}
+}]\index{B@{B}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!B@{B}}\item[{\em 
+\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}
+}]\end{description}
+\end{Desc}
+
+
+Defineret på linje 22 i filen main.\+c.
+
+
+\begin{DoxyCode}
+22 \{\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F} = 6, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}, 
+      \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}\} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone};
+\end{DoxyCode}
+
+
+\subsection{Funktions-\/dokumentation}
+\hypertarget{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}{\index{main.\+c@{main.\+c}!count\+Notes@{count\+Notes}}
+\index{count\+Notes@{count\+Notes}!main.\+c@{main.\+c}}
+\subsubsection[{count\+Notes}]{\setlength{\rightskip}{0pt plus 5cm}int count\+Notes (
+\begin{DoxyParamCaption}
+\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{amount}
+\end{DoxyParamCaption}
+)}}\label{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}
+A function to count the number of notes in the entire song 
+\begin{DoxyParams}{Parametre}
+{\em int\mbox{]}} & hex\mbox{[}\mbox{]}\+: an array with the stored information from the file \\
+\hline
+{\em int\mbox{]}} & amount\+: an integer holding the total number of characters in the array \\
+\hline
+\end{DoxyParams}
+
+
+Defineret på linje 119 i filen main.\+c.
+
+
+\begin{DoxyCode}
+119                                      \{
+120   \textcolor{keywordtype}{int} i = 0, res = 0;
+121   \textcolor{keywordflow}{for}(i = 0; i < amount; i++)\{
+122     \textcolor{keywordflow}{if}(hex[i] == 0x90)\{
+123       res++;
+124     \}
+125   \}
+126   \textcolor{keywordflow}{return} res;
+127 \}
+\end{DoxyCode}
+\hypertarget{main_8c_ae485c2568d192a3bfd673be0994f935f}{\index{main.\+c@{main.\+c}!delta\+Time\+To\+Note\+Length@{delta\+Time\+To\+Note\+Length}}
+\index{delta\+Time\+To\+Note\+Length@{delta\+Time\+To\+Note\+Length}!main.\+c@{main.\+c}}
+\subsubsection[{delta\+Time\+To\+Note\+Length}]{\setlength{\rightskip}{0pt plus 5cm}int delta\+Time\+To\+Note\+Length (
+\begin{DoxyParamCaption}
+\item[{int}]{ticks, }
+\item[{int}]{ppqn}
+\end{DoxyParamCaption}
+)}}\label{main_8c_ae485c2568d192a3bfd673be0994f935f}
+
+
+Defineret på linje 317 i filen main.\+c.
+
+
+\begin{DoxyCode}
+317                                                \{
+318   \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) (round((4*ticks)/ppqn));
+319 \}\end{DoxyCode}
+\hypertarget{main_8c_ad88978d32a0f080f58ed31ffe9c51396}{\index{main.\+c@{main.\+c}!fill\+Note@{fill\+Note}}
+\index{fill\+Note@{fill\+Note}!main.\+c@{main.\+c}}
+\subsubsection[{fill\+Note}]{\setlength{\rightskip}{0pt plus 5cm}void fill\+Note (
+\begin{DoxyParamCaption}
+\item[{int}]{input\+Tone, }
+\item[{{\bf note} $\ast$}]{note}
+\end{DoxyParamCaption}
+)}}\label{main_8c_ad88978d32a0f080f58ed31ffe9c51396}
+A function to fill out each of the structures of type note 
+\begin{DoxyParams}{Parametre}
+{\em int\mbox{]}} & input\+Tone\+: the value of the hexadecimal collected on the \char`\"{}tone\char`\"{}-\/spot \\
+\hline
+{\em note$\ast$\mbox{]}} & note\+: a pointer to a note-\/structure \\
+\hline
+\end{DoxyParams}
+
+
+Defineret på linje 201 i filen main.\+c.
+
+
+\begin{DoxyCode}
+201                                         \{
+202   note->\hyperlink{structnote_a30832d96c968d682e5838b39370a1908}{tone} = inputTone % 12;
+203   note->\hyperlink{structnote_a8b58f133e02c3ea4ec40ee641b654dcf}{octave} = inputTone / 12;
+204 \}
+\end{DoxyCode}
+\hypertarget{main_8c_a6406eca72b9402b7240ed0e453e8db46}{\index{main.\+c@{main.\+c}!fill\+Song\+Data@{fill\+Song\+Data}}
+\index{fill\+Song\+Data@{fill\+Song\+Data}!main.\+c@{main.\+c}}
+\subsubsection[{fill\+Song\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void fill\+Song\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf data} $\ast$}]{data, }
+\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{numbers\+In\+Text}
+\end{DoxyParamCaption}
+)}}\label{main_8c_a6406eca72b9402b7240ed0e453e8db46}
+A function, that fills out the song data 
+\begin{DoxyParams}{Parametre}
+{\em data$\ast$\mbox{]}} & data\+: a pointer to a structure containing the tempo and mode of the song \\
+\hline
+{\em int\mbox{]}} & hex\mbox{[}\mbox{]}\+:the array of integers read from the file \\
+\hline
+{\em int\mbox{]}} & numbers\+In\+Text\+: the total amount of integers in the array \\
+\hline
+\end{DoxyParams}
+
+
+Defineret på linje 134 i filen main.\+c.
+
+
+\begin{DoxyCode}
+134                                                            \{
+135   \textcolor{keywordtype}{int} j;
+136   \textcolor{comment}{/*Find the mode of the song, initialised as minor atm*/}
+137   data->\hyperlink{structdata_a9781fc7b786289e4c06b4085d31558e3}{mode} = \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor};
+138   \textcolor{keywordflow}{for}(j = 0; j < numbersInText; j++)\{
+139     \textcolor{comment}{/* finds the tempo */}
+140     \textcolor{keywordflow}{if}(hex[j] == 0xff)\{
+141       \textcolor{keywordflow}{if}(hex[j+1] == 0x51)\{
+142         data->\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
+143       \}
+144     \}
+145   \}
+146 \}
+\end{DoxyCode}
+\hypertarget{main_8c_aae60d3a40db2ce033ce3541f2cfcc178}{\index{main.\+c@{main.\+c}!find\+Events@{find\+Events}}
+\index{find\+Events@{find\+Events}!main.\+c@{main.\+c}}
+\subsubsection[{find\+Events}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Events (
+\begin{DoxyParamCaption}
+\item[{int}]{numbers\+In\+Text, }
+\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{main_8c_aae60d3a40db2ce033ce3541f2cfcc178}
+
+
+Defineret på linje 148 i filen main.\+c.
+
+
+\begin{DoxyCode}
+148                                                             \{
+149   \textcolor{keywordtype}{int} \hyperlink{structnote}{note} = 0x01, eventType = 0x01, counter = 0, i = 0;
+150   \textcolor{comment}{/*Read and proces the hex array*/}
+151   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < numbersInText; j++)\{
+152     \textcolor{comment}{/* Hops over any noto-on, note-off or metaevent start}
+153 \textcolor{comment}{       Also stores the tones read after a note-on         */}
+154     \textcolor{keywordflow}{if}(hex[j] == 0x00 && (hex[j + 1] == 0x90 || hex[j + 1] == 0xff))\{
+155       counter = 1;
+156       j += 4;
+157       \textcolor{keywordflow}{if}(hex[j - 3] == 0x90)\{
+158         note = hex[j - 2];
+159         \hyperlink{main_8c_ad88978d32a0f080f58ed31ffe9c51396}{fillNote}(hex[j - 2], &noteAr[i]);
+160         i++;
+161       \}
+162       \textcolor{keywordflow}{else}\{
+163         eventType = hex[j - 2];
+164       \}
+165     \}
+166     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[j] == 0x80 && hex[j + 1] == note)\{
+167       j += 2;
+168       note = 0x01;
+169       counter = 0;
+170     \}
+171     \textcolor{keywordflow}{if}(counter)\{
+172       \textcolor{comment}{/* Here you can check for parameters inside a meta-event or MIDI-event */}
+173     \}
+174     \textcolor{keywordflow}{else}\{
+175       \textcolor{comment}{/* Here you can check for parameters outside a meta-event or MIDI-event}
+176 \textcolor{comment}{         e.g. between a note-off and the next MIDI-event or a meta-event      */}
+177     \}
+178   \}
+179 \}
+\end{DoxyCode}
+\hypertarget{main_8c_ab56a62ec1c82722ba291a717b2afca5b}{\index{main.\+c@{main.\+c}!find\+Note\+Length@{find\+Note\+Length}}
+\index{find\+Note\+Length@{find\+Note\+Length}!main.\+c@{main.\+c}}
+\subsubsection[{find\+Note\+Length}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Note\+Length (
+\begin{DoxyParamCaption}
+\item[{double}]{x, }
+\item[{int $\ast$}]{high, }
+\item[{int $\ast$}]{low}
+\end{DoxyParamCaption}
+)}}\label{main_8c_ab56a62ec1c82722ba291a717b2afca5b}
+A function to calculate the notelenght -\/ tba 
+
+Defineret på linje 183 i filen main.\+c.
+
+
+\begin{DoxyCode}
+183                                                    \{
+184   \textcolor{keywordtype}{double} func = 16*((x*x)*(0.0000676318287050830)+(0.0128675448628599*x)-2.7216713227147);
+185   \textcolor{keywordtype}{double} temp = func;
+186   \textcolor{keywordtype}{double} temp2 = (int) temp;
+187 
+188   \textcolor{keywordflow}{if} (!(temp - (\textcolor{keywordtype}{double}) temp2 < 0.5))\{
+189     func += 1;
+190   \}
+191 
+192   printf(\textcolor{stringliteral}{"x: %f og func: %f\(\backslash\)n"}, x, func);
+193   *high = (int) func;
+194   *low = 16;
+195 \}
+\end{DoxyCode}
+\hypertarget{main_8c_a7e86822405cc3ff43db316d113a1fb6d}{\index{main.\+c@{main.\+c}!get\+Hex@{get\+Hex}}
+\index{get\+Hex@{get\+Hex}!main.\+c@{main.\+c}}
+\subsubsection[{get\+Hex}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Hex (
+\begin{DoxyParamCaption}
+\item[{F\+I\+L\+E $\ast$}]{f, }
+\item[{int}]{hex\+Ar\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{main_8c_a7e86822405cc3ff43db316d113a1fb6d}
+A function, that retrieves the hexadecimals from the files and also returns the number of files 
+\begin{DoxyParams}{Parametre}
+{\em F\+I\+L\+E$\ast$\mbox{]}} & f\+: a pointer to the file the program is reading from \\
+\hline
+{\em int\mbox{]}} & hex\+Ar\mbox{[}\mbox{]}\+: an array of integers, that the information is stored in \\
+\hline
+\end{DoxyParams}
+
+
+Defineret på linje 104 i filen main.\+c.
+
+
+\begin{DoxyCode}
+104                                 \{
+105   \textcolor{keywordtype}{int} i = 0, c;
+106  
+107   \textcolor{keywordflow}{while}( (c = fgetc(f)) != EOF && i < \hyperlink{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{CHARS})\{
+108     hexAr[i] = c;
+109     i++;
+110   \}
+111   
+112   \textcolor{keywordflow}{return} i;
+113 \}
+\end{DoxyCode}
+\hypertarget{main_8c_adab1118f3db622ab5570732f04ed61aa}{\index{main.\+c@{main.\+c}!insert\+Moods@{insert\+Moods}}
+\index{insert\+Moods@{insert\+Moods}!main.\+c@{main.\+c}}
+\subsubsection[{insert\+Moods}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Moods (
+\begin{DoxyParamCaption}
+\item[{{\bf mood\+Weighting}}]{mood\+Array\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{main_8c_adab1118f3db622ab5570732f04ed61aa}
+
+
+Defineret på linje 284 i filen main.\+c.
+
+
+\begin{DoxyCode}
+284                                            \{
+285   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}].\hyperlink{structmood_weighting_a61010f3a9441ad3cabbe94a31a64dad5}{mode}           = 3;
+286   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}].\hyperlink{structmood_weighting_a9b2180e8a4aab163ae48d0a66269a840}{tempo}          = 4;
+287   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}].\hyperlink{structmood_weighting_ab9e917ae02761f06d11c59645a45536d}{toneLength}     = 2;
+288   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}].\hyperlink{structmood_weighting_a27410ec4f299961816407657a3e241e8}{pitch}          = 1;
+289 
+290   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}].\hyperlink{structmood_weighting_a61010f3a9441ad3cabbe94a31a64dad5}{mode}            = -4;
+291   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}].\hyperlink{structmood_weighting_a9b2180e8a4aab163ae48d0a66269a840}{tempo}           = -5;
+292   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}].\hyperlink{structmood_weighting_ab9e917ae02761f06d11c59645a45536d}{toneLength}      = -3;
+293   moodArray[\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}].\hyperlink{structmood_weighting_a27410ec4f299961816407657a3e241e8}{pitch}           = 0;
+294 \}
+\end{DoxyCode}
+\hypertarget{main_8c_ac0f2228420376f4db7e1274f2b41667c}{\index{main.\+c@{main.\+c}!main@{main}}
+\index{main@{main}!main.\+c@{main.\+c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{const char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{main_8c_ac0f2228420376f4db7e1274f2b41667c}
+
+
+Defineret på linje 62 i filen main.\+c.
+
+
+\begin{DoxyCode}
+62                                       \{
+63   \textcolor{comment}{/*Variables*/}
+64   \textcolor{keywordtype}{int} numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
+65   \textcolor{comment}{/* PLACEHOLDER FIX THIS */}
+66   \textcolor{keywordtype}{int} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = 5, tempo = 5, toneLength = 5, pitch = 5;
+67   \hyperlink{structmood_weighting}{moodWeighting} moodArray[\hyperlink{main_8c_a3c99ae50e5cdc492183ec7bcfdea8a00}{AMOUNT\_OF\_MOODS}];
+68   \hyperlink{structdata}{data} \hyperlink{structdata}{data};
+69   FILE *f = fopen(argv[1],\textcolor{stringliteral}{"r"});
+70   \textcolor{keywordtype}{int} *hex = (\textcolor{keywordtype}{int} *) malloc(\hyperlink{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{CHARS} * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));
+71   \textcolor{keywordflow}{if}(hex == NULL)\{
+72     printf(\textcolor{stringliteral}{"Memory allokation failed, bye!"});
+73     exit(EXIT\_FAILURE);
+74   \}
+75   
+76   \textcolor{comment}{/*Reading the data from the file*/}
+77   numbersInText = \hyperlink{main_8c_a7e86822405cc3ff43db316d113a1fb6d}{getHex}(f, hex);
+78   \hyperlink{main_8c_a6406eca72b9402b7240ed0e453e8db46}{fillSongData}(&data, hex, numbersInText);
+79   notes = \hyperlink{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}{countNotes}(hex, numbersInText);
+80   \hyperlink{structnote}{note} *noteAr = (\hyperlink{structnote}{note}*) malloc(notes * \textcolor{keyword}{sizeof}(\hyperlink{structnote}{note}));
+81   \textcolor{keywordflow}{if}(noteAr == NULL)\{
+82     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
+83     exit(EXIT\_FAILURE);
+84   \}
+85   \hyperlink{main_8c_aae60d3a40db2ce033ce3541f2cfcc178}{findEvents}(numbersInText, hex, noteAr);
+86   \hyperlink{main_8c_adab1118f3db622ab5570732f04ed61aa}{insertMoods}(moodArray);
+87   \textcolor{keywordflow}{for}(i = 0; i < notes; i++)
+88     \hyperlink{main_8c_aa9c735ae880cee4e1272bcf387462c9a}{printNote}(noteAr[i]);
+89   \hyperlink{main_8c_a96686ff783072b26aa8666d0281d053c}{printSongData}(data);
+90   moodOfMelodi = \hyperlink{main_8c_ade6b8acc6a7f498b910c155b43d442b1}{weightingMatrix}(moodArray, mode, tempo, toneLength, pitch);
+91 
+92   \textcolor{comment}{/*Clean up and close*/}
+93   fclose(f);
+94   free(hex);
+95   free(noteAr);
+96 
+97   \textcolor{keywordflow}{return} 0;
+98 \}
+\end{DoxyCode}
+\hypertarget{main_8c_aa9c735ae880cee4e1272bcf387462c9a}{\index{main.\+c@{main.\+c}!print\+Note@{print\+Note}}
+\index{print\+Note@{print\+Note}!main.\+c@{main.\+c}}
+\subsubsection[{print\+Note}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Note (
+\begin{DoxyParamCaption}
+\item[{{\bf note}}]{note}
+\end{DoxyParamCaption}
+)}}\label{main_8c_aa9c735ae880cee4e1272bcf387462c9a}
+A function to print the note 
+\begin{DoxyParams}{Parametre}
+{\em note\mbox{]}} & note\+: the note structure to be printed \\
+\hline
+\end{DoxyParams}
+
+
+Defineret på linje 209 i filen main.\+c.
+
+
+\begin{DoxyCode}
+209                          \{
+210   printf(\textcolor{stringliteral}{"Tone: "});
+211 
+212   \textcolor{keywordflow}{switch} (note.\hyperlink{structnote_a30832d96c968d682e5838b39370a1908}{tone})\{
+213     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}     : printf(\textcolor{stringliteral}{"C"}) ; \textcolor{keywordflow}{break};
+214     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}: printf(\textcolor{stringliteral}{"C#"}); \textcolor{keywordflow}{break};
+215     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}     : printf(\textcolor{stringliteral}{"D"}) ; \textcolor{keywordflow}{break};
+216     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}: printf(\textcolor{stringliteral}{"D#"}); \textcolor{keywordflow}{break};
+217     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}     : printf(\textcolor{stringliteral}{"E"}) ; \textcolor{keywordflow}{break};
+218     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F}     : printf(\textcolor{stringliteral}{"F"}) ; \textcolor{keywordflow}{break};
+219     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}: printf(\textcolor{stringliteral}{"F#"}); \textcolor{keywordflow}{break};
+220     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}     : printf(\textcolor{stringliteral}{"G"}) ; \textcolor{keywordflow}{break};
+221     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}: printf(\textcolor{stringliteral}{"G#"}); \textcolor{keywordflow}{break};
+222     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}     : printf(\textcolor{stringliteral}{"A"}) ; \textcolor{keywordflow}{break};
+223     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}: printf(\textcolor{stringliteral}{"A#"}); \textcolor{keywordflow}{break};
+224     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}     : printf(\textcolor{stringliteral}{"B"}) ; \textcolor{keywordflow}{break};
+225     \textcolor{keywordflow}{default}    : printf(\textcolor{stringliteral}{"Undefined note"}); \textcolor{keywordflow}{break};
+226   \}
+227   printf(\textcolor{stringliteral}{", octave: %d\(\backslash\)n"}, note.\hyperlink{structnote_a8b58f133e02c3ea4ec40ee641b654dcf}{octave});
+228 \}
+\end{DoxyCode}
+\hypertarget{main_8c_a96686ff783072b26aa8666d0281d053c}{\index{main.\+c@{main.\+c}!print\+Song\+Data@{print\+Song\+Data}}
+\index{print\+Song\+Data@{print\+Song\+Data}!main.\+c@{main.\+c}}
+\subsubsection[{print\+Song\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Song\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf data}}]{data}
+\end{DoxyParamCaption}
+)}}\label{main_8c_a96686ff783072b26aa8666d0281d053c}
+A function to print out the overall data of the song, tempo and mode 
+\begin{DoxyParams}{Parametre}
+{\em data\mbox{]}} & data\+: the data to be printed \\
+\hline
+\end{DoxyParams}
+
+
+Defineret på linje 233 i filen main.\+c.
+
+
+\begin{DoxyCode}
+233                              \{
+234   printf(\textcolor{stringliteral}{"Tempo: %d\(\backslash\)nMode: "}, data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo});
+235   \textcolor{keywordflow}{switch}(data.\hyperlink{structdata_a9781fc7b786289e4c06b4085d31558e3}{mode})\{
+236     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}: printf(\textcolor{stringliteral}{"minor"}); \textcolor{keywordflow}{break};
+237     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}: printf(\textcolor{stringliteral}{"major"}); \textcolor{keywordflow}{break};
+238     \textcolor{keywordflow}{default}: printf(\textcolor{stringliteral}{"unknown mode"}); \textcolor{keywordflow}{break};
+239   \}
+240   putchar(\textcolor{charliteral}{'\(\backslash\)n'});
+241 \}
+\end{DoxyCode}
+\hypertarget{main_8c_a413774197396bb250ab5aa9c07be3223}{\index{main.\+c@{main.\+c}!setting\+Points@{setting\+Points}}
+\index{setting\+Points@{setting\+Points}!main.\+c@{main.\+c}}
+\subsubsection[{setting\+Points}]{\setlength{\rightskip}{0pt plus 5cm}void setting\+Points (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{mode, }
+\item[{int $\ast$}]{tempo, }
+\item[{int $\ast$}]{length, }
+\item[{int $\ast$}]{octave, }
+\item[{{\bf data}}]{data}
+\end{DoxyParamCaption}
+)}}\label{main_8c_a413774197396bb250ab5aa9c07be3223}
+
+
+Defineret på linje 243 i filen main.\+c.
+
+
+\begin{DoxyCode}
+243                                                                               \{
+244   \textcolor{keywordtype}{int} deltaTime = \hyperlink{main_8c_ae485c2568d192a3bfd673be0994f935f}{deltaTimeToNoteLength}(480, 960);
+245   \textcolor{keywordflow}{switch}(data.\hyperlink{structdata_a9781fc7b786289e4c06b4085d31558e3}{mode})\{
+246     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}: *\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = -5; \textcolor{keywordflow}{break};
+247     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}: *\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = 5; \textcolor{keywordflow}{break};
+248   \}
+249   \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 60)
+250     *tempo = -5;
+251   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 60 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 70)
+252     *tempo = -4;
+253   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 70 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 80)
+254     *tempo = -3;  
+255   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 80 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 90)
+256     *tempo = -2;
+257   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 90 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 100)
+258     *tempo = -1;
+259   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 100 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 120)
+260     *tempo =  0;  
+261   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 120 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 130)
+262     *tempo =  1;
+263   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 130 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 140)
+264     *tempo =  2;
+265   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 140 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 150)
+266     *tempo =  3;
+267   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 150 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 160)
+268     *tempo =  4;
+269   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >=  160)
+270     *tempo =  5;
+271 
+272   \textcolor{keywordflow}{switch}(deltaTime)\{
+273     \textcolor{keywordflow}{case} 1: *length = -5; \textcolor{keywordflow}{break};
+274     \textcolor{keywordflow}{case} 2: *length = -4; \textcolor{keywordflow}{break};
+275     \textcolor{keywordflow}{case} 4: *length = -2; \textcolor{keywordflow}{break};
+276     \textcolor{keywordflow}{case} 8: *length =  0; \textcolor{keywordflow}{break};
+277     \textcolor{keywordflow}{case} 16: *length = 3; \textcolor{keywordflow}{break};
+278     \textcolor{keywordflow}{case} 32: *length = 5; \textcolor{keywordflow}{break};
+279   \}
+280 \}
+\end{DoxyCode}
+\hypertarget{main_8c_ac6a3184d104e99d57824eecaabab8ed5}{\index{main.\+c@{main.\+c}!sort\+Result@{sort\+Result}}
+\index{sort\+Result@{sort\+Result}!main.\+c@{main.\+c}}
+\subsubsection[{sort\+Result}]{\setlength{\rightskip}{0pt plus 5cm}int sort\+Result (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{pa, }
+\item[{const void $\ast$}]{pb}
+\end{DoxyParamCaption}
+)}}\label{main_8c_ac6a3184d104e99d57824eecaabab8ed5}
+
+
+Defineret på linje 310 i filen main.\+c.
+
+
+\begin{DoxyCode}
+310                                               \{
+311   \textcolor{keywordtype}{int} a = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pa;
+312   \textcolor{keywordtype}{int} b = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pb;
+313   \textcolor{keywordflow}{return} (b-a);
+314 \}
+\end{DoxyCode}
+\hypertarget{main_8c_ade6b8acc6a7f498b910c155b43d442b1}{\index{main.\+c@{main.\+c}!weighting\+Matrix@{weighting\+Matrix}}
+\index{weighting\+Matrix@{weighting\+Matrix}!main.\+c@{main.\+c}}
+\subsubsection[{weighting\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}int weighting\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf mood\+Weighting}}]{mood\+Array\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{mode, }
+\item[{int}]{tempo, }
+\item[{int}]{tone\+Length, }
+\item[{int}]{pitch}
+\end{DoxyParamCaption}
+)}}\label{main_8c_ade6b8acc6a7f498b910c155b43d442b1}
+
+
+Defineret på linje 297 i filen main.\+c.
+
+
+\begin{DoxyCode}
+297                                                                                               \{
+298   \textcolor{keywordtype}{int} result[\hyperlink{main_8c_a3c99ae50e5cdc492183ec7bcfdea8a00}{AMOUNT\_OF\_MOODS}] = \{0\};
+299   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \hyperlink{main_8c_a3c99ae50e5cdc492183ec7bcfdea8a00}{AMOUNT\_OF\_MOODS}; i++)\{
+300     result[i] += (moodArray[i].\hyperlink{structmood_weighting_a61010f3a9441ad3cabbe94a31a64dad5}{mode} * \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode});
+301     result[i] += (moodArray[i].\hyperlink{structmood_weighting_a9b2180e8a4aab163ae48d0a66269a840}{tempo} * tempo);
+302     result[i] += (moodArray[i].\hyperlink{structmood_weighting_ab9e917ae02761f06d11c59645a45536d}{toneLength} * toneLength);
+303     result[i] += (moodArray[i].\hyperlink{structmood_weighting_a27410ec4f299961816407657a3e241e8}{pitch} * pitch);
+304   \}
+305   qsort(result, AMOUNT\_OF\_MOODS, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}), \hyperlink{main_8c_ac6a3184d104e99d57824eecaabab8ed5}{sortResult});
+306   \textcolor{keywordflow}{return} result[0];
+307 \}
+\end{DoxyCode}

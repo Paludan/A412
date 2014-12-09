@@ -1,0 +1,116 @@
+\begin{theindex}
+
+  \item {A}
+    \subitem {main.\+c}, \hyperpage{11}
+  \item {Asharp}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {B}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {C}
+    \subitem {main.\+c}, \hyperpage{11}
+  \item {Csharp}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {D}
+    \subitem {main.\+c}, \hyperpage{11}
+  \item {data}, \hyperpage{5}
+    \subitem {mode}, \hyperpage{5}
+    \subitem {tempo}, \hyperpage{5}
+  \item {Dsharp}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {E}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {F}
+    \subitem {main.\+c}, \hyperpage{11}
+  \item {Fsharp}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {G}
+    \subitem {main.\+c}, \hyperpage{11}
+  \item {glad}
+    \subitem {main.\+c}, \hyperpage{11}
+  \item {Gsharp}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {lenght}
+    \subitem {note}, \hyperpage{6}
+
+  \indexspace
+
+  \item {main.\+c}
+    \subitem {A}, \hyperpage{11}
+    \subitem {Asharp}, \hyperpage{11}
+    \subitem {B}, \hyperpage{11}
+    \subitem {C}, \hyperpage{11}
+    \subitem {Csharp}, \hyperpage{11}
+    \subitem {D}, \hyperpage{11}
+    \subitem {Dsharp}, \hyperpage{11}
+    \subitem {E}, \hyperpage{11}
+    \subitem {F}, \hyperpage{11}
+    \subitem {Fsharp}, \hyperpage{11}
+    \subitem {G}, \hyperpage{11}
+    \subitem {glad}, \hyperpage{11}
+    \subitem {Gsharp}, \hyperpage{11}
+    \subitem {major}, \hyperpage{10}
+    \subitem {minor}, \hyperpage{10}
+    \subitem {sad}, \hyperpage{11}
+  \item {major}
+    \subitem {main.\+c}, \hyperpage{10}
+  \item {minor}
+    \subitem {main.\+c}, \hyperpage{10}
+  \item {mode}
+    \subitem {data}, \hyperpage{5}
+
+  \indexspace
+
+  \item {note}, \hyperpage{6}
+    \subitem {lenght}, \hyperpage{6}
+    \subitem {octave}, \hyperpage{6}
+    \subitem {tone}, \hyperpage{6}
+
+  \indexspace
+
+  \item {octave}
+    \subitem {note}, \hyperpage{6}
+
+  \indexspace
+
+  \item {parameter}
+    \subitem {points}, \hyperpage{7}
+  \item {point}
+    \subitem {points}, \hyperpage{7}
+  \item {points}, \hyperpage{7}
+    \subitem {parameter}, \hyperpage{7}
+    \subitem {point}, \hyperpage{7}
+
+  \indexspace
+
+  \item {sad}
+    \subitem {main.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {tempo}
+    \subitem {data}, \hyperpage{5}
+  \item {tone}
+    \subitem {note}, \hyperpage{6}
+
+\end{theindex}

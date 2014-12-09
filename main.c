@@ -7,6 +7,7 @@
  * Esben Kirkegaard Da Scrub
  * Arne Rasmussen Da Champ
  * Tobias Morell
+ * @file
 */
 
 #include <stdio.h>
