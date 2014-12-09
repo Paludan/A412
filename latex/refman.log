@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.14)  9 DEC 2014 09:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.14)  9 DEC 2014 11:31
 entering extended mode
 **refman
 (C:\Users\Gedesnegl\Desktop\A412\latex\refman.tex
@@ -600,32 +600,6 @@ Package: wasysym 2003/10/30 v2.0 Wasy-2 symbol support package
 LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 (Font)                  U/wasy/m/n --> U/wasy/b/n on input line 90.
 )
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.sty"
-Package: babel 2008/07/08 v3.8m The Babel package
-
-*************************************
-* Local config file bblopts.cfg used
-*
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
-File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
-)
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\danish.ldf"
-Language: danish 2009/09/19 v1.3r Danish support from the babel system
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
-File: babel.def 2008/07/08 v3.8m Babel common definitions
-\babel@savecnt=\count110
-\U@D=\dimen133
-)
-Package babel Info: Making " an active character on input line 82.
-))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
-Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.def"
-File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
-))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
@@ -704,17 +678,17 @@ Package ifvtex Info: VTeX not detected.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count111
-\Gm@cntv=\count112
-\c@Gm@tempcnt=\count113
-\Gm@bindingoffset=\dimen134
-\Gm@wd@mp=\dimen135
-\Gm@odd@mp=\dimen136
-\Gm@even@mp=\dimen137
-\Gm@layoutwidth=\dimen138
-\Gm@layoutheight=\dimen139
-\Gm@layouthoffset=\dimen140
-\Gm@layoutvoffset=\dimen141
+\Gm@cnth=\count110
+\Gm@cntv=\count111
+\c@Gm@tempcnt=\count112
+\Gm@bindingoffset=\dimen133
+\Gm@wd@mp=\dimen134
+\Gm@odd@mp=\dimen135
+\Gm@even@mp=\dimen136
+\Gm@layoutwidth=\dimen137
+\Gm@layoutheight=\dimen138
+\Gm@layouthoffset=\dimen139
+\Gm@layoutvoffset=\dimen140
 \Gm@dimlist=\toks24
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
@@ -734,7 +708,7 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip65
 \bibsep=\skip66
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count114
+\c@NAT@ctr=\count113
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tocloft\tocloft.sty"
 Package: tocloft 2013/05/02 v2.3f parameterised ToC, etc., typesetting
@@ -768,8 +742,8 @@ Package tocloft Info: The document has chapter divisions on input line 44.
 \cftbeforefigskip=\skip93
 \cftfigindent=\skip94
 \cftfignumwidth=\skip95
-\c@lofdepth=\count115
-\c@lotdepth=\count116
+\c@lofdepth=\count114
+\c@lotdepth=\count115
 \cftbeforelottitleskip=\skip96
 \cftafterlottitleskip=\skip97
 \cftbeforetabskip=\skip98
@@ -831,16 +805,16 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
-\@linkdim=\dimen142
-\Hy@linkcounter=\count117
-\Hy@pagecounter=\count118
+\@linkdim=\dimen141
+\Hy@linkcounter=\count116
+\Hy@pagecounter=\count117
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count119
+\Hy@SavedSpaceFactor=\count118
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -861,17 +835,17 @@ Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 ))
-\c@Hy@tempcnt=\count120
+\c@Hy@tempcnt=\count119
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen143
-\Fld@menulength=\count121
-\Field@Width=\dimen144
-\Fld@charsize=\dimen145
+\XeTeXLinkMargin=\dimen142
+\Fld@menulength=\count120
+\Field@Width=\dimen143
+\Fld@charsize=\dimen144
 Package hyperref Info: Hyper figures OFF on input line 6295.
 Package hyperref Info: Link nesting OFF on input line 6300.
 Package hyperref Info: Hyper index ON on input line 6303.
@@ -881,21 +855,21 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6320.
 Package hyperref Info: PDF/A mode OFF on input line 6325.
 LaTeX Info: Redefining \ref on input line 6365.
 LaTeX Info: Redefining \pageref on input line 6369.
-\Hy@abspage=\count122
-\c@Item=\count123
-\c@Hfootnote=\count124
+\Hy@abspage=\count121
+\c@Item=\count122
+\c@Hfootnote=\count123
 )
 
 Package hyperref Message: Driver: hpdftex.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
-\Fld@listcount=\count125
-\c@bookmark@seq@number=\count126
+\Fld@listcount=\count124
+\c@bookmark@seq@number=\count125
 \Hy@SectionHShift=\skip101
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 109.
-Package hyperref Info: Option `unicode' set `true' on input line 109.
+Package hyperref Info: Option `colorlinks' set `true' on input line 105.
+Package hyperref Info: Option `unicode' set `true' on input line 105.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\puenc.def"
 File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
@@ -903,53 +877,53 @@ Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
 (C:\Users\Gedesnegl\Desktop\A412\latex\refman.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 119.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 119.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 115.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 115.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 119.
-LaTeX Font Info:    ... okay on input line 119.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 119.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 115.
+LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 115.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\t1phv.fd"
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 119.
+(Font)              scaled to size 8.99994pt on input line 115.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count127
-\scratchdimen=\dimen146
+\scratchcounter=\count126
+\scratchdimen=\dimen145
 \scratchbox=\box56
-\nofMPsegments=\count128
-\nofMParguments=\count129
+\nofMPsegments=\count127
+\nofMParguments=\count128
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count130
-\MPscratchDim=\dimen147
-\MPnumerator=\count131
-\makeMPintoPDFobject=\count132
+\MPscratchCnt=\count129
+\MPscratchDim=\dimen146
+\MPnumerator=\count130
+\makeMPintoPDFobject=\count131
 \everyMPtoPDFconversion=\toks26
 )
-\big@size=\dimen148
+\big@size=\dimen147
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -986,78 +960,78 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box57
-Package backref Info: ** backref set up for natbib ** on input line 119.
-Package hyperref Info: Link coloring ON on input line 119.
+Package backref Info: ** backref set up for natbib ** on input line 115.
+Package hyperref Info: Link coloring ON on input line 115.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count133
+\c@section@level=\count132
 )
-LaTeX Info: Redefining \ref on input line 119.
-LaTeX Info: Redefining \pageref on input line 119.
-LaTeX Info: Redefining \nameref on input line 119.
+LaTeX Info: Redefining \ref on input line 115.
+LaTeX Info: Redefining \pageref on input line 115.
+LaTeX Info: Redefining \nameref on input line 115.
 
 (C:\Users\Gedesnegl\Desktop\A412\latex\refman.out)
 (C:\Users\Gedesnegl\Desktop\A412\latex\refman.out)
 \@outlinefile=\write4
-Package hyperref Info: Option `pageanchor' set `false' on input line 126.
+Package hyperref Info: Option `pageanchor' set `false' on input line 122.
 
 
 Package hyperref Warning: Option `bookmarks' has already been used,
-(hyperref)                setting the option has no effect on input line 126.
+(hyperref)                setting the option has no effect on input line 122.
 
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 126.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 122.
 
-Package hyperref Info: Option `unicode' set `true' on input line 126.
+Package hyperref Info: Option `unicode' set `true' on input line 122.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 12.9599pt on input line 131.
+(Font)              scaled to size 12.9599pt on input line 127.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 10.79993pt on input line 131.
+(Font)              scaled to size 10.79993pt on input line 127.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 6.29996pt on input line 131.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 13
-1.
+(Font)              scaled to size 6.29996pt on input line 127.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 12
+7.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1ztmcm.fd"
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 13
-1.
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 12
+7.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omlztmcm.fd"
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 13
-1.
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 12
+7.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omsztmcm.fd"
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 13
-1.
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 12
+7.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omxztmcm.fd"
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 131.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 127.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\wasysym\uwasy.fd"
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 131.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 127.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 131.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 127.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 131.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 127.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 135.
+(Font)              scaled to size 8.09995pt on input line 131.
  [1
 
 
@@ -1065,45 +1039,45 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 22.39185pt on input line 139.
+(Font)              scaled to size 22.39185pt on input line 135.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 139.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 135.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 22.39185pt on input line 139.
+(Font)              scaled to size 22.39185pt on input line 135.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 22.39185pt on input line 139.
+(Font)              scaled to size 22.39185pt on input line 135.
 
 (C:\Users\Gedesnegl\Desktop\A412\latex\refman.toc
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 2.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 8.99994pt on input line 2.
+(Font)              scaled to size 8.99994pt on input line 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
  [3
 
 ])
 \tf@toc=\write5
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 140.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 136.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 6.29996pt on input line 140.
+(Font)              scaled to size 6.29996pt on input line 136.
  [4]
-Package hyperref Info: Option `pageanchor' set `true' on input line 142.
+Package hyperref Info: Option `pageanchor' set `true' on input line 138.
 
-Kapitel 1.
+Chapter 1.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 18.66588pt on input line 145.
+(Font)              scaled to size 18.66588pt on input line 141.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 145.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 141.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 18.66588pt on input line 145.
+(Font)              scaled to size 18.66588pt on input line 141.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 18.66588pt on input line 145.
+(Font)              scaled to size 18.66588pt on input line 141.
 (C:\Users\Gedesnegl\Desktop\A412\latex\annotated.tex
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 1.
@@ -1117,11 +1091,11 @@ LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 ] [2
 
 ]
-Kapitel 2.
+Chapter 2.
 (C:\Users\Gedesnegl\Desktop\A412\latex\files.tex) [3] [4
 
 ]
-Kapitel 3.
+Chapter 3.
 (C:\Users\Gedesnegl\Desktop\A412\latex\structdata.tex
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 4.
@@ -1146,7 +1120,7 @@ LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (C:\Users\Gedesnegl\Desktop\A412\latex\structpoints.tex [6]) [7] [8
 
 ]
-Kapitel 4.
+Chapter 4.
 (C:\Users\Gedesnegl\Desktop\A412\latex\main_8c.tex
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 4.
 
@@ -1204,24 +1178,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--6
 ) [16] (C:\Users\Gedesnegl\Desktop\A412\latex\refman.ind [17
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 165.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 165.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 161.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
 
 (C:\Users\Gedesnegl\Desktop\A412\latex\refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 165.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 165.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 161.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 161.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 0ADE3988440ACA25833EBDD3DD5C43B1;10482.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 165.
+(rerunfilecheck)             Checksum: A2F3EA7DC397F0CA4783A77B7FC784DA;10341.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 161.
  ) 
 Here is how much of TeX's memory you used:
- 12833 strings out of 493921
- 181730 string characters out of 3144863
- 264302 words of memory out of 3000000
- 15739 multiletter control sequences out of 15000+200000
+ 12525 strings out of 493921
+ 177632 string characters out of 3144863
+ 258106 words of memory out of 3000000
+ 15447 multiletter control sequences out of 15000+200000
  83586 words of font info for 111 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 48i,16n,43p,1953b,504s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 48i,16n,43p,1953b,495s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program 
 Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fi
@@ -1232,7 +1206,7 @@ ts/type1/urw/helvetic/uhvbo8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
 1/urw/helvetic/uhvbo8ac.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/
 helvetic/uhvr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic
 /uhvro8a.pfb>
-Output written on refman.pdf (21 pages, 231214 bytes).
+Output written on refman.pdf (21 pages, 228863 bytes).
 PDF statistics:
  778 PDF objects out of 1000 (max. 8388607)
  147 named destinations out of 1000 (max. 500000)
