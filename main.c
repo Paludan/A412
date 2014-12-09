@@ -1,4 +1,7 @@
-/* MIDI analysing mega device of epic proportions
+/*@file
+ *@brief This file is marvelous.
+ *
+ * MIDI analysing mega device of epic proportions
  * Gruppe A412
  * Lee Paludan
  * Simon Madsen
@@ -7,7 +10,6 @@
  * Esben Kirkegaard Da Scrub
  * Arne Rasmussen Da Champ
  * Tobias Morell
- * @file
 */
 
 #include <stdio.h>
