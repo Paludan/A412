@@ -195,8 +195,7 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
     if(hex[j] == 0x90)
       fillNote(hex[j + 1], &noteAr[*n += 1]); 
     }   
-  } 
-}
+} 
 
 void insertPlacement2(int hex[], int *place, int j){
   int i = 2;
