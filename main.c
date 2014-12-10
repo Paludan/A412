@@ -19,10 +19,11 @@
 
 #define CHARS 1000
 #define AMOUNT_OF_MOODS 2
+#define SCALESIZE 7
 
 /*Enums and structs*/
 typedef enum mode {major, minor} mode;
-typedef enum tone {C, Csharp, D, Dsharp, E, F = 6, Fsharp, G, Gsharp, A, Asharp, B} tone;
+typedef enum tone {C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B} tone;
 typedef enum mood {glad, sad} mood;
 
 typedef struct{
@@ -77,6 +78,11 @@ void insertPlacement2(int [], int *, int);
 int checkNextEvent(int [], int);
 int sortResult(const void *, const void *);
 int deltaTimeToNoteLength (int, int);
+int isInScale(int, int[], int);
+int isInMinor(int);
+int isInMajor(int);
+int sortToner(const void*, const void*);
+void findMode(note*, int, data*);
 
 int main(int argc, const char *argv[]){
   /*Variables*/
@@ -84,7 +90,7 @@ int main(int argc, const char *argv[]){
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   moodWeighting moodArray[AMOUNT_OF_MOODS];
-  data data;
+  data data = {0, major, D};
   FILE *f = fopen(argv[1],"r");
   if(f == NULL){
     perror("Error opening file");
@@ -112,9 +118,12 @@ int main(int argc, const char *argv[]){
   printf("%d, %d, %d, %d\n", mode, tempo, toneLength, pitch);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
+  findMode(noteAr, notes, &data);
   printSongData(data);
   moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
   printf("%d\n", moodOfMelodi);
+
+
   /*Clean up and close*/
   fclose(f);
   free(hex);
@@ -160,7 +169,6 @@ int countNotes(int hex[], int amount){
 void fillSongData(data *data, int hex[], int numbersInText){
   int j;
   /*Find the mode of the song, initialised as minor atm*/
-  data->mode = minor;
   for(j = 0; j < numbersInText; j++){
     /* finds the tempo */
     if(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03){
@@ -217,22 +225,6 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
-/**A function to calculate the notelength - tba
-*/
-void findNoteLength (double x, int *high, int *low){
-  double func = 16*((x*x)*(0.0000676318287050830)+(0.0128675448628599*x)-2.7216713227147);
-  double temp = func;
-  double temp2 = (int) temp;
-
-  if (!(temp - (double) temp2 < 0.5)){
-    func += 1;
-  }
-
-  printf("x: %f og func: %f\n", x, func);
-  *high = (int) func;
-  *low = 16;
-}
-
 /**A function to fill out each of the structures of type note
   *@param[int] inputTone: the value of the hexadecimal collected on the "tone"-spot
   *@param[note*] note: a pointer to a note-structure
@@ -277,6 +269,7 @@ void printSongData(data data){
     case major: printf("major"); break;
     default: printf("unknown mode"); break;
   }
+  printf("\nKeytone: %d", data.key);
   putchar('\n');
 }
 
@@ -403,4 +396,115 @@ int deltaTimeToNoteLength (int ticks, int ppqn){
   else
     noteLength = 32;
   return noteLength;
+}
+
+/**A function to sort integers in ascending order.
+  */
+int sortTones(const void *a, const void *b){
+  int *i1 = (int*) a, *i2 = (int*) b;
+
+  return (int) *i1 - *i2;
+}
+
+/**A function to find the mode of the song by first calculating the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
+  *@param[note[]] noteAr: An array of all the notes in the entire song
+  *@param[int] totalNotes: The number of notes in the song
+  */
+void findMode(note noteAr[], int totalNotes, data *data){
+  int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0;
+
+  /*Goes through all notes of the song and puts them into an array*/
+  while(x < totalNotes){
+    for(y = 0; y < sizeBar; y++, x++){
+      bar[y] = noteAr[x].tone;
+    }
+
+    if(y == sizeBar){
+      /*Sort notes in acsending order*/
+      qsort(bar, sizeBar, sizeof(tone), sortTones);
+
+      /*Find the lowest possible tonespan over the entire array of notes*/
+      for(z = 0; z < 4; z++){
+	if((z + 1) > 3)
+          tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+        else if((z + 2) > 3)
+          tempSpan = bar[(z+1)]-bar[z] + (bar[(z+2)%4]+12)-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+	else if((z +3) > 3)
+          tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
+	else
+          tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
+
+	if(tempSpan < span){
+          span = tempSpan; 
+          keynote = bar[z];
+        }
+      }
+      mode += isInScale(keynote, bar, sizeBar);
+    }
+  data->key = keynote;
+  if(mode > 0)
+    data->mode = major;
+  else if(mode > 0)
+    data->mode = minor;  
+  }
+}
+
+/**A function to check if a given scale in given keytone corresponds with the tones in the rest of the song.
+  *@param[scale] mode: An enum that describes the given mode
+  *@param[int] keytone: The keytone of the processed scale
+  *@param[int] otherTones[]: An array of the rest of the tones, which the function compares to the keytone and mode
+  *@param[int] size: The number of tones in the otherTones array
+  *@return[int]: a boolean value, returns 1 if the mode is major, -1 if it's minor and 0, if wasn't possible to decide.
+  */
+int isInScale(int keytone, int otherTones[], int size){
+  int toneLeap, isMinor = 1, isMajor = 1;
+
+  for(int i = 0; i < size; i++){
+    if(otherTones[i] < keytone)
+      otherTones[i] += 12;
+      toneLeap = otherTones[i] - keytone;
+
+      if(isMinor)
+        isMinor = isInMinor(toneLeap);
+      if(isMajor)
+        isMajor = isInMajor(toneLeap);
+    }
+
+    if(isMinor && isMajor)
+      return 0;
+    else if(isMinor)
+      return -1;
+    if(isMajor)
+      return 1;
+
+    return 0;
+}
+
+/**A function to check if the given tone leap is in the minor scale.
+  *@param[int] toneLeap: An integer describing the processed tone leap
+  *@return[int]: a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not.
+  */
+
+int isInMinor(int toneLeap){
+  int minor[] = {0, 2, 3, 5, 7, 8, 10};
+
+  for(int i = 0; i < SCALESIZE; i++){
+    if(toneLeap == minor[i])
+      return 1;
+  }
+  return 0;
+}
+
+/**A function to check if the given tone leap is in the major scale.
+  *@param[int] toneLeap: An integer describing the processed tone leap
+  *@return[int]: a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not.
+  */
+int isInMajor(int toneLeap){
+  int major[] = {0, 2, 4, 5, 7, 9, 11};
+
+  for(int i = 0; i < SCALESIZE; i++){
+    if(toneLeap == major[i])
+      return 1;
+  }
+  return 0;
 }
