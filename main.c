@@ -420,6 +420,7 @@ void findMode(note noteAr[], int totalNotes, data *data){
     }
 
     if(y == sizeBar){
+      span = 999;
       /*Sort notes in acsending order*/
       qsort(bar, sizeBar, sizeof(tone), sortTones);
 
@@ -440,11 +441,12 @@ void findMode(note noteAr[], int totalNotes, data *data){
         }
       }
       mode += isInScale(keynote, bar, sizeBar);
+      printf("Moden er nu: %d\n", mode);
     }
   data->key = keynote;
   if(mode > 0)
     data->mode = major;
-  else if(mode > 0)
+  else if(mode < 0)
     data->mode = minor;  
   }
 }
