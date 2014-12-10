@@ -66,7 +66,7 @@ void printNote(note);
 int getHex(FILE*, int[]);
 void fillSongData(data*, int[], int);
 int countNotes(int[], int);
-void fillNote(int, note*, int);
+void fillNote(int, note*);
 void printSongData(data);
 void settingPoints(int*, int*, int*, int*, data, int, note []);
 void insertMoods(moodWeighting []);
@@ -109,6 +109,7 @@ int main(int argc, const char *argv[]){
   findEvents(numbersInText, hex, placement, noteAr);
   insertMoods(moodArray);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr);
+  printf("%d, %d, %d, %d\n", mode, tempo, toneLength, pitch);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
   printSongData(data);
@@ -192,7 +193,8 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
   if(checkNextEvent(hex, (j + i))){
     *place = j;
     if(hex[j] == 0x90)
-      fillNote(hex[j + 1], &noteAr[*n += 1]);  
+      fillNote(hex[j + 1], &noteAr[*n += 1]); 
+    }   
   } 
 }
 
@@ -236,7 +238,7 @@ void findNoteLength (double x, int *high, int *low){
   *@param[int] inputTone: the value of the hexadecimal collected on the "tone"-spot
   *@param[note*] note: a pointer to a note-structure
 */
-void fillNote(int inputTone, note *note, int i){
+void fillNote(int inputTone, note *note){
   note->tone = inputTone % 12;
   note->average = inputTone;
   note->octave = inputTone / 12;
