@@ -170,7 +170,7 @@ void fillSongData(data *data, int hex[], int numbersInText){
 
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[]){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-      programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = 0;
+      programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = -1;
 
   for(int j = 0; j < numbersInText; j++){
     switch (hex[j]){
@@ -191,10 +191,8 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
   while(i < 7 && hex[(j + i++)] > 0x80);
   if(checkNextEvent(hex, (j + i))){
     *place = j;
-    if(hex[j] == 0x90){
-      fillNote(hex[j + 1], &noteAr[*n]);
-      *n += 1;
-    }   
+    if(hex[j] == 0x90)
+      fillNote(hex[j + 1], &noteAr[*n += 1]);  
   } 
 }
 

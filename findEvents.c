@@ -10,30 +10,32 @@ typedef struct{
 
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[]){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-      programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0;
+      programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = 0;
 
   for(int j = 0; j < numbersInText; j++){
     switch (hex[j]){
-      case 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j);                   break;
-      case 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j);                 break;
-      case 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j);           break;
-      case 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j);     break;
-      case 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);     break;
-      case 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j); break;
-      case 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j);           break;
-      default  :                                                                          break;
+      case 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n);               break;
+      case 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n);             break;
+      case 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);       break;
+      case 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n); break;
+      case 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);             break;
+      case 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);         break;
+      case 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);       break;
+      default  :                                                                                  break;
     }
   }
 }
 
-void insertPlacement1(int hex[], int *place, int j){
+void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
   int i = 3;
   while(i < 7 && hex[(j + i++)] > 0x80);
   if(checkNextEvent(hex, (j + i))){
     *place = j;
-    if(hex[j] == 0x90)
-      fillNote(hex[j + 1], &noteAr[i++]);
-  }  
+    if(hex[j] == 0x90){
+      fillNote(hex[j + 1], &noteAr[*n]);
+      *n += 1;
+    }   
+  } 
 }
 
 void insertPlacement2(int hex[], int *place, int j){
