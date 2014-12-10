@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 #define CHARS 1000
 #define AMOUNT_OF_MOODS 2
@@ -27,7 +28,8 @@ typedef enum mood {glad, sad} mood;
 typedef struct{
   int tone;
   int octave;
-  int lenght;
+  int length;
+  int average;
 } note;
 
 typedef struct{
@@ -64,8 +66,9 @@ void printNote(note);
 int getHex(FILE*, int[]);
 void fillSongData(data*, int[], int);
 int countNotes(int[], int);
-void fillNote(int, note*);
+void fillNote(int, note*, int);
 void printSongData(data);
+void settingPoints(int*, int*, int*, int*, data, int, note []);
 void insertMoods(moodWeighting []);
 int weightingMatrix(moodWeighting [], int, int, int, int);
 void findEvents(int, int [], eventPlacement [], note []);
@@ -83,6 +86,10 @@ int main(int argc, const char *argv[]){
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data;
   FILE *f = fopen(argv[1],"r");
+  if(f == NULL){
+    perror("Error opening file");
+    exit(EXIT_FAILURE);
+  }
   int *hex = (int *) malloc(CHARS * sizeof(int));
   if(hex == NULL){
     printf("Memory allokation failed, bye!");
@@ -101,11 +108,12 @@ int main(int argc, const char *argv[]){
   eventPlacement placement[numbersInText];
   findEvents(numbersInText, hex, placement, noteAr);
   insertMoods(moodArray);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
   printSongData(data);
   moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
-
+  printf("%d\n", moodOfMelodi);
   /*Clean up and close*/
   fclose(f);
   free(hex);
@@ -154,10 +162,8 @@ void fillSongData(data *data, int hex[], int numbersInText){
   data->mode = minor;
   for(j = 0; j < numbersInText; j++){
     /* finds the tempo */
-    if(hex[j] == 0xff){
-      if(hex[j+1] == 0x51){
-        data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
-      }
+    if(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03){
+      data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
     }
   }
 }
@@ -212,7 +218,7 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
-/**A function to calculate the notelenght - tba
+/**A function to calculate the notelength - tba
 */
 void findNoteLength (double x, int *high, int *low){
   double func = 16*((x*x)*(0.0000676318287050830)+(0.0128675448628599*x)-2.7216713227147);
@@ -232,8 +238,9 @@ void findNoteLength (double x, int *high, int *low){
   *@param[int] inputTone: the value of the hexadecimal collected on the "tone"-spot
   *@param[note*] note: a pointer to a note-structure
 */
-void fillNote(int inputTone, note *note){
+void fillNote(int inputTone, note *note, int i){
   note->tone = inputTone % 12;
+  note->average = inputTone;
   note->octave = inputTone / 12;
 }
 
@@ -274,11 +281,12 @@ void printSongData(data data){
   putchar('\n');
 }
 
-void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
-  int deltaTime = deltaTimeToNoteLength(480, 960);
+void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[]){
+  int deltaTime = deltaTimeToNoteLength(480, 960), combined = 0, averageNote = 0;
   switch(data.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5; break;
+    default: *mode = 0; break;
   }
   if(data.tempo < 60)
     *tempo = -5;
@@ -311,6 +319,33 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data){
     case 16: *length = 3; break;
     case 32: *length = 5; break;
   }
+  for (int i = 0; i < notes; i++){
+    combined += noteAr[i].average;
+  }
+  averageNote = combined/notes;
+
+  if(averageNote <= 16)
+    *octave = -5;
+  else if(averageNote >= 17 && averageNote <= 23)
+    *octave = -4;
+  else if(averageNote >= 24 && averageNote <= 30)
+    *octave = -3;
+  else if(averageNote >= 31 && averageNote <= 37)
+    *octave = -2;
+  else if(averageNote >= 38 && averageNote <= 44)
+    *octave = -1;
+  else if(averageNote >= 45 && averageNote <= 51)
+    *octave = 0;
+  else if(averageNote >= 52 && averageNote <= 58)
+    *octave = 1;
+  else if(averageNote >= 59 && averageNote <= 65)
+    *octave = 2;
+  else if(averageNote >= 66 && averageNote <= 72)
+    *octave = 3;
+  else if(averageNote >= 73 && averageNote <= 79)
+    *octave = 4;
+  else if(averageNote >=80)
+    *octave = 5;
 }
 
 
@@ -336,6 +371,11 @@ int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLeng
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
   }
+  if (result[0] > result[1])
+    printf("Happy\n");
+  else if (result[1] > result[0])
+    printf("Sad\n");
+  
   qsort(result, AMOUNT_OF_MOODS, sizeof(int), sortResult);
   return result[0];
 }
@@ -351,17 +391,17 @@ int sortResult(const void *pa, const void *pb){
 int deltaTimeToNoteLength (int ticks, int ppqn){
   double noteLength= ((double) (ticks)) / ((double) (ppqn/8));
 
-	if (noteLength < 1.5 && noteLength >= 0)
-		noteLength = 1;
-	else if (noteLength < 3 && noteLength >= 1.5)
-		noteLength = 2;
-	else if (noteLength < 6 && noteLength >= 3)
-		noteLength = 4;
-	else if (noteLength < 12 && noteLength >= 6)
-		noteLength = 8;
-	else if (noteLength < 24 && noteLength >= 12)
-		noteLength = 16;
-	else
-		noteLength = 32;
-	return noteLength;
+  if (noteLength < 1.5 && noteLength >= 0)
+    noteLength = 1;
+  else if (noteLength < 3 && noteLength >= 1.5)
+    noteLength = 2;
+  else if (noteLength < 6 && noteLength >= 3)
+    noteLength = 4;
+  else if (noteLength < 12 && noteLength >= 6)
+    noteLength = 8;
+  else if (noteLength < 24 && noteLength >= 12)
+    noteLength = 16;
+  else
+    noteLength = 32;
+  return noteLength;
 }
