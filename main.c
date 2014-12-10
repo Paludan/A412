@@ -48,6 +48,16 @@ typedef struct{
   int pitch;
 } moodWeighting;
 
+typedef struct{
+  int noteOn;
+  int noteOff;
+  int afterTouch;
+  int controlChange;
+  int programChange;
+  int channelPressure;
+  int pitchWheel;
+} eventPlacement;
+
 /*Prototypes*/
 void findNoteLength(double x, int *, int *);
 void printNote(note);
@@ -58,7 +68,10 @@ void fillNote(int, note*);
 void printSongData(data);
 void insertMoods(moodWeighting []);
 int weightingMatrix(moodWeighting [], int, int, int, int);
-void findEvents(int, int [], note []);
+void findEvents(int, int [], eventPlacement [], note []);
+void insertPlacement1(int [], int *, int, note [], int *);
+void insertPlacement2(int [], int *, int);
+int checkNextEvent(int [], int);
 int sortResult(const void *, const void *);
 int deltaTimeToNoteLength (int, int);
 
@@ -85,7 +98,8 @@ int main(int argc, const char *argv[]){
     printf("Memory allocation failed, bye!");
     exit(EXIT_FAILURE);
   }
-  findEvents(numbersInText, hex, noteAr);
+  eventPlacement placement[numbersInText];
+  findEvents(numbersInText, hex, placement, noteAr);
   insertMoods(moodArray);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
@@ -148,36 +162,53 @@ void fillSongData(data *data, int hex[], int numbersInText){
   }
 }
 
-void findEvents(int numbersInText, int hex[], note noteAr[]){
-  int note = 0x01, eventType = 0x01, counter = 0, i = 0;
-  /*Read and proces the hex array*/
+void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[]){
+  int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
+      programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = 0;
+
   for(int j = 0; j < numbersInText; j++){
-    /* Hops over any noto-on, note-off or metaevent start
-       Also stores the tones read after a note-on         */
-    if(hex[j] == 0x00 && (hex[j + 1] == 0x90 || hex[j + 1] == 0xff)){
-      counter = 1;
-      j += 4;
-      if(hex[j - 3] == 0x90){
-        note = hex[j - 2];
-        fillNote(hex[j - 2], &noteAr[i]);
-        i++;
-      }
-      else{
-        eventType = hex[j - 2];
-      }
+    switch (hex[j]){
+      case 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n);               break;
+      case 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n);             break;
+      case 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);       break;
+      case 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n); break;
+      case 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);             break;
+      case 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);         break;
+      case 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);       break;
+      default  :                                                                                  break;
     }
-    else if(hex[j] == 0x80 && hex[j + 1] == note){
-      j += 2;
-      note = 0x01;
-      counter = 0;
-    }
-    if(counter){
-      /* Here you can check for parameters inside a meta-event or MIDI-event */
-    }
-    else{
-      /* Here you can check for parameters outside a meta-event or MIDI-event
-         e.g. between a note-off and the next MIDI-event or a meta-event      */
-    }
+  }
+}
+
+void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
+  int i = 3;
+  while(i < 7 && hex[(j + i++)] > 0x80);
+  if(checkNextEvent(hex, (j + i))){
+    *place = j;
+    if(hex[j] == 0x90){
+      fillNote(hex[j + 1], &noteAr[*n]);
+      *n += 1;
+    }   
+  } 
+}
+
+void insertPlacement2(int hex[], int *place, int j){
+  int i = 2;
+  while(i < 6 && hex[(j + i++)] > 0x80);
+  if(checkNextEvent(hex, (j + i)))
+    *place = j;
+}
+
+int checkNextEvent(int hex[], int j){
+  switch (hex[j]){
+    case 0x90:
+    case 0x80:
+    case 0xA0:
+    case 0xB0:
+    case 0xC0:
+    case 0xD0:
+    case 0xE0: return 1; break;
+    default  : return 0; break;
   }
 }
 
