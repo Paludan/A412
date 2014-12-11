@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['amount_5fof_5fmoods',['AMOUNT_OF_MOODS',['../main_8c.html#a3c99ae50e5cdc492183ec7bcfdea8a00',1,'main.c']]]
+  ['chars',['CHARS',['../main_8c.html#a5d7cfaaf3d71eb89b31364adb9fda6a6',1,'main.c']]]
 ];

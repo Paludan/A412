@@ -1,116 +1,293 @@
 \begin{theindex}
 
   \item {A}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
+  \item {A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}
+    \subitem {main.\+c}, 19
+  \item {after\+Touch}
+    \subitem {event\+Placement}, 3
   \item {Asharp}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
+  \item {average}
+    \subitem {note}, 4
 
   \indexspace
 
   \item {B}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
 
   \indexspace
 
   \item {C}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
+  \item {C\+H\+A\+R\+S}
+    \subitem {main.\+c}, 8
+  \item {channel\+Pressure}
+    \subitem {event\+Placement}, 3
+  \item {check\+Directory}
+    \subitem {main.\+c}, 8
+  \item {check\+Next\+Event}
+    \subitem {find\+Events.\+c}, 5
+    \subitem {main.\+c}, 9
+  \item {check\+Scale}
+    \subitem {main.\+c}, 9
+  \item {control\+Change}
+    \subitem {event\+Placement}, 3
+  \item {count\+Notes}
+    \subitem {main.\+c}, 9
+  \item {count\+Ticks1}
+    \subitem {find\+Events.\+c}, 5
+    \subitem {main.\+c}, 9
+  \item {count\+Ticks2}
+    \subitem {find\+Events.\+c}, 5
+    \subitem {main.\+c}, 9
   \item {Csharp}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
 
   \indexspace
 
   \item {D}
-    \subitem {main.\+c}, \hyperpage{11}
-  \item {data}, \hyperpage{5}
-    \subitem {mode}, \hyperpage{5}
-    \subitem {tempo}, \hyperpage{5}
+    \subitem {main.\+c}, 8
+  \item {data}, 2
+    \subitem {key}, 2
+    \subitem {mode}, 2
+    \subitem {tempo}, 2
+  \item {delta\+Time\+To\+Note\+Length}
+    \subitem {main.\+c}, 10
   \item {Dsharp}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
 
   \indexspace
 
   \item {E}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
+  \item {event\+Placement}, 2
+    \subitem {after\+Touch}, 3
+    \subitem {channel\+Pressure}, 3
+    \subitem {control\+Change}, 3
+    \subitem {note\+Off}, 3
+    \subitem {note\+On}, 3
+    \subitem {pitch\+Wheel}, 3
+    \subitem {program\+Change}, 3
 
   \indexspace
 
   \item {F}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
+  \item {fill\+Note}
+    \subitem {main.\+c}, 10
+  \item {fill\+Song\+Data}
+    \subitem {main.\+c}, 10
+  \item {find\+Events}
+    \subitem {find\+Events.\+c}, 5
+    \subitem {main.\+c}, 10
+  \item {find\+Events.\+c}, 4
+    \subitem {check\+Next\+Event}, 5
+    \subitem {count\+Ticks1}, 5
+    \subitem {count\+Ticks2}, 5
+    \subitem {find\+Events}, 5
+    \subitem {find\+Ticks}, 5
+    \subitem {insert\+Placement1}, 6
+    \subitem {insert\+Placement2}, 6
+    \subitem {main}, 6
+  \item {find\+Mode}
+    \subitem {main.\+c}, 11
+  \item {Find\+Mood\+Amount}
+    \subitem {main.\+c}, 12
+  \item {find\+Note\+Length}
+    \subitem {main.\+c}, 12
+  \item {find\+Ticks}
+    \subitem {find\+Events.\+c}, 5
+    \subitem {main.\+c}, 12
   \item {Fsharp}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
 
   \indexspace
 
   \item {G}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
+  \item {get\+Hex}
+    \subitem {main.\+c}, 12
   \item {glad}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
   \item {Gsharp}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
 
   \indexspace
 
-  \item {lenght}
-    \subitem {note}, \hyperpage{6}
+  \item {insert\+Moods}
+    \subitem {main.\+c}, 13
+  \item {insert\+Placement1}
+    \subitem {find\+Events.\+c}, 6
+    \subitem {main.\+c}, 13
+  \item {insert\+Placement2}
+    \subitem {find\+Events.\+c}, 6
+    \subitem {main.\+c}, 13
+  \item {is\+In\+Major}
+    \subitem {main.\+c}, 13
+  \item {is\+In\+Minor}
+    \subitem {main.\+c}, 13
+  \item {is\+In\+Scale}
+    \subitem {main.\+c}, 15
 
   \indexspace
 
-  \item {main.\+c}
-    \subitem {A}, \hyperpage{11}
-    \subitem {Asharp}, \hyperpage{11}
-    \subitem {B}, \hyperpage{11}
-    \subitem {C}, \hyperpage{11}
-    \subitem {Csharp}, \hyperpage{11}
-    \subitem {D}, \hyperpage{11}
-    \subitem {Dsharp}, \hyperpage{11}
-    \subitem {E}, \hyperpage{11}
-    \subitem {F}, \hyperpage{11}
-    \subitem {Fsharp}, \hyperpage{11}
-    \subitem {G}, \hyperpage{11}
-    \subitem {glad}, \hyperpage{11}
-    \subitem {Gsharp}, \hyperpage{11}
-    \subitem {major}, \hyperpage{10}
-    \subitem {minor}, \hyperpage{10}
-    \subitem {sad}, \hyperpage{11}
+  \item {key}
+    \subitem {data}, 2
+
+  \indexspace
+
+  \item {length}
+    \subitem {note}, 4
+
+  \indexspace
+
+  \item {main}
+    \subitem {find\+Events.\+c}, 6
+    \subitem {main.\+c}, 15
+    \subitem {test.\+c}, 19
+  \item {main.\+c}, 6
+    \subitem {A}, 8
+    \subitem {A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}, 19
+    \subitem {Asharp}, 8
+    \subitem {B}, 8
+    \subitem {C}, 8
+    \subitem {C\+H\+A\+R\+S}, 8
+    \subitem {check\+Directory}, 8
+    \subitem {check\+Next\+Event}, 9
+    \subitem {check\+Scale}, 9
+    \subitem {count\+Notes}, 9
+    \subitem {count\+Ticks1}, 9
+    \subitem {count\+Ticks2}, 9
+    \subitem {Csharp}, 8
+    \subitem {D}, 8
+    \subitem {delta\+Time\+To\+Note\+Length}, 10
+    \subitem {Dsharp}, 8
+    \subitem {E}, 8
+    \subitem {F}, 8
+    \subitem {fill\+Note}, 10
+    \subitem {fill\+Song\+Data}, 10
+    \subitem {find\+Events}, 10
+    \subitem {find\+Mode}, 11
+    \subitem {Find\+Mood\+Amount}, 12
+    \subitem {find\+Note\+Length}, 12
+    \subitem {find\+Ticks}, 12
+    \subitem {Fsharp}, 8
+    \subitem {G}, 8
+    \subitem {get\+Hex}, 12
+    \subitem {glad}, 8
+    \subitem {Gsharp}, 8
+    \subitem {insert\+Moods}, 13
+    \subitem {insert\+Placement1}, 13
+    \subitem {insert\+Placement2}, 13
+    \subitem {is\+In\+Major}, 13
+    \subitem {is\+In\+Minor}, 13
+    \subitem {is\+In\+Scale}, 15
+    \subitem {main}, 15
+    \subitem {major}, 8
+    \subitem {minor}, 8
+    \subitem {mode}, 8
+    \subitem {mood}, 8
+    \subitem {print\+Note}, 16
+    \subitem {print\+Song\+Data}, 16
+    \subitem {S\+C\+A\+L\+E\+S\+I\+Z\+E}, 8
+    \subitem {sad}, 8
+    \subitem {setting\+Points}, 18
+    \subitem {sort\+Result}, 19
+    \subitem {sort\+Toner}, 19
+    \subitem {sort\+Tones}, 19
+    \subitem {tone}, 8
+    \subitem {weighting\+Matrix}, 19
   \item {major}
-    \subitem {main.\+c}, \hyperpage{10}
+    \subitem {main.\+c}, 8
   \item {minor}
-    \subitem {main.\+c}, \hyperpage{10}
+    \subitem {main.\+c}, 8
   \item {mode}
-    \subitem {data}, \hyperpage{5}
+    \subitem {data}, 2
+    \subitem {main.\+c}, 8
+    \subitem {mood\+Weighting}, 3
+  \item {mood}
+    \subitem {main.\+c}, 8
+  \item {mood\+Weighting}, 3
+    \subitem {mode}, 3
+    \subitem {name}, 3
+    \subitem {pitch}, 3
+    \subitem {tempo}, 3
+    \subitem {tone\+Length}, 3
 
   \indexspace
 
-  \item {note}, \hyperpage{6}
-    \subitem {lenght}, \hyperpage{6}
-    \subitem {octave}, \hyperpage{6}
-    \subitem {tone}, \hyperpage{6}
+  \item {name}
+    \subitem {mood\+Weighting}, 3
+  \item {note}, 3
+    \subitem {average}, 4
+    \subitem {length}, 4
+    \subitem {octave}, 4
+    \subitem {tone}, 4
+  \item {note\+Off}
+    \subitem {event\+Placement}, 3
+  \item {note\+On}
+    \subitem {event\+Placement}, 3
 
   \indexspace
 
   \item {octave}
-    \subitem {note}, \hyperpage{6}
+    \subitem {note}, 4
 
   \indexspace
 
   \item {parameter}
-    \subitem {points}, \hyperpage{7}
+    \subitem {points}, 4
+  \item {pitch}
+    \subitem {mood\+Weighting}, 3
+  \item {pitch\+Wheel}
+    \subitem {event\+Placement}, 3
   \item {point}
-    \subitem {points}, \hyperpage{7}
-  \item {points}, \hyperpage{7}
-    \subitem {parameter}, \hyperpage{7}
-    \subitem {point}, \hyperpage{7}
+    \subitem {points}, 4
+  \item {points}, 4
+    \subitem {parameter}, 4
+    \subitem {point}, 4
+  \item {print\+Note}
+    \subitem {main.\+c}, 16
+  \item {print\+Song\+Data}
+    \subitem {main.\+c}, 16
+  \item {program\+Change}
+    \subitem {event\+Placement}, 3
 
   \indexspace
 
+  \item {S\+C\+A\+L\+E\+S\+I\+Z\+E}
+    \subitem {main.\+c}, 8
   \item {sad}
-    \subitem {main.\+c}, \hyperpage{11}
+    \subitem {main.\+c}, 8
+  \item {setting\+Points}
+    \subitem {main.\+c}, 18
+  \item {sort\+Result}
+    \subitem {main.\+c}, 19
+  \item {sort\+Toner}
+    \subitem {main.\+c}, 19
+  \item {sort\+Tones}
+    \subitem {main.\+c}, 19
 
   \indexspace
 
   \item {tempo}
-    \subitem {data}, \hyperpage{5}
+    \subitem {data}, 2
+    \subitem {mood\+Weighting}, 3
+  \item {test.\+c}, 19
+    \subitem {main}, 19
+    \subitem {test\+Funk}, 20
+  \item {test\+Funk}
+    \subitem {test.\+c}, 20
   \item {tone}
-    \subitem {note}, \hyperpage{6}
+    \subitem {main.\+c}, 8
+    \subitem {note}, 4
+  \item {tone\+Length}
+    \subitem {mood\+Weighting}, 3
+
+  \indexspace
+
+  \item {weighting\+Matrix}
+    \subitem {main.\+c}, 19
 
 \end{theindex}

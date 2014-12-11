@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lenght',['lenght',['../structnote.html#a361dd34c08a22e0d8af45bfb8fefb287',1,'note']]]
+  ['key',['key',['../structdata.html#ae1a174f61aada93146a06764a3511eb6',1,'data']]]
 ];

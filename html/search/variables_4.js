@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['tempo',['tempo',['../structdata.html#a31232da79683035a6ff185f530da6c24',1,'data::tempo()'],['../structmood_weighting.html#a9b2180e8a4aab163ae48d0a66269a840',1,'moodWeighting::tempo()']]],
-  ['tone',['tone',['../structnote.html#a30832d96c968d682e5838b39370a1908',1,'note']]],
-  ['tonelength',['toneLength',['../structmood_weighting.html#ab9e917ae02761f06d11c59645a45536d',1,'moodWeighting']]]
+  ['mode',['mode',['../structdata.html#a9781fc7b786289e4c06b4085d31558e3',1,'data::mode()'],['../structmood_weighting.html#a61010f3a9441ad3cabbe94a31a64dad5',1,'moodWeighting::mode()']]]
 ];
