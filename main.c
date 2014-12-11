@@ -501,7 +501,7 @@ void deltaTimeToNoteLength (int *ticks, int ppqn, int size, note *noteAr){
 	}
 }
 
-/**A function to sort integers in ascending order.
+/**A function to sort integers in ascending order, used by qsort
   */
 int sortTones(const void *a, const void *b){
   int *i1 = (int*) a, *i2 = (int*) b;
@@ -625,7 +625,6 @@ int isInScale(int keytone, int otherTones[], int size){
   *@param toneLeap An integer describing the processed tone leap
   *@return a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not.
   */
-
 int isInMinor(int toneLeap){
   int minor[] = {0, 2, 3, 5, 7, 8, 10};
 
