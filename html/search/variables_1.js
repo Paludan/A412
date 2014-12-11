@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mode',['mode',['../structdata.html#a9781fc7b786289e4c06b4085d31558e3',1,'data::mode()'],['../structmood_weighting.html#a61010f3a9441ad3cabbe94a31a64dad5',1,'moodWeighting::mode()']]]
+  ['channelpressure',['channelPressure',['../structevent_placement.html#aa862fb0adf136bad91e493ae93a703bb',1,'eventPlacement']]],
+  ['controlchange',['controlChange',['../structevent_placement.html#aa4a1d84f7b34a1c3f193a940de8e0aab',1,'eventPlacement']]]
 ];

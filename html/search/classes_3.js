@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['points',['points',['../structpoints.html',1,'']]]
+  ['note',['note',['../structnote.html',1,'']]]
 ];
