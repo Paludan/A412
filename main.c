@@ -32,6 +32,7 @@ typedef struct{
   int octave;
   int length;
   int average;
+  int ticks;
 } note;
 
 typedef struct{
@@ -75,15 +76,15 @@ void printSongData(data);
 void settingPoints(int*, int*, int*, int*, data, int, note [], int *);
 void insertMoods(moodWeighting [], FILE*);
 void weightingMatrix(moodWeighting [], int, int, int, int, int *);
-void findEvents(int, int [], eventPlacement [], note [], int [], int *);
-void insertPlacement1(int [], int *, int, note [], int *);
+void findEvents(int, int [], eventPlacement [], note [], int *);
+void insertPlacement1(int [], int *, int, note [], int *, int []);
 void insertPlacement2(int [], int *, int);
 int checkNextEvent(int [], int);
-void findTicks(int, int [], eventPlacement [], note [], int [], int, int *);
-void countTicks1(int [], int *, int, int [], int *);
-void countTicks2(int [], int *, int, int [], int *);
+void findTicks(int, int [], eventPlacement [], note [], int, int *, int []);
+void countTicks1(int [], int *, int, note [], int *);
+void countTicks2(int [], int *, int, note [], int *);
 int sortResult(const void *, const void *);
-void deltaTimeToNoteLength (int *, int, int, note *);
+void deltaTimeToNoteLength(int, int, note *);
 int isInScale(int, int[], int);
 int isInMinor(int);
 int isInMajor(int);
@@ -97,9 +98,7 @@ int main(int argc, const char *argv[]){
   FILE *f;
   char MIDIfile[25];
   /*Variables*/
-  int numbersInText = 0, notes, size = 0;
-  /* PLACEHOLDER FIX THIS */
-  int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
+  int numbersInText = 0, notes, size = 0, mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   FILE* moods = fopen("moods.txt", "r");
   if(moods == NULL){
     perror("Error: moods missing ");
@@ -139,16 +138,14 @@ int main(int argc, const char *argv[]){
     exit(EXIT_FAILURE);
   }
   eventPlacement placement[numbersInText];
-  int ticks[numbersInText];
-  findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
-  deltaTimeToNoteLength(ticks, 960, size, noteAr);
+  findEvents(numbersInText, hex, placement, noteAr, &size);
+  deltaTimeToNoteLength(960, size, noteAr);
   insertMoods(moodArray, moods);
   findMode(noteAr, notes, &data);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
   printSongData(data);
   int result[AMOUNT_OF_MOODS];
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result);
-  printf("%d\n", result[0]);
 
   /*Clean up and close*/
   fclose(f);
@@ -225,31 +222,32 @@ void fillSongData(data *data, int hex[], int numbersInText){
   }
 }
 
-void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[], int *size){
+void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int *size){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-      programChange = 0, channelPressure = 0, pitchWheel = 0, n = 0;
+      programChange = 0, channelPressure = 0, pitchWheel = 0, n = 0, notes[numbersInText];
 
   for(int j = 0; j < numbersInText; j++){
     switch (hex[j]){
-      case 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n);               break;
-      case 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n);             break;
-      case 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);       break;
-      case 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n); break;
-      case 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);             break;
-      case 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);         break;
-      case 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);       break;
-      default  :                                                                                  break;
+      case 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n, notes);               break;
+      case 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n, notes);             break;
+      case 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n, notes);       break;
+      case 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n, notes); break;
+      case 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);                    break;
+      case 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);                break;
+      case 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n, notes);       break;
+      default  :                                                                                         break;
     }
   }
-  findTicks(numbersInText, hex, placement, noteAr, ticks, noteOn, size);
+  findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
 }
 
-void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
+void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n, int notes[]){
   int i = 3;
   while(i < 7 && hex[(j + i++)] > 0x80);
   if(checkNextEvent(hex, (j + i))){
     *place = j;
     if(hex[j] == 0x90){
+      notes[*n] = hex[j + 1];
       fillNote(hex[j + 1], &noteAr[*n]);
       *n += 1;
     }   
@@ -276,55 +274,58 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
-void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[], int noteOn, int *size){
+void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn, int *size, int notes[]){
   int tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
   
   for(int j = 0; j < noteOn; j++){
     for(int i = placement[j].noteOn; i < numbersInText; i++){
       if(hex[i] == 0x80){
-        if(hex[i + 1] == noteAr[j].tone)
+        if(hex[i + 1] == notes[j])
           break;
-        else{
-          countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
-        }
+        else
+          countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
       else if(hex[i] == 0xA0){
-        if(hex[i + 1] == noteAr[j].tone && hex[i + 2] == 0x00)
+        if(hex[i + 1] == notes[j] && hex[i + 2] == 0x00)
           break;
-        else{
-          countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
-        }
+        else
+          countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
       else if(hex[i] == 0xD0){
         if(hex[i + 1] == 0x00)
           break;
-        else{
-          countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
-        }
+        else
+          countTicks2(hex, &i, deltaCounter2, noteAr, &tickCounter);
       }
-      else if(hex[i] == 0xC0){
-        countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
-      }
-      else{
-        countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
-      }     
+      else if(hex[i] == 0xC0)
+        countTicks2(hex, &i, deltaCounter2, noteAr, &tickCounter);
+      else
+        countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);   
     }
   }
   *size = tickCounter;
 }
 
-void countTicks1(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter){
+void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
+  noteAr[*tickCounter].ticks = 0;
+  int tick = 0;
   while(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
-    ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
-  ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
-  i += deltaCounter;
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+  tick += hex[(*i + deltaCounter)];
+  noteAr[*tickCounter].ticks += tick;
+  *tickCounter += 1;
+  *i += deltaCounter;
 }
 
-void countTicks2(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter){
+void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
+  noteAr[*tickCounter].ticks = 0;
+  int tick = 0;
   while(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
-    ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
-  ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
-  i += deltaCounter;
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+  tick += hex[(*i + deltaCounter)];
+  noteAr[*tickCounter].ticks += tick;
+  *tickCounter += 1;
+  *i += deltaCounter;
 }
 
 /**A function to fill out each of the structures of type note
@@ -478,11 +479,11 @@ int sortResult(const void *pa, const void *pb){
 }
 
 /* Find note length */
-void deltaTimeToNoteLength (int *ticks, int ppqn, int size, note *noteAr){
+void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
 
   for (int i = 0; i < size; i++){
   
-    double noteLength = ((double) (ticks[i])) / ((double) (ppqn/8));
+    double noteLength = ((double) (noteAr[i].ticks)) / ((double) (ppqn/8));
 
     if (noteLength < 1.5 && noteLength >= 0)
       noteLength = 1;
