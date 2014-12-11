@@ -442,13 +442,11 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
 
 /* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
 void insertMoods(moodWeighting moodArray[], FILE* moods){
-  printf("hej er her");
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     fscanf(moods, "%s %d %d %d %d", moodArray[i].name , &moodArray[i].mode, 
                                     &moodArray[i].tempo, &moodArray[i].toneLength,
                                     &moodArray[i].pitch);
   }
-  printf("jeg er også her");
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
