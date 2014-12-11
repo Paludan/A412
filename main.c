@@ -538,7 +538,6 @@ void findMode(note noteAr[], int totalNotes, data *data){
     }
   }
 
-  /*TEST*/
   for(y = 0; y < 12; y++){
     z = y;
     if(majors[z]){
@@ -548,10 +547,9 @@ void findMode(note noteAr[], int totalNotes, data *data){
     }
   }
 
-  z = 0;
-  x = 0;
+  z = 0;  x = 0;
 
-  /*Goes through all notes of the song and puts them into an array*/
+  /*Goes through all notes of the song and puts them into an array, 4 at a time*/
   while(x < totalNotes){
     z = x;
     for(y = 0; y < sizeBar; y++, z++){
@@ -566,7 +564,7 @@ void findMode(note noteAr[], int totalNotes, data *data){
       /*Sort notes in acsending order*/
       qsort(bar, sizeBar, sizeof(tone), sortTones);
 
-      /*Find the lowest possible tonespan over the entire array of notes*/
+      /*Find the lowest possible tonespan over the array of 4 notes*/
       for(z = 0; z < sizeBar; z++){
 	if((z + 1) > 3)
           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
@@ -586,7 +584,7 @@ void findMode(note noteAr[], int totalNotes, data *data){
       x++;
     }
   }
-  
+  /*outputs result directly to the data struct*/
   if(mode > 0)
     data->mode = major;
   else if(mode < 0)
