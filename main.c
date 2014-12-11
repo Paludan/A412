@@ -97,7 +97,7 @@ int main(int argc, const char *argv[]){
   FILE *f;
   char MIDIfile[25];
   /*Variables*/
-  int numbersInText = 0, notes, size = 0, moodOfMelodi = 0;
+  int numbersInText = 0, notes, size = 0;
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   FILE* moods = fopen("moods.txt", "r");
@@ -779,9 +779,9 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == (-((result[moodOfMelodi] + 100) / 4)))
+      else if(test == (((-(result[moodOfMelodi]) + 100) / 4)))
         printf("[");
-      else if(test == (-((result[moodOfMelodi] + 100) / 4) + 2))
+      else if(test == (((-(result[moodOfMelodi]) + 100) / 4) + 2))
         printf("]");
       else
         printf("-");
