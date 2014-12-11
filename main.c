@@ -64,7 +64,7 @@ typedef struct{
 } eventPlacement;
 
 /*Prototypes*/
-void checkDirectory(char*);
+void checkDirectory(char*, DIR*);
 void findNoteLength(double x, int *, int *);
 void printNote(note);
 int getHex(FILE*, int[]);
@@ -92,6 +92,7 @@ void findMode(note*, int, data*);
 int FindMoodAmount(FILE*);
 
 int main(int argc, const char *argv[]){
+  DIR *dir;
   FILE *f;
   char MIDIfile[25];
   /*Variables*/
@@ -113,6 +114,7 @@ int main(int argc, const char *argv[]){
       perror("Error opening file");
       exit(EXIT_FAILURE);
     }
+    closedir (dir);  
   }
   else if(argv[1] != NULL){
     f = fopen(argv[1],"r");
@@ -140,11 +142,10 @@ int main(int argc, const char *argv[]){
   int ticks[numbersInText];
   findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
   insertMoods(moodArray, moods);
-  settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
-  printf("%d, %d, %d, %d\n", mode, tempo, toneLength, pitch);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
   findMode(noteAr, notes, &data);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
   printSongData(data);
   moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
   printf("%d\n", moodOfMelodi);
@@ -159,19 +160,15 @@ int main(int argc, const char *argv[]){
 }
 /**A function to read music directory and prompt user to choose file
   *@param[char*] MIDIfile: a pointer to a string containing the name of the chosen input file*/
-void checkDirectory(char *MIDIfile){
-  DIR *dir;
+void checkDirectory(char *MIDIfile, DIR *dir){
   struct dirent *musicDir;
   if ((dir = opendir ("./Music")) != NULL) {
     printf("Mulige numre\n");
-    /* print all the files and directories within specified directory */
       while ((musicDir = readdir (dir)) != NULL) {
         printf ("%s\n", musicDir->d_name);
       }
-    closedir (dir);
   } 
   else {
-  /* Could not open directory */
     perror ("Failure while opening directory");
     exit (EXIT_FAILURE);
   }
