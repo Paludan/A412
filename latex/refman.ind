@@ -3,7 +3,7 @@
   \item {A}
     \subitem {main.\+c}, 8
   \item {A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}
-    \subitem {main.\+c}, 17
+    \subitem {main.\+c}, 19
   \item {after\+Touch}
     \subitem {event\+Placement}, 3
   \item {Asharp}
@@ -29,6 +29,8 @@
   \item {check\+Next\+Event}
     \subitem {find\+Events.\+c}, 5
     \subitem {main.\+c}, 9
+  \item {check\+Scale}
+    \subitem {main.\+c}, 9
   \item {control\+Change}
     \subitem {event\+Placement}, 3
   \item {count\+Notes}
@@ -51,7 +53,7 @@
     \subitem {mode}, 2
     \subitem {tempo}, 2
   \item {delta\+Time\+To\+Note\+Length}
-    \subitem {main.\+c}, 9
+    \subitem {main.\+c}, 10
   \item {Dsharp}
     \subitem {main.\+c}, 8
 
@@ -91,9 +93,9 @@
   \item {find\+Mode}
     \subitem {main.\+c}, 11
   \item {Find\+Mood\+Amount}
-    \subitem {main.\+c}, 11
+    \subitem {main.\+c}, 12
   \item {find\+Note\+Length}
-    \subitem {main.\+c}, 11
+    \subitem {main.\+c}, 12
   \item {find\+Ticks}
     \subitem {find\+Events.\+c}, 5
     \subitem {main.\+c}, 12
@@ -114,10 +116,10 @@
   \indexspace
 
   \item {insert\+Moods}
-    \subitem {main.\+c}, 12
+    \subitem {main.\+c}, 13
   \item {insert\+Placement1}
     \subitem {find\+Events.\+c}, 6
-    \subitem {main.\+c}, 12
+    \subitem {main.\+c}, 13
   \item {insert\+Placement2}
     \subitem {find\+Events.\+c}, 6
     \subitem {main.\+c}, 13
@@ -126,7 +128,7 @@
   \item {is\+In\+Minor}
     \subitem {main.\+c}, 13
   \item {is\+In\+Scale}
-    \subitem {main.\+c}, 13
+    \subitem {main.\+c}, 15
 
   \indexspace
 
@@ -142,23 +144,24 @@
 
   \item {main}
     \subitem {find\+Events.\+c}, 6
-    \subitem {main.\+c}, 14
-    \subitem {test.\+c}, 17
+    \subitem {main.\+c}, 15
+    \subitem {test.\+c}, 19
   \item {main.\+c}, 6
     \subitem {A}, 8
-    \subitem {A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}, 17
+    \subitem {A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}, 19
     \subitem {Asharp}, 8
     \subitem {B}, 8
     \subitem {C}, 8
     \subitem {C\+H\+A\+R\+S}, 8
     \subitem {check\+Directory}, 8
     \subitem {check\+Next\+Event}, 9
+    \subitem {check\+Scale}, 9
     \subitem {count\+Notes}, 9
     \subitem {count\+Ticks1}, 9
     \subitem {count\+Ticks2}, 9
     \subitem {Csharp}, 8
     \subitem {D}, 8
-    \subitem {delta\+Time\+To\+Note\+Length}, 9
+    \subitem {delta\+Time\+To\+Note\+Length}, 10
     \subitem {Dsharp}, 8
     \subitem {E}, 8
     \subitem {F}, 8
@@ -166,35 +169,35 @@
     \subitem {fill\+Song\+Data}, 10
     \subitem {find\+Events}, 10
     \subitem {find\+Mode}, 11
-    \subitem {Find\+Mood\+Amount}, 11
-    \subitem {find\+Note\+Length}, 11
+    \subitem {Find\+Mood\+Amount}, 12
+    \subitem {find\+Note\+Length}, 12
     \subitem {find\+Ticks}, 12
     \subitem {Fsharp}, 8
     \subitem {G}, 8
     \subitem {get\+Hex}, 12
     \subitem {glad}, 8
     \subitem {Gsharp}, 8
-    \subitem {insert\+Moods}, 12
-    \subitem {insert\+Placement1}, 12
+    \subitem {insert\+Moods}, 13
+    \subitem {insert\+Placement1}, 13
     \subitem {insert\+Placement2}, 13
     \subitem {is\+In\+Major}, 13
     \subitem {is\+In\+Minor}, 13
-    \subitem {is\+In\+Scale}, 13
-    \subitem {main}, 14
+    \subitem {is\+In\+Scale}, 15
+    \subitem {main}, 15
     \subitem {major}, 8
     \subitem {minor}, 8
     \subitem {mode}, 8
     \subitem {mood}, 8
-    \subitem {print\+Note}, 15
-    \subitem {print\+Song\+Data}, 15
+    \subitem {print\+Note}, 16
+    \subitem {print\+Song\+Data}, 16
     \subitem {S\+C\+A\+L\+E\+S\+I\+Z\+E}, 8
     \subitem {sad}, 8
-    \subitem {setting\+Points}, 15
-    \subitem {sort\+Result}, 16
-    \subitem {sort\+Toner}, 16
-    \subitem {sort\+Tones}, 16
+    \subitem {setting\+Points}, 18
+    \subitem {sort\+Result}, 19
+    \subitem {sort\+Toner}, 19
+    \subitem {sort\+Tones}, 19
     \subitem {tone}, 8
-    \subitem {weighting\+Matrix}, 17
+    \subitem {weighting\+Matrix}, 19
   \item {major}
     \subitem {main.\+c}, 8
   \item {minor}
@@ -245,9 +248,9 @@
     \subitem {parameter}, 4
     \subitem {point}, 4
   \item {print\+Note}
-    \subitem {main.\+c}, 15
+    \subitem {main.\+c}, 16
   \item {print\+Song\+Data}
-    \subitem {main.\+c}, 15
+    \subitem {main.\+c}, 16
   \item {program\+Change}
     \subitem {event\+Placement}, 3
 
@@ -258,24 +261,24 @@
   \item {sad}
     \subitem {main.\+c}, 8
   \item {setting\+Points}
-    \subitem {main.\+c}, 15
+    \subitem {main.\+c}, 18
   \item {sort\+Result}
-    \subitem {main.\+c}, 16
+    \subitem {main.\+c}, 19
   \item {sort\+Toner}
-    \subitem {main.\+c}, 16
+    \subitem {main.\+c}, 19
   \item {sort\+Tones}
-    \subitem {main.\+c}, 16
+    \subitem {main.\+c}, 19
 
   \indexspace
 
   \item {tempo}
     \subitem {data}, 2
     \subitem {mood\+Weighting}, 3
-  \item {test.\+c}, 17
-    \subitem {main}, 17
-    \subitem {test\+Funk}, 17
+  \item {test.\+c}, 19
+    \subitem {main}, 19
+    \subitem {test\+Funk}, 20
   \item {test\+Funk}
-    \subitem {test.\+c}, 17
+    \subitem {test.\+c}, 20
   \item {tone}
     \subitem {main.\+c}, 8
     \subitem {note}, 4
@@ -285,6 +288,6 @@
   \indexspace
 
   \item {weighting\+Matrix}
-    \subitem {main.\+c}, 17
+    \subitem {main.\+c}, 19
 
 \end{theindex}

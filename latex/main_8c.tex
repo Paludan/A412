@@ -65,7 +65,7 @@ enum {\bf mood} \{ {\bf glad},
 \subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf check\+Directory} (char $\ast$)
+void {\bf check\+Directory} (char $\ast$, D\+I\+R $\ast$)
 \item 
 void {\bf find\+Note\+Length} (double x, int $\ast$, int $\ast$)
 \item 
@@ -120,6 +120,8 @@ int {\bf Find\+Mood\+Amount} (F\+I\+L\+E $\ast$)
 int {\bf main} (int argc, const char $\ast$argv[$\,$])
 \item 
 int {\bf sort\+Tones} (const void $\ast$a, const void $\ast$b)
+\item 
+void {\bf check\+Scale} (int scales[$\,$], int {\bf tone}, int key)
 \item 
 void {\bf find\+Mode} ({\bf note} note\+Ar[$\,$], int total\+Notes, {\bf data} $\ast${\bf data})
 \end{DoxyCompactItemize}
@@ -227,35 +229,34 @@ B\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc
 \index{check\+Directory@{check\+Directory}!main.\+c@{main.\+c}}
 \paragraph[{check\+Directory}]{\setlength{\rightskip}{0pt plus 5cm}void check\+Directory (
 \begin{DoxyParamCaption}
-\item[{char $\ast$}]{M\+I\+D\+Ifile}
+\item[{char $\ast$}]{M\+I\+D\+Ifile, }
+\item[{D\+I\+R $\ast$}]{dir}
 \end{DoxyParamCaption}
-)}\label{main_8c_a6e65cd59478f60276ddf27b226f5ef8c}
+)}\label{main_8c_a15516ca0e878b486b04f9bd5d0b401d2}
 A function to read music directory and prompt user to choose file 
 \begin{DoxyParams}{Parameters}
-{\em } & char$\ast$]\+: M\+I\+D\+Ifile\+: a pointer to a string containing the name of the chosen input file \\
+{\em M\+I\+D\+Ifile} & a pointer to a string containing the name of the chosen input file \\
+\hline
+{\em dir} & a pointer to a directory \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00162                                    \{
-00163   DIR *dir;
-00164   \textcolor{keyword}{struct }dirent *musicDir;
-00165   \textcolor{keywordflow}{if} ((dir = opendir (\textcolor{stringliteral}{"./Music"})) != NULL) \{
-00166     printf(\textcolor{stringliteral}{"Mulige numre\(\backslash\)n"});
-00167     \textcolor{comment}{/* print all the files and directories within specified directory */}
+00164                                              \{
+00165   \textcolor{keyword}{struct }dirent *musicDir;
+00166   \textcolor{keywordflow}{if} ((dir = opendir (\textcolor{stringliteral}{"./Music"})) != NULL) \{
+00167     printf(\textcolor{stringliteral}{"Mulige numre\(\backslash\)n"});
 00168       \textcolor{keywordflow}{while} ((musicDir = readdir (dir)) != NULL) \{
 00169         printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, musicDir->d\_name);
 00170       \}
-00171     closedir (dir);
-00172   \} 
-00173   \textcolor{keywordflow}{else} \{
-00174   \textcolor{comment}{/* Could not open directory */}
-00175     perror (\textcolor{stringliteral}{"Failure while opening directory"});
-00176     exit (EXIT\_FAILURE);
-00177   \}
-00178   printf(\textcolor{stringliteral}{"Indtast det valgte nummer\(\backslash\)n"});
-00179   scanf(\textcolor{stringliteral}{"%s"}, MIDIfile);
-00180 \}
+00171   \} 
+00172   \textcolor{keywordflow}{else} \{
+00173     perror (\textcolor{stringliteral}{"Failure while opening directory"});
+00174     exit (EXIT\_FAILURE);
+00175   \}
+00176   printf(\textcolor{stringliteral}{"Indtast det valgte nummer\(\backslash\)n"});
+00177   scanf(\textcolor{stringliteral}{"%s"}, MIDIfile);
+00178 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!check\+Next\+Event@{check\+Next\+Event}}
 \index{check\+Next\+Event@{check\+Next\+Event}!main.\+c@{main.\+c}}
@@ -267,18 +268,35 @@ A function to read music directory and prompt user to choose file
 )}\label{main_8c_a31a2c1016f54d5c2508c8a1578437f2d}
 
 \begin{DoxyCode}
-00265                                     \{
-00266   \textcolor{keywordflow}{switch} (hex[j])\{
-00267     \textcolor{keywordflow}{case} 0x90:
-00268     \textcolor{keywordflow}{case} 0x80:
-00269     \textcolor{keywordflow}{case} 0xA0:
-00270     \textcolor{keywordflow}{case} 0xB0:
-00271     \textcolor{keywordflow}{case} 0xC0:
-00272     \textcolor{keywordflow}{case} 0xD0:
-00273     \textcolor{keywordflow}{case} 0xE0: \textcolor{keywordflow}{return} 1; \textcolor{keywordflow}{break};
-00274     \textcolor{keywordflow}{default}  : \textcolor{keywordflow}{return} 0; \textcolor{keywordflow}{break};
-00275   \}
-00276 \}
+00263                                     \{
+00264   \textcolor{keywordflow}{switch} (hex[j])\{
+00265     \textcolor{keywordflow}{case} 0x90:
+00266     \textcolor{keywordflow}{case} 0x80:
+00267     \textcolor{keywordflow}{case} 0xA0:
+00268     \textcolor{keywordflow}{case} 0xB0:
+00269     \textcolor{keywordflow}{case} 0xC0:
+00270     \textcolor{keywordflow}{case} 0xD0:
+00271     \textcolor{keywordflow}{case} 0xE0: \textcolor{keywordflow}{return} 1; \textcolor{keywordflow}{break};
+00272     \textcolor{keywordflow}{default}  : \textcolor{keywordflow}{return} 0; \textcolor{keywordflow}{break};
+00273   \}
+00274 \}
+\end{DoxyCode}
+\index{main.\+c@{main.\+c}!check\+Scale@{check\+Scale}}
+\index{check\+Scale@{check\+Scale}!main.\+c@{main.\+c}}
+\paragraph[{check\+Scale}]{\setlength{\rightskip}{0pt plus 5cm}void check\+Scale (
+\begin{DoxyParamCaption}
+\item[{int}]{scales[$\,$], }
+\item[{int}]{tone, }
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)}\label{main_8c_a14c87dc75ccb31a96d21ed5ca8edcb7e}
+
+\begin{DoxyCode}
+00513                                                 \{
+00514   \textcolor{keywordflow}{if}(tone < key)
+00515     tone += 12;
+00516   scales[key] = isInMajor(tone - key);
+00517 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!count\+Notes@{count\+Notes}}
 \index{count\+Notes@{count\+Notes}!main.\+c@{main.\+c}}
@@ -290,22 +308,22 @@ A function to read music directory and prompt user to choose file
 )}\label{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}
 A function to count the number of notes in the entire song 
 \begin{DoxyParams}{Parameters}
-{\em } & int]\+: hex[]\+: an array with the stored information from the file \\
+{\em hex\mbox{[}$\,$\mbox{]}} & an array with the stored information from the file \\
 \hline
-{\em } & int]\+: amount\+: an integer holding the total number of characters in the array \\
+{\em amount} & an integer holding the total number of characters in the array \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00200                                      \{
-00201   \textcolor{keywordtype}{int} i = 0, res = 0;
-00202   \textcolor{keywordflow}{for}(i = 0; i < amount; i++)\{
-00203     \textcolor{keywordflow}{if}(hex[i] == 0x90)\{
-00204       res++;
-00205     \}
-00206   \}
-00207   \textcolor{keywordflow}{return} res;
-00208 \}
+00198                                      \{
+00199   \textcolor{keywordtype}{int} i = 0, res = 0;
+00200   \textcolor{keywordflow}{for}(i = 0; i < amount; i++)\{
+00201     \textcolor{keywordflow}{if}(hex[i] == 0x90)\{
+00202       res++;
+00203     \}
+00204   \}
+00205   \textcolor{keywordflow}{return} res;
+00206 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!count\+Ticks1@{count\+Ticks1}}
 \index{count\+Ticks1@{count\+Ticks1}!main.\+c@{main.\+c}}
@@ -320,12 +338,12 @@ A function to count the number of notes in the entire song
 )}\label{main_8c_af836f26ac499b26de031f92ef5899a31}
 
 \begin{DoxyCode}
-00314                                                                                     \{
-00315   \textcolor{keywordflow}{while}(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
-00316     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
-00317   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
-00318   i += deltaCounter;
-00319 \}
+00312                                                                                     \{
+00313   \textcolor{keywordflow}{while}(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
+00314     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+00315   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
+00316   i += deltaCounter;
+00317 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!count\+Ticks2@{count\+Ticks2}}
 \index{count\+Ticks2@{count\+Ticks2}!main.\+c@{main.\+c}}
@@ -340,12 +358,12 @@ A function to count the number of notes in the entire song
 )}\label{main_8c_a4bc2fa0c74fcabd55e06bd0d49e1f992}
 
 \begin{DoxyCode}
-00321                                                                                     \{
-00322   \textcolor{keywordflow}{while}(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
-00323     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
-00324   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
-00325   i += deltaCounter;
-00326 \}
+00319                                                                                     \{
+00320   \textcolor{keywordflow}{while}(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
+00321     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+00322   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
+00323   i += deltaCounter;
+00324 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!delta\+Time\+To\+Note\+Length@{delta\+Time\+To\+Note\+Length}}
 \index{delta\+Time\+To\+Note\+Length@{delta\+Time\+To\+Note\+Length}!main.\+c@{main.\+c}}
@@ -359,28 +377,28 @@ A function to count the number of notes in the entire song
 )}\label{main_8c_a5ce54b23ee9b2c1ae92adac7a9505180}
 
 \begin{DoxyCode}
-00484                                                                          \{
-00485 
-00486   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
-00487   
-00488     \textcolor{keywordtype}{double} noteLength = ((double) (ticks[i])) / ((\textcolor{keywordtype}{double}) (ppqn/8));
-00489 
-00490     \textcolor{keywordflow}{if} (noteLength < 1.5 && noteLength >= 0)
-00491       noteLength = 1;
-00492     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 3 && noteLength >= 1.5)
-00493       noteLength = 2;
-00494     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 6 && noteLength >= 3)
-00495       noteLength = 4;
-00496     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 12 && noteLength >= 6)
-00497       noteLength = 8;
-00498     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 24 && noteLength >= 12)
-00499       noteLength = 16;
-00500     \textcolor{keywordflow}{else}
-00501       noteLength = 32;
-00502     
-00503         noteAr[i].length = noteLength;
-00504     \}
-00505 \}
+00482                                                                          \{
+00483 
+00484   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
+00485   
+00486     \textcolor{keywordtype}{double} noteLength = ((double) (ticks[i])) / ((\textcolor{keywordtype}{double}) (ppqn/8));
+00487 
+00488     \textcolor{keywordflow}{if} (noteLength < 1.5 && noteLength >= 0)
+00489       noteLength = 1;
+00490     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 3 && noteLength >= 1.5)
+00491       noteLength = 2;
+00492     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 6 && noteLength >= 3)
+00493       noteLength = 4;
+00494     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 12 && noteLength >= 6)
+00495       noteLength = 8;
+00496     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 24 && noteLength >= 12)
+00497       noteLength = 16;
+00498     \textcolor{keywordflow}{else}
+00499       noteLength = 32;
+00500     
+00501         noteAr[i].length = noteLength;
+00502     \}
+00503 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!fill\+Note@{fill\+Note}}
 \index{fill\+Note@{fill\+Note}!main.\+c@{main.\+c}}
@@ -392,18 +410,18 @@ A function to count the number of notes in the entire song
 )}\label{main_8c_ad88978d32a0f080f58ed31ffe9c51396}
 A function to fill out each of the structures of type note 
 \begin{DoxyParams}{Parameters}
-{\em } & int]\+: input\+Tone\+: the value of the hexadecimal collected on the \char`\"{}tone\char`\"{}-\/spot \\
+{\em input\+Tone} & the value of the hexadecimal collected on the \char`\"{}tone\char`\"{}-\/spot \\
 \hline
-{\em } & note$\ast$]\+: note\+: a pointer to a note-\/structure \\
+{\em note$\ast$} & a pointer to a note-\/structure \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00332                                         \{
-00333   note->tone = inputTone % 12;
-00334   note->average = inputTone;
-00335   note->octave = inputTone / 12;
-00336 \}
+00330                                         \{
+00331   note->tone = inputTone % 12;
+00332   note->average = inputTone;
+00333   note->octave = inputTone / 12;
+00334 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!fill\+Song\+Data@{fill\+Song\+Data}}
 \index{fill\+Song\+Data@{fill\+Song\+Data}!main.\+c@{main.\+c}}
@@ -416,25 +434,25 @@ A function to fill out each of the structures of type note
 )}\label{main_8c_a6406eca72b9402b7240ed0e453e8db46}
 ! A function, that fills out the song data 
 \begin{DoxyParams}{Parameters}
-{\em } & data$\ast$]\+: data\+: a pointer to a structure containing the tempo and mode of the song \\
+{\em $\ast$data} & a pointer to a structure containing the tempo and mode of the song \\
 \hline
-{\em } & int]\+: hex[]\+:the array of integers read from the file \\
+{\em hex\mbox{[}$\,$\mbox{]}} & the array of integers read from the file \\
 \hline
-{\em } & int]\+: numbers\+In\+Text\+: the total amount of integers in the array \\
+{\em numbers\+In\+Text} & the total amount of integers in the array \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00216                                                            \{
-00217   \textcolor{keywordtype}{int} j;
-00218   \textcolor{comment}{/*Find the mode of the song, initialised as minor atm*/}
-00219   \textcolor{keywordflow}{for}(j = 0; j < numbersInText; j++)\{
-00220     \textcolor{comment}{/* finds the tempo */}
-00221     \textcolor{keywordflow}{if}(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03)\{
-00222       data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
-00223     \}
-00224   \}
-00225 \}
+00214                                                            \{
+00215   \textcolor{keywordtype}{int} j;
+00216   \textcolor{comment}{/*Find the mode of the song, initialised as minor atm*/}
+00217   \textcolor{keywordflow}{for}(j = 0; j < numbersInText; j++)\{
+00218     \textcolor{comment}{/* finds the tempo */}
+00219     \textcolor{keywordflow}{if}(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03)\{
+00220       data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
+00221     \}
+00222   \}
+00223 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!find\+Events@{find\+Events}}
 \index{find\+Events@{find\+Events}!main.\+c@{main.\+c}}
@@ -450,25 +468,25 @@ A function to fill out each of the structures of type note
 )}\label{main_8c_a958ac363192985c144e524cc6e092e7c}
 
 \begin{DoxyCode}
-00227                                                                                                            
+00225                                                                                                            
            \{
-00228   \textcolor{keywordtype}{int} noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-00229       programChange = 0, channelPressure = 0, pitchWheel = 0, n = 0;
-00230 
-00231   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < numbersInText; j++)\{
-00232     \textcolor{keywordflow}{switch} (hex[j])\{
-00233       \textcolor{keywordflow}{case} 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n);               \textcolor{keywordflow}{break};
-00234       \textcolor{keywordflow}{case} 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n);             \textcolor{keywordflow}{break};
-00235       \textcolor{keywordflow}{case} 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);       \textcolor{keywordflow}{break};
-00236       \textcolor{keywordflow}{case} 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n); \textcolor{keywordflow}{break};
-00237       \textcolor{keywordflow}{case} 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);             \textcolor{keywordflow}{break};
-00238       \textcolor{keywordflow}{case} 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);         \textcolor{keywordflow}{break};
-00239       \textcolor{keywordflow}{case} 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);       \textcolor{keywordflow}{break};
-00240       \textcolor{keywordflow}{default}  :                                                                                  \textcolor{keywordflow}{break};
-00241     \}
-00242   \}
-00243   findTicks(numbersInText, hex, placement, noteAr, ticks, noteOn, size);
-00244 \}
+00226   \textcolor{keywordtype}{int} noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
+00227       programChange = 0, channelPressure = 0, pitchWheel = 0, n = 0;
+00228 
+00229   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < numbersInText; j++)\{
+00230     \textcolor{keywordflow}{switch} (hex[j])\{
+00231       \textcolor{keywordflow}{case} 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n);               \textcolor{keywordflow}{break};
+00232       \textcolor{keywordflow}{case} 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n);             \textcolor{keywordflow}{break};
+00233       \textcolor{keywordflow}{case} 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);       \textcolor{keywordflow}{break};
+00234       \textcolor{keywordflow}{case} 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n); \textcolor{keywordflow}{break};
+00235       \textcolor{keywordflow}{case} 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);             \textcolor{keywordflow}{break};
+00236       \textcolor{keywordflow}{case} 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);         \textcolor{keywordflow}{break};
+00237       \textcolor{keywordflow}{case} 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);       \textcolor{keywordflow}{break};
+00238       \textcolor{keywordflow}{default}  :                                                                                  \textcolor{keywordflow}{break};
+00239     \}
+00240   \}
+00241   findTicks(numbersInText, hex, placement, noteAr, ticks, noteOn, size);
+00242 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!find\+Mode@{find\+Mode}}
 \index{find\+Mode@{find\+Mode}!main.\+c@{main.\+c}}
@@ -490,54 +508,88 @@ A function to fill out each of the structures of type note
 )}\label{main_8c_a660cd7ea9eae225a44ccb0fd609984a3}
 A function to find the mode of the song by first calculating the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys. 
 \begin{DoxyParams}{Parameters}
-{\em } & note[]]\+: note\+Ar\+: An array of all the notes in the entire song \\
+{\em note\+Ar} & An array of all the notes in the entire song \\
 \hline
-{\em } & int]\+: total\+Notes\+: The number of notes in the song \\
+{\em total\+Notes} & The number of notes in the song \\
+\hline
+{\em data} & The song data \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00519                                                         \{
-00520   \textcolor{keywordtype}{int} x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, 
-      mode = 0;
-00521 
-00522   \textcolor{comment}{/*Goes through all notes of the song and puts them into an array*/}
-00523   \textcolor{keywordflow}{while}(x < totalNotes)\{
-00524     \textcolor{keywordflow}{for}(y = 0; y < sizeBar; y++, x++)\{
-00525       bar[y] = noteAr[x].tone;
-00526     \}
+00524                                                         \{
+00525   \textcolor{keywordtype}{int} majors[12] = \{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1\}, minors[12] = \{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0\};
+00526   \textcolor{keywordtype}{int} x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, 
+      mode = 0, tempNote = 0;
 00527 
-00528     \textcolor{keywordflow}{if}(y == sizeBar)\{
-00529       span = 999;
-00530       \textcolor{comment}{/*Sort notes in acsending order*/}
-00531       qsort(bar, sizeBar, \textcolor{keyword}{sizeof}(tone), sortTones);
-00532 
-00533       \textcolor{comment}{/*Find the lowest possible tonespan over the entire array of notes*/}
-00534       \textcolor{keywordflow}{for}(z = 0; z < 4; z++)\{
-00535     \textcolor{keywordflow}{if}((z + 1) > 3)
-00536           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
-00537         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z + 2) > 3)
-00538           tempSpan = bar[(z+1)]-bar[z] + (bar[(z+2)%4]+12)-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
-00539     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z +3) > 3)
-00540           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
-00541     \textcolor{keywordflow}{else}
-00542           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
-00543 
-00544     \textcolor{keywordflow}{if}(tempSpan < span)\{
-00545           span = tempSpan; 
-00546           keynote = bar[z];
-00547         \}
-00548       \}
-00549       mode += isInScale(keynote, bar, sizeBar);
-00550       printf(\textcolor{stringliteral}{"Moden er nu: %d\(\backslash\)n"}, mode);
-00551     \}
-00552   data->key = keynote;
-00553   \textcolor{keywordflow}{if}(mode > 0)
-00554     data->mode = major;
-00555   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(mode < 0)
-00556     data->mode = minor;  
-00557   \}
-00558 \}
+00528   \textcolor{keywordflow}{for}(x = 0; x < totalNotes; x++)\{
+00529     tempNote = noteAr[x].tone;
+00530  
+00531     \textcolor{keywordflow}{for}(y = C; y <= B; y++)\{
+00532       \textcolor{keywordflow}{if}(majors[y])
+00533         checkScale(majors, tempNote, y);
+00534     \}
+00535   \}
+00536 
+00537   \textcolor{comment}{/*TEST Keynote giver det forkerte svar, resten virker*/}
+00538   \textcolor{keywordflow}{for}(y = 0; y < 12; y++)\{
+00539     z = y;
+00540     \textcolor{keywordflow}{if}(majors[z])\{
+00541       \textcolor{keywordflow}{if}((z - 3) < 0)
+00542         z += 12;
+00543     minors[z-3] = 1;
+00544     \}
+00545   \}
+00546   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} p = 0; p < 12; p++)\{
+00547     printf(\textcolor{stringliteral}{"Dur: %d\(\backslash\)n"}, majors[p]);
+00548   \}
+00549   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} p = 0; p < 12; p++)
+00550     printf(\textcolor{stringliteral}{"Mol: %d\(\backslash\)n"}, minors[p]);
+00551   z = 0;
+00552   x = 0;
+00553 
+00554   \textcolor{comment}{/*Goes through all notes of the song and puts them into an array*/}
+00555   \textcolor{keywordflow}{while}(x < totalNotes)\{
+00556     z = x;
+00557     \textcolor{keywordflow}{for}(y = 0; y < sizeBar; y++, z++)\{
+00558       \textcolor{keywordflow}{if}(z < totalNotes)
+00559         bar[y] = noteAr[z].tone;
+00560       \textcolor{keywordflow}{else}
+00561         sizeBar = y;
+00562     \}
+00563 
+00564     \textcolor{keywordflow}{if}(y == sizeBar)\{
+00565       span = 999;
+00566       \textcolor{comment}{/*Sort notes in acsending order*/}
+00567       qsort(bar, sizeBar, \textcolor{keyword}{sizeof}(tone), sortTones);
+00568 
+00569       \textcolor{comment}{/*Find the lowest possible tonespan over the entire array of notes*/}
+00570       \textcolor{keywordflow}{for}(z = 0; z < sizeBar; z++)\{
+00571     \textcolor{keywordflow}{if}((z + 1) > 3)
+00572           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+00573         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z + 2) > 3)
+00574           tempSpan = bar[(z+1)]-bar[z] + (bar[(z+2)%4]+12)-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+00575     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z +3) > 3)
+00576           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
+00577     \textcolor{keywordflow}{else}
+00578           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
+00579         
+00580     \textcolor{keywordflow}{if}(tempSpan < span && (majors[bar[z]] || minors[bar[z]]))\{
+00581           span = tempSpan;
+00582           keynote = bar[z];
+00583         \}
+00584       \}
+00585       mode += isInScale(keynote, bar, sizeBar);
+00586       printf(\textcolor{stringliteral}{"Moden er nu: %d\(\backslash\)n"}, mode);
+00587       x++;
+00588     \}
+00589   \}
+00590   
+00591   \textcolor{keywordflow}{if}(mode > 0)
+00592     data->mode = major;
+00593   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(mode < 0)
+00594     data->mode = minor;
+00595 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!Find\+Mood\+Amount@{Find\+Mood\+Amount}}
 \index{Find\+Mood\+Amount@{Find\+Mood\+Amount}!main.\+c@{main.\+c}}
@@ -548,15 +600,15 @@ A function to find the mode of the song by first calculating the tone span over 
 )}\label{main_8c_aea24927f2da3a892904ec1abd4ad01bf}
 
 \begin{DoxyCode}
-00620                                \{
-00621   \textcolor{keywordtype}{int} i = 1;
-00622   \textcolor{keywordflow}{while}(fgetc(moods) != EOF)\{
-00623     \textcolor{keywordflow}{if}(fgetc(moods) == \textcolor{charliteral}{'\(\backslash\)n'})
-00624       i++;
-00625   \}
-00626   rewind(moods);
-00627   \textcolor{keywordflow}{return} i;
-00628 \}
+00657                                \{
+00658   \textcolor{keywordtype}{int} i = 1;
+00659   \textcolor{keywordflow}{while}(fgetc(moods) != EOF)\{
+00660     \textcolor{keywordflow}{if}(fgetc(moods) == \textcolor{charliteral}{'\(\backslash\)n'})
+00661       i++;
+00662   \}
+00663   rewind(moods);
+00664   \textcolor{keywordflow}{return} i;
+00665 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!find\+Note\+Length@{find\+Note\+Length}}
 \index{find\+Note\+Length@{find\+Note\+Length}!main.\+c@{main.\+c}}
@@ -582,42 +634,42 @@ A function to find the mode of the song by first calculating the tone span over 
 )}\label{main_8c_ac6acd514eb7de5e7d0a48cae55dc02ff}
 
 \begin{DoxyCode}
-00278                                                                                                            
+00276                                                                                                            
                       \{
-00279   \textcolor{keywordtype}{int} tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
-00280   
-00281   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < noteOn; j++)\{
-00282     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = placement[j].noteOn; i < numbersInText; i++)\{
-00283       \textcolor{keywordflow}{if}(hex[i] == 0x80)\{
-00284         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].tone)
-00285           \textcolor{keywordflow}{break};
-00286         \textcolor{keywordflow}{else}\{
-00287           countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
-00288         \}
-00289       \}
-00290       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xA0)\{
-00291         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].tone && hex[i + 2] == 0x00)
-00292           \textcolor{keywordflow}{break};
-00293         \textcolor{keywordflow}{else}\{
-00294           countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
-00295         \}
-00296       \}
-00297       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xD0)\{
-00298         \textcolor{keywordflow}{if}(hex[i + 1] == 0x00)
-00299           \textcolor{keywordflow}{break};
-00300         \textcolor{keywordflow}{else}\{
-00301           countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
-00302         \}
-00303       \}
-00304       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xC0)\{
-00305         countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
-00306       \}
-00307       \textcolor{keywordflow}{else}\{
-00308         countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
-00309       \}     
-00310     \}
-00311   \}
-00312 \}
+00277   \textcolor{keywordtype}{int} tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
+00278   
+00279   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < noteOn; j++)\{
+00280     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = placement[j].noteOn; i < numbersInText; i++)\{
+00281       \textcolor{keywordflow}{if}(hex[i] == 0x80)\{
+00282         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].tone)
+00283           \textcolor{keywordflow}{break};
+00284         \textcolor{keywordflow}{else}\{
+00285           countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+00286         \}
+00287       \}
+00288       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xA0)\{
+00289         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].tone && hex[i + 2] == 0x00)
+00290           \textcolor{keywordflow}{break};
+00291         \textcolor{keywordflow}{else}\{
+00292           countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+00293         \}
+00294       \}
+00295       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xD0)\{
+00296         \textcolor{keywordflow}{if}(hex[i + 1] == 0x00)
+00297           \textcolor{keywordflow}{break};
+00298         \textcolor{keywordflow}{else}\{
+00299           countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
+00300         \}
+00301       \}
+00302       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xC0)\{
+00303         countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
+00304       \}
+00305       \textcolor{keywordflow}{else}\{
+00306         countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+00307       \}     
+00308     \}
+00309   \}
+00310 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!get\+Hex@{get\+Hex}}
 \index{get\+Hex@{get\+Hex}!main.\+c@{main.\+c}}
@@ -629,22 +681,22 @@ A function to find the mode of the song by first calculating the tone span over 
 )}\label{main_8c_a7e86822405cc3ff43db316d113a1fb6d}
 A function, that retrieves the hexadecimals from the files and also returns the number of files 
 \begin{DoxyParams}{Parameters}
-{\em } & F\+I\+L\+E$\ast$]\+: f\+: a pointer to the file the program is reading from \\
+{\em $\ast$f} & a pointer to the file the program is reading from \\
 \hline
-{\em } & int]\+: hex\+Ar[]\+: an array of integers, that the information is stored in \\
+{\em hex\+Ar\mbox{[}$\,$\mbox{]}} & an array of integers, that the information is stored in \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00186                                 \{
-00187   \textcolor{keywordtype}{int} i = 0, c;
-00188   \textcolor{keywordflow}{while}( (c = fgetc(f)) != EOF && i < CHARS)\{
-00189     hexAr[i] = c;
-00190     i++;
-00191   \}
-00192   
-00193   \textcolor{keywordflow}{return} i;
-00194 \}
+00184                                 \{
+00185   \textcolor{keywordtype}{int} i = 0, c;
+00186   \textcolor{keywordflow}{while}( (c = fgetc(f)) != EOF && i < CHARS)\{
+00187     hexAr[i] = c;
+00188     i++;
+00189   \}
+00190   
+00191   \textcolor{keywordflow}{return} i;
+00192 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!insert\+Moods@{insert\+Moods}}
 \index{insert\+Moods@{insert\+Moods}!main.\+c@{main.\+c}}
@@ -656,13 +708,13 @@ A function, that retrieves the hexadecimals from the files and also returns the 
 )}\label{main_8c_a1709777308c32674291e7213d55feb6e}
 
 \begin{DoxyCode}
-00445                                                         \{
-00446   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
-00447     fscanf(moods, \textcolor{stringliteral}{"%s %d %d %d %d"}, moodArray[i].name , &moodArray[i].mode, 
-00448                                     &moodArray[i].tempo, &moodArray[i].toneLength,
-00449                                     &moodArray[i].pitch);
-00450   \}
-00451 \}
+00443                                                         \{
+00444   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00445     fscanf(moods, \textcolor{stringliteral}{"%s %d %d %d %d"}, moodArray[i].name , &moodArray[i].mode, 
+00446                                     &moodArray[i].tempo, &moodArray[i].toneLength,
+00447                                     &moodArray[i].pitch);
+00448   \}
+00449 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!insert\+Placement1@{insert\+Placement1}}
 \index{insert\+Placement1@{insert\+Placement1}!main.\+c@{main.\+c}}
@@ -677,17 +729,17 @@ A function, that retrieves the hexadecimals from the files and also returns the 
 )}\label{main_8c_afce19655c88726711949a8e720767874}
 
 \begin{DoxyCode}
-00246                                                                           \{
-00247   \textcolor{keywordtype}{int} i = 3;
-00248   \textcolor{keywordflow}{while}(i < 7 && hex[(j + i++)] > 0x80);
-00249   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))\{
-00250     *place = j;
-00251     \textcolor{keywordflow}{if}(hex[j] == 0x90)\{
-00252       fillNote(hex[j + 1], &noteAr[*n]);
-00253       *n += 1;
-00254     \}   
-00255   \} 
-00256 \}
+00244                                                                           \{
+00245   \textcolor{keywordtype}{int} i = 3;
+00246   \textcolor{keywordflow}{while}(i < 7 && hex[(j + i++)] > 0x80);
+00247   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))\{
+00248     *place = j;
+00249     \textcolor{keywordflow}{if}(hex[j] == 0x90)\{
+00250       fillNote(hex[j + 1], &noteAr[*n]);
+00251       *n += 1;
+00252     \}   
+00253   \} 
+00254 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!insert\+Placement2@{insert\+Placement2}}
 \index{insert\+Placement2@{insert\+Placement2}!main.\+c@{main.\+c}}
@@ -700,12 +752,12 @@ A function, that retrieves the hexadecimals from the files and also returns the 
 )}\label{main_8c_a0349131ee04fd791a9bcd1205db44778}
 
 \begin{DoxyCode}
-00258                                                    \{
-00259   \textcolor{keywordtype}{int} i = 2;
-00260   \textcolor{keywordflow}{while}(i < 6 && hex[(j + i++)] > 0x80);
-00261   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))
-00262     *place = j;
-00263 \}
+00256                                                    \{
+00257   \textcolor{keywordtype}{int} i = 2;
+00258   \textcolor{keywordflow}{while}(i < 6 && hex[(j + i++)] > 0x80);
+00259   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))
+00260     *place = j;
+00261 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!is\+In\+Major@{is\+In\+Major}}
 \index{is\+In\+Major@{is\+In\+Major}!main.\+c@{main.\+c}}
@@ -716,23 +768,23 @@ A function, that retrieves the hexadecimals from the files and also returns the 
 )}\label{main_8c_a241d0a265bf9c508dee8671ecab5f1d8}
 A function to check if the given tone leap is in the major scale. 
 \begin{DoxyParams}{Parameters}
-{\em } & int]\+: tone\+Leap\+: An integer describing the processed tone leap \\
+{\em tone\+Leap} & An integer describing the processed tone leap \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-[ int]\+: a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not. 
+a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not. 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-00610                            \{
-00611   \textcolor{keywordtype}{int} major[] = \{0, 2, 4, 5, 7, 9, 11\};
-00612 
-00613   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < SCALESIZE; i++)\{
-00614     \textcolor{keywordflow}{if}(toneLeap == major[i])
-00615       \textcolor{keywordflow}{return} 1;
-00616   \}
-00617   \textcolor{keywordflow}{return} 0;
-00618 \}
+00646                            \{
+00647   \textcolor{keywordtype}{int} major[] = \{0, 2, 4, 5, 7, 9, 11\};
+00648 
+00649   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < SCALESIZE; i++)\{
+00650     \textcolor{keywordflow}{if}(toneLeap == major[i])
+00651       \textcolor{keywordflow}{return} 1;
+00652   \}
+00653   \textcolor{keywordflow}{return} 0;
+00654 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!is\+In\+Minor@{is\+In\+Minor}}
 \index{is\+In\+Minor@{is\+In\+Minor}!main.\+c@{main.\+c}}
@@ -743,23 +795,23 @@ A function to check if the given tone leap is in the major scale.
 )}\label{main_8c_a7a1c0b6f906689e24cb60e1e5ff8bc76}
 A function to check if the given tone leap is in the minor scale. 
 \begin{DoxyParams}{Parameters}
-{\em } & int]\+: tone\+Leap\+: An integer describing the processed tone leap \\
+{\em tone\+Leap} & An integer describing the processed tone leap \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-[ int]\+: a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not. 
+a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not. 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-00596                            \{
-00597   \textcolor{keywordtype}{int} minor[] = \{0, 2, 3, 5, 7, 8, 10\};
-00598 
-00599   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < SCALESIZE; i++)\{
-00600     \textcolor{keywordflow}{if}(toneLeap == minor[i])
-00601       \textcolor{keywordflow}{return} 1;
-00602   \}
-00603   \textcolor{keywordflow}{return} 0;
-00604 \}
+00632                            \{
+00633   \textcolor{keywordtype}{int} minor[] = \{0, 2, 3, 5, 7, 8, 10\};
+00634 
+00635   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < SCALESIZE; i++)\{
+00636     \textcolor{keywordflow}{if}(toneLeap == minor[i])
+00637       \textcolor{keywordflow}{return} 1;
+00638   \}
+00639   \textcolor{keywordflow}{return} 0;
+00640 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!is\+In\+Scale@{is\+In\+Scale}}
 \index{is\+In\+Scale@{is\+In\+Scale}!main.\+c@{main.\+c}}
@@ -772,43 +824,41 @@ A function to check if the given tone leap is in the minor scale.
 )}\label{main_8c_ab07d21079009fe6f42cd1a95b5db3522}
 A function to check if a given scale in given keytone corresponds with the tones in the rest of the song. 
 \begin{DoxyParams}{Parameters}
-{\em } & scale]\+: mode\+: An enum that describes the given mode \\
+{\em keytone} & The keytone of the processed scale \\
 \hline
-{\em } & int]\+: keytone\+: The keytone of the processed scale \\
+{\em other\+Tones\mbox{[}$\,$\mbox{]}} & An array of the rest of the tones, which the function compares to the keytone and mode \\
 \hline
-{\em } & int]\+: other\+Tones[]\+: An array of the rest of the tones, which the function compares to the keytone and mode \\
-\hline
-{\em } & int]\+: size\+: The number of tones in the other\+Tones array \\
+{\em size} & The number of tones in the other\+Tones array \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-[ int]\+: a boolean value, returns 1 if the mode is major, -\/1 if it's minor and 0, if wasn't possible to decide. 
+a boolean value, returns 1 if the mode is major, -\/1 if it's minor and 0, if wasn't possible to decide. 
 \end{DoxyReturn}
 
 \begin{DoxyCode}
-00567                                                       \{
-00568   \textcolor{keywordtype}{int} toneLeap, isMinor = 1, isMajor = 1;
-00569 
-00570   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
-00571     \textcolor{keywordflow}{if}(otherTones[i] < keytone)
-00572       otherTones[i] += 12;
-00573       toneLeap = otherTones[i] - keytone;
-00574 
-00575       \textcolor{keywordflow}{if}(isMinor)
-00576         isMinor = isInMinor(toneLeap);
-00577       \textcolor{keywordflow}{if}(isMajor)
-00578         isMajor = isInMajor(toneLeap);
-00579     \}
-00580 
-00581     \textcolor{keywordflow}{if}(isMinor && isMajor)
-00582       \textcolor{keywordflow}{return} 0;
-00583     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(isMinor)
-00584       \textcolor{keywordflow}{return} -1;
-00585     \textcolor{keywordflow}{if}(isMajor)
-00586       \textcolor{keywordflow}{return} 1;
-00587 
-00588     \textcolor{keywordflow}{return} 0;
-00589 \}
+00603                                                       \{
+00604   \textcolor{keywordtype}{int} toneLeap, isMinor = 1, isMajor = 1;
+00605 
+00606   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
+00607     \textcolor{keywordflow}{if}(otherTones[i] < keytone)
+00608       otherTones[i] += 12;
+00609       toneLeap = otherTones[i] - keytone;
+00610 
+00611       \textcolor{keywordflow}{if}(isMinor)
+00612         isMinor = isInMinor(toneLeap);
+00613       \textcolor{keywordflow}{if}(isMajor)
+00614         isMajor = isInMajor(toneLeap);
+00615     \}
+00616 
+00617     \textcolor{keywordflow}{if}(isMinor && isMajor)
+00618       \textcolor{keywordflow}{return} 0;
+00619     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(isMinor)
+00620       \textcolor{keywordflow}{return} -1;
+00621     \textcolor{keywordflow}{if}(isMajor)
+00622       \textcolor{keywordflow}{return} 1;
+00623 
+00624     \textcolor{keywordflow}{return} 0;
+00625 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!main@{main}}
 \index{main@{main}!main.\+c@{main.\+c}}
@@ -821,71 +871,72 @@ A function to check if a given scale in given keytone corresponds with the tones
 
 \begin{DoxyCode}
 00094                                       \{
-00095   FILE *f;
-00096   \textcolor{keywordtype}{char} MIDIfile[25];
-00097   \textcolor{comment}{/*Variables*/}
-00098   \textcolor{keywordtype}{int} numbersInText = 0, notes, i = 0, size = 0, moodOfMelodi = 0;
-00099   \textcolor{comment}{/* PLACEHOLDER FIX THIS */}
-00100   \textcolor{keywordtype}{int} mode = 5, tempo = 5, toneLength = 5, pitch = 5;
-00101   FILE* moods = fopen(\textcolor{stringliteral}{"moods.txt"}, \textcolor{stringliteral}{"r"});
-00102   \textcolor{keywordflow}{if}(moods == NULL)\{
-00103     perror(\textcolor{stringliteral}{"Error: moods missing "});
-00104     exit(EXIT\_FAILURE);
-00105   \}
-00106   AMOUNT_OF_MOODS = FindMoodAmount(moods);
-00107   moodWeighting moodArray[AMOUNT_OF_MOODS];
-00108   data data = \{0, major, D\};
-00109   \textcolor{keywordflow}{if} (argv[1] == NULL)\{
-00110     checkDirectory(MIDIfile);  
-00111     f = fopen(MIDIfile,\textcolor{stringliteral}{"r"});  
-00112     \textcolor{keywordflow}{if}(f == NULL)\{
-00113       perror(\textcolor{stringliteral}{"Error opening file"});
-00114       exit(EXIT\_FAILURE);
-00115     \}
-00116   \}
-00117   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(argv[1] != NULL)\{
-00118     f = fopen(argv[1],\textcolor{stringliteral}{"r"});
-00119     \textcolor{keywordflow}{if}(f == NULL)\{
-00120       perror(\textcolor{stringliteral}{"Error opening file"});
-00121       exit(EXIT\_FAILURE);
-00122     \}
-00123   \}
-00124 
-00125   \textcolor{keywordtype}{int} *hex = (\textcolor{keywordtype}{int} *) malloc(CHARS * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));
-00126   \textcolor{keywordflow}{if}(hex == NULL)\{
-00127     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
-00128     exit(EXIT\_FAILURE);
-00129   \}
-00130   \textcolor{comment}{/*Reading the data from the file*/}
-00131   numbersInText = getHex(f, hex);
-00132   fillSongData(&data, hex, numbersInText);
-00133   notes = countNotes(hex, numbersInText);
-00134   note *noteAr = (note*) malloc(notes * \textcolor{keyword}{sizeof}(note));
-00135   \textcolor{keywordflow}{if}(noteAr == NULL)\{
-00136     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
-00137     exit(EXIT\_FAILURE);
-00138   \}
-00139   eventPlacement placement[numbersInText];
-00140   \textcolor{keywordtype}{int} ticks[numbersInText];
-00141   findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
-00142   insertMoods(moodArray, moods);
-00143   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
-00144   printf(\textcolor{stringliteral}{"%d, %d, %d, %d\(\backslash\)n"}, mode, tempo, toneLength, pitch);
+00095   DIR *dir;
+00096   FILE *f;
+00097   \textcolor{keywordtype}{char} MIDIfile[25];
+00098   \textcolor{comment}{/*Variables*/}
+00099   \textcolor{keywordtype}{int} numbersInText = 0, notes, i = 0, size = 0, moodOfMelodi = 0;
+00100   \textcolor{comment}{/* PLACEHOLDER FIX THIS */}
+00101   \textcolor{keywordtype}{int} mode = 5, tempo = 5, toneLength = 5, pitch = 5;
+00102   FILE* moods = fopen(\textcolor{stringliteral}{"moods.txt"}, \textcolor{stringliteral}{"r"});
+00103   \textcolor{keywordflow}{if}(moods == NULL)\{
+00104     perror(\textcolor{stringliteral}{"Error: moods missing "});
+00105     exit(EXIT\_FAILURE);
+00106   \}
+00107   AMOUNT_OF_MOODS = FindMoodAmount(moods);
+00108   moodWeighting moodArray[AMOUNT_OF_MOODS];
+00109   data data = \{0, major, D\};
+00110   \textcolor{keywordflow}{if} (argv[1] == NULL)\{
+00111     checkDirectory(MIDIfile);  
+00112     f = fopen(MIDIfile,\textcolor{stringliteral}{"r"});  
+00113     \textcolor{keywordflow}{if}(f == NULL)\{
+00114       perror(\textcolor{stringliteral}{"Error opening file"});
+00115       exit(EXIT\_FAILURE);
+00116     \}
+00117     closedir (dir);  
+00118   \}
+00119   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(argv[1] != NULL)\{
+00120     f = fopen(argv[1],\textcolor{stringliteral}{"r"});
+00121     \textcolor{keywordflow}{if}(f == NULL)\{
+00122       perror(\textcolor{stringliteral}{"Error opening file"});
+00123       exit(EXIT\_FAILURE);
+00124     \}
+00125   \}
+00126 
+00127   \textcolor{keywordtype}{int} *hex = (\textcolor{keywordtype}{int} *) malloc(CHARS * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));
+00128   \textcolor{keywordflow}{if}(hex == NULL)\{
+00129     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
+00130     exit(EXIT\_FAILURE);
+00131   \}
+00132   \textcolor{comment}{/*Reading the data from the file*/}
+00133   numbersInText = getHex(f, hex);
+00134   fillSongData(&data, hex, numbersInText);
+00135   notes = countNotes(hex, numbersInText);
+00136   note *noteAr = (note*) malloc(notes * \textcolor{keyword}{sizeof}(note));
+00137   \textcolor{keywordflow}{if}(noteAr == NULL)\{
+00138     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
+00139     exit(EXIT\_FAILURE);
+00140   \}
+00141   eventPlacement placement[numbersInText];
+00142   \textcolor{keywordtype}{int} ticks[numbersInText];
+00143   findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
+00144   insertMoods(moodArray, moods);
 00145   \textcolor{keywordflow}{for}(i = 0; i < notes; i++)
 00146     printNote(noteAr[i]);
 00147   findMode(noteAr, notes, &data);
-00148   printSongData(data);
-00149   moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
-00150   printf(\textcolor{stringliteral}{"%d\(\backslash\)n"}, moodOfMelodi);
-00151 
+00148   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
+00149   printSongData(data);
+00150   moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
+00151   printf(\textcolor{stringliteral}{"%d\(\backslash\)n"}, moodOfMelodi);
 00152 
-00153   \textcolor{comment}{/*Clean up and close*/}
-00154   fclose(f);
-00155   free(hex);
-00156   free(noteAr);
-00157 
-00158   \textcolor{keywordflow}{return} 0;
-00159 \}
+00153 
+00154   \textcolor{comment}{/*Clean up and close*/}
+00155   fclose(f);
+00156   free(hex);
+00157   free(noteAr);
+00158 
+00159   \textcolor{keywordflow}{return} 0;
+00160 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!print\+Note@{print\+Note}}
 \index{print\+Note@{print\+Note}!main.\+c@{main.\+c}}
@@ -896,31 +947,31 @@ A function to check if a given scale in given keytone corresponds with the tones
 )}\label{main_8c_aa9c735ae880cee4e1272bcf387462c9a}
 A function to print the note 
 \begin{DoxyParams}{Parameters}
-{\em } & note]\+: note\+: the note structure to be printed \\
+{\em note} & the note structure to be printed \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00341                          \{
-00342   printf(\textcolor{stringliteral}{"Tone: "});
-00343 
-00344   \textcolor{keywordflow}{switch} (note.tone)\{
-00345     \textcolor{keywordflow}{case} C     : printf(\textcolor{stringliteral}{"C"}) ; \textcolor{keywordflow}{break};
-00346     \textcolor{keywordflow}{case} Csharp: printf(\textcolor{stringliteral}{"C#"}); \textcolor{keywordflow}{break};
-00347     \textcolor{keywordflow}{case} D     : printf(\textcolor{stringliteral}{"D"}) ; \textcolor{keywordflow}{break};
-00348     \textcolor{keywordflow}{case} Dsharp: printf(\textcolor{stringliteral}{"D#"}); \textcolor{keywordflow}{break};
-00349     \textcolor{keywordflow}{case} E     : printf(\textcolor{stringliteral}{"E"}) ; \textcolor{keywordflow}{break};
-00350     \textcolor{keywordflow}{case} F     : printf(\textcolor{stringliteral}{"F"}) ; \textcolor{keywordflow}{break};
-00351     \textcolor{keywordflow}{case} Fsharp: printf(\textcolor{stringliteral}{"F#"}); \textcolor{keywordflow}{break};
-00352     \textcolor{keywordflow}{case} G     : printf(\textcolor{stringliteral}{"G"}) ; \textcolor{keywordflow}{break};
-00353     \textcolor{keywordflow}{case} Gsharp: printf(\textcolor{stringliteral}{"G#"}); \textcolor{keywordflow}{break};
-00354     \textcolor{keywordflow}{case} A     : printf(\textcolor{stringliteral}{"A"}) ; \textcolor{keywordflow}{break};
-00355     \textcolor{keywordflow}{case} Asharp: printf(\textcolor{stringliteral}{"A#"}); \textcolor{keywordflow}{break};
-00356     \textcolor{keywordflow}{case} B     : printf(\textcolor{stringliteral}{"B"}) ; \textcolor{keywordflow}{break};
-00357     \textcolor{keywordflow}{default}    : printf(\textcolor{stringliteral}{"Undefined note"}); \textcolor{keywordflow}{break};
-00358   \}
-00359   printf(\textcolor{stringliteral}{", octave: %d\(\backslash\)n"}, note.octave);
-00360 \}
+00339                          \{
+00340   printf(\textcolor{stringliteral}{"Tone: "});
+00341 
+00342   \textcolor{keywordflow}{switch} (note.tone)\{
+00343     \textcolor{keywordflow}{case} C     : printf(\textcolor{stringliteral}{"C"}) ; \textcolor{keywordflow}{break};
+00344     \textcolor{keywordflow}{case} Csharp: printf(\textcolor{stringliteral}{"C#"}); \textcolor{keywordflow}{break};
+00345     \textcolor{keywordflow}{case} D     : printf(\textcolor{stringliteral}{"D"}) ; \textcolor{keywordflow}{break};
+00346     \textcolor{keywordflow}{case} Dsharp: printf(\textcolor{stringliteral}{"D#"}); \textcolor{keywordflow}{break};
+00347     \textcolor{keywordflow}{case} E     : printf(\textcolor{stringliteral}{"E"}) ; \textcolor{keywordflow}{break};
+00348     \textcolor{keywordflow}{case} F     : printf(\textcolor{stringliteral}{"F"}) ; \textcolor{keywordflow}{break};
+00349     \textcolor{keywordflow}{case} Fsharp: printf(\textcolor{stringliteral}{"F#"}); \textcolor{keywordflow}{break};
+00350     \textcolor{keywordflow}{case} G     : printf(\textcolor{stringliteral}{"G"}) ; \textcolor{keywordflow}{break};
+00351     \textcolor{keywordflow}{case} Gsharp: printf(\textcolor{stringliteral}{"G#"}); \textcolor{keywordflow}{break};
+00352     \textcolor{keywordflow}{case} A     : printf(\textcolor{stringliteral}{"A"}) ; \textcolor{keywordflow}{break};
+00353     \textcolor{keywordflow}{case} Asharp: printf(\textcolor{stringliteral}{"A#"}); \textcolor{keywordflow}{break};
+00354     \textcolor{keywordflow}{case} B     : printf(\textcolor{stringliteral}{"B"}) ; \textcolor{keywordflow}{break};
+00355     \textcolor{keywordflow}{default}    : printf(\textcolor{stringliteral}{"Undefined note"}); \textcolor{keywordflow}{break};
+00356   \}
+00357   printf(\textcolor{stringliteral}{", octave: %d\(\backslash\)n"}, note.octave);
+00358 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!print\+Song\+Data@{print\+Song\+Data}}
 \index{print\+Song\+Data@{print\+Song\+Data}!main.\+c@{main.\+c}}
@@ -931,21 +982,21 @@ A function to print the note
 )}\label{main_8c_a96686ff783072b26aa8666d0281d053c}
 A function to print out the overall data of the song, tempo and mode 
 \begin{DoxyParams}{Parameters}
-{\em } & data]\+: data\+: the data to be printed \\
+{\em data} & the data to be printed \\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyCode}
-00365                              \{
-00366   printf(\textcolor{stringliteral}{"Tempo: %d\(\backslash\)nMode: "}, data.tempo);
-00367   \textcolor{keywordflow}{switch}(data.mode)\{
-00368     \textcolor{keywordflow}{case} minor: printf(\textcolor{stringliteral}{"minor"}); \textcolor{keywordflow}{break};
-00369     \textcolor{keywordflow}{case} major: printf(\textcolor{stringliteral}{"major"}); \textcolor{keywordflow}{break};
-00370     \textcolor{keywordflow}{default}: printf(\textcolor{stringliteral}{"unknown mode"}); \textcolor{keywordflow}{break};
-00371   \}
-00372   printf(\textcolor{stringliteral}{"\(\backslash\)nKeytone: %d"}, data.key);
-00373   putchar(\textcolor{charliteral}{'\(\backslash\)n'});
-00374 \}
+00363                              \{
+00364   printf(\textcolor{stringliteral}{"Tempo: %d\(\backslash\)nMode: "}, data.tempo);
+00365   \textcolor{keywordflow}{switch}(data.mode)\{
+00366     \textcolor{keywordflow}{case} minor: printf(\textcolor{stringliteral}{"minor"}); \textcolor{keywordflow}{break};
+00367     \textcolor{keywordflow}{case} major: printf(\textcolor{stringliteral}{"major"}); \textcolor{keywordflow}{break};
+00368     \textcolor{keywordflow}{default}: printf(\textcolor{stringliteral}{"unknown mode"}); \textcolor{keywordflow}{break};
+00369   \}
+00370   printf(\textcolor{stringliteral}{"\(\backslash\)nKeytone: %d"}, data.key);
+00371   putchar(\textcolor{charliteral}{'\(\backslash\)n'});
+00372 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!setting\+Points@{setting\+Points}}
 \index{setting\+Points@{setting\+Points}!main.\+c@{main.\+c}}
@@ -963,73 +1014,73 @@ A function to print out the overall data of the song, tempo and mode
 )}\label{main_8c_ac5cf65542ee2eded456a070d2159af90}
 
 \begin{DoxyCode}
-00376                                                                                                            
+00374                                                                                                            
               \{
-00377   \textcolor{keywordtype}{int} deltaTime = 2, combined = 0, averageNote = 0;
-00378   \textcolor{keywordflow}{switch}(data.mode)\{
-00379     \textcolor{keywordflow}{case} minor: *mode = -5; \textcolor{keywordflow}{break};
-00380     \textcolor{keywordflow}{case} major: *mode = 5; \textcolor{keywordflow}{break};
-00381     \textcolor{keywordflow}{default}: *mode = 0; \textcolor{keywordflow}{break};
-00382   \}
-00383   \textcolor{keywordflow}{if}(data.tempo < 60)
-00384     *tempo = -5;
-00385   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 60 && data.tempo < 70)
-00386     *tempo = -4;
-00387   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 70 && data.tempo < 80)
-00388     *tempo = -3;  
-00389   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 80 && data.tempo < 90)
-00390     *tempo = -2;
-00391   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 90 && data.tempo < 100)
-00392     *tempo = -1;
-00393   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 100 && data.tempo < 120)
-00394     *tempo =  0;  
-00395   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 120 && data.tempo < 130)
-00396     *tempo =  1;
-00397   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 130 && data.tempo < 140)
-00398     *tempo =  2;
-00399   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 140 && data.tempo < 150)
-00400     *tempo =  3;
-00401   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 150 && data.tempo < 160)
-00402     *tempo =  4;
-00403   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >=  160)
-00404     *tempo =  5;
-00405 
-00406   \textcolor{keywordflow}{switch}(deltaTime)\{
-00407     \textcolor{keywordflow}{case} 1: *length = -5; \textcolor{keywordflow}{break};
-00408     \textcolor{keywordflow}{case} 2: *length = -4; \textcolor{keywordflow}{break};
-00409     \textcolor{keywordflow}{case} 4: *length = -2; \textcolor{keywordflow}{break};
-00410     \textcolor{keywordflow}{case} 8: *length =  0; \textcolor{keywordflow}{break};
-00411     \textcolor{keywordflow}{case} 16: *length = 3; \textcolor{keywordflow}{break};
-00412     \textcolor{keywordflow}{case} 32: *length = 5; \textcolor{keywordflow}{break};
-00413   \}
-00414   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < notes; i++)\{
-00415     combined += noteAr[i].average;
-00416   \}
-00417   averageNote = combined/notes;
-00418 
-00419   \textcolor{keywordflow}{if}(averageNote <= 16)
-00420     *octave = -5;
-00421   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 17 && averageNote <= 23)
-00422     *octave = -4;
-00423   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 24 && averageNote <= 30)
-00424     *octave = -3;
-00425   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 31 && averageNote <= 37)
-00426     *octave = -2;
-00427   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 38 && averageNote <= 44)
-00428     *octave = -1;
-00429   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 45 && averageNote <= 51)
-00430     *octave = 0;
-00431   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 52 && averageNote <= 58)
-00432     *octave = 1;
-00433   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 59 && averageNote <= 65)
-00434     *octave = 2;
-00435   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 66 && averageNote <= 72)
-00436     *octave = 3;
-00437   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 73 && averageNote <= 79)
-00438     *octave = 4;
-00439   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >=80)
-00440     *octave = 5;
-00441 \}
+00375   \textcolor{keywordtype}{int} deltaTime = 2, combined = 0, averageNote = 0;
+00376   \textcolor{keywordflow}{switch}(data.mode)\{
+00377     \textcolor{keywordflow}{case} minor: *mode = -5; \textcolor{keywordflow}{break};
+00378     \textcolor{keywordflow}{case} major: *mode = 5; \textcolor{keywordflow}{break};
+00379     \textcolor{keywordflow}{default}: *mode = 0; \textcolor{keywordflow}{break};
+00380   \}
+00381   \textcolor{keywordflow}{if}(data.tempo < 60)
+00382     *tempo = -5;
+00383   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 60 && data.tempo < 70)
+00384     *tempo = -4;
+00385   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 70 && data.tempo < 80)
+00386     *tempo = -3;  
+00387   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 80 && data.tempo < 90)
+00388     *tempo = -2;
+00389   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 90 && data.tempo < 100)
+00390     *tempo = -1;
+00391   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 100 && data.tempo < 120)
+00392     *tempo =  0;  
+00393   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 120 && data.tempo < 130)
+00394     *tempo =  1;
+00395   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 130 && data.tempo < 140)
+00396     *tempo =  2;
+00397   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 140 && data.tempo < 150)
+00398     *tempo =  3;
+00399   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 150 && data.tempo < 160)
+00400     *tempo =  4;
+00401   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >=  160)
+00402     *tempo =  5;
+00403 
+00404   \textcolor{keywordflow}{switch}(deltaTime)\{
+00405     \textcolor{keywordflow}{case} 1: *length = -5; \textcolor{keywordflow}{break};
+00406     \textcolor{keywordflow}{case} 2: *length = -4; \textcolor{keywordflow}{break};
+00407     \textcolor{keywordflow}{case} 4: *length = -2; \textcolor{keywordflow}{break};
+00408     \textcolor{keywordflow}{case} 8: *length =  0; \textcolor{keywordflow}{break};
+00409     \textcolor{keywordflow}{case} 16: *length = 3; \textcolor{keywordflow}{break};
+00410     \textcolor{keywordflow}{case} 32: *length = 5; \textcolor{keywordflow}{break};
+00411   \}
+00412   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < notes; i++)\{
+00413     combined += noteAr[i].average;
+00414   \}
+00415   averageNote = combined/notes;
+00416 
+00417   \textcolor{keywordflow}{if}(averageNote <= 16)
+00418     *octave = -5;
+00419   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 17 && averageNote <= 23)
+00420     *octave = -4;
+00421   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 24 && averageNote <= 30)
+00422     *octave = -3;
+00423   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 31 && averageNote <= 37)
+00424     *octave = -2;
+00425   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 38 && averageNote <= 44)
+00426     *octave = -1;
+00427   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 45 && averageNote <= 51)
+00428     *octave = 0;
+00429   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 52 && averageNote <= 58)
+00430     *octave = 1;
+00431   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 59 && averageNote <= 65)
+00432     *octave = 2;
+00433   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 66 && averageNote <= 72)
+00434     *octave = 3;
+00435   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 73 && averageNote <= 79)
+00436     *octave = 4;
+00437   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >=80)
+00438     *octave = 5;
+00439 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!sort\+Result@{sort\+Result}}
 \index{sort\+Result@{sort\+Result}!main.\+c@{main.\+c}}
@@ -1041,11 +1092,11 @@ A function to print out the overall data of the song, tempo and mode
 )}\label{main_8c_ac6a3184d104e99d57824eecaabab8ed5}
 
 \begin{DoxyCode}
-00477                                               \{
-00478   \textcolor{keywordtype}{int} a = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pa;
-00479   \textcolor{keywordtype}{int} b = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pb;
-00480   \textcolor{keywordflow}{return} (b-a);
-00481 \}
+00475                                               \{
+00476   \textcolor{keywordtype}{int} a = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pa;
+00477   \textcolor{keywordtype}{int} b = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pb;
+00478   \textcolor{keywordflow}{return} (b-a);
+00479 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!sort\+Toner@{sort\+Toner}}
 \index{sort\+Toner@{sort\+Toner}!main.\+c@{main.\+c}}
@@ -1065,11 +1116,11 @@ A function to print out the overall data of the song, tempo and mode
 )}\label{main_8c_a33b74ebb6acaeb30576c9e66aebe2fb6}
 A function to sort integers in ascending order. 
 \begin{DoxyCode}
-00509                                            \{
-00510   \textcolor{keywordtype}{int} *i1 = (\textcolor{keywordtype}{int}*) a, *i2 = (\textcolor{keywordtype}{int}*) b;
-00511 
-00512   \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) *i1 - *i2;
-00513 \}
+00507                                            \{
+00508   \textcolor{keywordtype}{int} *i1 = (\textcolor{keywordtype}{int}*) a, *i2 = (\textcolor{keywordtype}{int}*) b;
+00509 
+00510   \textcolor{keywordflow}{return} *i1 - *i2;
+00511 \}
 \end{DoxyCode}
 \index{main.\+c@{main.\+c}!weighting\+Matrix@{weighting\+Matrix}}
 \index{weighting\+Matrix@{weighting\+Matrix}!main.\+c@{main.\+c}}
@@ -1084,27 +1135,27 @@ A function to sort integers in ascending order.
 )}\label{main_8c_ade6b8acc6a7f498b910c155b43d442b1}
 
 \begin{DoxyCode}
-00454                                                                                               \{
-00455   \textcolor{keywordtype}{int} result[AMOUNT_OF_MOODS];
-00456   
-00457   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
-00458     result[i] = 0;
-00459   \}
-00460   
-00461   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
-00462     result[i] += (moodArray[i].mode * mode);
-00463     result[i] += (moodArray[i].tempo * tempo);
-00464     result[i] += (moodArray[i].toneLength * toneLength);
-00465     result[i] += (moodArray[i].pitch * pitch);
-00466   \}
-00467   
-00468   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
-00469     printf(\textcolor{stringliteral}{"%s: %d\(\backslash\)n"}, moodArray[i].name, result[i]);
-00470   \}
-00471   
-00472   qsort(result, AMOUNT\_OF\_MOODS, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}), sortResult);
-00473   \textcolor{keywordflow}{return} result[0];
-00474 \}
+00452                                                                                               \{
+00453   \textcolor{keywordtype}{int} result[AMOUNT_OF_MOODS];
+00454   
+00455   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00456     result[i] = 0;
+00457   \}
+00458   
+00459   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00460     result[i] += (moodArray[i].mode * mode);
+00461     result[i] += (moodArray[i].tempo * tempo);
+00462     result[i] += (moodArray[i].toneLength * toneLength);
+00463     result[i] += (moodArray[i].pitch * pitch);
+00464   \}
+00465   
+00466   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00467     printf(\textcolor{stringliteral}{"%s: %d\(\backslash\)n"}, moodArray[i].name, result[i]);
+00468   \}
+00469   
+00470   qsort(result, AMOUNT\_OF\_MOODS, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}), sortResult);
+00471   \textcolor{keywordflow}{return} result[0];
+00472 \}
 \end{DoxyCode}
 
 

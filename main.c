@@ -156,7 +156,8 @@ int main(int argc, const char *argv[]){
   return 0;
 }
 /**A function to read music directory and prompt user to choose file
-  *@param[ char*] MIDIfile: a pointer to a string containing the name of the chosen input file*/
+  *@param MIDIfile a pointer to a string containing the name of the chosen input file
+  *@param dir a pointer to a directory*/
 void checkDirectory(char *MIDIfile, DIR *dir){
   struct dirent *musicDir;
   if ((dir = opendir ("./Music")) != NULL) {
@@ -175,8 +176,8 @@ void checkDirectory(char *MIDIfile, DIR *dir){
 }
 
 /**A function, that retrieves the hexadecimals from the files and also returns the number of files
-  *@param[ FILE*]: f: a pointer to the file the program is reading from
-  *@param[ int]: hexAr[]: an array of integers, that the information is stored in
+  *@param *f a pointer to the file the program is reading from
+  *@param hexAr[] an array of integers, that the information is stored in
   */
 int getHex(FILE *f, int hexAr[]){
   int i = 0, c;
@@ -189,8 +190,8 @@ int getHex(FILE *f, int hexAr[]){
 }
 
 /**A function to count the number of notes in the entire song
-  *@param[ int]: hex[]: an array with the stored information from the file
-  *@param[ int]: amount: an integer holding the total number of characters in the array
+  *@param hex[] an array with the stored information from the file
+  *@param amount an integer holding the total number of characters in the array
  */
 int countNotes(int hex[], int amount){
   int i = 0, res = 0;
@@ -204,9 +205,9 @@ int countNotes(int hex[], int amount){
 
 /**! \fn int fillSongData(data *data, int hex[], int numbersInText) 
   *A function, that fills out the song data
-  *@param[ data*]: data: a pointer to a structure containing the tempo and mode of the song
-  *@param[ int]: hex[]:the array of integers read from the file
-  *@param[ int]: numbersInText: the total amount of integers in the array
+  *@param *data a pointer to a structure containing the tempo and mode of the song
+  *@param hex[] the array of integers read from the file
+  *@param numbersInText the total amount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
   int j;
@@ -321,8 +322,8 @@ void countTicks2(int hex[], int *i, int deltaCounter, int ticks[], int *tickCoun
 }
 
 /**A function to fill out each of the structures of type note
-  *@param[ int]: inputTone: the value of the hexadecimal collected on the "tone"-spot
-  *@param[ note*]: note: a pointer to a note-structure
+  *@param inputTone the value of the hexadecimal collected on the "tone"-spot
+  *@param note* a pointer to a note-structure
 */
 void fillNote(int inputTone, note *note){
   note->tone = inputTone % 12;
@@ -331,7 +332,7 @@ void fillNote(int inputTone, note *note){
 }
 
 /**A function to print the note
-  *@param[ note]: note: the note structure to be printed
+  *@param note the note structure to be printed
   */
 void printNote(note note){
   printf("Tone: ");
@@ -355,7 +356,7 @@ void printNote(note note){
 }
 
 /**A function to print out the overall data of the song, tempo and mode
-  *@param[ data]: data: the data to be printed
+  *@param data the data to be printed
   */
 void printSongData(data data){
   printf("Tempo: %d\nMode: ", data.tempo);
@@ -504,7 +505,7 @@ void deltaTimeToNoteLength (int *ticks, int ppqn, int size, note *noteAr){
 int sortTones(const void *a, const void *b){
   int *i1 = (int*) a, *i2 = (int*) b;
 
-  return (int) *i1 - *i2;
+  return *i1 - *i2;
 }
 
 void checkScale(int scales[], int tone, int key){
@@ -514,8 +515,9 @@ void checkScale(int scales[], int tone, int key){
 }
 
 /**A function to find the mode of the song by first calculating the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
-  *@param[ note[]]: noteAr: An array of all the notes in the entire song
-  *@param[ int]: totalNotes: The number of notes in the song
+  *@param noteAr An array of all the notes in the entire song
+  *@param totalNotes The number of notes in the song
+  *@param data The song data
   */
 void findMode(note noteAr[], int totalNotes, data *data){
   int majors[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, minors[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -586,11 +588,10 @@ void findMode(note noteAr[], int totalNotes, data *data){
 }
 
 /**A function to check if a given scale in given keytone corresponds with the tones in the rest of the song.
-  *@param[ scale]: mode: An enum that describes the given mode
-  *@param[ int]: keytone: The keytone of the processed scale
-  *@param[ int]: otherTones[]: An array of the rest of the tones, which the function compares to the keytone and mode
-  *@param[ int]: size: The number of tones in the otherTones array
-  *@return[ int]: a boolean value, returns 1 if the mode is major, -1 if it's minor and 0, if wasn't possible to decide.
+  *@param keytone The keytone of the processed scale
+  *@param otherTones[] An array of the rest of the tones, which the function compares to the keytone and mode
+  *@param size The number of tones in the otherTones array
+  *@return a boolean value, returns 1 if the mode is major, -1 if it's minor and 0, if wasn't possible to decide.
   */
 int isInScale(int keytone, int otherTones[], int size){
   int toneLeap, isMinor = 1, isMajor = 1;
@@ -617,8 +618,8 @@ int isInScale(int keytone, int otherTones[], int size){
 }
 
 /**A function to check if the given tone leap is in the minor scale.
-  *@param[ int]: toneLeap: An integer describing the processed tone leap
-  *@return[ int]: a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not.
+  *@param toneLeap An integer describing the processed tone leap
+  *@return a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not.
   */
 
 int isInMinor(int toneLeap){
@@ -632,8 +633,8 @@ int isInMinor(int toneLeap){
 }
 
 /**A function to check if the given tone leap is in the major scale.
-  *@param[ int]: toneLeap: An integer describing the processed tone leap
-  *@return[ int]: a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not.
+  *@param toneLeap An integer describing the processed tone leap
+  *@return a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not.
   */
 int isInMajor(int toneLeap){
   int major[] = {0, 2, 4, 5, 7, 9, 11};
