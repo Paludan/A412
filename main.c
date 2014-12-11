@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <dirent.h>
 
 #define CHARS 1000
 #define AMOUNT_OF_MOODS 2
@@ -85,17 +86,46 @@ int sortToner(const void*, const void*);
 void findMode(note*, int, data*);
 
 int main(int argc, const char *argv[]){
+  FILE *f;
+  DIR *dir;
+  struct dirent *musicDir;
+  char MIDIfile[25];
   /*Variables*/
   int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data = {0, major, D};
-  FILE *f = fopen(argv[1],"r");
-  if(f == NULL){
-    perror("Error opening file");
-    exit(EXIT_FAILURE);
+  if (argv[1] == NULL){
+    if ((dir = opendir ("./Music")) != NULL) {
+    printf("Mulige numre\n");
+    /* print all the files and directories within specified directory */
+      while ((musicDir = readdir (dir)) != NULL) {
+        printf ("%s\n", musicDir->d_name);
+      }
+      closedir (dir);
+    } 
+    else {
+    /* Could not open directory */
+      perror ("Failure while opening directory");
+      return EXIT_FAILURE;
+    }
+    printf("Indtast det valgte nummer\n");
+    scanf("%s", MIDIfile);
+    f = fopen(MIDIfile,"r");  
+    if(f == NULL){
+      perror("Error opening file");
+      exit(EXIT_FAILURE);
+    }
   }
+  else if(argv[1] != NULL){
+    f = fopen(argv[1],"r");
+    if(f == NULL){
+      perror("Error opening file");
+      exit(EXIT_FAILURE);
+    }
+  }
+
   int *hex = (int *) malloc(CHARS * sizeof(int));
   if(hex == NULL){
     printf("Memory allokation failed, bye!");
@@ -138,7 +168,6 @@ int main(int argc, const char *argv[]){
   */
 int getHex(FILE *f, int hexAr[]){
   int i = 0, c;
- 
   while( (c = fgetc(f)) != EOF && i < CHARS){
     hexAr[i] = c;
     i++;
