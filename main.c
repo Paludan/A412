@@ -97,11 +97,7 @@ int main(int argc, const char *argv[]){
   FILE *f;
   char MIDIfile[25];
   /*Variables*/
-<<<<<<< HEAD
-  int numbersInText = 0, notes, i = 0, size = 0;
-=======
   int numbersInText = 0, notes, size = 0, moodOfMelodi = 0;
->>>>>>> 0911448b73e18d42384fb39ad11f19e2914e7d39
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   FILE* moods = fopen("moods.txt", "r");
@@ -662,7 +658,6 @@ int FindMoodAmount(FILE *moods){
   return i;
 }
 
-<<<<<<< HEAD
 void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[], int result[]){
   printf("\n\n\n");
   printf(" Mode:");
@@ -794,5 +789,3 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
 
   printf("\n The mood of the melodi is %s\n", moodArray[moodOfMelodi].name);
 }
-=======
->>>>>>> 0911448b73e18d42384fb39ad11f19e2914e7d39
