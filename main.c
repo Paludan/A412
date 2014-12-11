@@ -63,6 +63,7 @@ typedef struct{
 } eventPlacement;
 
 /*Prototypes*/
+int checkDirectory(char*);
 void findNoteLength(double x, int *, int *);
 void printNote(note);
 int getHex(FILE*, int[]);
@@ -90,8 +91,6 @@ void findMode(note*, int, data*);
 
 int main(int argc, const char *argv[]){
   FILE *f;
-  DIR *dir;
-  struct dirent *musicDir;
   char MIDIfile[25];
   /*Variables*/
   int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
@@ -100,21 +99,7 @@ int main(int argc, const char *argv[]){
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data = {0, major, D};
   if (argv[1] == NULL){
-    if ((dir = opendir ("./Music")) != NULL) {
-    printf("Mulige numre\n");
-    /* print all the files and directories within specified directory */
-      while ((musicDir = readdir (dir)) != NULL) {
-        printf ("%s\n", musicDir->d_name);
-      }
-      closedir (dir);
-    } 
-    else {
-    /* Could not open directory */
-      perror ("Failure while opening directory");
-      return EXIT_FAILURE;
-    }
-    printf("Indtast det valgte nummer\n");
-    scanf("%s", MIDIfile);
+    checkDirectory(MIDIfile);  
     f = fopen(MIDIfile,"r");  
     if(f == NULL){
       perror("Error opening file");
@@ -134,7 +119,6 @@ int main(int argc, const char *argv[]){
     printf("Memory allokation failed, bye!");
     exit(EXIT_FAILURE);
   }
-  
   /*Reading the data from the file*/
   numbersInText = getHex(f, hex);
   fillSongData(&data, hex, numbersInText);
@@ -164,6 +148,27 @@ int main(int argc, const char *argv[]){
   free(noteAr);
 
   return 0;
+}
+/**A function to read music directory and prompt user to choose file
+  *@param[char*] MIDIfile: a pointer to a string containing the name of the chosen input file*/
+int checkDirectory(char *MIDIfile){
+  DIR *dir;
+  struct dirent *musicDir;
+  if ((dir = opendir ("./Music")) != NULL) {
+    printf("Mulige numre\n");
+    /* print all the files and directories within specified directory */
+      while ((musicDir = readdir (dir)) != NULL) {
+        printf ("%s\n", musicDir->d_name);
+      }
+    closedir (dir);
+  } 
+  else {
+  /* Could not open directory */
+    perror ("Failure while opening directory");
+    return EXIT_FAILURE;
+  }
+  printf("Indtast det valgte nummer\n");
+  scanf("%s", MIDIfile);
 }
 
 /**A function, that retrieves the hexadecimals from the files and also returns the number of files
