@@ -511,17 +511,54 @@ int sortTones(const void *a, const void *b){
   return (int) *i1 - *i2;
 }
 
+void checkScale(int scales[], int tone, int key){
+  if(tone < key)
+    tone += 12;
+  scales[key] = isInMajor(tone - key);
+}
+
 /**A function to find the mode of the song by first calculating the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
   *@param[note[]] noteAr: An array of all the notes in the entire song
   *@param[int] totalNotes: The number of notes in the song
   */
 void findMode(note noteAr[], int totalNotes, data *data){
-  int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0;
+  int majors[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, minors[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0, tempNote = 0;
+
+  for(x = 0; x < totalNotes; x++){
+    tempNote = noteAr[x].tone;
+ 
+    for(y = C; y <= B; y++){
+      if(majors[y])
+        checkScale(majors, tempNote, y);
+    }
+  }
+
+  /*TEST Keynote giver det forkerte svar, resten virker*/
+  for(y = 0; y < 12; y++){
+    z = y;
+    if(majors[z]){
+      if((z - 3) < 0)
+        z += 12;
+    minors[z-3] = 1;
+    }
+  }
+  for(int p = 0; p < 12; p++){
+    printf("Dur: %d\n", majors[p]);
+  }
+  for(int p = 0; p < 12; p++)
+    printf("Mol: %d\n", minors[p]);
+  z = 0;
+  x = 0;
 
   /*Goes through all notes of the song and puts them into an array*/
   while(x < totalNotes){
-    for(y = 0; y < sizeBar; y++, x++){
-      bar[y] = noteAr[x].tone;
+    z = x;
+    for(y = 0; y < sizeBar; y++, z++){
+      if(z < totalNotes)
+        bar[y] = noteAr[z].tone;
+      else
+        sizeBar = y;
     }
 
     if(y == sizeBar){
@@ -530,7 +567,7 @@ void findMode(note noteAr[], int totalNotes, data *data){
       qsort(bar, sizeBar, sizeof(tone), sortTones);
 
       /*Find the lowest possible tonespan over the entire array of notes*/
-      for(z = 0; z < 4; z++){
+      for(z = 0; z < sizeBar; z++){
 	if((z + 1) > 3)
           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
         else if((z + 2) > 3)
@@ -539,21 +576,22 @@ void findMode(note noteAr[], int totalNotes, data *data){
           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
 	else
           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
-
-	if(tempSpan < span){
-          span = tempSpan; 
+        
+	if(tempSpan < span && (majors[bar[z]] || minors[bar[z]])){
+          span = tempSpan;
           keynote = bar[z];
         }
       }
       mode += isInScale(keynote, bar, sizeBar);
       printf("Moden er nu: %d\n", mode);
+      x++;
     }
-  data->key = keynote;
+  }
+  
   if(mode > 0)
     data->mode = major;
   else if(mode < 0)
-    data->mode = minor;  
-  }
+    data->mode = minor;
 }
 
 /**A function to check if a given scale in given keytone corresponds with the tones in the rest of the song.
@@ -616,6 +654,7 @@ int isInMajor(int toneLeap){
   return 0;
 }
 
+
 int FindMoodAmount(FILE *moods){
   int i = 1;
   while(fgetc(moods) != EOF){
@@ -625,3 +664,4 @@ int FindMoodAmount(FILE *moods){
   rewind(moods);
   return i;
 }
+
