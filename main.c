@@ -18,7 +18,7 @@
 #include <string.h>
 
 #define CHARS 1000
-#define AMOUNT_OF_MOODS 2
+int AMOUNT_OF_MOODS;
 
 /*Enums and structs*/
 typedef enum mode {major, minor} mode;
@@ -44,6 +44,7 @@ typedef struct{
 } points;
 
 typedef struct{
+  char name[25];
   int mode;
   int tempo;
   int toneLength;
@@ -69,7 +70,7 @@ int countNotes(int[], int);
 void fillNote(int, note*);
 void printSongData(data);
 void settingPoints(int*, int*, int*, int*, data, int, note []);
-void insertMoods(moodWeighting []);
+void insertMoods(moodWeighting [], FILE*);
 int weightingMatrix(moodWeighting [], int, int, int, int);
 void findEvents(int, int [], eventPlacement [], note []);
 void insertPlacement1(int [], int *, int, note [], int *);
@@ -77,12 +78,19 @@ void insertPlacement2(int [], int *, int);
 int checkNextEvent(int [], int);
 int sortResult(const void *, const void *);
 int deltaTimeToNoteLength (int, int);
+int FindMoodAmount(FILE*);
 
 int main(int argc, const char *argv[]){
   /*Variables*/
   int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
+  FILE* moods = fopen("moods.txt", "r");
+  if(moods == NULL){
+    perror("Error: moods missing ");
+    exit(EXIT_FAILURE);
+  }
+  AMOUNT_OF_MOODS = FindMoodAmount(moods);
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data;
   FILE *f = fopen(argv[1],"r");
@@ -92,7 +100,7 @@ int main(int argc, const char *argv[]){
   }
   int *hex = (int *) malloc(CHARS * sizeof(int));
   if(hex == NULL){
-    printf("Memory allokation failed, bye!");
+    printf("Memory allocation failed, bye!");
     exit(EXIT_FAILURE);
   }
   
@@ -107,7 +115,7 @@ int main(int argc, const char *argv[]){
   }
   eventPlacement placement[numbersInText];
   findEvents(numbersInText, hex, placement, noteAr);
-  insertMoods(moodArray);
+  insertMoods(moodArray, moods);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr);
   printf("%d, %d, %d, %d\n", mode, tempo, toneLength, pitch);
   for(i = 0; i < notes; i++)
@@ -349,31 +357,34 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
 
 
 /* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
-void insertMoods(moodWeighting moodArray[]){
-  moodArray[glad].mode           = 3;
-  moodArray[glad].tempo          = 4;
-  moodArray[glad].toneLength     = 2;
-  moodArray[glad].pitch          = 1;
-
-  moodArray[sad].mode            = -4;
-  moodArray[sad].tempo           = -5;
-  moodArray[sad].toneLength      = -3;
-  moodArray[sad].pitch           = 0;
+void insertMoods(moodWeighting moodArray[], FILE* moods){
+  printf("hej er her");
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
+    fscanf(moods, "%s %d %d %d %d", moodArray[i].name , &moodArray[i].mode, 
+                                    &moodArray[i].tempo, &moodArray[i].toneLength,
+                                    &moodArray[i].pitch);
+  }
+  printf("jeg er også her");
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
 int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch){
-  int result[AMOUNT_OF_MOODS] = {0};
+  int result[AMOUNT_OF_MOODS];
+  
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
+    result[i] = 0;
+  }
+  
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     result[i] += (moodArray[i].mode * mode);
     result[i] += (moodArray[i].tempo * tempo);
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
   }
-  if (result[0] > result[1])
-    printf("Happy\n");
-  else if (result[1] > result[0])
-    printf("Sad\n");
+  
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
+    printf("%s: %d\n", moodArray[i].name, result[i]);
+  }
   
   qsort(result, AMOUNT_OF_MOODS, sizeof(int), sortResult);
   return result[0];
@@ -403,4 +414,14 @@ int deltaTimeToNoteLength (int ticks, int ppqn){
   else
     noteLength = 32;
   return noteLength;
+}
+
+int FindMoodAmount(FILE *moods){
+  int i = 1;
+  while(fgetc(moods) != EOF){
+    if(fgetc(moods) == '\n')
+      i++;
+  }
+  rewind(moods);
+  return i;
 }
