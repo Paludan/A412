@@ -96,7 +96,7 @@ int main(int argc, const char *argv[]){
   FILE *f;
   char MIDIfile[25];
   /*Variables*/
-  int numbersInText = 0, notes, i = 0, size = 0, moodOfMelodi = 0;
+  int numbersInText = 0, notes, size = 0, moodOfMelodi = 0;
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   FILE* moods = fopen("moods.txt", "r");
@@ -141,8 +141,6 @@ int main(int argc, const char *argv[]){
   int ticks[numbersInText];
   findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
   insertMoods(moodArray, moods);
-  for(i = 0; i < notes; i++)
-    printNote(noteAr[i]);
   findMode(noteAr, notes, &data);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
   printSongData(data);
@@ -541,11 +539,7 @@ void findMode(note noteAr[], int totalNotes, data *data){
     minors[z-3] = 1;
     }
   }
-  for(int p = 0; p < 12; p++){
-    printf("Dur: %d\n", majors[p]);
-  }
-  for(int p = 0; p < 12; p++)
-    printf("Mol: %d\n", minors[p]);
+
   z = 0;
   x = 0;
 
@@ -581,7 +575,6 @@ void findMode(note noteAr[], int totalNotes, data *data){
         }
       }
       mode += isInScale(keynote, bar, sizeBar);
-      printf("Moden er nu: %d\n", mode);
       x++;
     }
   }
