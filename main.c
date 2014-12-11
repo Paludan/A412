@@ -74,7 +74,7 @@ void fillNote(int, note*);
 void printSongData(data);
 void settingPoints(int*, int*, int*, int*, data, int, note [], int *);
 void insertMoods(moodWeighting [], FILE*);
-int weightingMatrix(moodWeighting [], int, int, int, int);
+void weightingMatrix(moodWeighting [], int, int, int, int, int *);
 void findEvents(int, int [], eventPlacement [], note [], int [], int *);
 void insertPlacement1(int [], int *, int, note [], int *);
 void insertPlacement2(int [], int *, int);
@@ -90,12 +90,13 @@ int isInMajor(int);
 int sortToner(const void*, const void*);
 void findMode(note*, int, data*);
 int FindMoodAmount(FILE*);
+void printResults(int, int, int, int, moodWeighting [], int []);
 
 int main(int argc, const char *argv[]){
   FILE *f;
   char MIDIfile[25];
   /*Variables*/
-  int numbersInText = 0, notes, i = 0, size = 0, moodOfMelodi = 0;
+  int numbersInText = 0, notes, i = 0, size = 0;
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   FILE* moods = fopen("moods.txt", "r");
@@ -139,6 +140,7 @@ int main(int argc, const char *argv[]){
   eventPlacement placement[numbersInText];
   int ticks[numbersInText];
   findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
+  deltaTimeToNoteLength(ticks, 960, size, noteAr);
   insertMoods(moodArray, moods);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
   printf("%d, %d, %d, %d\n", mode, tempo, toneLength, pitch);
@@ -146,14 +148,17 @@ int main(int argc, const char *argv[]){
     printNote(noteAr[i]);
   findMode(noteAr, notes, &data);
   printSongData(data);
-  moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
-  printf("%d\n", moodOfMelodi);
-
+  int result[AMOUNT_OF_MOODS];
+  weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result);
+  printf("%d\n", result[0]);
 
   /*Clean up and close*/
   fclose(f);
   free(hex);
   free(noteAr);
+
+  /* Print results */
+  printResults(mode, tempo, toneLength, pitch, moodArray, result);
 
   return 0;
 }
@@ -308,6 +313,7 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
       }     
     }
   }
+  *size = tickCounter;
 }
 
 void countTicks1(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter){
@@ -442,19 +448,15 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
 
 /* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
 void insertMoods(moodWeighting moodArray[], FILE* moods){
-  printf("hej er her");
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     fscanf(moods, "%s %d %d %d %d", moodArray[i].name , &moodArray[i].mode, 
                                     &moodArray[i].tempo, &moodArray[i].toneLength,
                                     &moodArray[i].pitch);
   }
-  printf("jeg er også her");
 }
 
 /* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
-int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch){
-  int result[AMOUNT_OF_MOODS];
-  
+void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch, int *result){
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     result[i] = 0;
   }
@@ -469,9 +471,6 @@ int weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLeng
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     printf("%s: %d\n", moodArray[i].name, result[i]);
   }
-  
-  qsort(result, AMOUNT_OF_MOODS, sizeof(int), sortResult);
-  return result[0];
 }
 
 /* Sort rows highest first */
@@ -626,4 +625,136 @@ int FindMoodAmount(FILE *moods){
   }
   rewind(moods);
   return i;
+}
+
+void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[], int result[]){
+  printf("\n\n\n");
+  printf(" Mode:");
+  if(mode < 0)
+    printf("        %d\n", mode);
+  else
+    printf("         %d\n", mode);
+  printf(" Tempo:");
+  if(tempo < 0)
+    printf("       %d\n", tempo);
+  else
+    printf("        %d\n", tempo);
+  printf(" Tone length:");
+  if(toneLength < 0)
+    printf(" %d\n", toneLength);
+  else
+    printf("  %d\n", toneLength);
+  printf(" Pitch:");
+  if(pitch < 0)
+    printf("       %d\n", pitch);
+  else
+    printf("        %d\n", pitch);
+  printf("\n\n\n                                       WEIGHTINGS            \n");
+  printf("                           Mode | Tempo | Tone length | Pitch\n");
+  
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
+    printf(" %s", moodArray[i].name);
+    for(int j = strlen(moodArray[i].name); j < 26; j++)
+      printf(" ");
+    if(moodArray[i].mode > -1)
+      printf(" ");
+    printf(" %d", moodArray[i].mode);
+    for(int j = 0; j < 2; j++)
+      printf(" ");
+    printf("| ");
+    if(moodArray[i].tempo > -1)
+      printf(" ");
+    printf(" %d", moodArray[i].tempo);
+    for(int j = 0; j < 3; j++)
+      printf(" ");
+    printf("|    ");
+    if(moodArray[i].toneLength > -1)
+      printf(" ");
+    printf(" %d", moodArray[i].toneLength);
+    for(int j = 0; j < 6; j++)
+      printf(" ");
+    printf("|  ");
+    if(moodArray[i].pitch > -1)
+      printf(" ");
+    printf(" %d\n", moodArray[i].pitch);
+  }
+  printf("\n\n\n");
+
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
+    if(mode < 0)
+      printf(" %d * ", mode);
+    else
+      printf(" %d * ", mode);
+    if(moodArray[i].mode < 0)
+      printf("%d + ", moodArray[i].mode);
+    else
+      printf(" %d + ", moodArray[i].mode);
+    if(tempo < 0)
+      printf("%d * ", tempo);
+    else
+      printf(" %d * ", tempo);
+    if(moodArray[i].tempo < 0)
+      printf("%d + ", moodArray[i].tempo);
+    else
+      printf(" %d + ", moodArray[i].tempo);
+    if(toneLength < 0)
+      printf("%d * ", toneLength);
+    else
+      printf(" %d * ", toneLength);
+    if(moodArray[i].toneLength < 0)
+      printf("%d + ", moodArray[i].toneLength);
+    else
+      printf(" %d + ", moodArray[i].toneLength);
+    if(pitch < 0)
+      printf("%d * ", pitch);
+    else
+      printf(" %d * ", pitch);
+    if(moodArray[i].pitch < 0)
+      printf("%d = ", moodArray[i].pitch);
+    else
+      printf(" %d = ", moodArray[i].pitch);
+    if(result[i] < 0)
+      printf("%d\n", result[i]);
+    else
+      printf(" %d\n", result[i]);
+  }
+  int moodOfMelodi = 0;
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
+    if(moodOfMelodi < result[i])
+      moodOfMelodi = i;
+  }
+  int test = 0;
+  
+  if(!strcmp(moodArray[moodOfMelodi].name, "Happy")){
+    printf("\n\n\n Sad ");
+    while(test < 51){
+      if(test == 25)
+        printf("|");
+      else if(test == (((result[moodOfMelodi] + 100) / 4)))
+        printf("[");
+      else if(test == (((result[moodOfMelodi] + 100) / 4) + 2))
+        printf("]");
+      else
+        printf("-");
+      test++;
+    }
+    printf(" Happy\n\n\n");
+  }
+  else if(!strcmp(moodArray[moodOfMelodi].name, "Sad")){
+    printf("\n\n\n Sad ");
+    while(test < 51){
+      if(test == 25)
+        printf("|");
+      else if(test == (-((result[moodOfMelodi] + 100) / 4)))
+        printf("[");
+      else if(test == (-((result[moodOfMelodi] + 100) / 4) + 2))
+        printf("]");
+      else
+        printf("-");
+      test++;
+    }
+    printf(" Happy\n\n\n");
+  }
+
+  printf("\n The mood of the melodi is %s\n", moodArray[moodOfMelodi].name);
 }
