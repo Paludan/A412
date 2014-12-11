@@ -1,269 +1,229 @@
-\hypertarget{find_events_8c}{\section{find\+Events.\+c File Reference}
+\subsection{find\+Events.\+c File Reference}
 \label{find_events_8c}\index{find\+Events.\+c@{find\+Events.\+c}}
-}
-\subsection*{Data Structures}
+\subsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structevent_placement}{event\+Placement}
+struct {\bf event\+Placement}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{find_events_8c_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+int {\bf main} (void)
 \item 
-void \hyperlink{find_events_8c_aae5a932471061429fb51a9802801918e}{find\+Events} (int numbers\+In\+Text, int hex\mbox{[}$\,$\mbox{]}, \hyperlink{structevent_placement}{event\+Placement} placement\mbox{[}$\,$\mbox{]}, \hyperlink{structnote}{note} note\+Ar\mbox{[}$\,$\mbox{]}, int ticks\mbox{[}$\,$\mbox{]})
+void {\bf find\+Events} (int numbers\+In\+Text, int hex[$\,$], {\bf event\+Placement} placement[$\,$], {\bf note} note\+Ar[$\,$], int ticks[$\,$])
 \item 
-void \hyperlink{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}{insert\+Placement1} (int hex\mbox{[}$\,$\mbox{]}, int $\ast$place, int j, \hyperlink{structnote}{note} note\+Ar\mbox{[}$\,$\mbox{]}, int $\ast$n)
+void {\bf insert\+Placement1} (int hex[$\,$], int $\ast$place, int j, {\bf note} note\+Ar[$\,$], int $\ast$n)
 \item 
-void \hyperlink{find_events_8c_ae7a8b439392bbd7875e6c954cd00e4e6}{insert\+Placement2} (int hex\mbox{[}$\,$\mbox{]}, int $\ast$place, int j)
+void {\bf insert\+Placement2} (int hex[$\,$], int $\ast$place, int j)
 \item 
-int \hyperlink{find_events_8c_ac7d2cb0719f51f37879849a2b126e85f}{check\+Next\+Event} (int hex\mbox{[}$\,$\mbox{]}, int j)
+int {\bf check\+Next\+Event} (int hex[$\,$], int j)
 \item 
-void \hyperlink{find_events_8c_a602e17fef9e7173a06c2121d1566c910}{find\+Ticks} (int numbers\+In\+Text, int hex\mbox{[}$\,$\mbox{]}, \hyperlink{structevent_placement}{event\+Placement} placement\mbox{[}$\,$\mbox{]}, \hyperlink{structnote}{note} note\+Ar\mbox{[}$\,$\mbox{]}, int ticks\mbox{[}$\,$\mbox{]})
+void {\bf find\+Ticks} (int numbers\+In\+Text, int hex[$\,$], {\bf event\+Placement} placement[$\,$], {\bf note} note\+Ar[$\,$], int ticks[$\,$])
 \item 
-void \hyperlink{find_events_8c_a78d062237113084e77aa32bc34aae8ad}{count\+Ticks1} (int hex\mbox{[}$\,$\mbox{]}, int $\ast$i, int delta\+Counter, int ticks\mbox{[}$\,$\mbox{]}, int $\ast$tick\+Counter)
+void {\bf count\+Ticks1} (int hex[$\,$], int $\ast$i, int delta\+Counter, int ticks[$\,$], int $\ast$tick\+Counter)
 \item 
-void \hyperlink{find_events_8c_aec998572685a5ba58fffe8f04f002f86}{count\+Ticks2} (int hex\mbox{[}$\,$\mbox{]}, int $\ast$i, int delta\+Counter, int ticks\mbox{[}$\,$\mbox{]}, int $\ast$tick\+Counter)
+void {\bf count\+Ticks2} (int hex[$\,$], int $\ast$i, int delta\+Counter, int ticks[$\,$], int $\ast$tick\+Counter)
 \end{DoxyCompactItemize}
 
 
-\subsection{Function Documentation}
-\hypertarget{find_events_8c_ac7d2cb0719f51f37879849a2b126e85f}{\index{find\+Events.\+c@{find\+Events.\+c}!check\+Next\+Event@{check\+Next\+Event}}
+\subsubsection{Function Documentation}
+\index{find\+Events.\+c@{find\+Events.\+c}!check\+Next\+Event@{check\+Next\+Event}}
 \index{check\+Next\+Event@{check\+Next\+Event}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{check\+Next\+Event}]{\setlength{\rightskip}{0pt plus 5cm}int check\+Next\+Event (
+\paragraph[{check\+Next\+Event}]{\setlength{\rightskip}{0pt plus 5cm}int check\+Next\+Event (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int}]{j}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_ac7d2cb0719f51f37879849a2b126e85f}
-
-
-Definition at line 54 of file find\+Events.\+c.
-
+)}\label{find_events_8c_ac7d2cb0719f51f37879849a2b126e85f}
 
 \begin{DoxyCode}
-54                                     \{
-55   \textcolor{keywordflow}{switch} (hex[j])\{
-56     \textcolor{keywordflow}{case} 0x90:
-57     \textcolor{keywordflow}{case} 0x80:
-58     \textcolor{keywordflow}{case} 0xA0:
-59     \textcolor{keywordflow}{case} 0xB0:
-60     \textcolor{keywordflow}{case} 0xC0:
-61     \textcolor{keywordflow}{case} 0xD0:
-62     \textcolor{keywordflow}{case} 0xE0: \textcolor{keywordflow}{return} 1; \textcolor{keywordflow}{break};
-63     \textcolor{keywordflow}{default}  : \textcolor{keywordflow}{return} 0; \textcolor{keywordflow}{break};
-64   \}
-65 \}
+00054                                     \{
+00055   \textcolor{keywordflow}{switch} (hex[j])\{
+00056     \textcolor{keywordflow}{case} 0x90:
+00057     \textcolor{keywordflow}{case} 0x80:
+00058     \textcolor{keywordflow}{case} 0xA0:
+00059     \textcolor{keywordflow}{case} 0xB0:
+00060     \textcolor{keywordflow}{case} 0xC0:
+00061     \textcolor{keywordflow}{case} 0xD0:
+00062     \textcolor{keywordflow}{case} 0xE0: \textcolor{keywordflow}{return} 1; \textcolor{keywordflow}{break};
+00063     \textcolor{keywordflow}{default}  : \textcolor{keywordflow}{return} 0; \textcolor{keywordflow}{break};
+00064   \}
+00065 \}
 \end{DoxyCode}
-\hypertarget{find_events_8c_a78d062237113084e77aa32bc34aae8ad}{\index{find\+Events.\+c@{find\+Events.\+c}!count\+Ticks1@{count\+Ticks1}}
+\index{find\+Events.\+c@{find\+Events.\+c}!count\+Ticks1@{count\+Ticks1}}
 \index{count\+Ticks1@{count\+Ticks1}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{count\+Ticks1}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks1 (
+\paragraph[{count\+Ticks1}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks1 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{i, }
 \item[{int}]{delta\+Counter, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{ticks[$\,$], }
 \item[{int $\ast$}]{tick\+Counter}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_a78d062237113084e77aa32bc34aae8ad}
-
-
-Definition at line 103 of file find\+Events.\+c.
-
+)}\label{find_events_8c_a78d062237113084e77aa32bc34aae8ad}
 
 \begin{DoxyCode}
-103                                                                                     \{
-104   \textcolor{keywordflow}{while}(deltaCounter < 7 && hex[(i + deltaCounter)] > 0x80)
-105     ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);
-106   ticks[tickCounter++] += hex[(i + deltaCounter++)];
-107   i += deltaCounter;
-108 \}
+00103                                                                                     \{
+00104   \textcolor{keywordflow}{while}(deltaCounter < 7 && hex[(i + deltaCounter)] > 0x80)
+00105     ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);
+00106   ticks[tickCounter++] += hex[(i + deltaCounter++)];
+00107   i += deltaCounter;
+00108 \}
 \end{DoxyCode}
-\hypertarget{find_events_8c_aec998572685a5ba58fffe8f04f002f86}{\index{find\+Events.\+c@{find\+Events.\+c}!count\+Ticks2@{count\+Ticks2}}
+\index{find\+Events.\+c@{find\+Events.\+c}!count\+Ticks2@{count\+Ticks2}}
 \index{count\+Ticks2@{count\+Ticks2}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{count\+Ticks2}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks2 (
+\paragraph[{count\+Ticks2}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks2 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{i, }
 \item[{int}]{delta\+Counter, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{ticks[$\,$], }
 \item[{int $\ast$}]{tick\+Counter}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_aec998572685a5ba58fffe8f04f002f86}
-
-
-Definition at line 110 of file find\+Events.\+c.
-
+)}\label{find_events_8c_aec998572685a5ba58fffe8f04f002f86}
 
 \begin{DoxyCode}
-110                                                                                     \{
-111   \textcolor{keywordflow}{while}(deltaCounter < 6 && hex[(i + deltaCounter)] > 0x80)
-112     ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);
-113   ticks[tickCounter++] += hex[(i + deltaCounter++)];
-114   i += deltaCounter;
-115 \}\end{DoxyCode}
-\hypertarget{find_events_8c_aae5a932471061429fb51a9802801918e}{\index{find\+Events.\+c@{find\+Events.\+c}!find\+Events@{find\+Events}}
+00110                                                                                     \{
+00111   \textcolor{keywordflow}{while}(deltaCounter < 6 && hex[(i + deltaCounter)] > 0x80)
+00112     ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);
+00113   ticks[tickCounter++] += hex[(i + deltaCounter++)];
+00114   i += deltaCounter;
+00115 \}\end{DoxyCode}
+\index{find\+Events.\+c@{find\+Events.\+c}!find\+Events@{find\+Events}}
 \index{find\+Events@{find\+Events}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{find\+Events}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Events (
+\paragraph[{find\+Events}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Events (
 \begin{DoxyParamCaption}
 \item[{int}]{numbers\+In\+Text, }
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf event\+Placement}}]{placement\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}}
+\item[{int}]{hex[$\,$], }
+\item[{{\bf event\+Placement}}]{placement[$\,$], }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
+\item[{int}]{ticks[$\,$]}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_aae5a932471061429fb51a9802801918e}
-
-
-Definition at line 16 of file find\+Events.\+c.
-
+)}\label{find_events_8c_aae5a932471061429fb51a9802801918e}
 
 \begin{DoxyCode}
-16                                                                                                      \{
-17   \textcolor{keywordtype}{int} noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-18       programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = 0;
-19 
-20   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < numbersInText; j++)\{
-21     \textcolor{keywordflow}{switch} (hex[j])\{
-22       \textcolor{keywordflow}{case} 0x90: \hyperlink{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}{insertPlacement1}(hex, &placement[noteOn++].noteOn, j, noteAr, &n);        
-             \textcolor{keywordflow}{break};
-23       \textcolor{keywordflow}{case} 0x80: \hyperlink{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}{insertPlacement1}(hex, &placement[noteOff++].noteOff, j, noteAr, &n);      
-             \textcolor{keywordflow}{break};
-24       \textcolor{keywordflow}{case} 0xA0: \hyperlink{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}{insertPlacement1}(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);
-             \textcolor{keywordflow}{break};
-25       \textcolor{keywordflow}{case} 0xB0: \hyperlink{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}{insertPlacement1}(hex, &placement[controlChange++].controlChange, j, noteAr
-      , &n); \textcolor{keywordflow}{break};
-26       \textcolor{keywordflow}{case} 0xC0: \hyperlink{find_events_8c_ae7a8b439392bbd7875e6c954cd00e4e6}{insertPlacement2}(hex, &placement[programChange++].programChange, j);      
-             \textcolor{keywordflow}{break};
-27       \textcolor{keywordflow}{case} 0xD0: \hyperlink{find_events_8c_ae7a8b439392bbd7875e6c954cd00e4e6}{insertPlacement2}(hex, &placement[channelPressure++].channelPressure, j);  
-             \textcolor{keywordflow}{break};
-28       \textcolor{keywordflow}{case} 0xE0: \hyperlink{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}{insertPlacement1}(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);
-             \textcolor{keywordflow}{break};
-29       \textcolor{keywordflow}{default}  :                                                                                  \textcolor{keywordflow}{break};
-30     \}
-31   \}
-32   \hyperlink{find_events_8c_a602e17fef9e7173a06c2121d1566c910}{findTicks}(numbersInText, hex, placement, noteAr, ticks);
-33 \}
+00016                                                                                                      \{
+00017   \textcolor{keywordtype}{int} noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
+00018       programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = 0;
+00019 
+00020   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < numbersInText; j++)\{
+00021     \textcolor{keywordflow}{switch} (hex[j])\{
+00022       \textcolor{keywordflow}{case} 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n);               \textcolor{keywordflow}{break};
+00023       \textcolor{keywordflow}{case} 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n);             \textcolor{keywordflow}{break};
+00024       \textcolor{keywordflow}{case} 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);       \textcolor{keywordflow}{break};
+00025       \textcolor{keywordflow}{case} 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n); \textcolor{keywordflow}{break};
+00026       \textcolor{keywordflow}{case} 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);             \textcolor{keywordflow}{break};
+00027       \textcolor{keywordflow}{case} 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);         \textcolor{keywordflow}{break};
+00028       \textcolor{keywordflow}{case} 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);       \textcolor{keywordflow}{break};
+00029       \textcolor{keywordflow}{default}  :                                                                                  \textcolor{keywordflow}{break};
+00030     \}
+00031   \}
+00032   findTicks(numbersInText, hex, placement, noteAr, ticks);
+00033 \}
 \end{DoxyCode}
-\hypertarget{find_events_8c_a602e17fef9e7173a06c2121d1566c910}{\index{find\+Events.\+c@{find\+Events.\+c}!find\+Ticks@{find\+Ticks}}
+\index{find\+Events.\+c@{find\+Events.\+c}!find\+Ticks@{find\+Ticks}}
 \index{find\+Ticks@{find\+Ticks}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{find\+Ticks}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Ticks (
+\paragraph[{find\+Ticks}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Ticks (
 \begin{DoxyParamCaption}
 \item[{int}]{numbers\+In\+Text, }
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf event\+Placement}}]{placement\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}}
+\item[{int}]{hex[$\,$], }
+\item[{{\bf event\+Placement}}]{placement[$\,$], }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
+\item[{int}]{ticks[$\,$]}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_a602e17fef9e7173a06c2121d1566c910}
-
-
-Definition at line 67 of file find\+Events.\+c.
-
+)}\label{find_events_8c_a602e17fef9e7173a06c2121d1566c910}
 
 \begin{DoxyCode}
-67                                                                                                     \{
-68   \textcolor{keywordtype}{int} tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
-69   
-70   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < noteOn; j++)\{
-71     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = placement[j].noteOn; i < numbersInText; i++)\{
-72       \textcolor{keywordflow}{if}(hex[i] == 0x80)\{
-73         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j])
-74           \textcolor{keywordflow}{break};
-75         \textcolor{keywordflow}{else}\{
-76           \hyperlink{find_events_8c_a78d062237113084e77aa32bc34aae8ad}{countTicks1}(hex, &i, deltaCounter1, ticks[], tickCounter);
-77         \}
-78       \}
-79       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xA0)\{
-80         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j] && hex[i + 2] == 0x00)
-81           \textcolor{keywordflow}{break};
-82         \textcolor{keywordflow}{else}\{
-83           \hyperlink{find_events_8c_a78d062237113084e77aa32bc34aae8ad}{countTicks1}(hex, &i, deltaCounter1, ticks[], tickCounter);
-84         \}
-85       \}
-86       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xD0)\{
-87         \textcolor{keywordflow}{if}(hex[i + 1] == 0x00)
-88           \textcolor{keywordflow}{break};
-89         \textcolor{keywordflow}{else}\{
-90           \hyperlink{find_events_8c_aec998572685a5ba58fffe8f04f002f86}{countTicks2}(hex, &i, deltaCounter2, ticks[], tickCounter);
-91         \}
-92       \}
-93       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[start] == 0xC0)\{
-94         \hyperlink{find_events_8c_aec998572685a5ba58fffe8f04f002f86}{countTicks2}(hex, &i, deltaCounter2, ticks[], tickCounter);
-95       \}
-96       \textcolor{keywordflow}{else}\{
-97         \hyperlink{find_events_8c_a78d062237113084e77aa32bc34aae8ad}{countTicks1}(hex, &i, deltaCounter1, ticks[], tickCounter);
-98       \}     
-99     \}
-100   \}
-101 \}
+00067                                                                                                     \{
+00068   \textcolor{keywordtype}{int} tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
+00069   
+00070   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < noteOn; j++)\{
+00071     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = placement[j].noteOn; i < numbersInText; i++)\{
+00072       \textcolor{keywordflow}{if}(hex[i] == 0x80)\{
+00073         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j])
+00074           \textcolor{keywordflow}{break};
+00075         \textcolor{keywordflow}{else}\{
+00076           countTicks1(hex, &i, deltaCounter1, ticks[], tickCounter);
+00077         \}
+00078       \}
+00079       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xA0)\{
+00080         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j] && hex[i + 2] == 0x00)
+00081           \textcolor{keywordflow}{break};
+00082         \textcolor{keywordflow}{else}\{
+00083           countTicks1(hex, &i, deltaCounter1, ticks[], tickCounter);
+00084         \}
+00085       \}
+00086       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xD0)\{
+00087         \textcolor{keywordflow}{if}(hex[i + 1] == 0x00)
+00088           \textcolor{keywordflow}{break};
+00089         \textcolor{keywordflow}{else}\{
+00090           countTicks2(hex, &i, deltaCounter2, ticks[], tickCounter);
+00091         \}
+00092       \}
+00093       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[start] == 0xC0)\{
+00094         countTicks2(hex, &i, deltaCounter2, ticks[], tickCounter);
+00095       \}
+00096       \textcolor{keywordflow}{else}\{
+00097         countTicks1(hex, &i, deltaCounter1, ticks[], tickCounter);
+00098       \}     
+00099     \}
+00100   \}
+00101 \}
 \end{DoxyCode}
-\hypertarget{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}{\index{find\+Events.\+c@{find\+Events.\+c}!insert\+Placement1@{insert\+Placement1}}
+\index{find\+Events.\+c@{find\+Events.\+c}!insert\+Placement1@{insert\+Placement1}}
 \index{insert\+Placement1@{insert\+Placement1}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{insert\+Placement1}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement1 (
+\paragraph[{insert\+Placement1}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement1 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{place, }
 \item[{int}]{j, }
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
 \item[{int $\ast$}]{n}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}
-
-
-Definition at line 35 of file find\+Events.\+c.
-
+)}\label{find_events_8c_a6504a42d64dc0bd2c59b512ffdcd5f6f}
 
 \begin{DoxyCode}
-35                                                                           \{
-36   \textcolor{keywordtype}{int} i = 3;
-37   \textcolor{keywordflow}{while}(i < 7 && hex[(j + i++)] > 0x80);
-38   \textcolor{keywordflow}{if}(\hyperlink{find_events_8c_ac7d2cb0719f51f37879849a2b126e85f}{checkNextEvent}(hex, (j + i)))\{
-39     *place = j;
-40     \textcolor{keywordflow}{if}(hex[j] == 0x90)\{
-41       \hyperlink{main_8c_ad88978d32a0f080f58ed31ffe9c51396}{fillNote}(hex[j + 1], &noteAr[*n]);
-42       *n += 1;
-43     \}   
-44   \} 
-45 \}
+00035                                                                           \{
+00036   \textcolor{keywordtype}{int} i = 3;
+00037   \textcolor{keywordflow}{while}(i < 7 && hex[(j + i++)] > 0x80);
+00038   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))\{
+00039     *place = j;
+00040     \textcolor{keywordflow}{if}(hex[j] == 0x90)\{
+00041       fillNote(hex[j + 1], &noteAr[*n]);
+00042       *n += 1;
+00043     \}   
+00044   \} 
+00045 \}
 \end{DoxyCode}
-\hypertarget{find_events_8c_ae7a8b439392bbd7875e6c954cd00e4e6}{\index{find\+Events.\+c@{find\+Events.\+c}!insert\+Placement2@{insert\+Placement2}}
+\index{find\+Events.\+c@{find\+Events.\+c}!insert\+Placement2@{insert\+Placement2}}
 \index{insert\+Placement2@{insert\+Placement2}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{insert\+Placement2}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement2 (
+\paragraph[{insert\+Placement2}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement2 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{place, }
 \item[{int}]{j}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_ae7a8b439392bbd7875e6c954cd00e4e6}
-
-
-Definition at line 47 of file find\+Events.\+c.
-
+)}\label{find_events_8c_ae7a8b439392bbd7875e6c954cd00e4e6}
 
 \begin{DoxyCode}
-47                                                    \{
-48   \textcolor{keywordtype}{int} i = 2;
-49   \textcolor{keywordflow}{while}(i < 6 && hex[(j + i++)] > 0x80);
-50   \textcolor{keywordflow}{if}(\hyperlink{find_events_8c_ac7d2cb0719f51f37879849a2b126e85f}{checkNextEvent}(hex, (j + i)))
-51     *place = j;
-52 \}
+00047                                                    \{
+00048   \textcolor{keywordtype}{int} i = 2;
+00049   \textcolor{keywordflow}{while}(i < 6 && hex[(j + i++)] > 0x80);
+00050   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))
+00051     *place = j;
+00052 \}
 \end{DoxyCode}
-\hypertarget{find_events_8c_a840291bc02cba5474a4cb46a9b9566fe}{\index{find\+Events.\+c@{find\+Events.\+c}!main@{main}}
+\index{find\+Events.\+c@{find\+Events.\+c}!main@{main}}
 \index{main@{main}!find\+Events.\+c@{find\+Events.\+c}}
-\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\paragraph[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
 \begin{DoxyParamCaption}
 \item[{void}]{}
 \end{DoxyParamCaption}
-)}}\label{find_events_8c_a840291bc02cba5474a4cb46a9b9566fe}
-
-
-Definition at line 11 of file find\+Events.\+c.
-
+)}\label{find_events_8c_a840291bc02cba5474a4cb46a9b9566fe}
 
 \begin{DoxyCode}
-11               \{
-12   \textcolor{keywordtype}{int} ticks[numbersInText];
-13   \textcolor{keywordflow}{return} 0;
-14 \}
+00011               \{
+00012   \textcolor{keywordtype}{int} ticks[numbersInText];
+00013   \textcolor{keywordflow}{return} 0;
+00014 \}
 \end{DoxyCode}

@@ -87,8 +87,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">findEvents.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p><a href="find_events_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -138,8 +136,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00054">54</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                    {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordflow">switch</span> (hex[j]){</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">case</span> 0x90:</div>
@@ -196,8 +192,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00103">103</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                                                                                    {</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">while</span>(deltaCounter &lt; 7 &amp;&amp; hex[(i + deltaCounter)] &gt; 0x80)</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);</div>
@@ -248,8 +242,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00110">110</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                                                                                    {</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="keywordflow">while</span>(deltaCounter &lt; 6 &amp;&amp; hex[(i + deltaCounter)] &gt; 0x80)</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);</div>
@@ -299,8 +291,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00016">16</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                                                                                                     {</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keywordtype">int</span> noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;      programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = 0;</div>
@@ -319,9 +309,9 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="find_events_8c.html#a602e17fef9e7173a06c2121d1566c910">findTicks</a>(numbersInText, hex, placement, noteAr, ticks);</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="ttc" id="find_events_8c_html_a602e17fef9e7173a06c2121d1566c910"><div class="ttname"><a href="find_events_8c.html#a602e17fef9e7173a06c2121d1566c910">findTicks</a></div><div class="ttdeci">void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[])</div><div class="ttdef"><b>Definition:</b> <a href="find_events_8c_source.html#l00067">findEvents.c:67</a></div></div>
-<div class="ttc" id="find_events_8c_html_a6504a42d64dc0bd2c59b512ffdcd5f6f"><div class="ttname"><a href="find_events_8c.html#a6504a42d64dc0bd2c59b512ffdcd5f6f">insertPlacement1</a></div><div class="ttdeci">void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n)</div><div class="ttdef"><b>Definition:</b> <a href="find_events_8c_source.html#l00035">findEvents.c:35</a></div></div>
-<div class="ttc" id="find_events_8c_html_ae7a8b439392bbd7875e6c954cd00e4e6"><div class="ttname"><a href="find_events_8c.html#ae7a8b439392bbd7875e6c954cd00e4e6">insertPlacement2</a></div><div class="ttdeci">void insertPlacement2(int hex[], int *place, int j)</div><div class="ttdef"><b>Definition:</b> <a href="find_events_8c_source.html#l00047">findEvents.c:47</a></div></div>
+<div class="ttc" id="find_events_8c_html_a602e17fef9e7173a06c2121d1566c910"><div class="ttname"><a href="find_events_8c.html#a602e17fef9e7173a06c2121d1566c910">findTicks</a></div><div class="ttdeci">void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[])</div><div class="ttdef"><b>Definition:</b> findEvents.c:67</div></div>
+<div class="ttc" id="find_events_8c_html_a6504a42d64dc0bd2c59b512ffdcd5f6f"><div class="ttname"><a href="find_events_8c.html#a6504a42d64dc0bd2c59b512ffdcd5f6f">insertPlacement1</a></div><div class="ttdeci">void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n)</div><div class="ttdef"><b>Definition:</b> findEvents.c:35</div></div>
+<div class="ttc" id="find_events_8c_html_ae7a8b439392bbd7875e6c954cd00e4e6"><div class="ttname"><a href="find_events_8c.html#ae7a8b439392bbd7875e6c954cd00e4e6">insertPlacement2</a></div><div class="ttdeci">void insertPlacement2(int hex[], int *place, int j)</div><div class="ttdef"><b>Definition:</b> findEvents.c:47</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -366,8 +356,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00067">67</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                                                                                    {</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">int</span> tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  </div>
@@ -403,8 +391,8 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="ttc" id="find_events_8c_html_aec998572685a5ba58fffe8f04f002f86"><div class="ttname"><a href="find_events_8c.html#aec998572685a5ba58fffe8f04f002f86">countTicks2</a></div><div class="ttdeci">void countTicks2(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter)</div><div class="ttdef"><b>Definition:</b> <a href="find_events_8c_source.html#l00110">findEvents.c:110</a></div></div>
-<div class="ttc" id="find_events_8c_html_a78d062237113084e77aa32bc34aae8ad"><div class="ttname"><a href="find_events_8c.html#a78d062237113084e77aa32bc34aae8ad">countTicks1</a></div><div class="ttdeci">void countTicks1(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter)</div><div class="ttdef"><b>Definition:</b> <a href="find_events_8c_source.html#l00103">findEvents.c:103</a></div></div>
+<div class="ttc" id="find_events_8c_html_aec998572685a5ba58fffe8f04f002f86"><div class="ttname"><a href="find_events_8c.html#aec998572685a5ba58fffe8f04f002f86">countTicks2</a></div><div class="ttdeci">void countTicks2(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter)</div><div class="ttdef"><b>Definition:</b> findEvents.c:110</div></div>
+<div class="ttc" id="find_events_8c_html_a78d062237113084e77aa32bc34aae8ad"><div class="ttname"><a href="find_events_8c.html#a78d062237113084e77aa32bc34aae8ad">countTicks1</a></div><div class="ttdeci">void countTicks1(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter)</div><div class="ttdef"><b>Definition:</b> findEvents.c:103</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -449,8 +437,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00035">35</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                                                          {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">int</span> i = 3;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordflow">while</span>(i &lt; 7 &amp;&amp; hex[(j + i++)] &gt; 0x80);</div>
@@ -462,8 +448,8 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }   </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  } </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="ttc" id="main_8c_html_ad88978d32a0f080f58ed31ffe9c51396"><div class="ttname"><a href="main_8c.html#ad88978d32a0f080f58ed31ffe9c51396">fillNote</a></div><div class="ttdeci">void fillNote(int, note *)</div><div class="ttdef"><b>Definition:</b> <a href="main_8c_source.html#l00331">main.c:331</a></div></div>
-<div class="ttc" id="find_events_8c_html_ac7d2cb0719f51f37879849a2b126e85f"><div class="ttname"><a href="find_events_8c.html#ac7d2cb0719f51f37879849a2b126e85f">checkNextEvent</a></div><div class="ttdeci">int checkNextEvent(int hex[], int j)</div><div class="ttdef"><b>Definition:</b> <a href="find_events_8c_source.html#l00054">findEvents.c:54</a></div></div>
+<div class="ttc" id="main_8c_html_ad88978d32a0f080f58ed31ffe9c51396"><div class="ttname"><a href="main_8c.html#ad88978d32a0f080f58ed31ffe9c51396">fillNote</a></div><div class="ttdeci">void fillNote(int, note *)</div><div class="ttdef"><b>Definition:</b> main.c:332</div></div>
+<div class="ttc" id="find_events_8c_html_ac7d2cb0719f51f37879849a2b126e85f"><div class="ttname"><a href="find_events_8c.html#ac7d2cb0719f51f37879849a2b126e85f">checkNextEvent</a></div><div class="ttdeci">int checkNextEvent(int hex[], int j)</div><div class="ttdef"><b>Definition:</b> findEvents.c:54</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -496,15 +482,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00047">47</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                                   {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">int</span> i = 2;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">while</span>(i &lt; 6 &amp;&amp; hex[(j + i++)] &gt; 0x80);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">if</span>(<a class="code" href="find_events_8c.html#ac7d2cb0719f51f37879849a2b126e85f">checkNextEvent</a>(hex, (j + i)))</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    *place = j;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="ttc" id="find_events_8c_html_ac7d2cb0719f51f37879849a2b126e85f"><div class="ttname"><a href="find_events_8c.html#ac7d2cb0719f51f37879849a2b126e85f">checkNextEvent</a></div><div class="ttdeci">int checkNextEvent(int hex[], int j)</div><div class="ttdef"><b>Definition:</b> <a href="find_events_8c_source.html#l00054">findEvents.c:54</a></div></div>
+<div class="ttc" id="find_events_8c_html_ac7d2cb0719f51f37879849a2b126e85f"><div class="ttname"><a href="find_events_8c.html#ac7d2cb0719f51f37879849a2b126e85f">checkNextEvent</a></div><div class="ttdeci">int checkNextEvent(int hex[], int j)</div><div class="ttdef"><b>Definition:</b> findEvents.c:54</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -521,8 +505,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="find_events_8c_source.html#l00011">11</a> of file <a class="el" href="find_events_8c_source.html">findEvents.c</a>.</p>
 <div class="fragment"><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;              {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">int</span> ticks[numbersInText];</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordflow">return</span> 0;</div>
@@ -533,7 +515,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 11 2014 11:36:53 for A412 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Dec 11 2014 13:22:37 for A412 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

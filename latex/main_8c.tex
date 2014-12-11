@@ -1,1074 +1,955 @@
-\hypertarget{main_8c}{\section{main.\+c File Reference}
+\subsection{main.\+c File Reference}
 \label{main_8c}\index{main.\+c@{main.\+c}}
-}
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
 {\ttfamily \#include $<$math.\+h$>$}\\*
 {\ttfamily \#include $<$string.\+h$>$}\\*
 {\ttfamily \#include $<$dirent.\+h$>$}\\*
-\subsection*{Data Structures}
+\subsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structnote}{note}
+struct {\bf note}
 \item 
-struct \hyperlink{structdata}{data}
+struct {\bf data}
 \item 
-struct \hyperlink{structpoints}{points}
+struct {\bf points}
 \item 
-struct \hyperlink{structmood_weighting}{mood\+Weighting}
+struct {\bf mood\+Weighting}
 \item 
-struct \hyperlink{structevent_placement}{event\+Placement}
+struct {\bf event\+Placement}
 \end{DoxyCompactItemize}
-\subsection*{Macros}
+\subsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \hyperlink{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{C\+H\+A\+R\+S}~1000
+\#define {\bf C\+H\+A\+R\+S}~1000
 \item 
-\#define \hyperlink{main_8c_a3c7b5c7d1b09d118aa63ec87e3c73a8b}{S\+C\+A\+L\+E\+S\+I\+Z\+E}~7
+\#define {\bf S\+C\+A\+L\+E\+S\+I\+Z\+E}~7
 \end{DoxyCompactItemize}
-\subsection*{Typedefs}
+\subsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef enum \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} \hyperlink{main_8c_abcec22444f1b2fc64f59764d40244d9f}{mode}
+typedef enum {\bf mode} {\bf mode}
 \item 
-typedef enum \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone} \hyperlink{main_8c_aac01cecf1f254ffa121e2715527a6a5a}{tone}
+typedef enum {\bf tone} {\bf tone}
 \item 
-typedef enum \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7f}{mood} \hyperlink{main_8c_a3e304bbd72e3a576384c6e8cdb661eb4}{mood}
+typedef enum {\bf mood} {\bf mood}
 \end{DoxyCompactItemize}
-\subsection*{Enumerations}
+\subsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} \{ \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}, 
-\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}
+enum {\bf mode} \{ {\bf major}, 
+{\bf minor}
  \}
 \item 
-enum \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone} \{ \\*
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}, 
+enum {\bf tone} \{ \\*
+{\bf C}, 
+{\bf Csharp}, 
+{\bf D}, 
+{\bf Dsharp}, 
 \\*
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}, 
+{\bf E}, 
+{\bf F}, 
+{\bf Fsharp}, 
+{\bf G}, 
 \\*
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}, 
-\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}
+{\bf Gsharp}, 
+{\bf A}, 
+{\bf Asharp}, 
+{\bf B}
  \}
 \item 
-enum \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7f}{mood} \{ \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}, 
-\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}
+enum {\bf mood} \{ {\bf glad}, 
+{\bf sad}
  \}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\subsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{main_8c_a6e65cd59478f60276ddf27b226f5ef8c}{check\+Directory} (char $\ast$)
+void {\bf check\+Directory} (char $\ast$)
 \item 
-void \hyperlink{main_8c_ab56a62ec1c82722ba291a717b2afca5b}{find\+Note\+Length} (double x, int $\ast$, int $\ast$)
+void {\bf find\+Note\+Length} (double x, int $\ast$, int $\ast$)
 \item 
-void \hyperlink{main_8c_aa9c735ae880cee4e1272bcf387462c9a}{print\+Note} (\hyperlink{structnote}{note})
+void {\bf print\+Note} ({\bf note})
 \item 
-int \hyperlink{main_8c_a7e86822405cc3ff43db316d113a1fb6d}{get\+Hex} (F\+I\+L\+E $\ast$, int\mbox{[}$\,$\mbox{]})
+int {\bf get\+Hex} (F\+I\+L\+E $\ast$, int[$\,$])
 \item 
-void \hyperlink{main_8c_a6406eca72b9402b7240ed0e453e8db46}{fill\+Song\+Data} (\hyperlink{structdata}{data} $\ast$, int\mbox{[}$\,$\mbox{]}, int)
+void {\bf fill\+Song\+Data} ({\bf data} $\ast$, int[$\,$], int)
 \item 
-int \hyperlink{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}{count\+Notes} (int\mbox{[}$\,$\mbox{]}, int)
+int {\bf count\+Notes} (int[$\,$], int)
 \item 
-void \hyperlink{main_8c_ad88978d32a0f080f58ed31ffe9c51396}{fill\+Note} (int, \hyperlink{structnote}{note} $\ast$)
+void {\bf fill\+Note} (int, {\bf note} $\ast$)
 \item 
-void \hyperlink{main_8c_a96686ff783072b26aa8666d0281d053c}{print\+Song\+Data} (\hyperlink{structdata}{data})
+void {\bf print\+Song\+Data} ({\bf data})
 \item 
-void \hyperlink{main_8c_ac5cf65542ee2eded456a070d2159af90}{setting\+Points} (int $\ast$, int $\ast$, int $\ast$, int $\ast$, \hyperlink{structdata}{data}, int, \hyperlink{structnote}{note}\mbox{[}$\,$\mbox{]}, int $\ast$)
+void {\bf setting\+Points} (int $\ast$, int $\ast$, int $\ast$, int $\ast$, {\bf data}, int, {\bf note}[$\,$], int $\ast$)
 \item 
-void \hyperlink{main_8c_a1709777308c32674291e7213d55feb6e}{insert\+Moods} (\hyperlink{structmood_weighting}{mood\+Weighting}\mbox{[}$\,$\mbox{]}, F\+I\+L\+E $\ast$)
+void {\bf insert\+Moods} ({\bf mood\+Weighting}[$\,$], F\+I\+L\+E $\ast$)
 \item 
-int \hyperlink{main_8c_ade6b8acc6a7f498b910c155b43d442b1}{weighting\+Matrix} (\hyperlink{structmood_weighting}{mood\+Weighting}\mbox{[}$\,$\mbox{]}, int, int, int, int)
+int {\bf weighting\+Matrix} ({\bf mood\+Weighting}[$\,$], int, int, int, int)
 \item 
-void \hyperlink{main_8c_a958ac363192985c144e524cc6e092e7c}{find\+Events} (int, int\mbox{[}$\,$\mbox{]}, \hyperlink{structevent_placement}{event\+Placement}\mbox{[}$\,$\mbox{]}, \hyperlink{structnote}{note}\mbox{[}$\,$\mbox{]}, int\mbox{[}$\,$\mbox{]}, int $\ast$)
+void {\bf find\+Events} (int, int[$\,$], {\bf event\+Placement}[$\,$], {\bf note}[$\,$], int[$\,$], int $\ast$)
 \item 
-void \hyperlink{main_8c_afce19655c88726711949a8e720767874}{insert\+Placement1} (int\mbox{[}$\,$\mbox{]}, int $\ast$, int, \hyperlink{structnote}{note}\mbox{[}$\,$\mbox{]}, int $\ast$)
+void {\bf insert\+Placement1} (int[$\,$], int $\ast$, int, {\bf note}[$\,$], int $\ast$)
 \item 
-void \hyperlink{main_8c_a0349131ee04fd791a9bcd1205db44778}{insert\+Placement2} (int\mbox{[}$\,$\mbox{]}, int $\ast$, int)
+void {\bf insert\+Placement2} (int[$\,$], int $\ast$, int)
 \item 
-int \hyperlink{main_8c_a31a2c1016f54d5c2508c8a1578437f2d}{check\+Next\+Event} (int\mbox{[}$\,$\mbox{]}, int)
+int {\bf check\+Next\+Event} (int[$\,$], int)
 \item 
-void \hyperlink{main_8c_ac6acd514eb7de5e7d0a48cae55dc02ff}{find\+Ticks} (int, int\mbox{[}$\,$\mbox{]}, \hyperlink{structevent_placement}{event\+Placement}\mbox{[}$\,$\mbox{]}, \hyperlink{structnote}{note}\mbox{[}$\,$\mbox{]}, int\mbox{[}$\,$\mbox{]}, int, int $\ast$)
+void {\bf find\+Ticks} (int, int[$\,$], {\bf event\+Placement}[$\,$], {\bf note}[$\,$], int[$\,$], int, int $\ast$)
 \item 
-void \hyperlink{main_8c_af836f26ac499b26de031f92ef5899a31}{count\+Ticks1} (int\mbox{[}$\,$\mbox{]}, int $\ast$, int, int\mbox{[}$\,$\mbox{]}, int $\ast$)
+void {\bf count\+Ticks1} (int[$\,$], int $\ast$, int, int[$\,$], int $\ast$)
 \item 
-void \hyperlink{main_8c_a4bc2fa0c74fcabd55e06bd0d49e1f992}{count\+Ticks2} (int\mbox{[}$\,$\mbox{]}, int $\ast$, int, int\mbox{[}$\,$\mbox{]}, int $\ast$)
+void {\bf count\+Ticks2} (int[$\,$], int $\ast$, int, int[$\,$], int $\ast$)
 \item 
-int \hyperlink{main_8c_ac6a3184d104e99d57824eecaabab8ed5}{sort\+Result} (const void $\ast$, const void $\ast$)
+int {\bf sort\+Result} (const void $\ast$, const void $\ast$)
 \item 
-void \hyperlink{main_8c_a5ce54b23ee9b2c1ae92adac7a9505180}{delta\+Time\+To\+Note\+Length} (int $\ast$, int, int, \hyperlink{structnote}{note} $\ast$)
+void {\bf delta\+Time\+To\+Note\+Length} (int $\ast$, int, int, {\bf note} $\ast$)
 \item 
-int \hyperlink{main_8c_ab07d21079009fe6f42cd1a95b5db3522}{is\+In\+Scale} (int, int\mbox{[}$\,$\mbox{]}, int)
+int {\bf is\+In\+Scale} (int, int[$\,$], int)
 \item 
-int \hyperlink{main_8c_a7a1c0b6f906689e24cb60e1e5ff8bc76}{is\+In\+Minor} (int)
+int {\bf is\+In\+Minor} (int)
 \item 
-int \hyperlink{main_8c_a241d0a265bf9c508dee8671ecab5f1d8}{is\+In\+Major} (int)
+int {\bf is\+In\+Major} (int)
 \item 
-int \hyperlink{main_8c_a27beb09cf7217b8c5f3789913aa857db}{sort\+Toner} (const void $\ast$, const void $\ast$)
+int {\bf sort\+Toner} (const void $\ast$, const void $\ast$)
 \item 
-void \hyperlink{main_8c_a16182e7956158cfcf78a8b97423ee1da}{find\+Mode} (\hyperlink{structnote}{note} $\ast$, int, \hyperlink{structdata}{data} $\ast$)
+void {\bf find\+Mode} ({\bf note} $\ast$, int, {\bf data} $\ast$)
 \item 
-int \hyperlink{main_8c_aea24927f2da3a892904ec1abd4ad01bf}{Find\+Mood\+Amount} (F\+I\+L\+E $\ast$)
+int {\bf Find\+Mood\+Amount} (F\+I\+L\+E $\ast$)
 \item 
-int \hyperlink{main_8c_ac0f2228420376f4db7e1274f2b41667c}{main} (int argc, const char $\ast$argv\mbox{[}$\,$\mbox{]})
+int {\bf main} (int argc, const char $\ast$argv[$\,$])
 \item 
-int \hyperlink{main_8c_a33b74ebb6acaeb30576c9e66aebe2fb6}{sort\+Tones} (const void $\ast$a, const void $\ast$b)
+int {\bf sort\+Tones} (const void $\ast$a, const void $\ast$b)
 \item 
-void \hyperlink{main_8c_a660cd7ea9eae225a44ccb0fd609984a3}{find\+Mode} (\hyperlink{structnote}{note} note\+Ar\mbox{[}$\,$\mbox{]}, int total\+Notes, \hyperlink{structdata}{data} $\ast$\hyperlink{structdata}{data})
+void {\bf find\+Mode} ({\bf note} note\+Ar[$\,$], int total\+Notes, {\bf data} $\ast${\bf data})
 \end{DoxyCompactItemize}
-\subsection*{Variables}
+\subsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}
+int {\bf A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}
 \end{DoxyCompactItemize}
 
 
-\subsection{Macro Definition Documentation}
-\hypertarget{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{\index{main.\+c@{main.\+c}!C\+H\+A\+R\+S@{C\+H\+A\+R\+S}}
+\subsubsection{Macro Definition Documentation}
+\index{main.\+c@{main.\+c}!C\+H\+A\+R\+S@{C\+H\+A\+R\+S}}
 \index{C\+H\+A\+R\+S@{C\+H\+A\+R\+S}!main.\+c@{main.\+c}}
-\subsubsection[{C\+H\+A\+R\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+H\+A\+R\+S~1000}}\label{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}
-
-
-Definition at line 21 of file main.\+c.
-
-\hypertarget{main_8c_a3c7b5c7d1b09d118aa63ec87e3c73a8b}{\index{main.\+c@{main.\+c}!S\+C\+A\+L\+E\+S\+I\+Z\+E@{S\+C\+A\+L\+E\+S\+I\+Z\+E}}
+\paragraph[{C\+H\+A\+R\+S}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\+H\+A\+R\+S~1000}\label{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}
+\index{main.\+c@{main.\+c}!S\+C\+A\+L\+E\+S\+I\+Z\+E@{S\+C\+A\+L\+E\+S\+I\+Z\+E}}
 \index{S\+C\+A\+L\+E\+S\+I\+Z\+E@{S\+C\+A\+L\+E\+S\+I\+Z\+E}!main.\+c@{main.\+c}}
-\subsubsection[{S\+C\+A\+L\+E\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+C\+A\+L\+E\+S\+I\+Z\+E~7}}\label{main_8c_a3c7b5c7d1b09d118aa63ec87e3c73a8b}
+\paragraph[{S\+C\+A\+L\+E\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+C\+A\+L\+E\+S\+I\+Z\+E~7}\label{main_8c_a3c7b5c7d1b09d118aa63ec87e3c73a8b}
 
 
-Definition at line 23 of file main.\+c.
-
-
-
-\subsection{Typedef Documentation}
-\hypertarget{main_8c_abcec22444f1b2fc64f59764d40244d9f}{\index{main.\+c@{main.\+c}!mode@{mode}}
+\subsubsection{Typedef Documentation}
+\index{main.\+c@{main.\+c}!mode@{mode}}
 \index{mode@{mode}!main.\+c@{main.\+c}}
-\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf mode}  {\bf mode}}}\label{main_8c_abcec22444f1b2fc64f59764d40244d9f}
-\hypertarget{main_8c_a3e304bbd72e3a576384c6e8cdb661eb4}{\index{main.\+c@{main.\+c}!mood@{mood}}
+\paragraph[{mode}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf mode}  {\bf mode}}\label{main_8c_abcec22444f1b2fc64f59764d40244d9f}
+\index{main.\+c@{main.\+c}!mood@{mood}}
 \index{mood@{mood}!main.\+c@{main.\+c}}
-\subsubsection[{mood}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf mood}  {\bf mood}}}\label{main_8c_a3e304bbd72e3a576384c6e8cdb661eb4}
-\hypertarget{main_8c_aac01cecf1f254ffa121e2715527a6a5a}{\index{main.\+c@{main.\+c}!tone@{tone}}
+\paragraph[{mood}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf mood}  {\bf mood}}\label{main_8c_a3e304bbd72e3a576384c6e8cdb661eb4}
+\index{main.\+c@{main.\+c}!tone@{tone}}
 \index{tone@{tone}!main.\+c@{main.\+c}}
-\subsubsection[{tone}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf tone}  {\bf tone}}}\label{main_8c_aac01cecf1f254ffa121e2715527a6a5a}
+\paragraph[{tone}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf tone}  {\bf tone}}\label{main_8c_aac01cecf1f254ffa121e2715527a6a5a}
 
 
-\subsection{Enumeration Type Documentation}
-\hypertarget{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{\index{main.\+c@{main.\+c}!mode@{mode}}
+\subsubsection{Enumeration Type Documentation}
+\index{main.\+c@{main.\+c}!mode@{mode}}
 \index{mode@{mode}!main.\+c@{main.\+c}}
-\subsubsection[{mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf mode}}}\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}
+\paragraph[{mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf mode}}\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}
 \begin{Desc}
 \item[Enumerator]\par
 \begin{description}
 \index{major@{major}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!major@{major}}\item[{\em 
-\hypertarget{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}
+major\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}
 }]\index{minor@{minor}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!minor@{minor}}\item[{\em 
-\hypertarget{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}
+minor\label{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}
 }]\end{description}
 \end{Desc}
 
-
-Definition at line 26 of file main.\+c.
-
-
 \begin{DoxyCode}
-26 \{\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}, \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}\} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode};
+00026 \{major, minor\} mode;
 \end{DoxyCode}
-\hypertarget{main_8c_a845e01d4d631be8d8fac14b162607e7f}{\index{main.\+c@{main.\+c}!mood@{mood}}
+\index{main.\+c@{main.\+c}!mood@{mood}}
 \index{mood@{mood}!main.\+c@{main.\+c}}
-\subsubsection[{mood}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf mood}}}\label{main_8c_a845e01d4d631be8d8fac14b162607e7f}
+\paragraph[{mood}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf mood}}\label{main_8c_a845e01d4d631be8d8fac14b162607e7f}
 \begin{Desc}
 \item[Enumerator]\par
 \begin{description}
 \index{glad@{glad}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!glad@{glad}}\item[{\em 
-\hypertarget{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}\label{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}
+glad\label{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}
 }]\index{sad@{sad}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!sad@{sad}}\item[{\em 
-\hypertarget{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}\label{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}
+sad\label{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}
 }]\end{description}
 \end{Desc}
 
-
-Definition at line 28 of file main.\+c.
-
-
 \begin{DoxyCode}
-28 \{\hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa55170d14edc722ae6672132bd212a19d}{glad}, \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7fa545d9f58d50a21cb0f1a64155ec91a05}{sad}\} \hyperlink{main_8c_a845e01d4d631be8d8fac14b162607e7f}{mood};
+00028 \{glad, sad\} mood;
 \end{DoxyCode}
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919f}{\index{main.\+c@{main.\+c}!tone@{tone}}
+\index{main.\+c@{main.\+c}!tone@{tone}}
 \index{tone@{tone}!main.\+c@{main.\+c}}
-\subsubsection[{tone}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tone}}}\label{main_8c_aeb761eda34d47c3e64ca804875fd919f}
+\paragraph[{tone}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tone}}\label{main_8c_aeb761eda34d47c3e64ca804875fd919f}
 \begin{Desc}
 \item[Enumerator]\par
 \begin{description}
 \index{C@{C}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!C@{C}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}
+C\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}
 }]\index{Csharp@{Csharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Csharp@{Csharp}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}
+Csharp\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}
 }]\index{D@{D}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!D@{D}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}
+D\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}
 }]\index{Dsharp@{Dsharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Dsharp@{Dsharp}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}
+Dsharp\label{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}
 }]\index{E@{E}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!E@{E}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}
+E\label{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}
 }]\index{F@{F}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!F@{F}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F}\label{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}
+F\label{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}
 }]\index{Fsharp@{Fsharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Fsharp@{Fsharp}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}
+Fsharp\label{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}
 }]\index{G@{G}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!G@{G}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}
+G\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}
 }]\index{Gsharp@{Gsharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Gsharp@{Gsharp}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}
+Gsharp\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}
 }]\index{A@{A}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!A@{A}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}
+A\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}
 }]\index{Asharp@{Asharp}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!Asharp@{Asharp}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}\label{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}
+Asharp\label{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}
 }]\index{B@{B}!main.\+c@{main.\+c}}\index{main.\+c@{main.\+c}!B@{B}}\item[{\em 
-\hypertarget{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}
+B\label{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}
 }]\end{description}
 \end{Desc}
 
-
-Definition at line 27 of file main.\+c.
-
-
 \begin{DoxyCode}
-27 \{\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}, 
-      \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}\} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone};
+00027 \{C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B\} tone;
 \end{DoxyCode}
 
 
-\subsection{Function Documentation}
-\hypertarget{main_8c_a6e65cd59478f60276ddf27b226f5ef8c}{\index{main.\+c@{main.\+c}!check\+Directory@{check\+Directory}}
+\subsubsection{Function Documentation}
+\index{main.\+c@{main.\+c}!check\+Directory@{check\+Directory}}
 \index{check\+Directory@{check\+Directory}!main.\+c@{main.\+c}}
-\subsubsection[{check\+Directory}]{\setlength{\rightskip}{0pt plus 5cm}void check\+Directory (
+\paragraph[{check\+Directory}]{\setlength{\rightskip}{0pt plus 5cm}void check\+Directory (
 \begin{DoxyParamCaption}
 \item[{char $\ast$}]{M\+I\+D\+Ifile}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a6e65cd59478f60276ddf27b226f5ef8c}
+)}\label{main_8c_a6e65cd59478f60276ddf27b226f5ef8c}
 A function to read music directory and prompt user to choose file 
 \begin{DoxyParams}{Parameters}
-{\em char$\ast$\mbox{]}} & M\+I\+D\+Ifile\+: a pointer to a string containing the name of the chosen input file \\
+{\em } & char$\ast$]\+: M\+I\+D\+Ifile\+: a pointer to a string containing the name of the chosen input file \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 162 of file main.\+c.
-
-
 \begin{DoxyCode}
-162                                    \{
-163   DIR *dir;
-164   \textcolor{keyword}{struct }dirent *musicDir;
-165   \textcolor{keywordflow}{if} ((dir = opendir (\textcolor{stringliteral}{"./Music"})) != NULL) \{
-166     printf(\textcolor{stringliteral}{"Mulige numre\(\backslash\)n"});
-167     \textcolor{comment}{/* print all the files and directories within specified directory */}
-168       \textcolor{keywordflow}{while} ((musicDir = readdir (dir)) != NULL) \{
-169         printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, musicDir->d\_name);
-170       \}
-171     closedir (dir);
-172   \} 
-173   \textcolor{keywordflow}{else} \{
-174   \textcolor{comment}{/* Could not open directory */}
-175     perror (\textcolor{stringliteral}{"Failure while opening directory"});
-176     exit (EXIT\_FAILURE);
-177   \}
-178   printf(\textcolor{stringliteral}{"Indtast det valgte nummer\(\backslash\)n"});
-179   scanf(\textcolor{stringliteral}{"%s"}, MIDIfile);
-180 \}
+00162                                    \{
+00163   DIR *dir;
+00164   \textcolor{keyword}{struct }dirent *musicDir;
+00165   \textcolor{keywordflow}{if} ((dir = opendir (\textcolor{stringliteral}{"./Music"})) != NULL) \{
+00166     printf(\textcolor{stringliteral}{"Mulige numre\(\backslash\)n"});
+00167     \textcolor{comment}{/* print all the files and directories within specified directory */}
+00168       \textcolor{keywordflow}{while} ((musicDir = readdir (dir)) != NULL) \{
+00169         printf (\textcolor{stringliteral}{"%s\(\backslash\)n"}, musicDir->d\_name);
+00170       \}
+00171     closedir (dir);
+00172   \} 
+00173   \textcolor{keywordflow}{else} \{
+00174   \textcolor{comment}{/* Could not open directory */}
+00175     perror (\textcolor{stringliteral}{"Failure while opening directory"});
+00176     exit (EXIT\_FAILURE);
+00177   \}
+00178   printf(\textcolor{stringliteral}{"Indtast det valgte nummer\(\backslash\)n"});
+00179   scanf(\textcolor{stringliteral}{"%s"}, MIDIfile);
+00180 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a31a2c1016f54d5c2508c8a1578437f2d}{\index{main.\+c@{main.\+c}!check\+Next\+Event@{check\+Next\+Event}}
+\index{main.\+c@{main.\+c}!check\+Next\+Event@{check\+Next\+Event}}
 \index{check\+Next\+Event@{check\+Next\+Event}!main.\+c@{main.\+c}}
-\subsubsection[{check\+Next\+Event}]{\setlength{\rightskip}{0pt plus 5cm}int check\+Next\+Event (
+\paragraph[{check\+Next\+Event}]{\setlength{\rightskip}{0pt plus 5cm}int check\+Next\+Event (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int}]{j}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a31a2c1016f54d5c2508c8a1578437f2d}
-
-
-Definition at line 264 of file main.\+c.
-
+)}\label{main_8c_a31a2c1016f54d5c2508c8a1578437f2d}
 
 \begin{DoxyCode}
-264                                     \{
-265   \textcolor{keywordflow}{switch} (hex[j])\{
-266     \textcolor{keywordflow}{case} 0x90:
-267     \textcolor{keywordflow}{case} 0x80:
-268     \textcolor{keywordflow}{case} 0xA0:
-269     \textcolor{keywordflow}{case} 0xB0:
-270     \textcolor{keywordflow}{case} 0xC0:
-271     \textcolor{keywordflow}{case} 0xD0:
-272     \textcolor{keywordflow}{case} 0xE0: \textcolor{keywordflow}{return} 1; \textcolor{keywordflow}{break};
-273     \textcolor{keywordflow}{default}  : \textcolor{keywordflow}{return} 0; \textcolor{keywordflow}{break};
-274   \}
-275 \}
+00265                                     \{
+00266   \textcolor{keywordflow}{switch} (hex[j])\{
+00267     \textcolor{keywordflow}{case} 0x90:
+00268     \textcolor{keywordflow}{case} 0x80:
+00269     \textcolor{keywordflow}{case} 0xA0:
+00270     \textcolor{keywordflow}{case} 0xB0:
+00271     \textcolor{keywordflow}{case} 0xC0:
+00272     \textcolor{keywordflow}{case} 0xD0:
+00273     \textcolor{keywordflow}{case} 0xE0: \textcolor{keywordflow}{return} 1; \textcolor{keywordflow}{break};
+00274     \textcolor{keywordflow}{default}  : \textcolor{keywordflow}{return} 0; \textcolor{keywordflow}{break};
+00275   \}
+00276 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}{\index{main.\+c@{main.\+c}!count\+Notes@{count\+Notes}}
+\index{main.\+c@{main.\+c}!count\+Notes@{count\+Notes}}
 \index{count\+Notes@{count\+Notes}!main.\+c@{main.\+c}}
-\subsubsection[{count\+Notes}]{\setlength{\rightskip}{0pt plus 5cm}int count\+Notes (
+\paragraph[{count\+Notes}]{\setlength{\rightskip}{0pt plus 5cm}int count\+Notes (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int}]{amount}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}
+)}\label{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}
 A function to count the number of notes in the entire song 
 \begin{DoxyParams}{Parameters}
-{\em int\mbox{]}} & hex\mbox{[}\mbox{]}\+: an array with the stored information from the file \\
+{\em } & int]\+: hex[]\+: an array with the stored information from the file \\
 \hline
-{\em int\mbox{]}} & amount\+: an integer holding the total number of characters in the array \\
+{\em } & int]\+: amount\+: an integer holding the total number of characters in the array \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 200 of file main.\+c.
-
-
 \begin{DoxyCode}
-200                                      \{
-201   \textcolor{keywordtype}{int} i = 0, res = 0;
-202   \textcolor{keywordflow}{for}(i = 0; i < amount; i++)\{
-203     \textcolor{keywordflow}{if}(hex[i] == 0x90)\{
-204       res++;
-205     \}
-206   \}
-207   \textcolor{keywordflow}{return} res;
-208 \}
+00200                                      \{
+00201   \textcolor{keywordtype}{int} i = 0, res = 0;
+00202   \textcolor{keywordflow}{for}(i = 0; i < amount; i++)\{
+00203     \textcolor{keywordflow}{if}(hex[i] == 0x90)\{
+00204       res++;
+00205     \}
+00206   \}
+00207   \textcolor{keywordflow}{return} res;
+00208 \}
 \end{DoxyCode}
-\hypertarget{main_8c_af836f26ac499b26de031f92ef5899a31}{\index{main.\+c@{main.\+c}!count\+Ticks1@{count\+Ticks1}}
+\index{main.\+c@{main.\+c}!count\+Ticks1@{count\+Ticks1}}
 \index{count\+Ticks1@{count\+Ticks1}!main.\+c@{main.\+c}}
-\subsubsection[{count\+Ticks1}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks1 (
+\paragraph[{count\+Ticks1}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks1 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{i, }
 \item[{int}]{delta\+Counter, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{ticks[$\,$], }
 \item[{int $\ast$}]{tick\+Counter}
 \end{DoxyParamCaption}
-)}}\label{main_8c_af836f26ac499b26de031f92ef5899a31}
-
-
-Definition at line 313 of file main.\+c.
-
+)}\label{main_8c_af836f26ac499b26de031f92ef5899a31}
 
 \begin{DoxyCode}
-313                                                                                     \{
-314   \textcolor{keywordflow}{while}(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
-315     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
-316   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
-317   i += deltaCounter;
-318 \}
+00314                                                                                     \{
+00315   \textcolor{keywordflow}{while}(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
+00316     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+00317   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
+00318   i += deltaCounter;
+00319 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a4bc2fa0c74fcabd55e06bd0d49e1f992}{\index{main.\+c@{main.\+c}!count\+Ticks2@{count\+Ticks2}}
+\index{main.\+c@{main.\+c}!count\+Ticks2@{count\+Ticks2}}
 \index{count\+Ticks2@{count\+Ticks2}!main.\+c@{main.\+c}}
-\subsubsection[{count\+Ticks2}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks2 (
+\paragraph[{count\+Ticks2}]{\setlength{\rightskip}{0pt plus 5cm}void count\+Ticks2 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{i, }
 \item[{int}]{delta\+Counter, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{ticks[$\,$], }
 \item[{int $\ast$}]{tick\+Counter}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a4bc2fa0c74fcabd55e06bd0d49e1f992}
-
-
-Definition at line 320 of file main.\+c.
-
+)}\label{main_8c_a4bc2fa0c74fcabd55e06bd0d49e1f992}
 
 \begin{DoxyCode}
-320                                                                                     \{
-321   \textcolor{keywordflow}{while}(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
-322     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
-323   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
-324   i += deltaCounter;
-325 \}
+00321                                                                                     \{
+00322   \textcolor{keywordflow}{while}(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
+00323     ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+00324   ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
+00325   i += deltaCounter;
+00326 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a5ce54b23ee9b2c1ae92adac7a9505180}{\index{main.\+c@{main.\+c}!delta\+Time\+To\+Note\+Length@{delta\+Time\+To\+Note\+Length}}
+\index{main.\+c@{main.\+c}!delta\+Time\+To\+Note\+Length@{delta\+Time\+To\+Note\+Length}}
 \index{delta\+Time\+To\+Note\+Length@{delta\+Time\+To\+Note\+Length}!main.\+c@{main.\+c}}
-\subsubsection[{delta\+Time\+To\+Note\+Length}]{\setlength{\rightskip}{0pt plus 5cm}void delta\+Time\+To\+Note\+Length (
+\paragraph[{delta\+Time\+To\+Note\+Length}]{\setlength{\rightskip}{0pt plus 5cm}void delta\+Time\+To\+Note\+Length (
 \begin{DoxyParamCaption}
 \item[{int $\ast$}]{ticks, }
 \item[{int}]{ppqn, }
 \item[{int}]{size, }
 \item[{{\bf note} $\ast$}]{note\+Ar}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a5ce54b23ee9b2c1ae92adac7a9505180}
-
-
-Definition at line 485 of file main.\+c.
-
+)}\label{main_8c_a5ce54b23ee9b2c1ae92adac7a9505180}
 
 \begin{DoxyCode}
-485                                                                          \{
-486 
-487   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
-488   
-489     \textcolor{keywordtype}{double} noteLength = ((double) (ticks[i])) / ((\textcolor{keywordtype}{double}) (ppqn/8));
-490 
-491     \textcolor{keywordflow}{if} (noteLength < 1.5 && noteLength >= 0)
-492       noteLength = 1;
-493     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 3 && noteLength >= 1.5)
-494       noteLength = 2;
-495     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 6 && noteLength >= 3)
-496       noteLength = 4;
-497     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 12 && noteLength >= 6)
-498       noteLength = 8;
-499     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 24 && noteLength >= 12)
-500       noteLength = 16;
-501     \textcolor{keywordflow}{else}
-502       noteLength = 32;
-503     
-504         noteAr[i].\hyperlink{structnote_a348563a2eef21d1187cf04f493fedf36}{length} = noteLength;
-505     \}
-506 \}
+00484                                                                          \{
+00485 
+00486   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
+00487   
+00488     \textcolor{keywordtype}{double} noteLength = ((double) (ticks[i])) / ((\textcolor{keywordtype}{double}) (ppqn/8));
+00489 
+00490     \textcolor{keywordflow}{if} (noteLength < 1.5 && noteLength >= 0)
+00491       noteLength = 1;
+00492     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 3 && noteLength >= 1.5)
+00493       noteLength = 2;
+00494     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 6 && noteLength >= 3)
+00495       noteLength = 4;
+00496     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 12 && noteLength >= 6)
+00497       noteLength = 8;
+00498     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (noteLength < 24 && noteLength >= 12)
+00499       noteLength = 16;
+00500     \textcolor{keywordflow}{else}
+00501       noteLength = 32;
+00502     
+00503         noteAr[i].length = noteLength;
+00504     \}
+00505 \}
 \end{DoxyCode}
-\hypertarget{main_8c_ad88978d32a0f080f58ed31ffe9c51396}{\index{main.\+c@{main.\+c}!fill\+Note@{fill\+Note}}
+\index{main.\+c@{main.\+c}!fill\+Note@{fill\+Note}}
 \index{fill\+Note@{fill\+Note}!main.\+c@{main.\+c}}
-\subsubsection[{fill\+Note}]{\setlength{\rightskip}{0pt plus 5cm}void fill\+Note (
+\paragraph[{fill\+Note}]{\setlength{\rightskip}{0pt plus 5cm}void fill\+Note (
 \begin{DoxyParamCaption}
 \item[{int}]{input\+Tone, }
 \item[{{\bf note} $\ast$}]{note}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ad88978d32a0f080f58ed31ffe9c51396}
+)}\label{main_8c_ad88978d32a0f080f58ed31ffe9c51396}
 A function to fill out each of the structures of type note 
 \begin{DoxyParams}{Parameters}
-{\em int\mbox{]}} & input\+Tone\+: the value of the hexadecimal collected on the \char`\"{}tone\char`\"{}-\/spot \\
+{\em } & int]\+: input\+Tone\+: the value of the hexadecimal collected on the \char`\"{}tone\char`\"{}-\/spot \\
 \hline
-{\em note$\ast$\mbox{]}} & note\+: a pointer to a note-\/structure \\
+{\em } & note$\ast$]\+: note\+: a pointer to a note-\/structure \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 331 of file main.\+c.
-
-
 \begin{DoxyCode}
-331                                         \{
-332   note->\hyperlink{structnote_a30832d96c968d682e5838b39370a1908}{tone} = inputTone % 12;
-333   note->\hyperlink{structnote_aed9fb8ec9c20fa4620f928c988dba840}{average} = inputTone;
-334   note->\hyperlink{structnote_a8b58f133e02c3ea4ec40ee641b654dcf}{octave} = inputTone / 12;
-335 \}
+00332                                         \{
+00333   note->tone = inputTone % 12;
+00334   note->average = inputTone;
+00335   note->octave = inputTone / 12;
+00336 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a6406eca72b9402b7240ed0e453e8db46}{\index{main.\+c@{main.\+c}!fill\+Song\+Data@{fill\+Song\+Data}}
+\index{main.\+c@{main.\+c}!fill\+Song\+Data@{fill\+Song\+Data}}
 \index{fill\+Song\+Data@{fill\+Song\+Data}!main.\+c@{main.\+c}}
-\subsubsection[{fill\+Song\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void fill\+Song\+Data (
+\paragraph[{fill\+Song\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void fill\+Song\+Data (
 \begin{DoxyParamCaption}
 \item[{{\bf data} $\ast$}]{data, }
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int}]{numbers\+In\+Text}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a6406eca72b9402b7240ed0e453e8db46}
-A function, that fills out the song data 
+)}\label{main_8c_a6406eca72b9402b7240ed0e453e8db46}
+! A function, that fills out the song data 
 \begin{DoxyParams}{Parameters}
-{\em data$\ast$\mbox{]}} & data\+: a pointer to a structure containing the tempo and mode of the song \\
+{\em } & data$\ast$]\+: data\+: a pointer to a structure containing the tempo and mode of the song \\
 \hline
-{\em int\mbox{]}} & hex\mbox{[}\mbox{]}\+:the array of integers read from the file \\
+{\em } & int]\+: hex[]\+:the array of integers read from the file \\
 \hline
-{\em int\mbox{]}} & numbers\+In\+Text\+: the total amount of integers in the array \\
+{\em } & int]\+: numbers\+In\+Text\+: the total amount of integers in the array \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 215 of file main.\+c.
-
-
 \begin{DoxyCode}
-215                                                            \{
-216   \textcolor{keywordtype}{int} j;
-217   \textcolor{comment}{/*Find the mode of the song, initialised as minor atm*/}
-218   \textcolor{keywordflow}{for}(j = 0; j < numbersInText; j++)\{
-219     \textcolor{comment}{/* finds the tempo */}
-220     \textcolor{keywordflow}{if}(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03)\{
-221       data->\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
-222     \}
-223   \}
-224 \}
+00216                                                            \{
+00217   \textcolor{keywordtype}{int} j;
+00218   \textcolor{comment}{/*Find the mode of the song, initialised as minor atm*/}
+00219   \textcolor{keywordflow}{for}(j = 0; j < numbersInText; j++)\{
+00220     \textcolor{comment}{/* finds the tempo */}
+00221     \textcolor{keywordflow}{if}(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03)\{
+00222       data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
+00223     \}
+00224   \}
+00225 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a958ac363192985c144e524cc6e092e7c}{\index{main.\+c@{main.\+c}!find\+Events@{find\+Events}}
+\index{main.\+c@{main.\+c}!find\+Events@{find\+Events}}
 \index{find\+Events@{find\+Events}!main.\+c@{main.\+c}}
-\subsubsection[{find\+Events}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Events (
+\paragraph[{find\+Events}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Events (
 \begin{DoxyParamCaption}
 \item[{int}]{numbers\+In\+Text, }
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf event\+Placement}}]{placement\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
+\item[{{\bf event\+Placement}}]{placement[$\,$], }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
+\item[{int}]{ticks[$\,$], }
 \item[{int $\ast$}]{size}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a958ac363192985c144e524cc6e092e7c}
-
-
-Definition at line 226 of file main.\+c.
-
+)}\label{main_8c_a958ac363192985c144e524cc6e092e7c}
 
 \begin{DoxyCode}
-226                                                                                                            
+00227                                                                                                            
            \{
-227   \textcolor{keywordtype}{int} noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-228       programChange = 0, channelPressure = 0, pitchWheel = 0, n = 0;
-229 
-230   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < numbersInText; j++)\{
-231     \textcolor{keywordflow}{switch} (hex[j])\{
-232       \textcolor{keywordflow}{case} 0x90: \hyperlink{main_8c_afce19655c88726711949a8e720767874}{insertPlacement1}(hex, &placement[noteOn++].noteOn, j, noteAr, &n);        
-             \textcolor{keywordflow}{break};
-233       \textcolor{keywordflow}{case} 0x80: \hyperlink{main_8c_afce19655c88726711949a8e720767874}{insertPlacement1}(hex, &placement[noteOff++].noteOff, j, noteAr, &n);      
-             \textcolor{keywordflow}{break};
-234       \textcolor{keywordflow}{case} 0xA0: \hyperlink{main_8c_afce19655c88726711949a8e720767874}{insertPlacement1}(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);
-             \textcolor{keywordflow}{break};
-235       \textcolor{keywordflow}{case} 0xB0: \hyperlink{main_8c_afce19655c88726711949a8e720767874}{insertPlacement1}(hex, &placement[controlChange++].controlChange, j, noteAr
-      , &n); \textcolor{keywordflow}{break};
-236       \textcolor{keywordflow}{case} 0xC0: \hyperlink{main_8c_a0349131ee04fd791a9bcd1205db44778}{insertPlacement2}(hex, &placement[programChange++].programChange, j);      
-             \textcolor{keywordflow}{break};
-237       \textcolor{keywordflow}{case} 0xD0: \hyperlink{main_8c_a0349131ee04fd791a9bcd1205db44778}{insertPlacement2}(hex, &placement[channelPressure++].channelPressure, j);  
-             \textcolor{keywordflow}{break};
-238       \textcolor{keywordflow}{case} 0xE0: \hyperlink{main_8c_afce19655c88726711949a8e720767874}{insertPlacement1}(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);
-             \textcolor{keywordflow}{break};
-239       \textcolor{keywordflow}{default}  :                                                                                  \textcolor{keywordflow}{break};
-240     \}
-241   \}
-242   \hyperlink{main_8c_ac6acd514eb7de5e7d0a48cae55dc02ff}{findTicks}(numbersInText, hex, placement, noteAr, ticks, noteOn, size);
-243 \}
+00228   \textcolor{keywordtype}{int} noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
+00229       programChange = 0, channelPressure = 0, pitchWheel = 0, n = 0;
+00230 
+00231   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < numbersInText; j++)\{
+00232     \textcolor{keywordflow}{switch} (hex[j])\{
+00233       \textcolor{keywordflow}{case} 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, &n);               \textcolor{keywordflow}{break};
+00234       \textcolor{keywordflow}{case} 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, &n);             \textcolor{keywordflow}{break};
+00235       \textcolor{keywordflow}{case} 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, &n);       \textcolor{keywordflow}{break};
+00236       \textcolor{keywordflow}{case} 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, &n); \textcolor{keywordflow}{break};
+00237       \textcolor{keywordflow}{case} 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);             \textcolor{keywordflow}{break};
+00238       \textcolor{keywordflow}{case} 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);         \textcolor{keywordflow}{break};
+00239       \textcolor{keywordflow}{case} 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, &n);       \textcolor{keywordflow}{break};
+00240       \textcolor{keywordflow}{default}  :                                                                                  \textcolor{keywordflow}{break};
+00241     \}
+00242   \}
+00243   findTicks(numbersInText, hex, placement, noteAr, ticks, noteOn, size);
+00244 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a16182e7956158cfcf78a8b97423ee1da}{\index{main.\+c@{main.\+c}!find\+Mode@{find\+Mode}}
+\index{main.\+c@{main.\+c}!find\+Mode@{find\+Mode}}
 \index{find\+Mode@{find\+Mode}!main.\+c@{main.\+c}}
-\subsubsection[{find\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Mode (
+\paragraph[{find\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Mode (
 \begin{DoxyParamCaption}
 \item[{{\bf note} $\ast$}]{, }
 \item[{int}]{, }
 \item[{{\bf data} $\ast$}]{}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a16182e7956158cfcf78a8b97423ee1da}
-\hypertarget{main_8c_a660cd7ea9eae225a44ccb0fd609984a3}{\index{main.\+c@{main.\+c}!find\+Mode@{find\+Mode}}
+)}\label{main_8c_a16182e7956158cfcf78a8b97423ee1da}
+\index{main.\+c@{main.\+c}!find\+Mode@{find\+Mode}}
 \index{find\+Mode@{find\+Mode}!main.\+c@{main.\+c}}
-\subsubsection[{find\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Mode (
+\paragraph[{find\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Mode (
 \begin{DoxyParamCaption}
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
 \item[{int}]{total\+Notes, }
 \item[{{\bf data} $\ast$}]{data}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a660cd7ea9eae225a44ccb0fd609984a3}
+)}\label{main_8c_a660cd7ea9eae225a44ccb0fd609984a3}
 A function to find the mode of the song by first calculating the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys. 
 \begin{DoxyParams}{Parameters}
-{\em note\mbox{[}$\,$\mbox{]}\mbox{]}} & note\+Ar\+: An array of all the notes in the entire song \\
+{\em } & note[]]\+: note\+Ar\+: An array of all the notes in the entire song \\
 \hline
-{\em int\mbox{]}} & total\+Notes\+: The number of notes in the song \\
+{\em } & int]\+: total\+Notes\+: The number of notes in the song \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 520 of file main.\+c.
-
-
 \begin{DoxyCode}
-520                                                         \{
-521   \textcolor{keywordtype}{int} x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, 
-      \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = 0;
-522 
-523   \textcolor{comment}{/*Goes through all notes of the song and puts them into an array*/}
-524   \textcolor{keywordflow}{while}(x < totalNotes)\{
-525     \textcolor{keywordflow}{for}(y = 0; y < sizeBar; y++, x++)\{
-526       bar[y] = noteAr[x].\hyperlink{structnote_a30832d96c968d682e5838b39370a1908}{tone};
-527     \}
-528 
-529     \textcolor{keywordflow}{if}(y == sizeBar)\{
-530       span = 999;
-531       \textcolor{comment}{/*Sort notes in acsending order*/}
-532       qsort(bar, sizeBar, \textcolor{keyword}{sizeof}(\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone}), \hyperlink{main_8c_a33b74ebb6acaeb30576c9e66aebe2fb6}{sortTones});
-533 
-534       \textcolor{comment}{/*Find the lowest possible tonespan over the entire array of notes*/}
-535       \textcolor{keywordflow}{for}(z = 0; z < 4; z++)\{
-536     \textcolor{keywordflow}{if}((z + 1) > 3)
-537           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
-538         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z + 2) > 3)
-539           tempSpan = bar[(z+1)]-bar[z] + (bar[(z+2)%4]+12)-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
-540     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z +3) > 3)
-541           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
-542     \textcolor{keywordflow}{else}
-543           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
-544 
-545     \textcolor{keywordflow}{if}(tempSpan < span)\{
-546           span = tempSpan; 
-547           keynote = bar[z];
-548         \}
-549       \}
-550       \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} += \hyperlink{main_8c_ab07d21079009fe6f42cd1a95b5db3522}{isInScale}(keynote, bar, sizeBar);
-551       printf(\textcolor{stringliteral}{"Moden er nu: %d\(\backslash\)n"}, \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode});
-552     \}
-553   data->\hyperlink{structdata_ae1a174f61aada93146a06764a3511eb6}{key} = keynote;
-554   \textcolor{keywordflow}{if}(\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} > 0)
-555     data->\hyperlink{structdata_a9781fc7b786289e4c06b4085d31558e3}{mode} = \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major};
-556   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} < 0)
-557     data->\hyperlink{structdata_a9781fc7b786289e4c06b4085d31558e3}{mode} = \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor};  
-558   \}
-559 \}
+00519                                                         \{
+00520   \textcolor{keywordtype}{int} x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, 
+      mode = 0;
+00521 
+00522   \textcolor{comment}{/*Goes through all notes of the song and puts them into an array*/}
+00523   \textcolor{keywordflow}{while}(x < totalNotes)\{
+00524     \textcolor{keywordflow}{for}(y = 0; y < sizeBar; y++, x++)\{
+00525       bar[y] = noteAr[x].tone;
+00526     \}
+00527 
+00528     \textcolor{keywordflow}{if}(y == sizeBar)\{
+00529       span = 999;
+00530       \textcolor{comment}{/*Sort notes in acsending order*/}
+00531       qsort(bar, sizeBar, \textcolor{keyword}{sizeof}(tone), sortTones);
+00532 
+00533       \textcolor{comment}{/*Find the lowest possible tonespan over the entire array of notes*/}
+00534       \textcolor{keywordflow}{for}(z = 0; z < 4; z++)\{
+00535     \textcolor{keywordflow}{if}((z + 1) > 3)
+00536           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+00537         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z + 2) > 3)
+00538           tempSpan = bar[(z+1)]-bar[z] + (bar[(z+2)%4]+12)-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+00539     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((z +3) > 3)
+00540           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
+00541     \textcolor{keywordflow}{else}
+00542           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
+00543 
+00544     \textcolor{keywordflow}{if}(tempSpan < span)\{
+00545           span = tempSpan; 
+00546           keynote = bar[z];
+00547         \}
+00548       \}
+00549       mode += isInScale(keynote, bar, sizeBar);
+00550       printf(\textcolor{stringliteral}{"Moden er nu: %d\(\backslash\)n"}, mode);
+00551     \}
+00552   data->key = keynote;
+00553   \textcolor{keywordflow}{if}(mode > 0)
+00554     data->mode = major;
+00555   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(mode < 0)
+00556     data->mode = minor;  
+00557   \}
+00558 \}
 \end{DoxyCode}
-\hypertarget{main_8c_aea24927f2da3a892904ec1abd4ad01bf}{\index{main.\+c@{main.\+c}!Find\+Mood\+Amount@{Find\+Mood\+Amount}}
+\index{main.\+c@{main.\+c}!Find\+Mood\+Amount@{Find\+Mood\+Amount}}
 \index{Find\+Mood\+Amount@{Find\+Mood\+Amount}!main.\+c@{main.\+c}}
-\subsubsection[{Find\+Mood\+Amount}]{\setlength{\rightskip}{0pt plus 5cm}int Find\+Mood\+Amount (
+\paragraph[{Find\+Mood\+Amount}]{\setlength{\rightskip}{0pt plus 5cm}int Find\+Mood\+Amount (
 \begin{DoxyParamCaption}
 \item[{F\+I\+L\+E $\ast$}]{moods}
 \end{DoxyParamCaption}
-)}}\label{main_8c_aea24927f2da3a892904ec1abd4ad01bf}
-
-
-Definition at line 621 of file main.\+c.
-
+)}\label{main_8c_aea24927f2da3a892904ec1abd4ad01bf}
 
 \begin{DoxyCode}
-621                                \{
-622   \textcolor{keywordtype}{int} i = 1;
-623   \textcolor{keywordflow}{while}(fgetc(moods) != EOF)\{
-624     \textcolor{keywordflow}{if}(fgetc(moods) == \textcolor{charliteral}{'\(\backslash\)n'})
-625       i++;
-626   \}
-627   rewind(moods);
-628   \textcolor{keywordflow}{return} i;
-629 \}
+00620                                \{
+00621   \textcolor{keywordtype}{int} i = 1;
+00622   \textcolor{keywordflow}{while}(fgetc(moods) != EOF)\{
+00623     \textcolor{keywordflow}{if}(fgetc(moods) == \textcolor{charliteral}{'\(\backslash\)n'})
+00624       i++;
+00625   \}
+00626   rewind(moods);
+00627   \textcolor{keywordflow}{return} i;
+00628 \}
 \end{DoxyCode}
-\hypertarget{main_8c_ab56a62ec1c82722ba291a717b2afca5b}{\index{main.\+c@{main.\+c}!find\+Note\+Length@{find\+Note\+Length}}
+\index{main.\+c@{main.\+c}!find\+Note\+Length@{find\+Note\+Length}}
 \index{find\+Note\+Length@{find\+Note\+Length}!main.\+c@{main.\+c}}
-\subsubsection[{find\+Note\+Length}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Note\+Length (
+\paragraph[{find\+Note\+Length}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Note\+Length (
 \begin{DoxyParamCaption}
 \item[{double}]{x, }
 \item[{int $\ast$}]{, }
 \item[{int $\ast$}]{}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ab56a62ec1c82722ba291a717b2afca5b}
-\hypertarget{main_8c_ac6acd514eb7de5e7d0a48cae55dc02ff}{\index{main.\+c@{main.\+c}!find\+Ticks@{find\+Ticks}}
+)}\label{main_8c_ab56a62ec1c82722ba291a717b2afca5b}
+\index{main.\+c@{main.\+c}!find\+Ticks@{find\+Ticks}}
 \index{find\+Ticks@{find\+Ticks}!main.\+c@{main.\+c}}
-\subsubsection[{find\+Ticks}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Ticks (
+\paragraph[{find\+Ticks}]{\setlength{\rightskip}{0pt plus 5cm}void find\+Ticks (
 \begin{DoxyParamCaption}
 \item[{int}]{numbers\+In\+Text, }
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf event\+Placement}}]{placement\mbox{[}$\,$\mbox{]}, }
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
-\item[{int}]{ticks\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
+\item[{{\bf event\+Placement}}]{placement[$\,$], }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
+\item[{int}]{ticks[$\,$], }
 \item[{int}]{note\+On, }
 \item[{int $\ast$}]{size}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ac6acd514eb7de5e7d0a48cae55dc02ff}
-
-
-Definition at line 277 of file main.\+c.
-
+)}\label{main_8c_ac6acd514eb7de5e7d0a48cae55dc02ff}
 
 \begin{DoxyCode}
-277                                                                                                            
+00278                                                                                                            
                       \{
-278   \textcolor{keywordtype}{int} tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
-279   
-280   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < noteOn; j++)\{
-281     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = placement[j].noteOn; i < numbersInText; i++)\{
-282       \textcolor{keywordflow}{if}(hex[i] == 0x80)\{
-283         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone})
-284           \textcolor{keywordflow}{break};
-285         \textcolor{keywordflow}{else}\{
-286           \hyperlink{main_8c_af836f26ac499b26de031f92ef5899a31}{countTicks1}(hex, &i, deltaCounter1, ticks, &tickCounter);
-287         \}
-288       \}
-289       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xA0)\{
-290         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].\hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919f}{tone} && hex[i + 2] == 0x00)
-291           \textcolor{keywordflow}{break};
-292         \textcolor{keywordflow}{else}\{
-293           \hyperlink{main_8c_af836f26ac499b26de031f92ef5899a31}{countTicks1}(hex, &i, deltaCounter1, ticks, &tickCounter);
-294         \}
-295       \}
-296       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xD0)\{
-297         \textcolor{keywordflow}{if}(hex[i + 1] == 0x00)
-298           \textcolor{keywordflow}{break};
-299         \textcolor{keywordflow}{else}\{
-300           \hyperlink{main_8c_a4bc2fa0c74fcabd55e06bd0d49e1f992}{countTicks2}(hex, &i, deltaCounter2, ticks, &tickCounter);
-301         \}
-302       \}
-303       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xC0)\{
-304         \hyperlink{main_8c_a4bc2fa0c74fcabd55e06bd0d49e1f992}{countTicks2}(hex, &i, deltaCounter2, ticks, &tickCounter);
-305       \}
-306       \textcolor{keywordflow}{else}\{
-307         \hyperlink{main_8c_af836f26ac499b26de031f92ef5899a31}{countTicks1}(hex, &i, deltaCounter1, ticks, &tickCounter);
-308       \}     
-309     \}
-310   \}
-311 \}
+00279   \textcolor{keywordtype}{int} tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
+00280   
+00281   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < noteOn; j++)\{
+00282     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = placement[j].noteOn; i < numbersInText; i++)\{
+00283       \textcolor{keywordflow}{if}(hex[i] == 0x80)\{
+00284         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].tone)
+00285           \textcolor{keywordflow}{break};
+00286         \textcolor{keywordflow}{else}\{
+00287           countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+00288         \}
+00289       \}
+00290       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xA0)\{
+00291         \textcolor{keywordflow}{if}(hex[i + 1] == noteAr[j].tone && hex[i + 2] == 0x00)
+00292           \textcolor{keywordflow}{break};
+00293         \textcolor{keywordflow}{else}\{
+00294           countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+00295         \}
+00296       \}
+00297       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xD0)\{
+00298         \textcolor{keywordflow}{if}(hex[i + 1] == 0x00)
+00299           \textcolor{keywordflow}{break};
+00300         \textcolor{keywordflow}{else}\{
+00301           countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
+00302         \}
+00303       \}
+00304       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(hex[i] == 0xC0)\{
+00305         countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
+00306       \}
+00307       \textcolor{keywordflow}{else}\{
+00308         countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+00309       \}     
+00310     \}
+00311   \}
+00312 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a7e86822405cc3ff43db316d113a1fb6d}{\index{main.\+c@{main.\+c}!get\+Hex@{get\+Hex}}
+\index{main.\+c@{main.\+c}!get\+Hex@{get\+Hex}}
 \index{get\+Hex@{get\+Hex}!main.\+c@{main.\+c}}
-\subsubsection[{get\+Hex}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Hex (
+\paragraph[{get\+Hex}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Hex (
 \begin{DoxyParamCaption}
 \item[{F\+I\+L\+E $\ast$}]{f, }
-\item[{int}]{hex\+Ar\mbox{[}$\,$\mbox{]}}
+\item[{int}]{hex\+Ar[$\,$]}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a7e86822405cc3ff43db316d113a1fb6d}
+)}\label{main_8c_a7e86822405cc3ff43db316d113a1fb6d}
 A function, that retrieves the hexadecimals from the files and also returns the number of files 
 \begin{DoxyParams}{Parameters}
-{\em F\+I\+L\+E$\ast$\mbox{]}} & f\+: a pointer to the file the program is reading from \\
+{\em } & F\+I\+L\+E$\ast$]\+: f\+: a pointer to the file the program is reading from \\
 \hline
-{\em int\mbox{]}} & hex\+Ar\mbox{[}\mbox{]}\+: an array of integers, that the information is stored in \\
+{\em } & int]\+: hex\+Ar[]\+: an array of integers, that the information is stored in \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 186 of file main.\+c.
-
-
 \begin{DoxyCode}
-186                                 \{
-187   \textcolor{keywordtype}{int} i = 0, c;
-188   \textcolor{keywordflow}{while}( (c = fgetc(f)) != EOF && i < \hyperlink{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{CHARS})\{
-189     hexAr[i] = c;
-190     i++;
-191   \}
-192   
-193   \textcolor{keywordflow}{return} i;
-194 \}
+00186                                 \{
+00187   \textcolor{keywordtype}{int} i = 0, c;
+00188   \textcolor{keywordflow}{while}( (c = fgetc(f)) != EOF && i < CHARS)\{
+00189     hexAr[i] = c;
+00190     i++;
+00191   \}
+00192   
+00193   \textcolor{keywordflow}{return} i;
+00194 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a1709777308c32674291e7213d55feb6e}{\index{main.\+c@{main.\+c}!insert\+Moods@{insert\+Moods}}
+\index{main.\+c@{main.\+c}!insert\+Moods@{insert\+Moods}}
 \index{insert\+Moods@{insert\+Moods}!main.\+c@{main.\+c}}
-\subsubsection[{insert\+Moods}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Moods (
+\paragraph[{insert\+Moods}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Moods (
 \begin{DoxyParamCaption}
-\item[{{\bf mood\+Weighting}}]{mood\+Array\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf mood\+Weighting}}]{mood\+Array[$\,$], }
 \item[{F\+I\+L\+E $\ast$}]{moods}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a1709777308c32674291e7213d55feb6e}
-
-
-Definition at line 444 of file main.\+c.
-
+)}\label{main_8c_a1709777308c32674291e7213d55feb6e}
 
 \begin{DoxyCode}
-444                                                         \{
-445   printf(\textcolor{stringliteral}{"hej er her"});
-446   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{AMOUNT\_OF\_MOODS}; i++)\{
-447     fscanf(moods, \textcolor{stringliteral}{"%s %d %d %d %d"}, moodArray[i].name , &moodArray[i].\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode}, 
-448                                     &moodArray[i].tempo, &moodArray[i].toneLength,
-449                                     &moodArray[i].pitch);
-450   \}
-451   printf(\textcolor{stringliteral}{"jeg er også her"});
-452 \}
+00445                                                         \{
+00446   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00447     fscanf(moods, \textcolor{stringliteral}{"%s %d %d %d %d"}, moodArray[i].name , &moodArray[i].mode, 
+00448                                     &moodArray[i].tempo, &moodArray[i].toneLength,
+00449                                     &moodArray[i].pitch);
+00450   \}
+00451 \}
 \end{DoxyCode}
-\hypertarget{main_8c_afce19655c88726711949a8e720767874}{\index{main.\+c@{main.\+c}!insert\+Placement1@{insert\+Placement1}}
+\index{main.\+c@{main.\+c}!insert\+Placement1@{insert\+Placement1}}
 \index{insert\+Placement1@{insert\+Placement1}!main.\+c@{main.\+c}}
-\subsubsection[{insert\+Placement1}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement1 (
+\paragraph[{insert\+Placement1}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement1 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{place, }
 \item[{int}]{j, }
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
 \item[{int $\ast$}]{n}
 \end{DoxyParamCaption}
-)}}\label{main_8c_afce19655c88726711949a8e720767874}
-
-
-Definition at line 245 of file main.\+c.
-
+)}\label{main_8c_afce19655c88726711949a8e720767874}
 
 \begin{DoxyCode}
-245                                                                           \{
-246   \textcolor{keywordtype}{int} i = 3;
-247   \textcolor{keywordflow}{while}(i < 7 && hex[(j + i++)] > 0x80);
-248   \textcolor{keywordflow}{if}(\hyperlink{main_8c_a31a2c1016f54d5c2508c8a1578437f2d}{checkNextEvent}(hex, (j + i)))\{
-249     *place = j;
-250     \textcolor{keywordflow}{if}(hex[j] == 0x90)\{
-251       \hyperlink{main_8c_ad88978d32a0f080f58ed31ffe9c51396}{fillNote}(hex[j + 1], &noteAr[*n]);
-252       *n += 1;
-253     \}   
-254   \} 
-255 \}
+00246                                                                           \{
+00247   \textcolor{keywordtype}{int} i = 3;
+00248   \textcolor{keywordflow}{while}(i < 7 && hex[(j + i++)] > 0x80);
+00249   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))\{
+00250     *place = j;
+00251     \textcolor{keywordflow}{if}(hex[j] == 0x90)\{
+00252       fillNote(hex[j + 1], &noteAr[*n]);
+00253       *n += 1;
+00254     \}   
+00255   \} 
+00256 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a0349131ee04fd791a9bcd1205db44778}{\index{main.\+c@{main.\+c}!insert\+Placement2@{insert\+Placement2}}
+\index{main.\+c@{main.\+c}!insert\+Placement2@{insert\+Placement2}}
 \index{insert\+Placement2@{insert\+Placement2}!main.\+c@{main.\+c}}
-\subsubsection[{insert\+Placement2}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement2 (
+\paragraph[{insert\+Placement2}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Placement2 (
 \begin{DoxyParamCaption}
-\item[{int}]{hex\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{hex[$\,$], }
 \item[{int $\ast$}]{place, }
 \item[{int}]{j}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a0349131ee04fd791a9bcd1205db44778}
-
-
-Definition at line 257 of file main.\+c.
-
+)}\label{main_8c_a0349131ee04fd791a9bcd1205db44778}
 
 \begin{DoxyCode}
-257                                                    \{
-258   \textcolor{keywordtype}{int} i = 2;
-259   \textcolor{keywordflow}{while}(i < 6 && hex[(j + i++)] > 0x80);
-260   \textcolor{keywordflow}{if}(\hyperlink{main_8c_a31a2c1016f54d5c2508c8a1578437f2d}{checkNextEvent}(hex, (j + i)))
-261     *place = j;
-262 \}
+00258                                                    \{
+00259   \textcolor{keywordtype}{int} i = 2;
+00260   \textcolor{keywordflow}{while}(i < 6 && hex[(j + i++)] > 0x80);
+00261   \textcolor{keywordflow}{if}(checkNextEvent(hex, (j + i)))
+00262     *place = j;
+00263 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a241d0a265bf9c508dee8671ecab5f1d8}{\index{main.\+c@{main.\+c}!is\+In\+Major@{is\+In\+Major}}
+\index{main.\+c@{main.\+c}!is\+In\+Major@{is\+In\+Major}}
 \index{is\+In\+Major@{is\+In\+Major}!main.\+c@{main.\+c}}
-\subsubsection[{is\+In\+Major}]{\setlength{\rightskip}{0pt plus 5cm}int is\+In\+Major (
+\paragraph[{is\+In\+Major}]{\setlength{\rightskip}{0pt plus 5cm}int is\+In\+Major (
 \begin{DoxyParamCaption}
 \item[{int}]{tone\+Leap}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a241d0a265bf9c508dee8671ecab5f1d8}
+)}\label{main_8c_a241d0a265bf9c508dee8671ecab5f1d8}
 A function to check if the given tone leap is in the major scale. 
 \begin{DoxyParams}{Parameters}
-{\em int\mbox{]}} & tone\+Leap\+: An integer describing the processed tone leap \\
+{\em } & int]\+: tone\+Leap\+: An integer describing the processed tone leap \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{[}int\mbox{]}\+: a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not. 
+[ int]\+: a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not. 
 \end{DoxyReturn}
 
-
-Definition at line 611 of file main.\+c.
-
-
 \begin{DoxyCode}
-611                            \{
-612   \textcolor{keywordtype}{int} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}[] = \{0, 2, 4, 5, 7, 9, 11\};
-613 
-614   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \hyperlink{main_8c_a3c7b5c7d1b09d118aa63ec87e3c73a8b}{SCALESIZE}; i++)\{
-615     \textcolor{keywordflow}{if}(toneLeap == major[i])
-616       \textcolor{keywordflow}{return} 1;
-617   \}
-618   \textcolor{keywordflow}{return} 0;
-619 \}
+00610                            \{
+00611   \textcolor{keywordtype}{int} major[] = \{0, 2, 4, 5, 7, 9, 11\};
+00612 
+00613   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < SCALESIZE; i++)\{
+00614     \textcolor{keywordflow}{if}(toneLeap == major[i])
+00615       \textcolor{keywordflow}{return} 1;
+00616   \}
+00617   \textcolor{keywordflow}{return} 0;
+00618 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a7a1c0b6f906689e24cb60e1e5ff8bc76}{\index{main.\+c@{main.\+c}!is\+In\+Minor@{is\+In\+Minor}}
+\index{main.\+c@{main.\+c}!is\+In\+Minor@{is\+In\+Minor}}
 \index{is\+In\+Minor@{is\+In\+Minor}!main.\+c@{main.\+c}}
-\subsubsection[{is\+In\+Minor}]{\setlength{\rightskip}{0pt plus 5cm}int is\+In\+Minor (
+\paragraph[{is\+In\+Minor}]{\setlength{\rightskip}{0pt plus 5cm}int is\+In\+Minor (
 \begin{DoxyParamCaption}
 \item[{int}]{tone\+Leap}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a7a1c0b6f906689e24cb60e1e5ff8bc76}
+)}\label{main_8c_a7a1c0b6f906689e24cb60e1e5ff8bc76}
 A function to check if the given tone leap is in the minor scale. 
 \begin{DoxyParams}{Parameters}
-{\em int\mbox{]}} & tone\+Leap\+: An integer describing the processed tone leap \\
+{\em } & int]\+: tone\+Leap\+: An integer describing the processed tone leap \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{[}int\mbox{]}\+: a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not. 
+[ int]\+: a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not. 
 \end{DoxyReturn}
 
-
-Definition at line 597 of file main.\+c.
-
-
 \begin{DoxyCode}
-597                            \{
-598   \textcolor{keywordtype}{int} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}[] = \{0, 2, 3, 5, 7, 8, 10\};
-599 
-600   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \hyperlink{main_8c_a3c7b5c7d1b09d118aa63ec87e3c73a8b}{SCALESIZE}; i++)\{
-601     \textcolor{keywordflow}{if}(toneLeap == minor[i])
-602       \textcolor{keywordflow}{return} 1;
-603   \}
-604   \textcolor{keywordflow}{return} 0;
-605 \}
+00596                            \{
+00597   \textcolor{keywordtype}{int} minor[] = \{0, 2, 3, 5, 7, 8, 10\};
+00598 
+00599   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < SCALESIZE; i++)\{
+00600     \textcolor{keywordflow}{if}(toneLeap == minor[i])
+00601       \textcolor{keywordflow}{return} 1;
+00602   \}
+00603   \textcolor{keywordflow}{return} 0;
+00604 \}
 \end{DoxyCode}
-\hypertarget{main_8c_ab07d21079009fe6f42cd1a95b5db3522}{\index{main.\+c@{main.\+c}!is\+In\+Scale@{is\+In\+Scale}}
+\index{main.\+c@{main.\+c}!is\+In\+Scale@{is\+In\+Scale}}
 \index{is\+In\+Scale@{is\+In\+Scale}!main.\+c@{main.\+c}}
-\subsubsection[{is\+In\+Scale}]{\setlength{\rightskip}{0pt plus 5cm}int is\+In\+Scale (
+\paragraph[{is\+In\+Scale}]{\setlength{\rightskip}{0pt plus 5cm}int is\+In\+Scale (
 \begin{DoxyParamCaption}
 \item[{int}]{keytone, }
-\item[{int}]{other\+Tones\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{other\+Tones[$\,$], }
 \item[{int}]{size}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ab07d21079009fe6f42cd1a95b5db3522}
+)}\label{main_8c_ab07d21079009fe6f42cd1a95b5db3522}
 A function to check if a given scale in given keytone corresponds with the tones in the rest of the song. 
 \begin{DoxyParams}{Parameters}
-{\em scale\mbox{]}} & mode\+: An enum that describes the given mode \\
+{\em } & scale]\+: mode\+: An enum that describes the given mode \\
 \hline
-{\em int\mbox{]}} & keytone\+: The keytone of the processed scale \\
+{\em } & int]\+: keytone\+: The keytone of the processed scale \\
 \hline
-{\em int\mbox{]}} & other\+Tones\mbox{[}\mbox{]}\+: An array of the rest of the tones, which the function compares to the keytone and mode \\
+{\em } & int]\+: other\+Tones[]\+: An array of the rest of the tones, which the function compares to the keytone and mode \\
 \hline
-{\em int\mbox{]}} & size\+: The number of tones in the other\+Tones array \\
+{\em } & int]\+: size\+: The number of tones in the other\+Tones array \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{[}int\mbox{]}\+: a boolean value, returns 1 if the mode is major, -\/1 if it's minor and 0, if wasn't possible to decide. 
+[ int]\+: a boolean value, returns 1 if the mode is major, -\/1 if it's minor and 0, if wasn't possible to decide. 
 \end{DoxyReturn}
 
-
-Definition at line 568 of file main.\+c.
-
-
 \begin{DoxyCode}
-568                                                       \{
-569   \textcolor{keywordtype}{int} toneLeap, isMinor = 1, isMajor = 1;
-570 
-571   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
-572     \textcolor{keywordflow}{if}(otherTones[i] < keytone)
-573       otherTones[i] += 12;
-574       toneLeap = otherTones[i] - keytone;
-575 
-576       \textcolor{keywordflow}{if}(isMinor)
-577         isMinor = \hyperlink{main_8c_a7a1c0b6f906689e24cb60e1e5ff8bc76}{isInMinor}(toneLeap);
-578       \textcolor{keywordflow}{if}(isMajor)
-579         isMajor = \hyperlink{main_8c_a241d0a265bf9c508dee8671ecab5f1d8}{isInMajor}(toneLeap);
-580     \}
-581 
-582     \textcolor{keywordflow}{if}(isMinor && isMajor)
-583       \textcolor{keywordflow}{return} 0;
-584     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(isMinor)
-585       \textcolor{keywordflow}{return} -1;
-586     \textcolor{keywordflow}{if}(isMajor)
-587       \textcolor{keywordflow}{return} 1;
-588 
-589     \textcolor{keywordflow}{return} 0;
-590 \}
+00567                                                       \{
+00568   \textcolor{keywordtype}{int} toneLeap, isMinor = 1, isMajor = 1;
+00569 
+00570   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < size; i++)\{
+00571     \textcolor{keywordflow}{if}(otherTones[i] < keytone)
+00572       otherTones[i] += 12;
+00573       toneLeap = otherTones[i] - keytone;
+00574 
+00575       \textcolor{keywordflow}{if}(isMinor)
+00576         isMinor = isInMinor(toneLeap);
+00577       \textcolor{keywordflow}{if}(isMajor)
+00578         isMajor = isInMajor(toneLeap);
+00579     \}
+00580 
+00581     \textcolor{keywordflow}{if}(isMinor && isMajor)
+00582       \textcolor{keywordflow}{return} 0;
+00583     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(isMinor)
+00584       \textcolor{keywordflow}{return} -1;
+00585     \textcolor{keywordflow}{if}(isMajor)
+00586       \textcolor{keywordflow}{return} 1;
+00587 
+00588     \textcolor{keywordflow}{return} 0;
+00589 \}
 \end{DoxyCode}
-\hypertarget{main_8c_ac0f2228420376f4db7e1274f2b41667c}{\index{main.\+c@{main.\+c}!main@{main}}
+\index{main.\+c@{main.\+c}!main@{main}}
 \index{main@{main}!main.\+c@{main.\+c}}
-\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\paragraph[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
 \begin{DoxyParamCaption}
 \item[{int}]{argc, }
-\item[{const char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\item[{const char $\ast$}]{argv[$\,$]}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ac0f2228420376f4db7e1274f2b41667c}
-
-
-Definition at line 94 of file main.\+c.
-
+)}\label{main_8c_ac0f2228420376f4db7e1274f2b41667c}
 
 \begin{DoxyCode}
-94                                       \{
-95   FILE *f;
-96   \textcolor{keywordtype}{char} MIDIfile[25];
-97   \textcolor{comment}{/*Variables*/}
-98   \textcolor{keywordtype}{int} numbersInText = 0, notes, i = 0, size = 0, moodOfMelodi = 0;
-99   \textcolor{comment}{/* PLACEHOLDER FIX THIS */}
-100   \textcolor{keywordtype}{int} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = 5, tempo = 5, toneLength = 5, pitch = 5;
-101   FILE* moods = fopen(\textcolor{stringliteral}{"moods.txt"}, \textcolor{stringliteral}{"r"});
-102   \textcolor{keywordflow}{if}(moods == NULL)\{
-103     perror(\textcolor{stringliteral}{"Error: moods missing "});
-104     exit(EXIT\_FAILURE);
-105   \}
-106   \hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{AMOUNT\_OF\_MOODS} = \hyperlink{main_8c_aea24927f2da3a892904ec1abd4ad01bf}{FindMoodAmount}(moods);
-107   \hyperlink{structmood_weighting}{moodWeighting} moodArray[\hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{AMOUNT\_OF\_MOODS}];
-108   \hyperlink{structdata}{data} \hyperlink{structdata}{data} = \{0, \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}, \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}\};
-109   \textcolor{keywordflow}{if} (argv[1] == NULL)\{
-110     \hyperlink{main_8c_a6e65cd59478f60276ddf27b226f5ef8c}{checkDirectory}(MIDIfile);  
-111     f = fopen(MIDIfile,\textcolor{stringliteral}{"r"});  
-112     \textcolor{keywordflow}{if}(f == NULL)\{
-113       perror(\textcolor{stringliteral}{"Error opening file"});
-114       exit(EXIT\_FAILURE);
-115     \}
-116   \}
-117   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(argv[1] != NULL)\{
-118     f = fopen(argv[1],\textcolor{stringliteral}{"r"});
-119     \textcolor{keywordflow}{if}(f == NULL)\{
-120       perror(\textcolor{stringliteral}{"Error opening file"});
-121       exit(EXIT\_FAILURE);
-122     \}
-123   \}
-124 
-125   \textcolor{keywordtype}{int} *hex = (\textcolor{keywordtype}{int} *) malloc(\hyperlink{main_8c_a5d7cfaaf3d71eb89b31364adb9fda6a6}{CHARS} * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));
-126   \textcolor{keywordflow}{if}(hex == NULL)\{
-127     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
-128     exit(EXIT\_FAILURE);
-129   \}
-130   \textcolor{comment}{/*Reading the data from the file*/}
-131   numbersInText = \hyperlink{main_8c_a7e86822405cc3ff43db316d113a1fb6d}{getHex}(f, hex);
-132   \hyperlink{main_8c_a6406eca72b9402b7240ed0e453e8db46}{fillSongData}(&data, hex, numbersInText);
-133   notes = \hyperlink{main_8c_a53151dcc1b6757799ff4fd28f192c9b9}{countNotes}(hex, numbersInText);
-134   \hyperlink{structnote}{note} *noteAr = (\hyperlink{structnote}{note}*) malloc(notes * \textcolor{keyword}{sizeof}(\hyperlink{structnote}{note}));
-135   \textcolor{keywordflow}{if}(noteAr == NULL)\{
-136     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
-137     exit(EXIT\_FAILURE);
-138   \}
-139   \hyperlink{structevent_placement}{eventPlacement} placement[numbersInText];
-140   \textcolor{keywordtype}{int} ticks[numbersInText];
-141   \hyperlink{main_8c_a958ac363192985c144e524cc6e092e7c}{findEvents}(numbersInText, hex, placement, noteAr, ticks, &size);
-142   \hyperlink{main_8c_a1709777308c32674291e7213d55feb6e}{insertMoods}(moodArray, moods);
-143   \hyperlink{main_8c_ac5cf65542ee2eded456a070d2159af90}{settingPoints}(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
-144   printf(\textcolor{stringliteral}{"%d, %d, %d, %d\(\backslash\)n"}, mode, tempo, toneLength, pitch);
-145   \textcolor{keywordflow}{for}(i = 0; i < notes; i++)
-146     \hyperlink{main_8c_aa9c735ae880cee4e1272bcf387462c9a}{printNote}(noteAr[i]);
-147   \hyperlink{main_8c_a16182e7956158cfcf78a8b97423ee1da}{findMode}(noteAr, notes, &data);
-148   \hyperlink{main_8c_a96686ff783072b26aa8666d0281d053c}{printSongData}(data);
-149   moodOfMelodi = \hyperlink{main_8c_ade6b8acc6a7f498b910c155b43d442b1}{weightingMatrix}(moodArray, mode, tempo, toneLength, pitch);
-150   printf(\textcolor{stringliteral}{"%d\(\backslash\)n"}, moodOfMelodi);
-151 
-152 
-153   \textcolor{comment}{/*Clean up and close*/}
-154   fclose(f);
-155   free(hex);
-156   free(noteAr);
-157 
-158   \textcolor{keywordflow}{return} 0;
-159 \}
+00094                                       \{
+00095   FILE *f;
+00096   \textcolor{keywordtype}{char} MIDIfile[25];
+00097   \textcolor{comment}{/*Variables*/}
+00098   \textcolor{keywordtype}{int} numbersInText = 0, notes, i = 0, size = 0, moodOfMelodi = 0;
+00099   \textcolor{comment}{/* PLACEHOLDER FIX THIS */}
+00100   \textcolor{keywordtype}{int} mode = 5, tempo = 5, toneLength = 5, pitch = 5;
+00101   FILE* moods = fopen(\textcolor{stringliteral}{"moods.txt"}, \textcolor{stringliteral}{"r"});
+00102   \textcolor{keywordflow}{if}(moods == NULL)\{
+00103     perror(\textcolor{stringliteral}{"Error: moods missing "});
+00104     exit(EXIT\_FAILURE);
+00105   \}
+00106   AMOUNT_OF_MOODS = FindMoodAmount(moods);
+00107   moodWeighting moodArray[AMOUNT_OF_MOODS];
+00108   data data = \{0, major, D\};
+00109   \textcolor{keywordflow}{if} (argv[1] == NULL)\{
+00110     checkDirectory(MIDIfile);  
+00111     f = fopen(MIDIfile,\textcolor{stringliteral}{"r"});  
+00112     \textcolor{keywordflow}{if}(f == NULL)\{
+00113       perror(\textcolor{stringliteral}{"Error opening file"});
+00114       exit(EXIT\_FAILURE);
+00115     \}
+00116   \}
+00117   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(argv[1] != NULL)\{
+00118     f = fopen(argv[1],\textcolor{stringliteral}{"r"});
+00119     \textcolor{keywordflow}{if}(f == NULL)\{
+00120       perror(\textcolor{stringliteral}{"Error opening file"});
+00121       exit(EXIT\_FAILURE);
+00122     \}
+00123   \}
+00124 
+00125   \textcolor{keywordtype}{int} *hex = (\textcolor{keywordtype}{int} *) malloc(CHARS * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));
+00126   \textcolor{keywordflow}{if}(hex == NULL)\{
+00127     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
+00128     exit(EXIT\_FAILURE);
+00129   \}
+00130   \textcolor{comment}{/*Reading the data from the file*/}
+00131   numbersInText = getHex(f, hex);
+00132   fillSongData(&data, hex, numbersInText);
+00133   notes = countNotes(hex, numbersInText);
+00134   note *noteAr = (note*) malloc(notes * \textcolor{keyword}{sizeof}(note));
+00135   \textcolor{keywordflow}{if}(noteAr == NULL)\{
+00136     printf(\textcolor{stringliteral}{"Memory allocation failed, bye!"});
+00137     exit(EXIT\_FAILURE);
+00138   \}
+00139   eventPlacement placement[numbersInText];
+00140   \textcolor{keywordtype}{int} ticks[numbersInText];
+00141   findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
+00142   insertMoods(moodArray, moods);
+00143   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
+00144   printf(\textcolor{stringliteral}{"%d, %d, %d, %d\(\backslash\)n"}, mode, tempo, toneLength, pitch);
+00145   \textcolor{keywordflow}{for}(i = 0; i < notes; i++)
+00146     printNote(noteAr[i]);
+00147   findMode(noteAr, notes, &data);
+00148   printSongData(data);
+00149   moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
+00150   printf(\textcolor{stringliteral}{"%d\(\backslash\)n"}, moodOfMelodi);
+00151 
+00152 
+00153   \textcolor{comment}{/*Clean up and close*/}
+00154   fclose(f);
+00155   free(hex);
+00156   free(noteAr);
+00157 
+00158   \textcolor{keywordflow}{return} 0;
+00159 \}
 \end{DoxyCode}
-\hypertarget{main_8c_aa9c735ae880cee4e1272bcf387462c9a}{\index{main.\+c@{main.\+c}!print\+Note@{print\+Note}}
+\index{main.\+c@{main.\+c}!print\+Note@{print\+Note}}
 \index{print\+Note@{print\+Note}!main.\+c@{main.\+c}}
-\subsubsection[{print\+Note}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Note (
+\paragraph[{print\+Note}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Note (
 \begin{DoxyParamCaption}
 \item[{{\bf note}}]{note}
 \end{DoxyParamCaption}
-)}}\label{main_8c_aa9c735ae880cee4e1272bcf387462c9a}
+)}\label{main_8c_aa9c735ae880cee4e1272bcf387462c9a}
 A function to print the note 
 \begin{DoxyParams}{Parameters}
-{\em note\mbox{]}} & note\+: the note structure to be printed \\
+{\em } & note]\+: note\+: the note structure to be printed \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 340 of file main.\+c.
-
-
 \begin{DoxyCode}
-340                          \{
-341   printf(\textcolor{stringliteral}{"Tone: "});
-342 
-343   \textcolor{keywordflow}{switch} (note.\hyperlink{structnote_a30832d96c968d682e5838b39370a1908}{tone})\{
-344     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa739ce3f516592d245d16fd8a3893472c}{C}     : printf(\textcolor{stringliteral}{"C"}) ; \textcolor{keywordflow}{break};
-345     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa443d44cb35267bc4445499d568e4bd26}{Csharp}: printf(\textcolor{stringliteral}{"C#"}); \textcolor{keywordflow}{break};
-346     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa77a6b11f9898c052926f1d49765861e8}{D}     : printf(\textcolor{stringliteral}{"D"}) ; \textcolor{keywordflow}{break};
-347     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad3b2877ea9dc7d69bd1b52477a01a68b}{Dsharp}: printf(\textcolor{stringliteral}{"D#"}); \textcolor{keywordflow}{break};
-348     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fab199e021998d49b1f09338d8b9b18ecb}{E}     : printf(\textcolor{stringliteral}{"E"}) ; \textcolor{keywordflow}{break};
-349     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf382a63cc3d6491bf26b59e66f46826d}{F}     : printf(\textcolor{stringliteral}{"F"}) ; \textcolor{keywordflow}{break};
-350     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fad4ad1b6a094e98ff41e6e4f366769fc3}{Fsharp}: printf(\textcolor{stringliteral}{"F#"}); \textcolor{keywordflow}{break};
-351     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2fe993340f6abb2234e543cd427df70b}{G}     : printf(\textcolor{stringliteral}{"G"}) ; \textcolor{keywordflow}{break};
-352     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa2adbe5d79179fbb9103b944cd0f2d621}{Gsharp}: printf(\textcolor{stringliteral}{"G#"}); \textcolor{keywordflow}{break};
-353     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa42a4ade1acd55a49164099104990e09f}{A}     : printf(\textcolor{stringliteral}{"A"}) ; \textcolor{keywordflow}{break};
-354     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919faf6099e2a982664654807b32a8f11f197}{Asharp}: printf(\textcolor{stringliteral}{"A#"}); \textcolor{keywordflow}{break};
-355     \textcolor{keywordflow}{case} \hyperlink{main_8c_aeb761eda34d47c3e64ca804875fd919fa3f2a77ecd272aa6d6b5902faa5e5fc68}{B}     : printf(\textcolor{stringliteral}{"B"}) ; \textcolor{keywordflow}{break};
-356     \textcolor{keywordflow}{default}    : printf(\textcolor{stringliteral}{"Undefined note"}); \textcolor{keywordflow}{break};
-357   \}
-358   printf(\textcolor{stringliteral}{", octave: %d\(\backslash\)n"}, note.\hyperlink{structnote_a8b58f133e02c3ea4ec40ee641b654dcf}{octave});
-359 \}
+00341                          \{
+00342   printf(\textcolor{stringliteral}{"Tone: "});
+00343 
+00344   \textcolor{keywordflow}{switch} (note.tone)\{
+00345     \textcolor{keywordflow}{case} C     : printf(\textcolor{stringliteral}{"C"}) ; \textcolor{keywordflow}{break};
+00346     \textcolor{keywordflow}{case} Csharp: printf(\textcolor{stringliteral}{"C#"}); \textcolor{keywordflow}{break};
+00347     \textcolor{keywordflow}{case} D     : printf(\textcolor{stringliteral}{"D"}) ; \textcolor{keywordflow}{break};
+00348     \textcolor{keywordflow}{case} Dsharp: printf(\textcolor{stringliteral}{"D#"}); \textcolor{keywordflow}{break};
+00349     \textcolor{keywordflow}{case} E     : printf(\textcolor{stringliteral}{"E"}) ; \textcolor{keywordflow}{break};
+00350     \textcolor{keywordflow}{case} F     : printf(\textcolor{stringliteral}{"F"}) ; \textcolor{keywordflow}{break};
+00351     \textcolor{keywordflow}{case} Fsharp: printf(\textcolor{stringliteral}{"F#"}); \textcolor{keywordflow}{break};
+00352     \textcolor{keywordflow}{case} G     : printf(\textcolor{stringliteral}{"G"}) ; \textcolor{keywordflow}{break};
+00353     \textcolor{keywordflow}{case} Gsharp: printf(\textcolor{stringliteral}{"G#"}); \textcolor{keywordflow}{break};
+00354     \textcolor{keywordflow}{case} A     : printf(\textcolor{stringliteral}{"A"}) ; \textcolor{keywordflow}{break};
+00355     \textcolor{keywordflow}{case} Asharp: printf(\textcolor{stringliteral}{"A#"}); \textcolor{keywordflow}{break};
+00356     \textcolor{keywordflow}{case} B     : printf(\textcolor{stringliteral}{"B"}) ; \textcolor{keywordflow}{break};
+00357     \textcolor{keywordflow}{default}    : printf(\textcolor{stringliteral}{"Undefined note"}); \textcolor{keywordflow}{break};
+00358   \}
+00359   printf(\textcolor{stringliteral}{", octave: %d\(\backslash\)n"}, note.octave);
+00360 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a96686ff783072b26aa8666d0281d053c}{\index{main.\+c@{main.\+c}!print\+Song\+Data@{print\+Song\+Data}}
+\index{main.\+c@{main.\+c}!print\+Song\+Data@{print\+Song\+Data}}
 \index{print\+Song\+Data@{print\+Song\+Data}!main.\+c@{main.\+c}}
-\subsubsection[{print\+Song\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Song\+Data (
+\paragraph[{print\+Song\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void print\+Song\+Data (
 \begin{DoxyParamCaption}
 \item[{{\bf data}}]{data}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a96686ff783072b26aa8666d0281d053c}
+)}\label{main_8c_a96686ff783072b26aa8666d0281d053c}
 A function to print out the overall data of the song, tempo and mode 
 \begin{DoxyParams}{Parameters}
-{\em data\mbox{]}} & data\+: the data to be printed \\
+{\em } & data]\+: data\+: the data to be printed \\
 \hline
 \end{DoxyParams}
 
-
-Definition at line 364 of file main.\+c.
-
-
 \begin{DoxyCode}
-364                              \{
-365   printf(\textcolor{stringliteral}{"Tempo: %d\(\backslash\)nMode: "}, data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo});
-366   \textcolor{keywordflow}{switch}(data.\hyperlink{structdata_a9781fc7b786289e4c06b4085d31558e3}{mode})\{
-367     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}: printf(\textcolor{stringliteral}{"minor"}); \textcolor{keywordflow}{break};
-368     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}: printf(\textcolor{stringliteral}{"major"}); \textcolor{keywordflow}{break};
-369     \textcolor{keywordflow}{default}: printf(\textcolor{stringliteral}{"unknown mode"}); \textcolor{keywordflow}{break};
-370   \}
-371   printf(\textcolor{stringliteral}{"\(\backslash\)nKeytone: %d"}, data.\hyperlink{structdata_ae1a174f61aada93146a06764a3511eb6}{key});
-372   putchar(\textcolor{charliteral}{'\(\backslash\)n'});
-373 \}
+00365                              \{
+00366   printf(\textcolor{stringliteral}{"Tempo: %d\(\backslash\)nMode: "}, data.tempo);
+00367   \textcolor{keywordflow}{switch}(data.mode)\{
+00368     \textcolor{keywordflow}{case} minor: printf(\textcolor{stringliteral}{"minor"}); \textcolor{keywordflow}{break};
+00369     \textcolor{keywordflow}{case} major: printf(\textcolor{stringliteral}{"major"}); \textcolor{keywordflow}{break};
+00370     \textcolor{keywordflow}{default}: printf(\textcolor{stringliteral}{"unknown mode"}); \textcolor{keywordflow}{break};
+00371   \}
+00372   printf(\textcolor{stringliteral}{"\(\backslash\)nKeytone: %d"}, data.key);
+00373   putchar(\textcolor{charliteral}{'\(\backslash\)n'});
+00374 \}
 \end{DoxyCode}
-\hypertarget{main_8c_ac5cf65542ee2eded456a070d2159af90}{\index{main.\+c@{main.\+c}!setting\+Points@{setting\+Points}}
+\index{main.\+c@{main.\+c}!setting\+Points@{setting\+Points}}
 \index{setting\+Points@{setting\+Points}!main.\+c@{main.\+c}}
-\subsubsection[{setting\+Points}]{\setlength{\rightskip}{0pt plus 5cm}void setting\+Points (
+\paragraph[{setting\+Points}]{\setlength{\rightskip}{0pt plus 5cm}void setting\+Points (
 \begin{DoxyParamCaption}
 \item[{int $\ast$}]{mode, }
 \item[{int $\ast$}]{tempo, }
@@ -1076,178 +957,158 @@ Definition at line 364 of file main.\+c.
 \item[{int $\ast$}]{octave, }
 \item[{{\bf data}}]{data, }
 \item[{int}]{notes, }
-\item[{{\bf note}}]{note\+Ar\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf note}}]{note\+Ar[$\,$], }
 \item[{int $\ast$}]{size}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ac5cf65542ee2eded456a070d2159af90}
-
-
-Definition at line 375 of file main.\+c.
-
+)}\label{main_8c_ac5cf65542ee2eded456a070d2159af90}
 
 \begin{DoxyCode}
-375                                                                                                            
+00376                                                                                                            
               \{
-376   \textcolor{keywordtype}{int} deltaTime = 2, combined = 0, averageNote = 0;
-377   \textcolor{keywordflow}{switch}(data.\hyperlink{structdata_a9781fc7b786289e4c06b4085d31558e3}{mode})\{
-378     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167a252026d6db6e81a42ef18bfd98b45a11}{minor}: *\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = -5; \textcolor{keywordflow}{break};
-379     \textcolor{keywordflow}{case} \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167adc8c3476e4d3526d10210987c7131cb5}{major}: *\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = 5; \textcolor{keywordflow}{break};
-380     \textcolor{keywordflow}{default}: *\hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode} = 0; \textcolor{keywordflow}{break};
-381   \}
-382   \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 60)
-383     *tempo = -5;
-384   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 60 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 70)
-385     *tempo = -4;
-386   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 70 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 80)
-387     *tempo = -3;  
-388   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 80 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 90)
-389     *tempo = -2;
-390   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 90 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 100)
-391     *tempo = -1;
-392   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 100 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 120)
-393     *tempo =  0;  
-394   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 120 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 130)
-395     *tempo =  1;
-396   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 130 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 140)
-397     *tempo =  2;
-398   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 140 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 150)
-399     *tempo =  3;
-400   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >= 150 && data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} < 160)
-401     *tempo =  4;
-402   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.\hyperlink{structdata_a31232da79683035a6ff185f530da6c24}{tempo} >=  160)
-403     *tempo =  5;
-404 
-405   \textcolor{keywordflow}{switch}(deltaTime)\{
-406     \textcolor{keywordflow}{case} 1: *length = -5; \textcolor{keywordflow}{break};
-407     \textcolor{keywordflow}{case} 2: *length = -4; \textcolor{keywordflow}{break};
-408     \textcolor{keywordflow}{case} 4: *length = -2; \textcolor{keywordflow}{break};
-409     \textcolor{keywordflow}{case} 8: *length =  0; \textcolor{keywordflow}{break};
-410     \textcolor{keywordflow}{case} 16: *length = 3; \textcolor{keywordflow}{break};
-411     \textcolor{keywordflow}{case} 32: *length = 5; \textcolor{keywordflow}{break};
-412   \}
-413   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < notes; i++)\{
-414     combined += noteAr[i].\hyperlink{structnote_aed9fb8ec9c20fa4620f928c988dba840}{average};
-415   \}
-416   averageNote = combined/notes;
-417 
-418   \textcolor{keywordflow}{if}(averageNote <= 16)
-419     *octave = -5;
-420   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 17 && averageNote <= 23)
-421     *octave = -4;
-422   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 24 && averageNote <= 30)
-423     *octave = -3;
-424   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 31 && averageNote <= 37)
-425     *octave = -2;
-426   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 38 && averageNote <= 44)
-427     *octave = -1;
-428   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 45 && averageNote <= 51)
-429     *octave = 0;
-430   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 52 && averageNote <= 58)
-431     *octave = 1;
-432   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 59 && averageNote <= 65)
-433     *octave = 2;
-434   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 66 && averageNote <= 72)
-435     *octave = 3;
-436   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 73 && averageNote <= 79)
-437     *octave = 4;
-438   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >=80)
-439     *octave = 5;
-440 \}
+00377   \textcolor{keywordtype}{int} deltaTime = 2, combined = 0, averageNote = 0;
+00378   \textcolor{keywordflow}{switch}(data.mode)\{
+00379     \textcolor{keywordflow}{case} minor: *mode = -5; \textcolor{keywordflow}{break};
+00380     \textcolor{keywordflow}{case} major: *mode = 5; \textcolor{keywordflow}{break};
+00381     \textcolor{keywordflow}{default}: *mode = 0; \textcolor{keywordflow}{break};
+00382   \}
+00383   \textcolor{keywordflow}{if}(data.tempo < 60)
+00384     *tempo = -5;
+00385   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 60 && data.tempo < 70)
+00386     *tempo = -4;
+00387   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 70 && data.tempo < 80)
+00388     *tempo = -3;  
+00389   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 80 && data.tempo < 90)
+00390     *tempo = -2;
+00391   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 90 && data.tempo < 100)
+00392     *tempo = -1;
+00393   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 100 && data.tempo < 120)
+00394     *tempo =  0;  
+00395   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 120 && data.tempo < 130)
+00396     *tempo =  1;
+00397   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 130 && data.tempo < 140)
+00398     *tempo =  2;
+00399   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 140 && data.tempo < 150)
+00400     *tempo =  3;
+00401   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >= 150 && data.tempo < 160)
+00402     *tempo =  4;
+00403   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(data.tempo >=  160)
+00404     *tempo =  5;
+00405 
+00406   \textcolor{keywordflow}{switch}(deltaTime)\{
+00407     \textcolor{keywordflow}{case} 1: *length = -5; \textcolor{keywordflow}{break};
+00408     \textcolor{keywordflow}{case} 2: *length = -4; \textcolor{keywordflow}{break};
+00409     \textcolor{keywordflow}{case} 4: *length = -2; \textcolor{keywordflow}{break};
+00410     \textcolor{keywordflow}{case} 8: *length =  0; \textcolor{keywordflow}{break};
+00411     \textcolor{keywordflow}{case} 16: *length = 3; \textcolor{keywordflow}{break};
+00412     \textcolor{keywordflow}{case} 32: *length = 5; \textcolor{keywordflow}{break};
+00413   \}
+00414   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < notes; i++)\{
+00415     combined += noteAr[i].average;
+00416   \}
+00417   averageNote = combined/notes;
+00418 
+00419   \textcolor{keywordflow}{if}(averageNote <= 16)
+00420     *octave = -5;
+00421   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 17 && averageNote <= 23)
+00422     *octave = -4;
+00423   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 24 && averageNote <= 30)
+00424     *octave = -3;
+00425   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 31 && averageNote <= 37)
+00426     *octave = -2;
+00427   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 38 && averageNote <= 44)
+00428     *octave = -1;
+00429   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 45 && averageNote <= 51)
+00430     *octave = 0;
+00431   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 52 && averageNote <= 58)
+00432     *octave = 1;
+00433   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 59 && averageNote <= 65)
+00434     *octave = 2;
+00435   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 66 && averageNote <= 72)
+00436     *octave = 3;
+00437   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >= 73 && averageNote <= 79)
+00438     *octave = 4;
+00439   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(averageNote >=80)
+00440     *octave = 5;
+00441 \}
 \end{DoxyCode}
-\hypertarget{main_8c_ac6a3184d104e99d57824eecaabab8ed5}{\index{main.\+c@{main.\+c}!sort\+Result@{sort\+Result}}
+\index{main.\+c@{main.\+c}!sort\+Result@{sort\+Result}}
 \index{sort\+Result@{sort\+Result}!main.\+c@{main.\+c}}
-\subsubsection[{sort\+Result}]{\setlength{\rightskip}{0pt plus 5cm}int sort\+Result (
+\paragraph[{sort\+Result}]{\setlength{\rightskip}{0pt plus 5cm}int sort\+Result (
 \begin{DoxyParamCaption}
 \item[{const void $\ast$}]{pa, }
 \item[{const void $\ast$}]{pb}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ac6a3184d104e99d57824eecaabab8ed5}
-
-
-Definition at line 478 of file main.\+c.
-
+)}\label{main_8c_ac6a3184d104e99d57824eecaabab8ed5}
 
 \begin{DoxyCode}
-478                                               \{
-479   \textcolor{keywordtype}{int} a = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pa;
-480   \textcolor{keywordtype}{int} b = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pb;
-481   \textcolor{keywordflow}{return} (b-a);
-482 \}
+00477                                               \{
+00478   \textcolor{keywordtype}{int} a = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pa;
+00479   \textcolor{keywordtype}{int} b = *(\textcolor{keyword}{const} \textcolor{keywordtype}{int}*)pb;
+00480   \textcolor{keywordflow}{return} (b-a);
+00481 \}
 \end{DoxyCode}
-\hypertarget{main_8c_a27beb09cf7217b8c5f3789913aa857db}{\index{main.\+c@{main.\+c}!sort\+Toner@{sort\+Toner}}
+\index{main.\+c@{main.\+c}!sort\+Toner@{sort\+Toner}}
 \index{sort\+Toner@{sort\+Toner}!main.\+c@{main.\+c}}
-\subsubsection[{sort\+Toner}]{\setlength{\rightskip}{0pt plus 5cm}int sort\+Toner (
+\paragraph[{sort\+Toner}]{\setlength{\rightskip}{0pt plus 5cm}int sort\+Toner (
 \begin{DoxyParamCaption}
 \item[{const void $\ast$}]{, }
 \item[{const void $\ast$}]{}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a27beb09cf7217b8c5f3789913aa857db}
-\hypertarget{main_8c_a33b74ebb6acaeb30576c9e66aebe2fb6}{\index{main.\+c@{main.\+c}!sort\+Tones@{sort\+Tones}}
+)}\label{main_8c_a27beb09cf7217b8c5f3789913aa857db}
+\index{main.\+c@{main.\+c}!sort\+Tones@{sort\+Tones}}
 \index{sort\+Tones@{sort\+Tones}!main.\+c@{main.\+c}}
-\subsubsection[{sort\+Tones}]{\setlength{\rightskip}{0pt plus 5cm}int sort\+Tones (
+\paragraph[{sort\+Tones}]{\setlength{\rightskip}{0pt plus 5cm}int sort\+Tones (
 \begin{DoxyParamCaption}
 \item[{const void $\ast$}]{a, }
 \item[{const void $\ast$}]{b}
 \end{DoxyParamCaption}
-)}}\label{main_8c_a33b74ebb6acaeb30576c9e66aebe2fb6}
+)}\label{main_8c_a33b74ebb6acaeb30576c9e66aebe2fb6}
 A function to sort integers in ascending order. 
-
-Definition at line 510 of file main.\+c.
-
-
 \begin{DoxyCode}
-510                                            \{
-511   \textcolor{keywordtype}{int} *i1 = (\textcolor{keywordtype}{int}*) a, *i2 = (\textcolor{keywordtype}{int}*) b;
-512 
-513   \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) *i1 - *i2;
-514 \}
+00509                                            \{
+00510   \textcolor{keywordtype}{int} *i1 = (\textcolor{keywordtype}{int}*) a, *i2 = (\textcolor{keywordtype}{int}*) b;
+00511 
+00512   \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) *i1 - *i2;
+00513 \}
 \end{DoxyCode}
-\hypertarget{main_8c_ade6b8acc6a7f498b910c155b43d442b1}{\index{main.\+c@{main.\+c}!weighting\+Matrix@{weighting\+Matrix}}
+\index{main.\+c@{main.\+c}!weighting\+Matrix@{weighting\+Matrix}}
 \index{weighting\+Matrix@{weighting\+Matrix}!main.\+c@{main.\+c}}
-\subsubsection[{weighting\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}int weighting\+Matrix (
+\paragraph[{weighting\+Matrix}]{\setlength{\rightskip}{0pt plus 5cm}int weighting\+Matrix (
 \begin{DoxyParamCaption}
-\item[{{\bf mood\+Weighting}}]{mood\+Array\mbox{[}$\,$\mbox{]}, }
+\item[{{\bf mood\+Weighting}}]{mood\+Array[$\,$], }
 \item[{int}]{mode, }
 \item[{int}]{tempo, }
 \item[{int}]{tone\+Length, }
 \item[{int}]{pitch}
 \end{DoxyParamCaption}
-)}}\label{main_8c_ade6b8acc6a7f498b910c155b43d442b1}
-
-
-Definition at line 455 of file main.\+c.
-
+)}\label{main_8c_ade6b8acc6a7f498b910c155b43d442b1}
 
 \begin{DoxyCode}
-455                                                                                               \{
-456   \textcolor{keywordtype}{int} result[\hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{AMOUNT\_OF\_MOODS}];
-457   
-458   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{AMOUNT\_OF\_MOODS}; i++)\{
-459     result[i] = 0;
-460   \}
-461   
-462   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{AMOUNT\_OF\_MOODS}; i++)\{
-463     result[i] += (moodArray[i].\hyperlink{structmood_weighting_a61010f3a9441ad3cabbe94a31a64dad5}{mode} * \hyperlink{main_8c_a1a6b6fb557d8d37d59700faf4e4c9167}{mode});
-464     result[i] += (moodArray[i].\hyperlink{structmood_weighting_a9b2180e8a4aab163ae48d0a66269a840}{tempo} * tempo);
-465     result[i] += (moodArray[i].\hyperlink{structmood_weighting_ab9e917ae02761f06d11c59645a45536d}{toneLength} * toneLength);
-466     result[i] += (moodArray[i].\hyperlink{structmood_weighting_a27410ec4f299961816407657a3e241e8}{pitch} * pitch);
-467   \}
-468   
-469   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < \hyperlink{main_8c_ad4daca5a141533e7c95216763e28c4fe}{AMOUNT\_OF\_MOODS}; i++)\{
-470     printf(\textcolor{stringliteral}{"%s: %d\(\backslash\)n"}, moodArray[i].name, result[i]);
-471   \}
-472   
-473   qsort(result, AMOUNT\_OF\_MOODS, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}), \hyperlink{main_8c_ac6a3184d104e99d57824eecaabab8ed5}{sortResult});
-474   \textcolor{keywordflow}{return} result[0];
-475 \}
+00454                                                                                               \{
+00455   \textcolor{keywordtype}{int} result[AMOUNT_OF_MOODS];
+00456   
+00457   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00458     result[i] = 0;
+00459   \}
+00460   
+00461   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00462     result[i] += (moodArray[i].mode * mode);
+00463     result[i] += (moodArray[i].tempo * tempo);
+00464     result[i] += (moodArray[i].toneLength * toneLength);
+00465     result[i] += (moodArray[i].pitch * pitch);
+00466   \}
+00467   
+00468   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < AMOUNT_OF_MOODS; i++)\{
+00469     printf(\textcolor{stringliteral}{"%s: %d\(\backslash\)n"}, moodArray[i].name, result[i]);
+00470   \}
+00471   
+00472   qsort(result, AMOUNT\_OF\_MOODS, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}), sortResult);
+00473   \textcolor{keywordflow}{return} result[0];
+00474 \}
 \end{DoxyCode}
 
 
-\subsection{Variable Documentation}
-\hypertarget{main_8c_ad4daca5a141533e7c95216763e28c4fe}{\index{main.\+c@{main.\+c}!A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S@{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}}
+\subsubsection{Variable Documentation}
+\index{main.\+c@{main.\+c}!A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S@{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}}
 \index{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S@{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}!main.\+c@{main.\+c}}
-\subsubsection[{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}]{\setlength{\rightskip}{0pt plus 5cm}int A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}}\label{main_8c_ad4daca5a141533e7c95216763e28c4fe}
-
-
-Definition at line 22 of file main.\+c.
-
+\paragraph[{A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}]{\setlength{\rightskip}{0pt plus 5cm}int A\+M\+O\+U\+N\+T\+\_\+\+O\+F\+\_\+\+M\+O\+O\+D\+S}\label{main_8c_ad4daca5a141533e7c95216763e28c4fe}
