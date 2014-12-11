@@ -8,7 +8,12 @@ typedef struct{
   int pitchWheel;
 } eventPlacement;
 
-void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[]){
+int main(void){
+  int ticks[numbersInText];
+  return 0;
+}
+
+void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[]){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
       programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = 0;
 
@@ -24,6 +29,7 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
       default  :                                                                                  break;
     }
   }
+  findTicks(numbersInText, hex, placement, noteAr, ticks);
 }
 
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
@@ -58,31 +64,52 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
-void checkNoteOff(){
-  for()
+void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[]){
+  int tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
+  
+  for(int j = 0; j < noteOn; j++){
+    for(int i = placement[j].noteOn; i < numbersInText; i++){
+      if(hex[i] == 0x80){
+        if(hex[i + 1] == noteAr[j])
+          break;
+        else{
+          countTicks1(hex, &i, deltaCounter1, ticks[], tickCounter);
+        }
+      }
+      else if(hex[i] == 0xA0){
+        if(hex[i + 1] == noteAr[j] && hex[i + 2] == 0x00)
+          break;
+        else{
+          countTicks1(hex, &i, deltaCounter1, ticks[], tickCounter);
+        }
+      }
+      else if(hex[i] == 0xD0){
+        if(hex[i + 1] == 0x00)
+          break;
+        else{
+          countTicks2(hex, &i, deltaCounter2, ticks[], tickCounter);
+        }
+      }
+      else if(hex[start] == 0xC0){
+        countTicks2(hex, &i, deltaCounter2, ticks[], tickCounter);
+      }
+      else{
+        countTicks1(hex, &i, deltaCounter1, ticks[], tickCounter);
+      }     
+    }
+  }
 }
 
-void checkVelocity(int hex[], eventPlacement placement[], int noteOn,
-                   int afterTouch, int channelPressure, int noNoteOff[]){
-
-  for(int i = 0; i < noteOn; i++)
-    if(hex[(placement[i].noteOn + 2)] == 0x00)
-      noNoteOff[i] = 1;
-
-  for(int i = 0; i < afterTouch; i++)
-    if(hex[(placement[i].afterTouch + 2)] == 0x00)
-      for(int j = 0; j < noteOn; j++)
-        if(hex[(placement[j].noteOn + 1)] == hex[(placement[i].afterTouch + 1)] && notEnded[j])
-          noNoteOff[j] = 1;
-
-  for(int i = 0; i < channelPressure; i++)
-    if(hex[(placement[i].channelPressure + 1)] == 0x00)
-      for(int j = 0; j < noteOn; j++)
-        if(notEnded[j])
-          noNoteOff[j] = 1;
+void countTicks1(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter){
+  while(deltaCounter < 7 && hex[(i + deltaCounter)] > 0x80)
+    ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);
+  ticks[tickCounter++] += hex[(i + deltaCounter++)];
+  i += deltaCounter;
 }
 
-
-checkNoteOff();
-  int noNoteOff[noteOn] = {0};
-  checkVelocity(hex, placement, noteOn, afterTouch, channelPressure, noNoteOff);
+void countTicks2(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter){
+  while(deltaCounter < 6 && hex[(i + deltaCounter)] > 0x80)
+    ticks[tickCounter] += ((hex[(i + deltaCounter++)] - 0x80) * 128);
+  ticks[tickCounter++] += hex[(i + deltaCounter++)];
+  i += deltaCounter;
+}

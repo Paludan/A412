@@ -16,13 +16,15 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <dirent.h>
 
 #define CHARS 1000
 int AMOUNT_OF_MOODS;
+#define SCALESIZE 7
 
 /*Enums and structs*/
 typedef enum mode {major, minor} mode;
-typedef enum tone {C, Csharp, D, Dsharp, E, F = 6, Fsharp, G, Gsharp, A, Asharp, B} tone;
+typedef enum tone {C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B} tone;
 typedef enum mood {glad, sad} mood;
 
 typedef struct{
@@ -62,6 +64,7 @@ typedef struct{
 } eventPlacement;
 
 /*Prototypes*/
+void checkDirectory(char*);
 void findNoteLength(double x, int *, int *);
 void printNote(note);
 int getHex(FILE*, int[]);
@@ -69,20 +72,30 @@ void fillSongData(data*, int[], int);
 int countNotes(int[], int);
 void fillNote(int, note*);
 void printSongData(data);
-void settingPoints(int*, int*, int*, int*, data, int, note []);
+void settingPoints(int*, int*, int*, int*, data, int, note [], int *);
 void insertMoods(moodWeighting [], FILE*);
 int weightingMatrix(moodWeighting [], int, int, int, int);
-void findEvents(int, int [], eventPlacement [], note []);
+void findEvents(int, int [], eventPlacement [], note [], int [], int *);
 void insertPlacement1(int [], int *, int, note [], int *);
 void insertPlacement2(int [], int *, int);
 int checkNextEvent(int [], int);
+void findTicks(int, int [], eventPlacement [], note [], int [], int, int *);
+void countTicks1(int [], int *, int, int [], int *);
+void countTicks2(int [], int *, int, int [], int *);
 int sortResult(const void *, const void *);
-int deltaTimeToNoteLength (int, int);
+void deltaTimeToNoteLength (int *, int, int, note *);
+int isInScale(int, int[], int);
+int isInMinor(int);
+int isInMajor(int);
+int sortToner(const void*, const void*);
+void findMode(note*, int, data*);
 int FindMoodAmount(FILE*);
 
 int main(int argc, const char *argv[]){
+  FILE *f;
+  char MIDIfile[25];
   /*Variables*/
-  int numbersInText = 0, notes, i = 0, moodOfMelodi = 0;
+  int numbersInText = 0, notes, i = 0, size = 0, moodOfMelodi = 0;
   /* PLACEHOLDER FIX THIS */
   int mode = 5, tempo = 5, toneLength = 5, pitch = 5;
   FILE* moods = fopen("moods.txt", "r");
@@ -92,18 +105,28 @@ int main(int argc, const char *argv[]){
   }
   AMOUNT_OF_MOODS = FindMoodAmount(moods);
   moodWeighting moodArray[AMOUNT_OF_MOODS];
-  data data;
-  FILE *f = fopen(argv[1],"r");
-  if(f == NULL){
-    perror("Error opening file");
-    exit(EXIT_FAILURE);
+  data data = {0, major, D};
+  if (argv[1] == NULL){
+    checkDirectory(MIDIfile);  
+    f = fopen(MIDIfile,"r");  
+    if(f == NULL){
+      perror("Error opening file");
+      exit(EXIT_FAILURE);
+    }
   }
+  else if(argv[1] != NULL){
+    f = fopen(argv[1],"r");
+    if(f == NULL){
+      perror("Error opening file");
+      exit(EXIT_FAILURE);
+    }
+  }
+
   int *hex = (int *) malloc(CHARS * sizeof(int));
   if(hex == NULL){
     printf("Memory allocation failed, bye!");
     exit(EXIT_FAILURE);
   }
-  
   /*Reading the data from the file*/
   numbersInText = getHex(f, hex);
   fillSongData(&data, hex, numbersInText);
@@ -114,21 +137,46 @@ int main(int argc, const char *argv[]){
     exit(EXIT_FAILURE);
   }
   eventPlacement placement[numbersInText];
-  findEvents(numbersInText, hex, placement, noteAr);
+  int ticks[numbersInText];
+  findEvents(numbersInText, hex, placement, noteAr, ticks, &size);
   insertMoods(moodArray, moods);
-  settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
   printf("%d, %d, %d, %d\n", mode, tempo, toneLength, pitch);
   for(i = 0; i < notes; i++)
     printNote(noteAr[i]);
+  findMode(noteAr, notes, &data);
   printSongData(data);
   moodOfMelodi = weightingMatrix(moodArray, mode, tempo, toneLength, pitch);
   printf("%d\n", moodOfMelodi);
+
+
   /*Clean up and close*/
   fclose(f);
   free(hex);
   free(noteAr);
 
   return 0;
+}
+/**A function to read music directory and prompt user to choose file
+  *@param[char*] MIDIfile: a pointer to a string containing the name of the chosen input file*/
+void checkDirectory(char *MIDIfile){
+  DIR *dir;
+  struct dirent *musicDir;
+  if ((dir = opendir ("./Music")) != NULL) {
+    printf("Mulige numre\n");
+    /* print all the files and directories within specified directory */
+      while ((musicDir = readdir (dir)) != NULL) {
+        printf ("%s\n", musicDir->d_name);
+      }
+    closedir (dir);
+  } 
+  else {
+  /* Could not open directory */
+    perror ("Failure while opening directory");
+    exit (EXIT_FAILURE);
+  }
+  printf("Indtast det valgte nummer\n");
+  scanf("%s", MIDIfile);
 }
 
 /**A function, that retrieves the hexadecimals from the files and also returns the number of files
@@ -137,7 +185,6 @@ int main(int argc, const char *argv[]){
   */
 int getHex(FILE *f, int hexAr[]){
   int i = 0, c;
- 
   while( (c = fgetc(f)) != EOF && i < CHARS){
     hexAr[i] = c;
     i++;
@@ -168,7 +215,6 @@ int countNotes(int hex[], int amount){
 void fillSongData(data *data, int hex[], int numbersInText){
   int j;
   /*Find the mode of the song, initialised as minor atm*/
-  data->mode = minor;
   for(j = 0; j < numbersInText; j++){
     /* finds the tempo */
     if(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03){
@@ -177,9 +223,9 @@ void fillSongData(data *data, int hex[], int numbersInText){
   }
 }
 
-void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[]){
+void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[], int *size){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-      programChange = 0, channelPressure = 0, pitchWheel = 0, i = 0, n = -1;
+      programChange = 0, channelPressure = 0, pitchWheel = 0, n = 0;
 
   for(int j = 0; j < numbersInText; j++){
     switch (hex[j]){
@@ -193,6 +239,7 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
       default  :                                                                                  break;
     }
   }
+  findTicks(numbersInText, hex, placement, noteAr, ticks, noteOn, size);
 }
 
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
@@ -200,10 +247,12 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *n){
   while(i < 7 && hex[(j + i++)] > 0x80);
   if(checkNextEvent(hex, (j + i))){
     *place = j;
-    if(hex[j] == 0x90)
-      fillNote(hex[j + 1], &noteAr[*n += 1]); 
+    if(hex[j] == 0x90){
+      fillNote(hex[j + 1], &noteAr[*n]);
+      *n += 1;
     }   
-} 
+  } 
+}
 
 void insertPlacement2(int hex[], int *place, int j){
   int i = 2;
@@ -225,20 +274,54 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
-/**A function to calculate the notelength - tba
-*/
-void findNoteLength (double x, int *high, int *low){
-  double func = 16*((x*x)*(0.0000676318287050830)+(0.0128675448628599*x)-2.7216713227147);
-  double temp = func;
-  double temp2 = (int) temp;
-
-  if (!(temp - (double) temp2 < 0.5)){
-    func += 1;
+void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int ticks[], int noteOn, int *size){
+  int tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
+  
+  for(int j = 0; j < noteOn; j++){
+    for(int i = placement[j].noteOn; i < numbersInText; i++){
+      if(hex[i] == 0x80){
+        if(hex[i + 1] == noteAr[j].tone)
+          break;
+        else{
+          countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+        }
+      }
+      else if(hex[i] == 0xA0){
+        if(hex[i + 1] == noteAr[j].tone && hex[i + 2] == 0x00)
+          break;
+        else{
+          countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+        }
+      }
+      else if(hex[i] == 0xD0){
+        if(hex[i + 1] == 0x00)
+          break;
+        else{
+          countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
+        }
+      }
+      else if(hex[i] == 0xC0){
+        countTicks2(hex, &i, deltaCounter2, ticks, &tickCounter);
+      }
+      else{
+        countTicks1(hex, &i, deltaCounter1, ticks, &tickCounter);
+      }     
+    }
   }
+}
 
-  printf("x: %f og func: %f\n", x, func);
-  *high = (int) func;
-  *low = 16;
+void countTicks1(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter){
+  while(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
+    ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+  ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
+  i += deltaCounter;
+}
+
+void countTicks2(int hex[], int *i, int deltaCounter, int ticks[], int *tickCounter){
+  while(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
+    ticks[*tickCounter] += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+  ticks[*tickCounter++] += hex[(*i + deltaCounter++)];
+  i += deltaCounter;
 }
 
 /**A function to fill out each of the structures of type note
@@ -285,11 +368,12 @@ void printSongData(data data){
     case major: printf("major"); break;
     default: printf("unknown mode"); break;
   }
+  printf("\nKeytone: %d", data.key);
   putchar('\n');
 }
 
-void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[]){
-  int deltaTime = deltaTimeToNoteLength(480, 960), combined = 0, averageNote = 0;
+void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[], int *size){
+  int deltaTime = 2, combined = 0, averageNote = 0;
   switch(data.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5; break;
@@ -398,22 +482,140 @@ int sortResult(const void *pa, const void *pb){
 }
 
 /* Find note length */
-int deltaTimeToNoteLength (int ticks, int ppqn){
-  double noteLength= ((double) (ticks)) / ((double) (ppqn/8));
+void deltaTimeToNoteLength (int *ticks, int ppqn, int size, note *noteAr){
 
-  if (noteLength < 1.5 && noteLength >= 0)
-    noteLength = 1;
-  else if (noteLength < 3 && noteLength >= 1.5)
-    noteLength = 2;
-  else if (noteLength < 6 && noteLength >= 3)
-    noteLength = 4;
-  else if (noteLength < 12 && noteLength >= 6)
-    noteLength = 8;
-  else if (noteLength < 24 && noteLength >= 12)
-    noteLength = 16;
-  else
-    noteLength = 32;
-  return noteLength;
+  for (int i = 0; i < size; i++){
+  
+    double noteLength = ((double) (ticks[i])) / ((double) (ppqn/8));
+
+    if (noteLength < 1.5 && noteLength >= 0)
+      noteLength = 1;
+    else if (noteLength < 3 && noteLength >= 1.5)
+      noteLength = 2;
+    else if (noteLength < 6 && noteLength >= 3)
+      noteLength = 4;
+    else if (noteLength < 12 && noteLength >= 6)
+      noteLength = 8;
+    else if (noteLength < 24 && noteLength >= 12)
+      noteLength = 16;
+    else
+      noteLength = 32;
+    
+		noteAr[i].length = noteLength;
+	}
+}
+
+/**A function to sort integers in ascending order.
+  */
+int sortTones(const void *a, const void *b){
+  int *i1 = (int*) a, *i2 = (int*) b;
+
+  return (int) *i1 - *i2;
+}
+
+/**A function to find the mode of the song by first calculating the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
+  *@param[note[]] noteAr: An array of all the notes in the entire song
+  *@param[int] totalNotes: The number of notes in the song
+  */
+void findMode(note noteAr[], int totalNotes, data *data){
+  int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0;
+
+  /*Goes through all notes of the song and puts them into an array*/
+  while(x < totalNotes){
+    for(y = 0; y < sizeBar; y++, x++){
+      bar[y] = noteAr[x].tone;
+    }
+
+    if(y == sizeBar){
+      span = 999;
+      /*Sort notes in acsending order*/
+      qsort(bar, sizeBar, sizeof(tone), sortTones);
+
+      /*Find the lowest possible tonespan over the entire array of notes*/
+      for(z = 0; z < 4; z++){
+	if((z + 1) > 3)
+          tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+        else if((z + 2) > 3)
+          tempSpan = bar[(z+1)]-bar[z] + (bar[(z+2)%4]+12)-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
+	else if((z +3) > 3)
+          tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
+	else
+          tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
+
+	if(tempSpan < span){
+          span = tempSpan; 
+          keynote = bar[z];
+        }
+      }
+      mode += isInScale(keynote, bar, sizeBar);
+      printf("Moden er nu: %d\n", mode);
+    }
+  data->key = keynote;
+  if(mode > 0)
+    data->mode = major;
+  else if(mode < 0)
+    data->mode = minor;  
+  }
+}
+
+/**A function to check if a given scale in given keytone corresponds with the tones in the rest of the song.
+  *@param[scale] mode: An enum that describes the given mode
+  *@param[int] keytone: The keytone of the processed scale
+  *@param[int] otherTones[]: An array of the rest of the tones, which the function compares to the keytone and mode
+  *@param[int] size: The number of tones in the otherTones array
+  *@return[int]: a boolean value, returns 1 if the mode is major, -1 if it's minor and 0, if wasn't possible to decide.
+  */
+int isInScale(int keytone, int otherTones[], int size){
+  int toneLeap, isMinor = 1, isMajor = 1;
+
+  for(int i = 0; i < size; i++){
+    if(otherTones[i] < keytone)
+      otherTones[i] += 12;
+      toneLeap = otherTones[i] - keytone;
+
+      if(isMinor)
+        isMinor = isInMinor(toneLeap);
+      if(isMajor)
+        isMajor = isInMajor(toneLeap);
+    }
+
+    if(isMinor && isMajor)
+      return 0;
+    else if(isMinor)
+      return -1;
+    if(isMajor)
+      return 1;
+
+    return 0;
+}
+
+/**A function to check if the given tone leap is in the minor scale.
+  *@param[int] toneLeap: An integer describing the processed tone leap
+  *@return[int]: a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not.
+  */
+
+int isInMinor(int toneLeap){
+  int minor[] = {0, 2, 3, 5, 7, 8, 10};
+
+  for(int i = 0; i < SCALESIZE; i++){
+    if(toneLeap == minor[i])
+      return 1;
+  }
+  return 0;
+}
+
+/**A function to check if the given tone leap is in the major scale.
+  *@param[int] toneLeap: An integer describing the processed tone leap
+  *@return[int]: a boolean value, returns 1 if the tone leap is in the major scale, 0 if it's not.
+  */
+int isInMajor(int toneLeap){
+  int major[] = {0, 2, 4, 5, 7, 9, 11};
+
+  for(int i = 0; i < SCALESIZE; i++){
+    if(toneLeap == major[i])
+      return 1;
+  }
+  return 0;
 }
 
 int FindMoodAmount(FILE *moods){
