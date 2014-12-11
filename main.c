@@ -92,7 +92,7 @@ void findMode(note*, int, data*);
 int FindMoodAmount(FILE*);
 
 int main(int argc, const char *argv[]){
-  DIR *dir;
+  DIR *dir = 0;
   FILE *f;
   char MIDIfile[25];
   /*Variables*/
@@ -108,13 +108,12 @@ int main(int argc, const char *argv[]){
   moodWeighting moodArray[AMOUNT_OF_MOODS];
   data data = {0, major, D};
   if (argv[1] == NULL){
-    checkDirectory(MIDIfile);  
-    f = fopen(MIDIfile,"r");  
+    checkDirectory(MIDIfile, dir);
+    f = fopen(MIDIfile, "r");  
     if(f == NULL){
       perror("Error opening file");
       exit(EXIT_FAILURE);
     }
-    closedir (dir);  
   }
   else if(argv[1] != NULL){
     f = fopen(argv[1],"r");
@@ -123,7 +122,7 @@ int main(int argc, const char *argv[]){
       exit(EXIT_FAILURE);
     }
   }
-
+  closedir (dir); 
   int *hex = (int *) malloc(CHARS * sizeof(int));
   if(hex == NULL){
     printf("Memory allocation failed, bye!");
@@ -174,6 +173,7 @@ void checkDirectory(char *MIDIfile, DIR *dir){
   }
   printf("Indtast det valgte nummer\n");
   scanf("%s", MIDIfile);
+  chdir("./Music");
 }
 
 /**A function, that retrieves the hexadecimals from the files and also returns the number of files
