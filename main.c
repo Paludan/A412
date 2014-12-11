@@ -501,7 +501,7 @@ void deltaTimeToNoteLength (int *ticks, int ppqn, int size, note *noteAr){
 	}
 }
 
-/**A function to sort integers in ascending order.
+/**A function to sort integers in ascending order, used by qsort
   */
 int sortTones(const void *a, const void *b){
   int *i1 = (int*) a, *i2 = (int*) b;
@@ -561,10 +561,10 @@ void findMode(note noteAr[], int totalNotes, data *data){
 
     if(y == sizeBar){
       span = 999;
-      /*Sort notes in acsending order*/
+      /*Sort notes in ascending order*/
       qsort(bar, sizeBar, sizeof(tone), sortTones);
 
-      /*Find the lowest possible tonespan over the array of 4 notes*/
+      /*Finds the lowest possible tonespan over the array of 4 notes*/
       for(z = 0; z < sizeBar; z++){
 	if((z + 1) > 3)
           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
@@ -593,7 +593,7 @@ void findMode(note noteAr[], int totalNotes, data *data){
 
 /**A function to check if a given scale in given keytone corresponds with the tones in the rest of the song.
   *@param keytone The keytone of the processed scale
-  *@param otherTones[] An array of the rest of the tones, which the function compares to the keytone and mode
+  *@param otherTones An array of the rest of the tones, which the function compares to the keytone and mode
   *@param size The number of tones in the otherTones array
   *@return a boolean value, returns 1 if the mode is major, -1 if it's minor and 0, if wasn't possible to decide.
   */
@@ -625,7 +625,6 @@ int isInScale(int keytone, int otherTones[], int size){
   *@param toneLeap An integer describing the processed tone leap
   *@return a boolean value, returns 1 if the tone leap is in the minor scale, 0 if it's not.
   */
-
 int isInMinor(int toneLeap){
   int minor[] = {0, 2, 3, 5, 7, 8, 10};
 
