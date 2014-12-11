@@ -509,6 +509,11 @@ int sortTones(const void *a, const void *b){
   return *i1 - *i2;
 }
 
+/**Checks if the tone given is within the scale of the key given.
+  *@param scales An array containing the scalas
+  *@param tone An integer representing the tone to be checked
+  *@param key Integer representing the key the note is compared to
+  */
 void checkScale(int scales[], int tone, int key){
   if(tone < key)
     tone += 12;
@@ -533,7 +538,7 @@ void findMode(note noteAr[], int totalNotes, data *data){
     }
   }
 
-  /*TEST Keynote giver det forkerte svar, resten virker*/
+  /*TEST*/
   for(y = 0; y < 12; y++){
     z = y;
     if(majors[z]){
