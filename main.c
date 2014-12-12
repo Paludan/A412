@@ -245,7 +245,7 @@ int countPotentialNotes(int hex[], int amount){
   *@param numbersInText the total amount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
-  data->ppqn = hex[12]*256+hex[13];
+  data->ppqn = (hex[12] << 8) + hex[13];
   
   /*Find the mode of the song, initialised as minor atm*/
   for(int j = 0; j < numbersInText; j++)
