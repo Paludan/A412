@@ -225,7 +225,7 @@ int getHex(FILE *f, int hexAr[]){
 /**A function to count the number of notes in the entire song
   *@param hex[] an array with the stored information from the file
   *@param amount an integer holding the total number of characters in the array
- */
+  */
 int countPotentialNotes(int hex[], int amount){
   int i = 0, res = 0;
   
@@ -347,7 +347,7 @@ void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   int tick = 0;
   
   while(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
@@ -360,7 +360,7 @@ void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   int tick = 0;
   
   while(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
@@ -549,8 +549,8 @@ void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
     else
       noteLength = 32;
     
-		noteAr[i].length = noteLength;
-	}
+    noteAr[i].length = noteLength;
+  }
 }
 
 /**A function to sort integers in ascending order, used by qsort
