@@ -151,8 +151,8 @@ int main(int argc, const char *argv[]){
   findEvents(numbersInText, hex, placement, noteAr, &size, &amountOfNotes);
   deltaTimeToNoteLength(data.ppqn, size, noteAr);
   insertMoods(moodArray, moods);
-  findMode(noteAr, notes, &data);
-  settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
+  findMode(noteAr, amountOfNotes, &data);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, data, amountOfNotes, noteAr, &size);
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result);
 
   /*Clean up and close*/
