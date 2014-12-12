@@ -765,10 +765,8 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == (((result[moodOfMelodi] + 100) / 4)))
-        printf("[");
-      else if(test == (((result[moodOfMelodi] + 100) / 4) + 2))
-        printf("]");
+      else if(test == ((result[moodOfMelodi] / 2) + 1))
+        printf("[]");
       else
         printf("-");
       test++;
@@ -780,10 +778,8 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == (((-(result[moodOfMelodi]) + 100) / 4)))
-        printf("[");
-      else if(test == (((-(result[moodOfMelodi]) + 100) / 4) + 2))
-        printf("]");
+      else if(test == (((int)(-(result[moodOfMelodi]) + 100) / 2.4) + 1))
+        printf("[]");
       else
         printf("-");
       test++;
