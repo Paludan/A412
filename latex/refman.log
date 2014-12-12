@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.14)  11 DEC 2014 14:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.14)  12 DEC 2014 08:23
 entering extended mode
 **refman
 (C:\Users\Gedesnegl\Desktop\A412\latex\refman.tex
@@ -908,8 +908,8 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 4.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 4.
- [1])
-(C:\Users\Gedesnegl\Desktop\A412\latex\files.tex)
+)
+(C:\Users\Gedesnegl\Desktop\A412\latex\files.tex [1])
 (C:\Users\Gedesnegl\Desktop\A412\latex\structdata.tex
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 8.99994pt on input line 3.
@@ -927,109 +927,108 @@ LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (C:\Users\Gedesnegl\Desktop\A412\latex\structmood_weighting.tex)
 (C:\Users\Gedesnegl\Desktop\A412\latex\structnote.tex [3])
 (C:\Users\Gedesnegl\Desktop\A412\latex\structpoints.tex)
-(C:\Users\Gedesnegl\Desktop\A412\latex\find_events_8c.tex
-LaTeX Font Info:    Font shape `T1/phv/bc/it' in size <10> not available
-(Font)              Font shape `T1/phv/bc/sl' tried instead on input line 37.
-LaTeX Font Info:    Font shape `T1/phv/bc/sl' will be
-(Font)              scaled to size 8.99994pt on input line 37.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 39.
+(C:\Users\Gedesnegl\Desktop\A412\latex\main_8c.tex
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 3.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd"
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [4]
-LaTeX Font Info:    Font shape `T1/phv/bc/it' in size <7> not available
-(Font)              Font shape `T1/phv/bc/sl' tried instead on input line 63.
-LaTeX Font Info:    Font shape `T1/phv/bc/sl' will be
-(Font)              scaled to size 6.29996pt on input line 63.
- [5])
-(C:\Users\Gedesnegl\Desktop\A412\latex\main_8c.tex
+)
 Underfull \hbox (badness 10000) in paragraph at lines 3--8
 
  []
 
-[6] [7]
-Underfull \hbox (badness 10000) detected at line 161
+[4] [5]
+Underfull \hbox (badness 10000) detected at line 163
 [][][]
  []
 
 LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/it' tried instead on input line 165.
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 167.
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
-(Font)              Font shape `T1/phv/b/sl' tried instead on input line 165.
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 167.
 LaTeX Font Info:    Font shape `T1/phv/b/sl' will be
-(Font)              scaled to size 8.99994pt on input line 165.
+(Font)              scaled to size 8.99994pt on input line 167.
 
-Underfull \hbox (badness 10000) detected at line 177
+Underfull \hbox (badness 10000) detected at line 179
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 193
+Underfull \hbox (badness 10000) detected at line 195
 [][][]
  []
 
-[8]
+LaTeX Font Info:    Font shape `T1/phv/bc/it' in size <10> not available
+(Font)              Font shape `T1/phv/bc/sl' tried instead on input line 237.
+LaTeX Font Info:    Font shape `T1/phv/bc/sl' will be
+(Font)              scaled to size 8.99994pt on input line 237.
+LaTeX Font Info:    Font shape `T1/phv/bc/it' in size <7> not available
+(Font)              Font shape `T1/phv/bc/sl' tried instead on input line 237.
+LaTeX Font Info:    Font shape `T1/phv/bc/sl' will be
+(Font)              scaled to size 6.29996pt on input line 237.
+[6]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 238.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 240.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 238.
+(Font)              scaled to size 8.99994pt on input line 240.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 238.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 240.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 238.
- [9] [10]
-Overfull \hbox (19.35555pt too wide) in paragraph at lines 521--521
-[]\T1/pcr/m/n/7 00525   []int[] majors[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+(Font)              scaled to size 6.29996pt on input line 240.
+ [7] [8]
+Overfull \hbox (19.35555pt too wide) in paragraph at lines 546--546
+[]\T1/pcr/m/n/7 00530   []int[] majors[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
 1}, minors[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};[] 
  []
 
-[11] [12]
-Underfull \hbox (badness 10000) detected at line 774
-[][][]
- []
-
-[13] [14]
-Underfull \hbox (badness 10000) detected at line 801
+[9] [10] [11]
+Underfull \hbox (badness 10000) detected at line 790
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 834
+Underfull \hbox (badness 10000) detected at line 817
 [][][]
  []
 
-[15] [16] [17] [18]) (C:\Users\Gedesnegl\Desktop\A412\latex\test_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
+Underfull \hbox (badness 10000) detected at line 850
+[][][]
  []
 
-[19]) [20] (C:\Users\Gedesnegl\Desktop\A412\latex\refman.ind [21
+[12] [13]
+Overfull \hbox (19.35555pt too wide) in paragraph at lines 1003--1003
+[]\T1/pcr/m/n/7 00664                                                          
+                                                 {[] 
+ []
 
-] [22] [23
+[14] [15] [16]) [17] (C:\Users\Gedesnegl\Desktop\A412\latex\refman.ind [18
 
-])
-(C:\Users\Gedesnegl\Desktop\A412\latex\refman.aux) ) 
+]
+[19] [20
+
+]) (C:\Users\Gedesnegl\Desktop\A412\latex\refman.aux) ) 
 Here is how much of TeX's memory you used:
- 5422 strings out of 493921
- 74352 string characters out of 3144863
- 149415 words of memory out of 3000000
- 8529 multiletter control sequences out of 15000+200000
+ 5407 strings out of 493921
+ 73707 string characters out of 3144863
+ 147278 words of memory out of 3000000
+ 8520 multiletter control sequences out of 15000+200000
  71386 words of font info for 103 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  48i,17n,43p,1926b,462s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files (x86)/MiK
-TeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
-pe1/urw/courier/ucrr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/h
-elvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/
-uhvb8ac.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8a
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8ac.pfb><
-C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Progr
-am Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (24 pages, 143751 bytes).
+{C:/Program Files (x86)/
+MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/urw/courier/ucrr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/ur
+w/helvetic/uhvb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvet
+ic/uhvb8ac.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb
+o8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvbo8ac.pf
+b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (21 pages, 139329 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
+ 107 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
