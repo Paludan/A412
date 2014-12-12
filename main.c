@@ -164,6 +164,7 @@ int main(int argc, const char *argv[]){
 
   return 0;
 }
+
 /**A function to read music directory and prompt user to choose file
   *@param MIDIfile a pointer to a string containing the name of the chosen input file
   *@param dir a pointer to a directory*/
