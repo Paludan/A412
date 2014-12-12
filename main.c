@@ -378,7 +378,7 @@ void printSongData(data data){
 }
 
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[], int *size){
-  int deltaTime = 2, combined = 0, averageNote = 0;
+  int deltaTime = 0, combined = 0, averageNote = 0;
   switch(data.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5; break;
@@ -407,6 +407,24 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
   else if(data.tempo >=  160)
     *tempo =  5;
 
+  for(int i = 0; i < notes; i++){
+    combined += noteAr[i].length;
+  }
+  deltaTime = combined/notes;
+  
+  if (deltaTime < 1.5 && deltaTime >= 0)
+    *length = -5;
+  else if (deltaTime < 3 && deltaTime >= 1.5)
+    *length = -4;
+  else if (deltaTime < 6 && deltaTime >= 3)
+    *length = -2;
+  else if (deltaTime < 12 && deltaTime >= 6)
+    *length = -0;
+  else if (deltaTime < 24 && deltaTime >= 12)
+    *length = 3;
+  else
+    *length = 5;
+
   switch(deltaTime){
     case 1: *length = -5; break;
     case 2: *length = -4; break;
@@ -415,6 +433,7 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
     case 16: *length = 3; break;
     case 32: *length = 5; break;
   }
+  combined = 0;
   for (int i = 0; i < notes; i++){
     combined += noteAr[i].average;
   }
