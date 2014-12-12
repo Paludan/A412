@@ -137,12 +137,12 @@ int main(int argc, const char *argv[]){
     exit(EXIT_FAILURE);
   }
   eventPlacement placement[numbersInText];
+  int result[AMOUNT_OF_MOODS];
   findEvents(numbersInText, hex, placement, noteAr, &size, &amountOfNotes);
   deltaTimeToNoteLength(data.ppqn, size, noteAr);
   insertMoods(moodArray, moods);
   findMode(noteAr, notes, &data);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
-  int result[AMOUNT_OF_MOODS];
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result);
 
   /*Clean up and close*/
