@@ -169,15 +169,17 @@ int main(int argc, const char *argv[]){
   *@param dir a pointer to a directory*/
 void checkDirectory(char *MIDIfile, DIR *dir){
   struct dirent *musicDir;
-  int musicNumber = 0;
+  int musicNumber = -2;
 
   if((dir = opendir ("./Music")) != NULL) {
     printf(" Mulige numre\n");
     while ((musicDir = readdir (dir)) != NULL){
-      if(musicNumber < 10)
+      if(musicNumber > -1 && musicNumber < 10)
         printf (" %d.  %s\n", musicNumber++, musicDir->d_name);
-      else
+      else if(musicNumber > -1)
         printf (" %d. %s\n", musicNumber++, musicDir->d_name);
+      else
+        musicNumber++;
     }
   } 
   else{
@@ -185,8 +187,23 @@ void checkDirectory(char *MIDIfile, DIR *dir){
     exit (EXIT_FAILURE);
   }
 
-  printf("\n Indtast det valgte nummer\n");
-  scanf(" %s", MIDIfile);
+  closedir(dir);
+
+  if((dir = opendir ("./Music")) != NULL) {
+    printf("\n Indtast det valgte nummer\n ");
+    scanf(" %d", &musicNumber);
+
+    for(int i = -2; i <= musicNumber; i++)
+      if((musicDir = readdir (dir)) != NULL && i == (musicNumber))
+        strcpy(MIDIfile, musicDir->d_name);
+
+    printf("\n Du valgte \n %s\n Hvilket giver disse resultater\n", MIDIfile);
+  } 
+  else{
+    perror ("Failure while opening directory");
+    exit (EXIT_FAILURE);
+  }
+
   chdir("./Music");
 }
 
