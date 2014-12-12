@@ -73,7 +73,6 @@ int getHex(FILE*, int[]);
 void fillSongData(data*, int[], int);
 int countPotentialNotes(int[], int);
 void fillNote(int, note*);
-void printSongData(data);
 void settingPoints(int*, int*, int*, int*, data, int, note [], int *);
 void insertMoods(moodWeighting [], FILE*);
 void weightingMatrix(moodWeighting [], int, int, int, int, int *);
@@ -144,7 +143,6 @@ int main(int argc, const char *argv[]){
   insertMoods(moodArray, moods);
   findMode(noteAr, notes, &data);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
-  printSongData(data);
   int result[AMOUNT_OF_MOODS];
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result);
 
@@ -213,7 +211,7 @@ int countPotentialNotes(int hex[], int amount){
   *@param numbersInText the total amount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
-  data->ppgn = hex[12]*256+hex[13];
+  data->ppqn = hex[12]*256+hex[13];
   /*Find the mode of the song, initialised as minor atm*/
   for(int j = 0; j < numbersInText; j++){
     /* finds the tempo */
@@ -361,20 +359,6 @@ void printNote(note note){
     default    : printf("Undefined note"); break;
   }
   printf(", octave: %d\n", note.octave);
-}
-
-/**A function to print out the overall data of the song, tempo and mode
-  *@param data the data to be printed
-  */
-void printSongData(data data){
-  printf("Tempo: %d\nMode: ", data.tempo);
-  switch(data.mode){
-    case minor: printf("minor"); break;
-    case major: printf("major"); break;
-    default: printf("unknown mode"); break;
-  }
-  printf("\nKeytone: %d", data.key);
-  putchar('\n');
 }
 
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[], int *size){
@@ -684,25 +668,13 @@ int FindMoodAmount(FILE *moods){
 void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[], int result[]){
   printf("\n\n\n");
   printf(" Mode:");
-  if(mode < 0)
-    printf("        %d\n", mode);
-  else
-    printf("         %d\n", mode);
+    printf("%10d\n", mode);
   printf(" Tempo:");
-  if(tempo < 0)
-    printf("       %d\n", tempo);
-  else
-    printf("        %d\n", tempo);
+    printf("%9d\n", tempo);
   printf(" Tone length:");
-  if(toneLength < 0)
-    printf(" %d\n", toneLength);
-  else
-    printf("  %d\n", toneLength);
+    printf("%3d\n", toneLength);
   printf(" Pitch:");
-  if(pitch < 0)
-    printf("       %d\n", pitch);
-  else
-    printf("        %d\n", pitch);
+    printf("%9d\n", pitch);
   printf("\n\n\n                                       WEIGHTINGS            \n");
   printf("                           Mode | Tempo | Tone length | Pitch\n");
   
