@@ -495,7 +495,10 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
 }
 
 
-/* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
+/**Inserts the weighting of each mood in an array of structs, as read from a designated file.
+  *@param moodArray The array moods are stored in
+  *@param moods the file to be read
+  */
 void insertMoods(moodWeighting moodArray[], FILE* moods){
   for(int i = 0; i < AMOUNT_OF_MOODS; i++)
     fscanf(moods, "%s %d %d %d %d", moodArray[i].name , &moodArray[i].mode, 
