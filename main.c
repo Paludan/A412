@@ -66,7 +66,6 @@ typedef struct{
 
 /*Prototypes*/
 void checkDirectory(char*, DIR*);
-void findNoteLength(double x, int *, int *);
 void printNote(note);
 int getHex(FILE*, int[]);
 void fillSongData(data*, int[], int);
