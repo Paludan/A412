@@ -39,7 +39,6 @@ typedef struct{
   unsigned int tempo;
   int ppqn;
   mode mode;
-  tone key;
 } data;
 
 typedef struct{
