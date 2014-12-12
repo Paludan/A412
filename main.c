@@ -444,24 +444,25 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
     *length = -5;
   else if (deltaTime < 3 && deltaTime >= 1.5)
     *length = -4;
-  else if (deltaTime < 6 && deltaTime >= 3)
+  else if (deltaTime < 5 && deltaTime >= 4)
+    *length = -3;
+  else if (deltaTime < 6 && deltaTime >= 5)
     *length = -2;
-  else if (deltaTime < 12 && deltaTime >= 6)
+  else if (deltaTime < 9 && deltaTime >= 6)
+    *length = -1;
+  else if (deltaTime < 12 && deltaTime >= 9)
     *length = -0;
-  else if (deltaTime < 24 && deltaTime >= 12)
+  else if (deltaTime < 16 && deltaTime >= 12)
+    *length = 1;
+  else if (deltaTime < 20 && deltaTime >= 16)
+    *length = 2;
+  else if (deltaTime < 24 && deltaTime >= 20)
     *length = 3;
+  else if (deltaTime < 28 && deltaTime >= 24)
+    *length = 4;
   else
     *length = 5;
 
-  switch(deltaTime){
-    case 1: *length = -5; break;
-    case 2: *length = -4; break;
-    case 4: *length = -2; break;
-    case 8: *length =  0; break;
-    case 16: *length = 3; break;
-    case 32: *length = 5; break;
-  }
-  
   combined = 0;
   
   for (int i = 0; i < notes; i++)
