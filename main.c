@@ -503,7 +503,14 @@ void insertMoods(moodWeighting moodArray[], FILE* moods){
                                     &moodArray[i].pitch);
 }
 
-/* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
+/**Vector matrix multiplication. Receives an array of moods, the various parameters of the song and a
+  *pointer to an array where the results will be stored. The song data is multiplied onto each moods
+  *weighting and then stored.
+  *@param moodArray an array containing the weighting for all moods
+  *@param result an array for holding the songs scores as per each mood
+  *@param mode along with temp, toneLength and pitch, this variable contains a score -5 to 5 for how
+  *that facet of the song is.
+  */
 void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch, int *result){
   for(int i = 0; i < AMOUNT_OF_MOODS; i++)
     result[i] = 0;
