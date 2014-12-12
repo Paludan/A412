@@ -71,7 +71,7 @@ void findNoteLength(double x, int *, int *);
 void printNote(note);
 int getHex(FILE*, int[]);
 void fillSongData(data*, int[], int);
-int countNotes(int[], int);
+int countPotentialNotes(int[], int);
 void fillNote(int, note*);
 void printSongData(data);
 void settingPoints(int*, int*, int*, int*, data, int, note [], int *);
@@ -132,7 +132,7 @@ int main(int argc, const char *argv[]){
   /*Reading the data from the file*/
   numbersInText = getHex(f, hex);
   fillSongData(&data, hex, numbersInText);
-  notes = countNotes(hex, numbersInText);
+  notes = countPotentialNotes(hex, numbersInText);
   note *noteAr = (note*) malloc(notes * sizeof(note));
   if(noteAr == NULL){
     printf("Memory allocation failed, bye!");
@@ -196,7 +196,7 @@ int getHex(FILE *f, int hexAr[]){
   *@param hex[] an array with the stored information from the file
   *@param amount an integer holding the total number of characters in the array
  */
-int countNotes(int hex[], int amount){
+int countPotentialNotes(int hex[], int amount){
   int i = 0, res = 0;
   for(i = 0; i < amount; i++){
     if(hex[i] == 0x90){
