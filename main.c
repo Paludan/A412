@@ -73,7 +73,6 @@ int getHex(FILE*, int[]);
 void fillSongData(data*, int[], int);
 int countPotentialNotes(int[], int);
 void fillNote(int, note*);
-void printSongData(data);
 void settingPoints(int*, int*, int*, int*, data, int, note [], int *);
 void insertMoods(moodWeighting [], FILE*);
 void weightingMatrix(moodWeighting [], int, int, int, int, int *);
@@ -144,7 +143,6 @@ int main(int argc, const char *argv[]){
   insertMoods(moodArray, moods);
   findMode(noteAr, notes, &data);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
-  printSongData(data);
   int result[AMOUNT_OF_MOODS];
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result);
 
@@ -213,7 +211,7 @@ int countPotentialNotes(int hex[], int amount){
   *@param numbersInText the total amount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
-  data->ppgn = hex[12]*256+hex[13];
+  data->ppqn = hex[12]*256+hex[13];
   /*Find the mode of the song, initialised as minor atm*/
   for(int j = 0; j < numbersInText; j++){
     /* finds the tempo */
@@ -363,22 +361,8 @@ void printNote(note note){
   printf(", octave: %d\n", note.octave);
 }
 
-/**A function to print out the overall data of the song, tempo and mode
-  *@param data the data to be printed
-  */
-void printSongData(data data){
-  printf("Tempo: %d\nMode: ", data.tempo);
-  switch(data.mode){
-    case minor: printf("minor"); break;
-    case major: printf("major"); break;
-    default: printf("unknown mode"); break;
-  }
-  printf("\nKeytone: %d", data.key);
-  putchar('\n');
-}
-
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[], int *size){
-  int deltaTime = 2, combined = 0, averageNote = 0;
+  int deltaTime = 0, combined = 0, averageNote = 0;
   switch(data.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5; break;
@@ -407,6 +391,24 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
   else if(data.tempo >=  160)
     *tempo =  5;
 
+  for(int i = 0; i < notes; i++){
+    combined += noteAr[i].length;
+  }
+  deltaTime = combined/notes;
+  
+  if (deltaTime < 1.5 && deltaTime >= 0)
+    *length = -5;
+  else if (deltaTime < 3 && deltaTime >= 1.5)
+    *length = -4;
+  else if (deltaTime < 6 && deltaTime >= 3)
+    *length = -2;
+  else if (deltaTime < 12 && deltaTime >= 6)
+    *length = -0;
+  else if (deltaTime < 24 && deltaTime >= 12)
+    *length = 3;
+  else
+    *length = 5;
+
   switch(deltaTime){
     case 1: *length = -5; break;
     case 2: *length = -4; break;
@@ -415,6 +417,7 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
     case 16: *length = 3; break;
     case 32: *length = 5; break;
   }
+  combined = 0;
   for (int i = 0; i < notes; i++){
     combined += noteAr[i].average;
   }
@@ -665,25 +668,13 @@ int FindMoodAmount(FILE *moods){
 void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[], int result[]){
   printf("\n\n\n");
   printf(" Mode:");
-  if(mode < 0)
-    printf("        %d\n", mode);
-  else
-    printf("         %d\n", mode);
+    printf("%10d\n", mode);
   printf(" Tempo:");
-  if(tempo < 0)
-    printf("       %d\n", tempo);
-  else
-    printf("        %d\n", tempo);
+    printf("%9d\n", tempo);
   printf(" Tone length:");
-  if(toneLength < 0)
-    printf(" %d\n", toneLength);
-  else
-    printf("  %d\n", toneLength);
+    printf("%3d\n", toneLength);
   printf(" Pitch:");
-  if(pitch < 0)
-    printf("       %d\n", pitch);
-  else
-    printf("        %d\n", pitch);
+    printf("%9d\n", pitch);
   printf("\n\n\n                                       WEIGHTINGS            \n");
   printf("                           Mode | Tempo | Tone length | Pitch\n");
   
