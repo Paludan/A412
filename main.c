@@ -171,7 +171,7 @@ void checkDirectory(char *MIDIfile, DIR *dir){
     perror ("Failure while opening directory");
     exit (EXIT_FAILURE);
   }
-  printf("Indtast det valgte nummer\n");
+  printf("\nIndtast det valgte nummer\n");
   scanf("%s", MIDIfile);
   chdir("./Music");
 }
@@ -468,10 +468,6 @@ void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLen
     result[i] += (moodArray[i].tempo * tempo);
     result[i] += (moodArray[i].toneLength * toneLength);
     result[i] += (moodArray[i].pitch * pitch);
-  }
-  
-  for(int i = 0; i < AMOUNT_OF_MOODS; i++){
-    printf("%s: %d\n", moodArray[i].name, result[i]);
   }
 }
 
