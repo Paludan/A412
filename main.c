@@ -37,6 +37,7 @@ typedef struct{
 
 typedef struct{
   unsigned int tempo;
+  int ppqn;
   mode mode;
   tone key;
 } data;
@@ -139,7 +140,7 @@ int main(int argc, const char *argv[]){
   }
   eventPlacement placement[numbersInText];
   findEvents(numbersInText, hex, placement, noteAr, &size);
-  deltaTimeToNoteLength(960, size, noteAr);
+  deltaTimeToNoteLength(data.ppqn, size, noteAr);
   insertMoods(moodArray, moods);
   findMode(noteAr, notes, &data);
   settingPoints(&mode, &tempo, &toneLength, &pitch, data, notes, noteAr, &size);
@@ -212,9 +213,9 @@ int countNotes(int hex[], int amount){
   *@param numbersInText the total amount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
-  int j;
+  data->ppgn = hex[12]*256+hex[13];
   /*Find the mode of the song, initialised as minor atm*/
-  for(j = 0; j < numbersInText; j++){
+  for(int j = 0; j < numbersInText; j++){
     /* finds the tempo */
     if(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03){
       data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
