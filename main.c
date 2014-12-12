@@ -402,7 +402,12 @@ void printNote(note note){
   
   printf(", octave: %d\n", note.octave);
 }
-
+/**A function to insert points into integers based on the data pulled from the file
+ *@param mode, along with tempo, length and octave contains the points
+ *@param data contains the song data
+ *@param notes contains the amount of notes in the song
+ *@param note contains an array of the specific notes
+ */
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[], int *size){
   int deltaTime = 0, combined = 0, averageNote = 0;
   
