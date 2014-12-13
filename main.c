@@ -277,6 +277,8 @@ void fillSongData(data *data, int hex[], int numbersInText){
       data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
 }
 
+/**Searches the file for events and stores their placement in an array of eventPlacement structs 
+  */
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int *size, int *amountOfNotes){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
       programChange = 0, channelPressure = 0, pitchWheel = 0, notes[numbersInText];
@@ -295,6 +297,11 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
 }
 
+/**Starts in the hex which are investigated and looks forward to find a perspective.
+  *It goes to an assumed deltatime and finds the length of it. Thereafter it checks the next hex after the deltatime to make sure it is an event.
+  *If that is the case it stores the hex which is investegated in the first place.
+  *Furthermore if it is a noteOn event it stores the hex which is the note, processes the note and counts amount of notes.
+  */
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes, int notes[]){
   int i = 3;
   
@@ -310,6 +317,8 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
   } 
 }
 
+/**Does the same as insertPlacement1, but for events with 1 parameter.
+  */
 void insertPlacement2(int hex[], int *place, int j){
   int i = 2;
   
@@ -332,6 +341,8 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
+/**
+  */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn, int *size, int notes[]){
   int tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
   
@@ -365,6 +376,8 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
   *size = tickCounter;
 }
 
+/**Processes events with two parameters, extracting deltatime (and advancing the file pointer)
+  */
 void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0;
@@ -378,6 +391,8 @@ void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   *i += deltaCounter;
 }
 
+/**Processes events with one parameter, extracting deltatime (and advancing the file pointer)
+  */
 void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0;
@@ -425,6 +440,7 @@ void printNote(note note){
   
   printf(", octave: %d\n", note.octave);
 }
+
 /**A function to insert points into integers based on the data pulled from the file
  *@param mode, along with tempo, length and octave contains the points
  *@param data contains the song data
@@ -554,7 +570,8 @@ void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLen
   }
 }
 
-/* Find note length */
+/**Finds the note length, converted from deltatime to standard musical notation
+  */
 void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
   for (int i = 0; i < size; i++){
     double noteLength = ((double) (noteAr[i].ticks)) / ((double) (ppqn/8));
@@ -740,6 +757,10 @@ int FindMoodAmount(FILE *moods){
   return i;
 }
 
+/**Prints relevant information about the song. Finds and prints the mood with the highest score,
+  *and in the case of using the default sad/happy scale, scales the values to fit on the 51
+  *point sliding scale
+  */
 void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[], int result[]){
   printf("\n\n\n");
   printf(" Mode:");
