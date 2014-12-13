@@ -42,11 +42,6 @@ typedef struct{
 } data;
 
 typedef struct{
-  char *parameter;
-  int point;
-} points;
-
-typedef struct{
   char name[25];
   int mode;
   int tempo;
@@ -315,20 +310,26 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
   for(int j = 0; j < noteOn; j++){
     for(int i = placement[j].noteOn; i < numbersInText; i++){
       if(hex[i] == 0x80){
-        if(hex[i + 1] == notes[j])
+        if(hex[i + 1] == notes[j]){
+          tickCounter++;
           break;
+        }
         else
           countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
       else if(hex[i] == 0xA0){
-        if(hex[i + 1] == notes[j] && hex[i + 2] == 0x00)
+        if(hex[i + 1] == notes[j] && hex[i + 2] == 0x00){
+          tickCounter++;
           break;
+        }
         else
           countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
       else if(hex[i] == 0xD0){
-        if(hex[i + 1] == 0x00)
+        if(hex[i + 1] == 0x00){
+          tickCounter++;
           break;
+        }  
         else
           countTicks2(hex, &i, deltaCounter2, noteAr, &tickCounter);
       }
@@ -351,7 +352,6 @@ void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
-  *tickCounter += 1;
   *i += deltaCounter;
 }
 
@@ -364,7 +364,6 @@ void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
-  *tickCounter += 1;
   *i += deltaCounter;
 }
 
