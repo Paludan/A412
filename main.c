@@ -469,27 +469,27 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
   deltaTime = combined/notes;
   
   if (deltaTime < 1.5 && deltaTime >= 0)
-    *length = -5;
-  else if (deltaTime < 3 && deltaTime >= 1.5)
-    *length = -4;
-  else if (deltaTime < 5 && deltaTime >= 4)
-    *length = -3;
-  else if (deltaTime < 6 && deltaTime >= 5)
-    *length = -2;
-  else if (deltaTime < 9 && deltaTime >= 6)
-    *length = -1;
-  else if (deltaTime < 12 && deltaTime >= 9)
-    *length = -0;
-  else if (deltaTime < 16 && deltaTime >= 12)
-    *length = 1;
-  else if (deltaTime < 20 && deltaTime >= 16)
-    *length = 2;
-  else if (deltaTime < 24 && deltaTime >= 20)
-    *length = 3;
-  else if (deltaTime < 28 && deltaTime >= 24)
-    *length = 4;
-  else
     *length = 5;
+  else if (deltaTime < 3 && deltaTime >= 1.5)
+    *length = 4;
+  else if (deltaTime < 5 && deltaTime >= 4)
+    *length = 3;
+  else if (deltaTime < 6 && deltaTime >= 5)
+    *length = 2;
+  else if (deltaTime < 9 && deltaTime >= 6)
+    *length = 1;
+  else if (deltaTime < 12 && deltaTime >= 9)
+    *length = 0;
+  else if (deltaTime < 16 && deltaTime >= 12)
+    *length = -1;
+  else if (deltaTime < 20 && deltaTime >= 16)
+    *length = -2;
+  else if (deltaTime < 24 && deltaTime >= 20)
+    *length = -3;
+  else if (deltaTime < 28 && deltaTime >= 24)
+    *length = -4;
+  else
+    *length = -5;
 
   combined = 0;
   
