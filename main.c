@@ -27,6 +27,13 @@ typedef enum mode {major, minor} mode;
 typedef enum tone {C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B} tone;
 typedef enum mood {glad, sad} mood;
 
+/**A struct cotaining data about a single note
+  *@param tone the tone stored as an integer (C = 0)
+  *@param octave which octave, on a piano, the note is in (1 is the deepest, C4 is middle C)
+  *@param length the notes length in standard musical notation
+  *@param average used in calculating the average tone
+  *@param ticks the notes length in ticks
+  */
 typedef struct{
   int tone;
   int octave;
@@ -35,17 +42,24 @@ typedef struct{
   int ticks;
 } note;
 
+/**A struct containing general data pertaining to the song
+  *@param tempo the tempo in beats-per-minute
+  *@param ppqn ticks-per-quarter-note contains the number of ticks per quarter note
+  *@param mode an enumerated value representing the mode (major/minor)
+  */
 typedef struct{
   unsigned int tempo;
   int ppqn;
   mode mode;
 } data;
 
-typedef struct{
-  char *parameter;
-  int point;
-} points;
-
+/**A struct containing a single moods name and weighting
+  *@param name the name of the mood
+  *@param mode a value -5 to 5 representing this parameters impact on the mood
+  *@param tempo a value -5 to 5 representing this parameters impact on the mood
+  *@param toneLength a value -5 to 5 representing this parameters impact on the mood
+  *@param pitch a value -5 to 5 representing this parameters impact on the mood
+  */
 typedef struct{
   char name[25];
   int mode;
@@ -54,6 +68,15 @@ typedef struct{
   int pitch;
 } moodWeighting;
 
+/**A struct containing placements of midi events, stored as their placement in file
+  *@param noteOn signals when a note starts playing
+  *@param noteOff signals when a note stops playing
+  *@param afterTouch changes velocity for a single note on a single channel
+  *@param controlChange used for a large number of effects, none of which are used in this project (stored to find deltatimes)
+  *@param programChange signals instrument change (not used; stored to find deltatimes)
+  *@param channelPressure changes velocity for all notes on a specific channel (akin to a global afterTouch)
+  *@param pitchWheel fine tuning of pitch for all notes on a specific channel (similar to channelPressure, but for pitch) 
+  */
 typedef struct{
   int noteOn;
   int noteOff;
