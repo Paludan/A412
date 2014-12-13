@@ -860,5 +860,5 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     printf(" Happy\n\n\n");
   }
   
-  printf("\n The mood of the melodi is %s\n", moodArray[moodOfMelodi].name);
+  printf("\n The mood of the melody is %s\n", moodArray[moodOfMelodi].name);
 }
