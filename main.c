@@ -27,6 +27,13 @@ typedef enum mode {major, minor} mode;
 typedef enum tone {C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B} tone;
 typedef enum mood {glad, sad} mood;
 
+/**A struct cotaining data about a single note
+  *@param tone the tone stored as an integer (C = 0)
+  *@param octave which octave, on a piano, the note is in (1 is the deepest, C4 is middle C)
+  *@param length the notes length in standard musical notation
+  *@param average used in calculating the average tone
+  *@param ticks the notes length in ticks
+  */
 typedef struct{
   int tone;
   int octave;
@@ -35,12 +42,24 @@ typedef struct{
   int ticks;
 } note;
 
+/**A struct containing general data pertaining to the song
+  *@param tempo the tempo in beats-per-minute
+  *@param ppqn ticks-per-quarter-note contains the number of ticks per quarter note
+  *@param mode an enumerated value representing the mode (major/minor)
+  */
 typedef struct{
   unsigned int tempo;
   int ppqn;
   mode mode;
 } data;
 
+/**A struct containing a single moods name and weighting
+  *@param name the name of the mood
+  *@param mode a value -5 to 5 representing this parameters impact on the mood
+  *@param tempo a value -5 to 5 representing this parameters impact on the mood
+  *@param toneLength a value -5 to 5 representing this parameters impact on the mood
+  *@param pitch a value -5 to 5 representing this parameters impact on the mood
+  */
 typedef struct{
   char name[25];
   int mode;
@@ -49,6 +68,15 @@ typedef struct{
   int pitch;
 } moodWeighting;
 
+/**A struct containing placements of midi events, stored as their placement in file
+  *@param noteOn signals when a note starts playing
+  *@param noteOff signals when a note stops playing
+  *@param afterTouch changes velocity for a single note on a single channel
+  *@param controlChange used for a large number of effects, none of which are used in this project (stored to find deltatimes)
+  *@param programChange signals instrument change (not used; stored to find deltatimes)
+  *@param channelPressure changes velocity for all notes on a specific channel (akin to a global afterTouch)
+  *@param pitchWheel fine tuning of pitch for all notes on a specific channel (similar to channelPressure, but for pitch) 
+  */
 typedef struct{
   int noteOn;
   int noteOff;
@@ -220,7 +248,7 @@ int getHex(FILE *f, int hexAr[]){
 /**A function to count the number of notes in the entire song
   *@param hex[] an array with the stored information from the file
   *@param amount an integer holding the total number of characters in the array
- */
+  */
 int countPotentialNotes(int hex[], int amount){
   int i = 0, res = 0;
   
@@ -249,6 +277,8 @@ void fillSongData(data *data, int hex[], int numbersInText){
       data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
 }
 
+/**Searches the file for events and stores their placement in an array of eventPlacement structs 
+  */
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int *size, int *amountOfNotes){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
       programChange = 0, channelPressure = 0, pitchWheel = 0, notes[numbersInText];
@@ -267,6 +297,11 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
 }
 
+/**Starts in the hex which are investigated and looks forward to find a perspective.
+  *It goes to an assumed deltatime and finds the length of it. Thereafter it checks the next hex after the deltatime to make sure it is an event.
+  *If that is the case it stores the hex which is investegated in the first place.
+  *Furthermore if it is a noteOn event it stores the hex which is the note, processes the note and counts amount of notes.
+  */
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes, int notes[]){
   int i = 3;
   
@@ -282,6 +317,8 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
   } 
 }
 
+/**Does the same as insertPlacement1, but for events with 1 parameter.
+  */
 void insertPlacement2(int hex[], int *place, int j){
   int i = 2;
   
@@ -304,6 +341,8 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
+/**
+  */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn, int *size, int notes[]){
   int tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
   
@@ -343,24 +382,28 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
   *size = tickCounter;
 }
 
+/**Processes events with two parameters, extracting deltatime (and advancing the file pointer)
+  */
 void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0;
   
   while(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
   *i += deltaCounter;
 }
 
+/**Processes events with one parameter, extracting deltatime (and advancing the file pointer)
+  */
 void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0;
   
   while(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
@@ -401,6 +444,7 @@ void printNote(note note){
   
   printf(", octave: %d\n", note.octave);
 }
+
 /**A function to insert points into integers based on the data pulled from the file
  *@param mode, along with tempo, length and octave contains the points
  *@param data contains the song data
@@ -445,27 +489,27 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
   deltaTime = combined/notes;
   
   if (deltaTime < 1.5 && deltaTime >= 0)
-    *length = -5;
-  else if (deltaTime < 3 && deltaTime >= 1.5)
-    *length = -4;
-  else if (deltaTime < 5 && deltaTime >= 4)
-    *length = -3;
-  else if (deltaTime < 6 && deltaTime >= 5)
-    *length = -2;
-  else if (deltaTime < 9 && deltaTime >= 6)
-    *length = -1;
-  else if (deltaTime < 12 && deltaTime >= 9)
-    *length = -0;
-  else if (deltaTime < 16 && deltaTime >= 12)
-    *length = 1;
-  else if (deltaTime < 20 && deltaTime >= 16)
-    *length = 2;
-  else if (deltaTime < 24 && deltaTime >= 20)
-    *length = 3;
-  else if (deltaTime < 28 && deltaTime >= 24)
-    *length = 4;
-  else
     *length = 5;
+  else if (deltaTime < 3 && deltaTime >= 1.5)
+    *length = 4;
+  else if (deltaTime < 5 && deltaTime >= 4)
+    *length = 3;
+  else if (deltaTime < 6 && deltaTime >= 5)
+    *length = 2;
+  else if (deltaTime < 9 && deltaTime >= 6)
+    *length = 1;
+  else if (deltaTime < 12 && deltaTime >= 9)
+    *length = 0;
+  else if (deltaTime < 16 && deltaTime >= 12)
+    *length = -1;
+  else if (deltaTime < 20 && deltaTime >= 16)
+    *length = -2;
+  else if (deltaTime < 24 && deltaTime >= 20)
+    *length = -3;
+  else if (deltaTime < 28 && deltaTime >= 24)
+    *length = -4;
+  else
+    *length = -5;
 
   combined = 0;
   
@@ -530,7 +574,8 @@ void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLen
   }
 }
 
-/* Find note length */
+/**Finds the note length, converted from deltatime to standard musical notation
+  */
 void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
   for (int i = 0; i < size; i++){
     double noteLength = ((double) (noteAr[i].ticks)) / ((double) (ppqn/8));
@@ -548,8 +593,8 @@ void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
     else
       noteLength = 32;
     
-		noteAr[i].length = noteLength;
-	}
+    noteAr[i].length = noteLength;
+  }
 }
 
 /**A function to sort integers in ascending order, used by qsort
@@ -716,6 +761,10 @@ int FindMoodAmount(FILE *moods){
   return i;
 }
 
+/**Prints relevant information about the song. Finds and prints the mood with the highest score,
+  *and in the case of using the default sad/happy scale, scales the values to fit on the 51
+  *point sliding scale
+  */
 void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[], int result[]){
   printf("\n\n\n");
   printf(" Mode:");
@@ -836,5 +885,5 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     printf(" Happy\n\n\n");
   }
   
-  printf("\n The mood of the melodi is %s\n", moodArray[moodOfMelodi].name);
+  printf("\n The mood of the melody is %s\n", moodArray[moodOfMelodi].name);
 }

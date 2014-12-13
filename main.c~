@@ -225,7 +225,7 @@ int getHex(FILE *f, int hexAr[]){
 /**A function to count the number of notes in the entire song
   *@param hex[] an array with the stored information from the file
   *@param amount an integer holding the total number of characters in the array
- */
+  */
 int countPotentialNotes(int hex[], int amount){
   int i = 0, res = 0;
   
@@ -245,7 +245,7 @@ int countPotentialNotes(int hex[], int amount){
   *@param numbersInText the total amount of integers in the array
   */
 void fillSongData(data *data, int hex[], int numbersInText){
-  data->ppqn = hex[12]*256+hex[13];
+  data->ppqn = (hex[12] << 8) + hex[13];
   
   /*Find the mode of the song, initialised as minor atm*/
   for(int j = 0; j < numbersInText; j++)
@@ -347,7 +347,7 @@ void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   int tick = 0;
   
   while(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
@@ -360,7 +360,7 @@ void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   int tick = 0;
   
   while(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) * 128);
+    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
@@ -402,7 +402,12 @@ void printNote(note note){
   
   printf(", octave: %d\n", note.octave);
 }
-
+/**A function to insert points into integers based on the data pulled from the file
+ *@param mode, along with tempo, length and octave contains the points
+ *@param data contains the song data
+ *@param notes contains the amount of notes in the song
+ *@param note contains an array of the specific notes
+ */
 void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[], int *size){
   int deltaTime = 0, combined = 0, averageNote = 0;
   
@@ -495,7 +500,10 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
 }
 
 
-/* Inserts the weighting of each mood in the weighting matrix 0 = happy 1 = sad*/
+/**Inserts the weighting of each mood in an array of structs, as read from a designated file.
+  *@param moodArray The array moods are stored in
+  *@param moods the file to be read
+  */
 void insertMoods(moodWeighting moodArray[], FILE* moods){
   for(int i = 0; i < AMOUNT_OF_MOODS; i++)
     fscanf(moods, "%s %d %d %d %d", moodArray[i].name , &moodArray[i].mode, 
@@ -503,7 +511,14 @@ void insertMoods(moodWeighting moodArray[], FILE* moods){
                                     &moodArray[i].pitch);
 }
 
-/* Vector matrix multiplication. Mood vector and weghting matrix. Return the row with the highest value */
+/**Vector matrix multiplication. Receives an array of moods, the various parameters of the song and a
+  *pointer to an array where the results will be stored. The song data is multiplied onto each moods
+  *weighting and then stored.
+  *@param moodArray an array containing the weighting for all moods
+  *@param result an array for holding the songs scores as per each mood
+  *@param mode along with temp, toneLength and pitch, this variable contains a score -5 to 5 for how
+  *that facet of the song is.
+  */
 void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch, int *result){
   for(int i = 0; i < AMOUNT_OF_MOODS; i++)
     result[i] = 0;
@@ -534,8 +549,8 @@ void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
     else
       noteLength = 32;
     
-		noteAr[i].length = noteLength;
-	}
+    noteAr[i].length = noteLength;
+  }
 }
 
 /**A function to sort integers in ascending order, used by qsort
