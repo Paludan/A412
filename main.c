@@ -34,6 +34,7 @@ int AMOUNT_OF_MOODS;
 #define PITCH_WHEEL 0xE0
 #define ZERO 0x00
 #define HEX_80 0x80
+#define HEX_90 0x90
 #define LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME 3
 #define LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME 2
 #define MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END 7
@@ -131,6 +132,9 @@ int isInMinor(int);
 int isInMajor(int);
 int sortToner(const void*, const void*);
 void findMode(note*, int, globalMelodyInfo*);
+void kage(int [], int [], int, int, note []);
+void insertNotes(int [], int [], int, note [], int*);
+void returnToStruct(int, globalMelodyInfo *);
 int FindMoodAmount(FILE*);
 void printResults(int, int, int, int, moodWeighting [], int []);
 void printParameterVector(int, int, int, int);
@@ -279,7 +283,7 @@ int countPotentialNotes(int hex[], int amount){
   int i = 0, res = 0;
   
   for(i = 0; i < amount; i++){
-    if(hex[i] == 0x90){
+    if(hex[i] == HEX_90){
       res++;
     }
   }
@@ -294,7 +298,7 @@ int countPotentialNotes(int hex[], int amount){
   *@param numbersInText the total amount of integers in the array
   */
 void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
-  info->ppqn = (hex[12] << 8) + hex[13];
+  info->ppqn = (hex[12] << BIT_SHIFT_8) + hex[13];
   
   for(int j = 0; j < numbersInText; j++)
     /* finds the tempo */
@@ -676,9 +680,17 @@ void checkScale(int scales[], int tone, int key){
   *@param info contains ppqn, tempo and mode
   */
 void findMode(note noteAr[], int totalNotes, globalMelodyInfo *info){
-  int majors[12] = {1}, minors[12] = {0}, x = 0, y = 0, z = 0, bar[4],
-      sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0, tempNote = 0;
+  int majors[12] = {1}, minors[12] = {0}, mode = 0, tempNote = 0;
 
+  kage(majors, minors, tempNote, totalNotes, noteAr);
+  insertNotes(majors, minors, totalNotes, noteAr, &mode);
+  returnToStruct(mode, info);
+}
+
+/**
+  */
+void kage(int majors[], int minors[], int tempNote, int totalNotes, note noteAr[]){
+  int x = 0, y = 0, z = 0;
   for(x = 0; x < totalNotes; x++){
     tempNote = noteAr[x].tone;
     
@@ -697,10 +709,12 @@ void findMode(note noteAr[], int totalNotes, globalMelodyInfo *info){
       minors[z-3] = 1;
     }
   }
+}
 
-  z = 0;  x = 0;
-
-  /*Goes through all notes of the song and puts them into an array, 4 at a time*/
+/**Goes through all notes of the song and puts them into an array, 4 at a time
+  */
+void insertNotes(int majors[], int minors[], int totalNotes, note noteAr[], int *mode){
+  int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0;
   while(x < totalNotes){
     z = x;
     
@@ -718,26 +732,29 @@ void findMode(note noteAr[], int totalNotes, globalMelodyInfo *info){
 
       /*Finds the lowest possible tonespan over the array of 4 notes*/
       for(z = 0; z < sizeBar; z++){
-	      if((z + 1) > 3)
+        if((z + 1) > 3)
           tempSpan = (bar[(z+1)%4]+12)-bar[z] + bar[(z+2)%4]-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
         else if((z + 2) > 3)
           tempSpan = bar[(z+1)]-bar[z] + (bar[(z+2)%4]+12)-bar[(z+1)%4] + bar[(z+3)%4]-bar[(z+2)%4];
-	      else if((z +3) > 3)
+        else if((z +3) > 3)
           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + (bar[(z+3)%4]+12)-bar[z];
-	      else
+        else
           tempSpan = bar[(z+1)]-bar[z] + bar[(z+2)]-bar[(z+1)] + bar[(z+3)]-bar[(z+2)];
-	      if(tempSpan < span && (majors[bar[z]] || minors[bar[z]])){
+        if(tempSpan < span && (majors[bar[z]] || minors[bar[z]])){
           span = tempSpan;
           keynote = bar[z];
         }
       }
       
-      mode += isInScale(keynote, bar, sizeBar);
+      *mode += isInScale(keynote, bar, sizeBar);
       x++;
     }
   }
-  
-  /*outputs result directly to the info struct array*/
+}
+
+/**outputs result directly to the info struct array
+  */
+void returnToStruct(int mode, globalMelodyInfo *info){
   if(mode > 0)
     info->mode = major;
   else if(mode < 0)
