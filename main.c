@@ -1,7 +1,4 @@
 /*@file
- *@brief This file is marvelous.
- *
- * MIDI analysing mega device of epic proportions
  * Gruppe A412
  * Lee Paludan
  * Simon Madsen
@@ -18,9 +15,29 @@
 #include <string.h>
 #include <dirent.h>
 
-#define CHARS 1000
 int AMOUNT_OF_MOODS;
+#define CHARS 1000
 #define SCALESIZE 7
+#define META_EVENT 0xff
+#define TEMPO_EVENT_BYTE_1 0x51
+#define TEMPO_EVENT_BYTE_2 0x03
+#define BIT_SHIFT_16 16
+#define BIT_SHIFT_8 8
+#define BIT_SHIFT_7 7
+#define MICRO_SECONDS_PER_MINUTE 60000000
+#define NOTE_ON 0x90
+#define NOTE_OFF 0x80
+#define AFTER_TOUCH 0xA0
+#define CONTROL_CHANGE 0xB0
+#define PROGRAM_CHANGE 0xC0
+#define CHANNEL_PRESSURE 0xD0
+#define PITCH_WHEEL 0xE0
+#define ZERO 0x00
+#define HEX_80 0x80
+#define LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME 3
+#define LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME 2
+#define MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END 7
+#define MAX_LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME_END 6
 
 /*Enums and structs*/
 typedef enum mode {major, minor} mode;
@@ -31,14 +48,14 @@ typedef enum mood {glad, sad} mood;
   *@param tone the tone stored as an integer (C = 0)
   *@param octave which octave, on a piano, the note is in (1 is the deepest, C4 is middle C)
   *@param length the notes length in standard musical notation
-  *@param average used in calculating the average tone
+  *@param noteValue used in calculating the average tone
   *@param ticks the notes length in ticks
   */
 typedef struct{
   int tone;
   int octave;
   int length;
-  int average;
+  int noteValue;
   int ticks;
 } note;
 
@@ -51,7 +68,7 @@ typedef struct{
   unsigned int tempo;
   int ppqn;
   mode mode;
-} data;
+} globalMelodiInfo;
 
 /**A struct containing a single moods name and weighting
   *@param name the name of the mood
@@ -91,16 +108,20 @@ typedef struct{
 void checkDirectory(char*, DIR*);
 void printNote(note);
 int getHex(FILE*, int[]);
-void fillSongData(data*, int[], int);
+void fillSongData(globalMelodiInfo*, int[], int);
 int countPotentialNotes(int[], int);
 void fillNote(int, note*);
-void settingPoints(int*, int*, int*, int*, data, int, note [], int *);
+void settingPoints(int*, int*, int*, int*, globalMelodiInfo, int, note [], int *);
+void modePoints();
+void tempoPoints();
+void lengthPoints();
+void notePoints();
 void insertMoods(moodWeighting [], FILE*);
 void weightingMatrix(moodWeighting [], int, int, int, int, int *);
 void findEvents(int, int [], eventPlacement [], note [], int *, int *);
 void insertPlacement1(int [], int *, int, note [], int *, int []);
 void insertPlacement2(int [], int *, int);
-int checkNextEvent(int [], int);
+int isNextHexAnEvent(int [], int);
 void findTicks(int, int [], eventPlacement [], note [], int, int *, int []);
 void countTicks1(int [], int *, int, note [], int *);
 void countTicks2(int [], int *, int, note [], int *);
@@ -109,7 +130,7 @@ int isInScale(int, int[], int);
 int isInMinor(int);
 int isInMajor(int);
 int sortToner(const void*, const void*);
-void findMode(note*, int, data*);
+void findMode(note*, int, globalMelodiInfo*);
 int FindMoodAmount(FILE*);
 void printResults(int, int, int, int, moodWeighting [], int []);
 
@@ -128,7 +149,7 @@ int main(int argc, const char *argv[]){
   
   AMOUNT_OF_MOODS = FindMoodAmount(moods);
   moodWeighting moodArray[AMOUNT_OF_MOODS];
-  data data = {0, major, D};
+  globalMelodiInfo info;
   
   if (argv[1] == NULL){
     checkDirectory(MIDIfile, dir);
@@ -158,7 +179,7 @@ int main(int argc, const char *argv[]){
   
   /*Reading the data from the file*/
   numbersInText = getHex(f, hex);
-  fillSongData(&data, hex, numbersInText);
+  fillSongData(&info, hex, numbersInText);
   notes = countPotentialNotes(hex, numbersInText);
   note *noteAr = (note*) malloc(notes * sizeof(note));
   
@@ -170,10 +191,10 @@ int main(int argc, const char *argv[]){
   eventPlacement placement[numbersInText];
   int result[AMOUNT_OF_MOODS];
   findEvents(numbersInText, hex, placement, noteAr, &size, &amountOfNotes);
-  deltaTimeToNoteLength(data.ppqn, size, noteAr);
+  deltaTimeToNoteLength(info.ppqn, size, noteAr);
   insertMoods(moodArray, moods);
-  findMode(noteAr, amountOfNotes, &data);
-  settingPoints(&mode, &tempo, &toneLength, &pitch, data, amountOfNotes, noteAr, &size);
+  findMode(noteAr, amountOfNotes, &info);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, info, amountOfNotes, noteAr, &size);
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result);
 
   /*Clean up and close*/
@@ -261,20 +282,19 @@ int countPotentialNotes(int hex[], int amount){
   return res;
 }
 
-/**! \fn int fillSongData(data *data, int hex[], int numbersInText) 
-  *A function, that fills out the song data
-  *@param *data a pointer to a structure containing the tempo and mode of the song
+/**! \fn int fillSongData(globalMelodiInfo *info, int hex[], int numbersInText) 
+  *A function, that inserts ppqn and tempo to the info array
+  *@param *info a pointer to a structure containing the tempo and mode of the song
   *@param hex[] the array of integers read from the file
   *@param numbersInText the total amount of integers in the array
   */
-void fillSongData(data *data, int hex[], int numbersInText){
-  data->ppqn = (hex[12] << 8) + hex[13];
+void fillSongData(globalMelodiInfo *info, int hex[], int numbersInText){
+  info->ppqn = (hex[12] << 8) + hex[13];
   
-  /*Find the mode of the song, initialised as minor atm*/
   for(int j = 0; j < numbersInText; j++)
     /* finds the tempo */
-    if(hex[j] == 0xff && hex[j+1] == 0x51 && hex[j+2] == 0x03)
-      data->tempo =  60000000/((hex[j+3] << 16) | (hex[j+4] << 8) | (hex[j+5]));
+    if(hex[j] == META_EVENT && hex[j+1] == TEMPO_EVENT_BYTE_1 && hex[j+2] == TEMPO_EVENT_BYTE_2)
+      info->tempo =  MICRO_SECONDS_PER_MINUTE/((hex[j+3] << BIT_SHIFT_16) | (hex[j+4] << BIT_SHIFT_8) | (hex[j+5]));
 }
 
 /**Searches the file for events and stores their placement in an array of eventPlacement structs 
@@ -285,14 +305,21 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   
   for(int j = 0; j < numbersInText; j++)
     switch (hex[j]){
-      case 0x90: insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, amountOfNotes, notes);               break;
-      case 0x80: insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, amountOfNotes, notes);             break;
-      case 0xA0: insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, amountOfNotes, notes);       break;
-      case 0xB0: insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, amountOfNotes, notes); break;
-      case 0xC0: insertPlacement2(hex, &placement[programChange++].programChange, j);                               break;
-      case 0xD0: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);                           break;
-      case 0xE0: insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, amountOfNotes, notes);       break;
-      default  :                                                                                                    break;
+      case NOTE_ON         : insertPlacement1(hex, &placement[noteOn++].noteOn, j, noteAr, amountOfNotes, notes);
+                             break;
+      case NOTE_OFF        : insertPlacement1(hex, &placement[noteOff++].noteOff, j, noteAr, amountOfNotes, notes);
+                             break;
+      case AFTER_TOUCH     : insertPlacement1(hex, &placement[afterTouch++].afterTouch, j, noteAr, amountOfNotes, notes);
+                             break;
+      case CONTROL_CHANGE  : insertPlacement1(hex, &placement[controlChange++].controlChange, j, noteAr, amountOfNotes, notes);
+                             break;
+      case PROGRAM_CHANGE  : insertPlacement2(hex, &placement[programChange++].programChange, j);
+                             break;
+      case CHANNEL_PRESSURE: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);
+                             break;
+      case PITCH_WHEEL     : insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j, noteAr, amountOfNotes, notes);
+                             break;
+      default  :             break;
     }
   findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
 }
@@ -303,13 +330,13 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   *Furthermore if it is a noteOn event it stores the hex which is the note, processes the note and counts amount of notes
   */
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes, int notes[]){
-  int i = 3;
+  int i = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
-  while(i < 7 && hex[(j + i++)] > 0x80);
+  while(i < MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(j + i++)] > NOTE_OFF);
   
-  if(checkNextEvent(hex, (j + i))){
+  if(isNextHexAnEvent(hex, (j + i))){
     *place = j;
-    if(hex[j] == 0x90){
+    if(hex[j] == NOTE_ON){
       notes[*amountOfNotes] = hex[j + 1];
       fillNote(hex[j + 1], &noteAr[*amountOfNotes]);
       *amountOfNotes += 1;
@@ -317,40 +344,41 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
   } 
 }
 
-/**Does the same as insertPlacement1, but for events with 1 parameter
+/**Does the same as insertPlacement1, but for the two events that only takes one parameter
   */
 void insertPlacement2(int hex[], int *place, int j){
-  int i = 2;
+  int i = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
-  while(i < 6 && hex[(j + i++)] > 0x80);
+  while(i < MAX_LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(j + i++)] > NOTE_OFF);
   
-  if(checkNextEvent(hex, (j + i)))
+  if(isNextHexAnEvent(hex, (j + i)))
     *place = j;
 }
 
 /**Returns true if next hex is an event or false if not
   */
-int checkNextEvent(int hex[], int j){
+int isNextHexAnEvent(int hex[], int j){
   switch (hex[j]){
-    case 0x90:
-    case 0x80:
-    case 0xA0:
-    case 0xB0:
-    case 0xC0:
-    case 0xD0:
-    case 0xE0: return 1; break;
-    default  : return 0; break;
+    case NOTE_ON         :
+    case NOTE_OFF        :
+    case AFTER_TOUCH     :
+    case CONTROL_CHANGE  :
+    case PROGRAM_CHANGE  :
+    case CHANNEL_PRESSURE:
+    case PITCH_WHEEL     : return 1; break;
+    default              : return 0; break;
   }
 }
 
 /**Analyses ticks for every noteOn event by a for loop which begins in the noteOn events start and searches for the end of the event
   */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn, int *size, int notes[]){
-  int tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
+  int tickCounter = 0, deltaCounter1 = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME,
+                       deltaCounter2 = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
   for(int j = 0; j < noteOn; j++){
     for(int i = placement[j].noteOn; i < numbersInText; i++){
-      if(hex[i] == 0x80){
+      if(hex[i] == NOTE_OFF){
         if(hex[i + 1] == notes[j]){
           tickCounter++;
           break;
@@ -358,23 +386,23 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
         else
           countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
-      else if(hex[i] == 0xA0){
-        if(hex[i + 1] == notes[j] && hex[i + 2] == 0x00){
+      else if(hex[i] == AFTER_TOUCH){
+        if(hex[i + 1] == notes[j] && hex[i + 2] == ZERO){
           tickCounter++;
           break;
         }
         else
           countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
-      else if(hex[i] == 0xD0){
-        if(hex[i + 1] == 0x00){
+      else if(hex[i] == CHANNEL_PRESSURE){
+        if(hex[i + 1] == ZERO){
           tickCounter++;
           break;
         }  
         else
           countTicks2(hex, &i, deltaCounter2, noteAr, &tickCounter);
       }
-      else if(hex[i] == 0xC0)
+      else if(hex[i] == PROGRAM_CHANGE)
         countTicks2(hex, &i, deltaCounter2, noteAr, &tickCounter);
       else
         countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);   
@@ -384,28 +412,28 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
   *size = tickCounter;
 }
 
-/**Processes events with two parameters, extracting deltatime (and advancing the file pointer)
+/**Processes event types which take two parameters, extracting deltatime (and advancing the file pointer)
   */
 void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0;
   
-  while(deltaCounter < 7 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
+  while(deltaCounter < MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(*i + deltaCounter)] > HEX_80)
+    tick += ((hex[(*i + deltaCounter++)] - HEX_80) << BIT_SHIFT_7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
   *i += deltaCounter;
 }
 
-/**Processes events with one parameter, extracting deltatime (and advancing the file pointer)
+/**Processes event types which take one parameter, extracting deltatime (and advancing the file pointer)
   */
 void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0;
   
-  while(deltaCounter < 6 && hex[(*i + deltaCounter)] > 0x80)
-    tick += ((hex[(*i + deltaCounter++)] - 0x80) << 7);
+  while(deltaCounter < MAX_LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(*i + deltaCounter)] > HEX_80)
+    tick += ((hex[(*i + deltaCounter++)] - HEX_80) << BIT_SHIFT_7);
   
   tick += hex[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
@@ -418,7 +446,7 @@ void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
 */
 void fillNote(int inputTone, note *note){
   note->tone = inputTone % 12;
-  note->average = inputTone;
+  note->noteValue = inputTone;
   note->octave = inputTone / 12;
 }
 
@@ -448,43 +476,53 @@ void printNote(note note){
 }
 
 /**A function to insert points into integers based on the data pulled from the file
- *@param mode, along with tempo, length and octave contains the points
- *@param data contains the song data
+ *@param mode, along with tempo, length and octave contains the points for the melodi
+ *@param info contains the song ppqn, tempo and mode for the song
  *@param notes contains the amount of notes in the song
  *@param note contains an array of the specific notes
  */
-void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, int notes, note noteAr[], int *size){
+void settingPoints(int* mode, int* tempo, int* length, int* octave, globalMelodiInfo info, int notes, note noteAr[], int *size){
   int deltaTime = 0, combined = 0, averageNote = 0;
-  
-  switch(data.mode){
+  void modePoints();
+  void tempoPoints();
+  void lengthPoints();
+  void notePoints();
+}
+
+void modePoints(){
+  switch(info.mode){
     case minor: *mode = -5; break;
-    case major: *mode = 5; break;
-    default: *mode = 0; break;
+    case major: *mode = 5;  break;
+    default   : *mode = 0;  break;
   }
-  
-  if(data.tempo < 60)
+}
+
+void tempoPoints(){
+  if(info.tempo < 60)
     *tempo = -5;
-  else if(data.tempo >= 60 && data.tempo < 70)
+  else if(info.tempo >= 60 && info.tempo < 70)
     *tempo = -4;
-  else if(data.tempo >= 70 && data.tempo < 80)
+  else if(info.tempo >= 70 && info.tempo < 80)
     *tempo = -3;  
-  else if(data.tempo >= 80 && data.tempo < 90)
+  else if(info.tempo >= 80 && info.tempo < 90)
     *tempo = -2;
-  else if(data.tempo >= 90 && data.tempo < 100)
+  else if(info.tempo >= 90 && info.tempo < 100)
     *tempo = -1;
-  else if(data.tempo >= 100 && data.tempo < 120)
+  else if(info.tempo >= 100 && info.tempo < 120)
     *tempo =  0;  
-  else if(data.tempo >= 120 && data.tempo < 130)
+  else if(info.tempo >= 120 && info.tempo < 130)
     *tempo =  1;
-  else if(data.tempo >= 130 && data.tempo < 140)
+  else if(info.tempo >= 130 && info.tempo < 140)
     *tempo =  2;
-  else if(data.tempo >= 140 && data.tempo < 150)
+  else if(info.tempo >= 140 && info.tempo < 150)
     *tempo =  3;
-  else if(data.tempo >= 150 && data.tempo < 160)
+  else if(info.tempo >= 150 && info.tempo < 160)
     *tempo =  4;
-  else if(data.tempo >=  160)
+  else if(info.tempo >=  160)
     *tempo =  5;
-  
+}
+
+void lengthPoints(){
   for(int i = 0; i < notes; i++)
     combined += noteAr[i].length;
   
@@ -512,11 +550,11 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
     *length = -4;
   else
     *length = -5;
+}
 
-  combined = 0;
-  
+void notePoints(){
   for (int i = 0; i < notes; i++)
-    combined += noteAr[i].average;
+    combined += noteAr[i].noteValue;
   
   averageNote = combined/notes;
 
@@ -543,7 +581,6 @@ void settingPoints(int* mode, int* tempo, int* length, int* octave, data data, i
   else if(averageNote >=80)
     *octave = 5;
 }
-
 
 /**Inserts the weighting of each mood in an array of structs, as read from a designated file.
   *@param moodArray The array moods are stored in
@@ -621,10 +658,10 @@ void checkScale(int scales[], int tone, int key){
  * the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
   *@param noteAr An array of all the notes in the entire song
   *@param totalNotes The number of notes in the song
-  *@param data The song data
+  *@param info contains ppqn, tempo and mode
   */
-void findMode(note noteAr[], int totalNotes, data *data){
-  int majors[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, minors[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+void findMode(note noteAr[], int totalNotes, globalMelodiInfo *info){
+  int majors[12] = {1}, minors[12] = {0};
   int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0, tempNote = 0;
 
   for(x = 0; x < totalNotes; x++){
@@ -685,11 +722,11 @@ void findMode(note noteAr[], int totalNotes, data *data){
     }
   }
   
-  /*outputs result directly to the data struct*/
+  /*outputs result directly to the info struct array*/
   if(mode > 0)
-    data->mode = major;
+    info->mode = major;
   else if(mode < 0)
-    data->mode = minor;
+    info->mode = minor;
 }
 
 /**A function to check if a given scale in given keytone corresponds with the tones in the rest of the song.
