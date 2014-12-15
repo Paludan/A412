@@ -19,6 +19,26 @@ int {\bf pitch\+Wheel}
 \end{DoxyCompactItemize}
 
 
+\subsubsection{Detailed Description}
+A struct containing placements of midi events, stored as their placement in file 
+\begin{DoxyParams}{Parameters}
+{\em note\+On} & signals when a note starts playing \\
+\hline
+{\em note\+Off} & signals when a note stops playing \\
+\hline
+{\em after\+Touch} & changes velocity for a single note on a single channel \\
+\hline
+{\em control\+Change} & used for a large number of effects, none of which are used in this project (stored to find deltatimes) \\
+\hline
+{\em program\+Change} & signals instrument change (not used; stored to find deltatimes) \\
+\hline
+{\em channel\+Pressure} & changes velocity for all notes on a specific channel (akin to a global after\+Touch) \\
+\hline
+{\em pitch\+Wheel} & fine tuning of pitch for all notes on a specific channel (similar to channel\+Pressure, but for pitch) \\
+\hline
+\end{DoxyParams}
+
+
 \subsubsection{Field Documentation}
 \index{event\+Placement@{event\+Placement}!after\+Touch@{after\+Touch}}
 \index{after\+Touch@{after\+Touch}!event\+Placement@{event\+Placement}}

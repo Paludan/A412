@@ -5,19 +5,31 @@
 \item 
 unsigned int {\bf tempo}
 \item 
-{\bf mode} {\bf mode}
+int {\bf ppqn}
 \item 
-{\bf tone} {\bf key}
+{\bf mode} {\bf mode}
 \end{DoxyCompactItemize}
 
 
+\subsubsection{Detailed Description}
+A struct containing general data pertaining to the song 
+\begin{DoxyParams}{Parameters}
+{\em tempo} & the tempo in beats-\/per-\/minute \\
+\hline
+{\em ppqn} & ticks-\/per-\/quarter-\/note contains the number of ticks per quarter note \\
+\hline
+{\em mode} & an enumerated value representing the mode (major/minor) \\
+\hline
+\end{DoxyParams}
+
+
 \subsubsection{Field Documentation}
-\index{data@{data}!key@{key}}
-\index{key@{key}!data@{data}}
-\paragraph[{key}]{\setlength{\rightskip}{0pt plus 5cm}{\bf tone} data\+::key}\label{structdata_ae1a174f61aada93146a06764a3511eb6}
 \index{data@{data}!mode@{mode}}
 \index{mode@{mode}!data@{data}}
 \paragraph[{mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mode} data\+::mode}\label{structdata_a9781fc7b786289e4c06b4085d31558e3}
+\index{data@{data}!ppqn@{ppqn}}
+\index{ppqn@{ppqn}!data@{data}}
+\paragraph[{ppqn}]{\setlength{\rightskip}{0pt plus 5cm}int data\+::ppqn}\label{structdata_ae789a388e111cf8cd07be963a478b384}
 \index{data@{data}!tempo@{tempo}}
 \index{tempo@{tempo}!data@{data}}
 \paragraph[{tempo}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int data\+::tempo}\label{structdata_a31232da79683035a6ff185f530da6c24}

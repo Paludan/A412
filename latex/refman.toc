@@ -4,82 +4,79 @@
 \contentsline {subsection}{\numberline {2.1}File List}{2}
 \contentsline {section}{\numberline {3}Data Structure Documentation}{2}
 \contentsline {subsection}{\numberline {3.1}data Struct Reference}{2}
-\contentsline {subsubsection}{\numberline {3.1.1}Field Documentation}{2}
-\contentsline {paragraph}{\numberline {3.1.1.1}key}{2}
-\contentsline {paragraph}{\numberline {3.1.1.2}mode}{2}
-\contentsline {paragraph}{\numberline {3.1.1.3}tempo}{2}
+\contentsline {subsubsection}{\numberline {3.1.1}Detailed Description}{2}
+\contentsline {subsubsection}{\numberline {3.1.2}Field Documentation}{2}
+\contentsline {paragraph}{\numberline {3.1.2.1}mode}{2}
+\contentsline {paragraph}{\numberline {3.1.2.2}ppqn}{2}
+\contentsline {paragraph}{\numberline {3.1.2.3}tempo}{2}
 \contentsline {subsection}{\numberline {3.2}event\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Placement Struct Reference}{2}
-\contentsline {subsubsection}{\numberline {3.2.1}Field Documentation}{2}
-\contentsline {paragraph}{\numberline {3.2.1.1}after\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Touch}{2}
-\contentsline {paragraph}{\numberline {3.2.1.2}channel\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Pressure}{2}
-\contentsline {paragraph}{\numberline {3.2.1.3}control\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Change}{2}
-\contentsline {paragraph}{\numberline {3.2.1.4}note\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Off}{2}
-\contentsline {paragraph}{\numberline {3.2.1.5}note\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}On}{2}
-\contentsline {paragraph}{\numberline {3.2.1.6}pitch\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Wheel}{3}
-\contentsline {paragraph}{\numberline {3.2.1.7}program\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Change}{3}
-\contentsline {subsection}{\numberline {3.3}mood\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Weighting Struct Reference}{3}
-\contentsline {subsubsection}{\numberline {3.3.1}Field Documentation}{3}
-\contentsline {paragraph}{\numberline {3.3.1.1}mode}{3}
-\contentsline {paragraph}{\numberline {3.3.1.2}name}{3}
-\contentsline {paragraph}{\numberline {3.3.1.3}pitch}{3}
-\contentsline {paragraph}{\numberline {3.3.1.4}tempo}{3}
-\contentsline {paragraph}{\numberline {3.3.1.5}tone\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Length}{3}
-\contentsline {subsection}{\numberline {3.4}note Struct Reference}{3}
-\contentsline {subsubsection}{\numberline {3.4.1}Field Documentation}{3}
-\contentsline {paragraph}{\numberline {3.4.1.1}average}{3}
-\contentsline {paragraph}{\numberline {3.4.1.2}length}{3}
-\contentsline {paragraph}{\numberline {3.4.1.3}octave}{3}
-\contentsline {paragraph}{\numberline {3.4.1.4}ticks}{3}
-\contentsline {paragraph}{\numberline {3.4.1.5}tone}{3}
-\contentsline {subsection}{\numberline {3.5}points Struct Reference}{4}
-\contentsline {subsubsection}{\numberline {3.5.1}Field Documentation}{4}
-\contentsline {paragraph}{\numberline {3.5.1.1}parameter}{4}
-\contentsline {paragraph}{\numberline {3.5.1.2}point}{4}
-\contentsline {section}{\numberline {4}File Documentation}{4}
-\contentsline {subsection}{\numberline {4.1}main.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{4}
-\contentsline {subsubsection}{\numberline {4.1.1}Macro Definition Documentation}{6}
-\contentsline {paragraph}{\numberline {4.1.1.1}C\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}H\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}S}{6}
-\contentsline {paragraph}{\numberline {4.1.1.2}S\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}C\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}L\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}S\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}I\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Z\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E}{6}
-\contentsline {subsubsection}{\numberline {4.1.2}Typedef Documentation}{6}
-\contentsline {paragraph}{\numberline {4.1.2.1}mode}{6}
-\contentsline {paragraph}{\numberline {4.1.2.2}mood}{6}
-\contentsline {paragraph}{\numberline {4.1.2.3}tone}{6}
-\contentsline {subsubsection}{\numberline {4.1.3}Enumeration Type Documentation}{6}
-\contentsline {paragraph}{\numberline {4.1.3.1}mode}{6}
-\contentsline {paragraph}{\numberline {4.1.3.2}mood}{6}
-\contentsline {paragraph}{\numberline {4.1.3.3}tone}{6}
-\contentsline {subsubsection}{\numberline {4.1.4}Function Documentation}{6}
-\contentsline {paragraph}{\numberline {4.1.4.1}check\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Directory}{6}
-\contentsline {paragraph}{\numberline {4.1.4.2}check\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Next\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Event}{7}
-\contentsline {paragraph}{\numberline {4.1.4.3}check\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Scale}{7}
-\contentsline {paragraph}{\numberline {4.1.4.4}count\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Notes}{7}
-\contentsline {paragraph}{\numberline {4.1.4.5}count\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Ticks1}{8}
-\contentsline {paragraph}{\numberline {4.1.4.6}count\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Ticks2}{8}
-\contentsline {paragraph}{\numberline {4.1.4.7}delta\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Time\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}To\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Note\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Length}{8}
-\contentsline {paragraph}{\numberline {4.1.4.8}fill\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Note}{8}
-\contentsline {paragraph}{\numberline {4.1.4.9}fill\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Song\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Data}{8}
-\contentsline {paragraph}{\numberline {4.1.4.10}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Events}{9}
-\contentsline {paragraph}{\numberline {4.1.4.11}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Mode}{9}
-\contentsline {paragraph}{\numberline {4.1.4.12}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Mode}{9}
-\contentsline {paragraph}{\numberline {4.1.4.13}Find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Mood\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Amount}{10}
-\contentsline {paragraph}{\numberline {4.1.4.14}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Note\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Length}{10}
-\contentsline {paragraph}{\numberline {4.1.4.15}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Ticks}{10}
-\contentsline {paragraph}{\numberline {4.1.4.16}get\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Hex}{11}
-\contentsline {paragraph}{\numberline {4.1.4.17}insert\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Moods}{11}
-\contentsline {paragraph}{\numberline {4.1.4.18}insert\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Placement1}{11}
-\contentsline {paragraph}{\numberline {4.1.4.19}insert\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Placement2}{11}
-\contentsline {paragraph}{\numberline {4.1.4.20}is\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}In\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Major}{11}
-\contentsline {paragraph}{\numberline {4.1.4.21}is\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}In\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Minor}{12}
-\contentsline {paragraph}{\numberline {4.1.4.22}is\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}In\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Scale}{12}
-\contentsline {paragraph}{\numberline {4.1.4.23}main}{13}
-\contentsline {paragraph}{\numberline {4.1.4.24}print\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Note}{13}
-\contentsline {paragraph}{\numberline {4.1.4.25}print\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Results}{14}
-\contentsline {paragraph}{\numberline {4.1.4.26}print\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Song\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Data}{15}
-\contentsline {paragraph}{\numberline {4.1.4.27}setting\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Points}{16}
-\contentsline {paragraph}{\numberline {4.1.4.28}sort\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Result}{17}
-\contentsline {paragraph}{\numberline {4.1.4.29}sort\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Toner}{17}
-\contentsline {paragraph}{\numberline {4.1.4.30}sort\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Tones}{17}
-\contentsline {paragraph}{\numberline {4.1.4.31}weighting\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Matrix}{17}
-\contentsline {subsubsection}{\numberline {4.1.5}Variable Documentation}{17}
-\contentsline {paragraph}{\numberline {4.1.5.1}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}N\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}T\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}F\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}S}{17}
-\contentsline {section}{Index}{18}
+\contentsline {subsubsection}{\numberline {3.2.1}Detailed Description}{3}
+\contentsline {subsubsection}{\numberline {3.2.2}Field Documentation}{4}
+\contentsline {paragraph}{\numberline {3.2.2.1}after\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Touch}{4}
+\contentsline {paragraph}{\numberline {3.2.2.2}channel\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Pressure}{4}
+\contentsline {paragraph}{\numberline {3.2.2.3}control\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Change}{4}
+\contentsline {paragraph}{\numberline {3.2.2.4}note\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Off}{4}
+\contentsline {paragraph}{\numberline {3.2.2.5}note\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}On}{4}
+\contentsline {paragraph}{\numberline {3.2.2.6}pitch\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Wheel}{4}
+\contentsline {paragraph}{\numberline {3.2.2.7}program\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Change}{4}
+\contentsline {subsection}{\numberline {3.3}mood\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Weighting Struct Reference}{4}
+\contentsline {subsubsection}{\numberline {3.3.1}Detailed Description}{4}
+\contentsline {subsubsection}{\numberline {3.3.2}Field Documentation}{5}
+\contentsline {paragraph}{\numberline {3.3.2.1}mode}{5}
+\contentsline {paragraph}{\numberline {3.3.2.2}name}{5}
+\contentsline {paragraph}{\numberline {3.3.2.3}pitch}{5}
+\contentsline {paragraph}{\numberline {3.3.2.4}tempo}{5}
+\contentsline {paragraph}{\numberline {3.3.2.5}tone\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Length}{5}
+\contentsline {subsection}{\numberline {3.4}note Struct Reference}{5}
+\contentsline {subsubsection}{\numberline {3.4.1}Detailed Description}{5}
+\contentsline {subsubsection}{\numberline {3.4.2}Field Documentation}{5}
+\contentsline {paragraph}{\numberline {3.4.2.1}average}{5}
+\contentsline {paragraph}{\numberline {3.4.2.2}length}{5}
+\contentsline {paragraph}{\numberline {3.4.2.3}octave}{5}
+\contentsline {paragraph}{\numberline {3.4.2.4}ticks}{5}
+\contentsline {paragraph}{\numberline {3.4.2.5}tone}{5}
+\contentsline {section}{\numberline {4}File Documentation}{6}
+\contentsline {subsection}{\numberline {4.1}main.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{6}
+\contentsline {subsubsection}{\numberline {4.1.1}Macro Definition Documentation}{7}
+\contentsline {paragraph}{\numberline {4.1.1.1}C\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}H\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}S}{7}
+\contentsline {paragraph}{\numberline {4.1.1.2}S\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}C\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}L\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}S\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}I\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Z\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E}{7}
+\contentsline {subsubsection}{\numberline {4.1.2}Typedef Documentation}{7}
+\contentsline {paragraph}{\numberline {4.1.2.1}mode}{7}
+\contentsline {paragraph}{\numberline {4.1.2.2}mood}{7}
+\contentsline {paragraph}{\numberline {4.1.2.3}tone}{7}
+\contentsline {subsubsection}{\numberline {4.1.3}Enumeration Type Documentation}{7}
+\contentsline {paragraph}{\numberline {4.1.3.1}mode}{7}
+\contentsline {paragraph}{\numberline {4.1.3.2}mood}{7}
+\contentsline {paragraph}{\numberline {4.1.3.3}tone}{8}
+\contentsline {subsubsection}{\numberline {4.1.4}Function Documentation}{8}
+\contentsline {paragraph}{\numberline {4.1.4.1}check\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Directory}{8}
+\contentsline {paragraph}{\numberline {4.1.4.2}check\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Next\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Event}{9}
+\contentsline {paragraph}{\numberline {4.1.4.3}check\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Scale}{9}
+\contentsline {paragraph}{\numberline {4.1.4.4}count\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Potential\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Notes}{9}
+\contentsline {paragraph}{\numberline {4.1.4.5}count\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Ticks1}{9}
+\contentsline {paragraph}{\numberline {4.1.4.6}count\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Ticks2}{10}
+\contentsline {paragraph}{\numberline {4.1.4.7}delta\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Time\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}To\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Note\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Length}{10}
+\contentsline {paragraph}{\numberline {4.1.4.8}fill\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Note}{10}
+\contentsline {paragraph}{\numberline {4.1.4.9}fill\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Song\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Data}{10}
+\contentsline {paragraph}{\numberline {4.1.4.10}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Events}{11}
+\contentsline {paragraph}{\numberline {4.1.4.11}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Mode}{11}
+\contentsline {paragraph}{\numberline {4.1.4.12}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Mode}{11}
+\contentsline {paragraph}{\numberline {4.1.4.13}Find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Mood\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Amount}{12}
+\contentsline {paragraph}{\numberline {4.1.4.14}find\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Ticks}{12}
+\contentsline {paragraph}{\numberline {4.1.4.15}get\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Hex}{13}
+\contentsline {paragraph}{\numberline {4.1.4.16}insert\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Moods}{13}
+\contentsline {paragraph}{\numberline {4.1.4.17}insert\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Placement1}{13}
+\contentsline {paragraph}{\numberline {4.1.4.18}insert\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Placement2}{14}
+\contentsline {paragraph}{\numberline {4.1.4.19}is\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}In\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Major}{14}
+\contentsline {paragraph}{\numberline {4.1.4.20}is\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}In\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Minor}{14}
+\contentsline {paragraph}{\numberline {4.1.4.21}is\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}In\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Scale}{14}
+\contentsline {paragraph}{\numberline {4.1.4.22}main}{15}
+\contentsline {paragraph}{\numberline {4.1.4.23}print\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Note}{16}
+\contentsline {paragraph}{\numberline {4.1.4.24}print\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Results}{16}
+\contentsline {paragraph}{\numberline {4.1.4.25}setting\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Points}{18}
+\contentsline {paragraph}{\numberline {4.1.4.26}sort\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Toner}{19}
+\contentsline {paragraph}{\numberline {4.1.4.27}sort\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Tones}{19}
+\contentsline {paragraph}{\numberline {4.1.4.28}weighting\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Matrix}{19}
+\contentsline {subsubsection}{\numberline {4.1.5}Variable Documentation}{20}
+\contentsline {paragraph}{\numberline {4.1.5.1}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}U\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}N\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}T\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}F\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}M\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}S}{20}
+\contentsline {section}{Index}{21}
