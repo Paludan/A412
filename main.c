@@ -617,7 +617,8 @@ void checkScale(int scales[], int tone, int key){
   scales[key] = isInMajor(tone - key);
 }
 
-/**A function to find the mode of the song by first calculating the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
+/**A function to find the mode of the song by first calculating 
+ * the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
   *@param noteAr An array of all the notes in the entire song
   *@param totalNotes The number of notes in the song
   *@param data The song data
