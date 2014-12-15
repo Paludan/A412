@@ -61,7 +61,7 @@ typedef struct{
   *@param pitch a value -5 to 5 representing this parameters impact on the mood
   */
 typedef struct{
-  char name[25];
+  char name[15];
   int mode;
   int tempo;
   int toneLength;
@@ -779,12 +779,12 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
   printf("%3d\n", toneLength);
   printf(" Pitch:");
   printf("%9d\n", pitch);
-  printf("\n\n\n                                       WEIGHTINGS\n");
-  printf("                           Mode | Tempo | Tone length | Pitch\n");
+  printf("\n\n\n                             WEIGHTINGS\n");
+  printf("                 Mode | Tempo | Tone length | Pitch\n");
   
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     printf(" %s", moodArray[i].name);
-    for(int j = strlen(moodArray[i].name); j < 26; j++)
+    for(int j = strlen(moodArray[i].name); j < 16; j++)
       printf(" ");
     if(moodArray[i].mode > -1)
       printf(" ");
@@ -812,6 +812,9 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
   printf("\n\n\n");
   
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
+    printf(" %s", moodArray[i].name);
+    for(int j = strlen(moodArray[i].name); j < 16; j++)
+      printf(" ");
     if(mode < 0)
       printf(" %d * ", mode);
     else
@@ -856,7 +859,8 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     if(moodOfMelodi < result[i])
       moodOfMelodi = i;
   
-  if(!strcmp(moodArray[moodOfMelodi].name, "Happy")){
+  if(!strcmp(moodArray[moodOfMelodi].name, "Happy") && !strcmp(moodArray[0].name, "Happy")
+  && !strcmp(moodArray[1].name, "Sad")              && AMOUNT_OF_MOODS == 2){
     printf("\n\n\n Sad ");
     
     while(test < 51){
@@ -872,7 +876,8 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     
     printf(" Happy\n\n\n");
   }
-  else if(!strcmp(moodArray[moodOfMelodi].name, "Sad")){
+  else if(!strcmp(moodArray[moodOfMelodi].name, "Sad") && !strcmp(moodArray[0].name, "Happy")
+       && !strcmp(moodArray[1].name, "Sad")            && AMOUNT_OF_MOODS == 2){
     printf("\n\n\n Sad ");
     
     while(test < 51){
