@@ -297,10 +297,10 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
 }
 
-/**Starts in the hex which are investigated and looks forward to find a perspective.
-  *It goes to an assumed deltatime and finds the length of it. Thereafter it checks the next hex after the deltatime to make sure it is an event.
-  *If that is the case it stores the hex which is investegated in the first place.
-  *Furthermore if it is a noteOn event it stores the hex which is the note, processes the note and counts amount of notes.
+/**Starts in the hex which are investigated and looks forward to find a perspective
+  *It goes to an assumed deltatime and finds the length of it. Thereafter it checks the next hex after the deltatime to make sure it is an event
+  *If that is the case it stores the hex which is investegated in the first place
+  *Furthermore if it is a noteOn event it stores the hex which is the note, processes the note and counts amount of notes
   */
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes, int notes[]){
   int i = 3;
@@ -317,7 +317,7 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
   } 
 }
 
-/**Does the same as insertPlacement1, but for events with 1 parameter.
+/**Does the same as insertPlacement1, but for events with 1 parameter
   */
 void insertPlacement2(int hex[], int *place, int j){
   int i = 2;
@@ -328,6 +328,8 @@ void insertPlacement2(int hex[], int *place, int j){
     *place = j;
 }
 
+/**Returns true if next hex is an event or false if not
+  */
 int checkNextEvent(int hex[], int j){
   switch (hex[j]){
     case 0x90:
@@ -341,7 +343,7 @@ int checkNextEvent(int hex[], int j){
   }
 }
 
-/**
+/**Analyses ticks for every noteOn event by a for loop which begins in the noteOn events start and searches for the end of the event
   */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn, int *size, int notes[]){
   int tickCounter = 0, deltaCounter1 = 3, deltaCounter2 = 2;
@@ -749,7 +751,8 @@ int isInMajor(int toneLeap){
   return 0;
 }
 
-
+/**Returns the amount of moods written in the moods text file
+  */
 int FindMoodAmount(FILE *moods){
   int i = 1;
   
