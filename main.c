@@ -68,7 +68,7 @@ typedef struct{
   unsigned int tempo;
   int ppqn;
   mode mode;
-} globalMelodiInfo;
+} globalMelodyInfo;
 
 /**A struct containing a single moods name and weighting
   *@param name the name of the mood
@@ -108,31 +108,36 @@ typedef struct{
 void checkDirectory(char*, DIR*);
 void printNote(note);
 int getHex(FILE*, int[]);
-void fillSongData(globalMelodiInfo*, int[], int);
+void fillSongData(globalMelodyInfo*, int[], int);
 int countPotentialNotes(int[], int);
 void fillNote(int, note*);
-void settingPoints(int*, int*, int*, int*, globalMelodiInfo, int, note [], int *);
-void modePoints();
-void tempoPoints();
-void lengthPoints();
-void notePoints();
+void settingPoints(int*, int*, int*, int*, globalMelodyInfo, int, note [], int*);
+void modePoints(globalMelodyInfo, int*);
+void tempoPoints(globalMelodyInfo, int*);
+void lengthPoints(int*, note [], int);
+void notePoints(int*, note [], int);
 void insertMoods(moodWeighting [], FILE*);
-void weightingMatrix(moodWeighting [], int, int, int, int, int *);
-void findEvents(int, int [], eventPlacement [], note [], int *, int *);
-void insertPlacement1(int [], int *, int, note [], int *, int []);
-void insertPlacement2(int [], int *, int);
+void weightingMatrix(moodWeighting [], int, int, int, int, int*);
+void findEvents(int, int [], eventPlacement [], note [], int*, int*);
+void insertPlacement1(int [], int*, int, note [], int*, int []);
+void insertPlacement2(int [], int*, int);
 int isNextHexAnEvent(int [], int);
-void findTicks(int, int [], eventPlacement [], note [], int, int *, int []);
-void countTicks1(int [], int *, int, note [], int *);
-void countTicks2(int [], int *, int, note [], int *);
-void deltaTimeToNoteLength(int, int, note *);
+void findTicks(int, int [], eventPlacement [], note [], int, int*, int []);
+void countTicks1(int [], int*, int, note [], int*);
+void countTicks2(int [], int*, int, note [], int*);
+void deltaTimeToNoteLength(int, int, note*);
 int isInScale(int, int[], int);
 int isInMinor(int);
 int isInMajor(int);
 int sortToner(const void*, const void*);
-void findMode(note*, int, globalMelodiInfo*);
+void findMode(note*, int, globalMelodyInfo*);
 int FindMoodAmount(FILE*);
 void printResults(int, int, int, int, moodWeighting [], int []);
+void printParameterVector(int, int, int, int);
+void printWeightingMatrix(moodWeighting []);
+void printVectorMatrixProduct(moodWeighting [], int, int, int, int, int []);
+void printHappySadScale(moodWeighting [], int, int []);
+void printMoodOfMelody(moodWeighting [], int);
 
 int main(int argc, const char *argv[]){
   DIR *dir = 0;
@@ -149,7 +154,7 @@ int main(int argc, const char *argv[]){
   
   AMOUNT_OF_MOODS = FindMoodAmount(moods);
   moodWeighting moodArray[AMOUNT_OF_MOODS];
-  globalMelodiInfo info;
+  globalMelodyInfo info;
   
   if (argv[1] == NULL){
     checkDirectory(MIDIfile, dir);
@@ -282,13 +287,13 @@ int countPotentialNotes(int hex[], int amount){
   return res;
 }
 
-/**! \fn int fillSongData(globalMelodiInfo *info, int hex[], int numbersInText) 
+/**! \fn int fillSongData(globalMelodyInfo *info, int hex[], int numbersInText) 
   *A function, that inserts ppqn and tempo to the info array
   *@param *info a pointer to a structure containing the tempo and mode of the song
   *@param hex[] the array of integers read from the file
   *@param numbersInText the total amount of integers in the array
   */
-void fillSongData(globalMelodiInfo *info, int hex[], int numbersInText){
+void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
   info->ppqn = (hex[12] << 8) + hex[13];
   
   for(int j = 0; j < numbersInText; j++)
@@ -476,20 +481,22 @@ void printNote(note note){
 }
 
 /**A function to insert points into integers based on the data pulled from the file
- *@param mode, along with tempo, length and octave contains the points for the melodi
+ *@param mode, along with tempo, length and octave contains the points for the Melody
  *@param info contains the song ppqn, tempo and mode for the song
  *@param notes contains the amount of notes in the song
  *@param note contains an array of the specific notes
  */
-void settingPoints(int* mode, int* tempo, int* length, int* octave, globalMelodiInfo info, int notes, note noteAr[], int *size){
-  int deltaTime = 0, combined = 0, averageNote = 0;
-  void modePoints();
-  void tempoPoints();
-  void lengthPoints();
-  void notePoints();
+void settingPoints(int *mode, int *tempo, int *length, int *octave,
+                   globalMelodyInfo info,int notes, note noteAr[], int *size){
+  modePoints(info, mode);
+  tempoPoints(info, tempo);
+  lengthPoints(length, noteAr, notes);
+  notePoints(octave, noteAr, notes);
 }
 
-void modePoints(){
+/**Changes the value of the integer mode depending on the mode of the melody
+  */
+void modePoints(globalMelodyInfo info, int *mode){
   switch(info.mode){
     case minor: *mode = -5; break;
     case major: *mode = 5;  break;
@@ -497,7 +504,9 @@ void modePoints(){
   }
 }
 
-void tempoPoints(){
+/**Changes the value of the integer tempo depending on the tempo of the melody
+  */
+void tempoPoints(globalMelodyInfo info, int *tempo){
   if(info.tempo < 60)
     *tempo = -5;
   else if(info.tempo >= 60 && info.tempo < 70)
@@ -522,11 +531,14 @@ void tempoPoints(){
     *tempo =  5;
 }
 
-void lengthPoints(){
+/**Changes the value of the integer length depending on the average note length of the melody
+  */
+void lengthPoints(int *length, note noteAr[], int notes){
+  int combined = 0;
   for(int i = 0; i < notes; i++)
     combined += noteAr[i].length;
   
-  deltaTime = combined/notes;
+  int deltaTime = combined/notes;
   
   if (deltaTime < 1.5 && deltaTime >= 0)
     *length = 5;
@@ -552,11 +564,14 @@ void lengthPoints(){
     *length = -5;
 }
 
-void notePoints(){
+/**Changes the value of the integer octave depending on the average note value in the melody
+  */
+void notePoints(int *octave, note noteAr[], int notes){
+  int combined = 0;
   for (int i = 0; i < notes; i++)
     combined += noteAr[i].noteValue;
   
-  averageNote = combined/notes;
+  int averageNote = combined/notes;
 
   if(averageNote <= 16)
     *octave = -5;
@@ -654,15 +669,15 @@ void checkScale(int scales[], int tone, int key){
   scales[key] = isInMajor(tone - key);
 }
 
-/**A function to find the mode of the song by first calculating 
- * the tone span over sets of notes in the song, and then comparing it to the definition of minor and major keys.
+/**A function to find the mode of the song by first calculating the tone span over sets of notes in the song,
+  *and then comparing it to the definition of minor and major keys.
   *@param noteAr An array of all the notes in the entire song
   *@param totalNotes The number of notes in the song
   *@param info contains ppqn, tempo and mode
   */
-void findMode(note noteAr[], int totalNotes, globalMelodiInfo *info){
-  int majors[12] = {1}, minors[12] = {0};
-  int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0, tempNote = 0;
+void findMode(note noteAr[], int totalNotes, globalMelodyInfo *info){
+  int majors[12] = {1}, minors[12] = {0}, x = 0, y = 0, z = 0, bar[4],
+      sizeBar = 4, tempSpan = 999, span = 999, keynote = 0, mode = 0, tempNote = 0;
 
   for(x = 0; x < totalNotes; x++){
     tempNote = noteAr[x].tone;
@@ -807,6 +822,22 @@ int FindMoodAmount(FILE *moods){
   *point sliding scale
   */
 void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[], int result[]){
+  int moodOfMelody = 0;
+  
+  for(int i = 0; i < AMOUNT_OF_MOODS; i++)
+    if(moodOfMelody < result[i])
+      moodOfMelody = i;
+
+  printParameterVector(mode, tempo, toneLength, pitch);
+  printWeightingMatrix(moodArray);
+  printVectorMatrixProduct(moodArray, mode, tempo, toneLength, pitch, result);
+  printHappySadScale(moodArray, moodOfMelody, result);
+  printMoodOfMelody(moodArray, moodOfMelody);
+}
+
+/**Prints the parameter vector into the console
+  */
+void printParameterVector(int mode, int tempo, int toneLength, int pitch){
   printf("\n\n\n");
   printf(" Mode:");
   printf("%10d\n", mode);
@@ -816,6 +847,11 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
   printf("%3d\n", toneLength);
   printf(" Pitch:");
   printf("%9d\n", pitch);
+}
+
+/**Prints the weighting matrix into the console
+  */
+void printWeightingMatrix(moodWeighting moodArray[]){
   printf("\n\n\n                             WEIGHTINGS\n");
   printf("                 Mode | Tempo | Tone length | Pitch\n");
   
@@ -845,9 +881,12 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
       printf(" ");
     printf(" %d\n", moodArray[i].pitch);
   }
-
   printf("\n\n\n");
-  
+}
+
+/**Prints the matrix vector product calculation for each mood and their results
+  */
+void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch, int result[]){
   for(int i = 0; i < AMOUNT_OF_MOODS; i++){
     printf(" %s", moodArray[i].name);
     for(int j = strlen(moodArray[i].name); j < 16; j++)
@@ -889,21 +928,21 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     else
       printf(" %d\n", result[i]);
   }
-  
-  int moodOfMelodi = 0, test = 0;
-  
-  for(int i = 0; i < AMOUNT_OF_MOODS; i++)
-    if(moodOfMelodi < result[i])
-      moodOfMelodi = i;
-  
-  if(!strcmp(moodArray[moodOfMelodi].name, "Happy") && !strcmp(moodArray[0].name, "Happy")
-  && !strcmp(moodArray[1].name, "Sad")              && AMOUNT_OF_MOODS == 2){
+}
+
+/**If there only is the two moods happy and sad it prints a scale on which there is indicated
+  *if it is most happy or sad and how much
+  */
+void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[]){
+  int test = 0;
+  if(!strcmp(moodArray[moodOfMelody].name, "Happy") && !strcmp(moodArray[0].name, "Happy") &&
+     !strcmp(moodArray[1].name, "Sad")              && AMOUNT_OF_MOODS == 2){
     printf("\n\n\n Sad ");
     
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == ((result[moodOfMelodi] / 2) + 26))
+      else if(test == ((result[moodOfMelody] / 2) + 26))
         printf("[]");
       else
         printf("-");
@@ -913,14 +952,14 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     
     printf(" Happy\n\n\n");
   }
-  else if(!strcmp(moodArray[moodOfMelodi].name, "Sad") && !strcmp(moodArray[0].name, "Happy")
-       && !strcmp(moodArray[1].name, "Sad")            && AMOUNT_OF_MOODS == 2){
+  else if(!strcmp(moodArray[moodOfMelody].name, "Sad") && !strcmp(moodArray[0].name, "Happy") &&
+          !strcmp(moodArray[1].name, "Sad")            && AMOUNT_OF_MOODS == 2){
     printf("\n\n\n Sad ");
     
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == ((int)(-((result[moodOfMelodi]) / 2.4)) + 26))
+      else if(test == ((int)(-((result[moodOfMelody]) / 2.4)) + 26))
         printf("[]");
       else
         printf("-");
@@ -929,7 +968,11 @@ void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting 
     }
     
     printf(" Happy\n\n\n");
-  }
-  
-  printf("\n The mood of the melody is %s\n", moodArray[moodOfMelodi].name);
+  } 
+}
+
+/**Prints the mood of the melody into the console
+  */
+void printMoodOfMelody(moodWeighting moodArray[], int moodOfMelody){
+  printf("\n The mood of the melody is %s\n", moodArray[moodOfMelody].name);
 }
