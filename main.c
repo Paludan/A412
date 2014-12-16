@@ -120,7 +120,7 @@ int getHex(FILE*, int[]);
 void fillSongData(globalMelodyInfo*, int[], int);
 int countPotentialNotes(int[], int);
 void fillNote(int, note*);
-void settingPoints(int*, int*, int*, int*, globalMelodyInfo, int, note [], int*);
+void settingPoints(int*, int*, int*, int*, globalMelodyInfo, int, note []);
 void modePoints(globalMelodyInfo, int*);
 void tempoPoints(globalMelodyInfo, int*);
 void lengthPoints(int*, note [], int);
@@ -201,7 +201,7 @@ int main(int argc, const char *argv[]){
   deltaTimeToNoteLength(info.ppqn, amountOfNotes, noteAr);
   insertMoods(moodArray, moods, amountOfMoods);
   findMode(noteAr, amountOfNotes, &info);
-  settingPoints(&mode, &tempo, &toneLength, &pitch, info, amountOfNotes, noteAr, &amountOfNotes);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, info, amountOfNotes, noteAr);
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result, amountOfMoods);
 
   /* Print results */
@@ -299,9 +299,11 @@ void chooseTrack(char *MIDIfile, DIR *dir){
   chdir("./Music");
 }
 
-/**A function, that retrieves the hexadecimals from the files and also returns the number of files
+/**A function, that retrieves the hexadecimals from the files and
+  *also returns the number of bytes in the file
   *@param *f a pointer to the file the program is reading from
   *@param hexAr[] an array of integers, that the information is stored in
+  *@return i the number of bytes in the file
   */
 int getHex(FILE *f, int hexAr[]){
   int i = 0, c;
@@ -317,6 +319,7 @@ int getHex(FILE *f, int hexAr[]){
 /**A function to count the number of notes in the entire song
   *@param hex[] an array with the stored information from the file
   *@param amount an integer holding the total number of characters in the array
+  *@return res the number of hexadecimal 90'ies in the file
   */
 int countPotentialNotes(int hex[], int amount){
   int i = 0, res = 0;
@@ -350,6 +353,7 @@ void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
   *@param hex an array containing all the data from the MIDI-file
   *@param placement an array storing the places of each event
   *@param noteAr an array containing all the notes in the song
+  *@param amountOfNotes the number of hexadecimal 90'ies in the file
   */
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[],
                                                                int *amountOfNotes){
@@ -386,7 +390,7 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   *@param hex an array containing all values of the hexadecimals in the MIDI-file
   *@param place a pointer to the index of the found event in the hex-array
   *@param j the place on which the event is found in the hex-array
-  *@param noteAr the array of notes in the song is filled here
+  *@param noteAr the array of notes in the song is stored here
   *@param amountOfNotes an integer, that counts the amount of notes
   */
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes){
@@ -440,8 +444,8 @@ int isNextHexAnEvent(int hex[], int j){
   *@param numbersInText the total amount of numbers in the MIDI-file
   *@param hex an array containing all the decimals in the MIDI-file
   *@param placement an array of 
+  *@param noteAr the array of notes in the song is stored here
   *@param noteOn the total amount of note-on events in the MIDI-file
-  *@param size the
   */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn){
   int tickCounter = 0, deltaCounter1 = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME,
@@ -560,10 +564,10 @@ void printNote(note note){
  *@param mode, along with tempo, length and octave contains the points for the Melody
  *@param info contains the song ppqn, tempo and mode for the song
  *@param notes contains the amount of notes in the song
- *@param note contains an array of the specific notes
+ *@param noteAr the array of notes in the song is stored here
  */
 void settingPoints(int *mode, int *tempo, int *length, int *octave,
-                   globalMelodyInfo info,int notes, note noteAr[], int *size){
+                   globalMelodyInfo info,int notes, note noteAr[]){
   modePoints(info, mode);
   tempoPoints(info, tempo);
   lengthPoints(length, noteAr, notes);
@@ -571,6 +575,8 @@ void settingPoints(int *mode, int *tempo, int *length, int *octave,
 }
 
 /**Changes the value of the integer mode depending on the mode of the melody
+  *@param info contains the song ppqn, tempo and mode for the song
+  *@param mode contains the points for mode in the Melody
   */
 void modePoints(globalMelodyInfo info, int *mode){
   switch(info.mode){
@@ -581,6 +587,8 @@ void modePoints(globalMelodyInfo info, int *mode){
 }
 
 /**Changes the value of the integer tempo depending on the tempo of the melody
+  *@param info contains the song ppqn, tempo and mode for the song
+  *@param tempo contains the points for tempo in the Melody
   */
 void tempoPoints(globalMelodyInfo info, int *tempo){
   if(info.tempo < 60)
@@ -608,6 +616,9 @@ void tempoPoints(globalMelodyInfo info, int *tempo){
 }
 
 /**Changes the value of the integer length depending on the average note length of the melody
+  *@param length contains the points for length in the Melody
+  *@param noteAr the array of notes in the song is stored here
+  *@param notes the amount of notes in the file
   */
 void lengthPoints(int *length, note noteAr[], int notes){
   int combined = 0;
@@ -641,7 +652,9 @@ void lengthPoints(int *length, note noteAr[], int notes){
 }
 
 /**Changes the value of the integer octave depending on the average note value in the melody
-  *@param octave is a pointer to an integer containing 
+  *@param octave is a pointer to an integer containing the octave points
+  *@param noteAr the array of notes in the song is stored here
+  *@param notes the amount of notes in the file
   */
 void notePoints(int *octave, note noteAr[], int notes){
   int combined = 0;
@@ -677,6 +690,7 @@ void notePoints(int *octave, note noteAr[], int notes){
 /**Inserts the weighting of each mood in an array of structs, as read from a designated file.
   *@param moodArray The array moods are stored in
   *@param moods the file to be read
+  *@param amountOfMoods the amount of moods in the mood tekst file
   */
 void insertMoods(moodWeighting moodArray[], FILE* moods, int amountOfMoods){
   for(int i = 0; i < amountOfMoods; i++)
@@ -690,8 +704,8 @@ void insertMoods(moodWeighting moodArray[], FILE* moods, int amountOfMoods){
   *weighting and then stored.
   *@param moodArray an array containing the weighting for all moods
   *@param result an array for holding the songs scores as per each mood
-  *@param mode along with temp, toneLength and pitch, this variable contains a score -5 to 5 for how
-  *that facet of the song is.
+  *@param mode along with tempo, toneLength and pitch, this variable contains a score -5 to 5
+  *@param amountOfMoods the amount of moods in the mood tekst file
   */
 void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLength, int pitch,
                      int *result, int amountOfMoods){
