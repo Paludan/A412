@@ -676,6 +676,10 @@ void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLen
 }
 
 /**Finds the note length, converted from deltatime to standard musical notation
+  *after recieving the noteLength result, we round it to the nearest 32nd note
+  *@param ppqn is the PPQN value for the MIDI-file.
+  *@param size is the size of the array, used to prevent a segmentation fault.
+  *@param noteAr is a pointer to the beginning of the array containing all the notes.
   */
 void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
   for (int i = 0; i < size; i++){
