@@ -774,7 +774,7 @@ void checkScale(int scales[], int tone, int key){
   *@param info contains ppqn, tempo and mode
   */
 void findMode(note noteAr[], int totalNotes, globalMelodyInfo *info){
-  int majors[12] = {1}, minors[12] = {0}, mode = 0;
+  int majors[12] = {1,1,1,1,1,1,1,1,1,1,1,1}, minors[12] = {0,0,0,0,0,0,0,0,0,0,0,0}, mode = 0;
 
   checkScalesForToneleaps(majors, minors, totalNotes, noteAr);
   checkMelodyScale(majors, minors, totalNotes, noteAr, &mode);
@@ -819,6 +819,7 @@ void checkScalesForToneleaps(int majors[], int minors[], int totalNotes, note no
 	*/
 void checkMelodyScale(int majors[], int minors[], int totalNotes, note noteAr[], int *mode){
   int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0;
+    
   while(x < totalNotes){
     z = x;
     
@@ -849,7 +850,6 @@ void checkMelodyScale(int majors[], int minors[], int totalNotes, note noteAr[],
           keynote = bar[z];
         }
       }
-      
       *mode += isInScale(keynote, bar, sizeBar);
       x++;
     }
