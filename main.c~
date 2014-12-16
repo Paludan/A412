@@ -737,7 +737,8 @@ void findMode(note noteAr[], int totalNotes, globalMelodyInfo *info){
 /**A function to check which major scales matches the tones of the song and open their relative minors
   *@param majors is an array containing all possible majorscales
 	*@param minors is an array containing all possible minorscales
-	*@param tempNote 
+	*@param totalNotes is a variable with the value equal to the sum of all notes 
+	*@param noteAr is an array containing all notes
 	*/
 void checkScalesForToneleaps(int majors[], int minors[], int totalNotes, note noteAr[]){
   int x = 0, y = 0, z = 0, tempNote = 0;
@@ -764,7 +765,7 @@ void checkScalesForToneleaps(int majors[], int minors[], int totalNotes, note no
 /**Goes through all notes of the song and puts them into an array, 4 at a time
   *@param majors is an array containing all possible majorscales
 	*@param minors is an array containing all possible minorscales
-	*@param totalNotes is a variable with the value equal to the sum of notes
+	*@param totalNotes is a variable with the value equal to the sum of all notes
 	*@param noteAr is an array containing all the notes
 	*@param mode is an integer defining the scale. A positive value indicates a major scale
   *and a negative value indicates a minor scale.

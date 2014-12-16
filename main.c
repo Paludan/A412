@@ -611,6 +611,7 @@ void lengthPoints(int *length, note noteAr[], int notes){
 }
 
 /**Changes the value of the integer octave depending on the average note value in the melody
+  *@param octave is a pointer to an integer containing 
   */
 void notePoints(int *octave, note noteAr[], int notes){
   int combined = 0;
@@ -882,6 +883,7 @@ int isInMajor(int toneLeap){
 }
 
 /**Returns the amount of moods written in the moods text file
+  *@param moods is a pointer to the file containing mood data 
   */
 int FindMoodAmount(FILE *moods){
   int i = 1;
@@ -963,7 +965,14 @@ void printWeightingMatrix(moodWeighting moodArray[], int amountOfMoods){
 }
 
 /**Prints the matrix vector product calculation for each mood and their results
-  */
+  *@param moodArray is an array containing the moods
+  *@param mode is an integer defining what mode the melody has 
+	*@param tempo is an integer defining the the amount of BPM
+	*@param toneLength is an integer defining the toneLengths in the song
+	*@param pitch is an integer defining the octaves in teh song
+	*@param result ..?
+	*@param amountOfMoods ..?
+	*/
 void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, int toneLength,
                               int pitch, int result[], int amountOfMoods){
   for(int i = 0; i < amountOfMoods; i++){
@@ -1011,6 +1020,10 @@ void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, in
 
 /**If there only is the two moods happy and sad it prints a scale on which there is indicated
   *if it is most happy or sad and how much
+	*@param moodArray is an array that contains the moods
+	*@param moodOfMelody is an integer that defines which mood the melody is
+	*@param result is an array containing ??
+  *@param amountOfMoonds is ??
   */
 void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[], int amountOfMoods){
   int test = 0;
@@ -1051,6 +1064,8 @@ void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[
 }
 
 /**Prints the mood of the melody into the console
+  *@param moodArray is an array that contains the moods
+ 	*@param moodOfMelody is an integer that defines what mood the melody has	
   */
 void printMoodOfMelody(moodWeighting moodArray[], int moodOfMelody){
   printf("\n The mood of the melody is %s\n", moodArray[moodOfMelody].name);
