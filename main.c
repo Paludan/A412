@@ -127,11 +127,11 @@ void lengthPoints(int*, note [], int);
 void notePoints(int*, note [], int);
 void insertMoods(moodWeighting [], FILE*, int);
 void weightingMatrix(moodWeighting [], int, int, int, int, int*, int);
-void findEvents(int, int [], eventPlacement [], note [], int*, int*);
+void findEvents(int, int [], eventPlacement [], note [], int*);
 void insertPlacement1(int [], int*, int, note [], int*);
 void insertPlacement2(int [], int*, int);
 int isNextHexAnEvent(int [], int);
-void findTicks(int, int [], eventPlacement [], note [], int, int*);
+void findTicks(int, int [], eventPlacement [], note [], int);
 void countTicks1(int [], int*, int, note [], int*);
 void countTicks2(int [], int*, int, note [], int*);
 void deltaTimeToNoteLength(int, int, note*);
@@ -153,8 +153,8 @@ void printMoodOfMelody(moodWeighting [], int);
 
 int main(int argc, const char *argv[]){
   /* Variables */
-  int numbersInText = 0, notes, size = 0, mode = 5, tempo = 5, toneLength = 5, pitch = 5,
-      amountOfNotes = 0, amountOfMoods;;
+  int numbersInText = 0, potentialNotes, mode = 5, tempo = 5, toneLength = 5, pitch = 5,
+      amountOfNotes = 0, amountOfMoods;
   FILE* moods = fopen("moods.txt", "r");
   fileError(moods);
   char MIDIfile[25];
@@ -184,12 +184,12 @@ int main(int argc, const char *argv[]){
   /* Reading the data from the file */
   numbersInText = getHex(f, hex);
   fillSongData(&info, hex, numbersInText);
-  notes = countPotentialNotes(hex, numbersInText);
+  potentialNotes = countPotentialNotes(hex, numbersInText);
   
   /* Arrays */
-  note *noteAr = (note*) malloc(notes * sizeof(note));
+  note *noteAr = (note*) malloc(potentialNotes * sizeof(note));
   noteError(noteAr);
-  placement = (eventPlacement*) malloc(notes * sizeof(eventPlacement));
+  placement = (eventPlacement*) malloc(potentialNotes * sizeof(eventPlacement));
   if(placement == NULL){
     printf("Error in allocating space for events\n");
     exit(EXIT_FAILURE);
@@ -197,11 +197,11 @@ int main(int argc, const char *argv[]){
   int result[amountOfMoods];
 
   /* Find parameters, calculate points and processes points */
-  findEvents(numbersInText, hex, placement, noteAr, &size, &amountOfNotes);
-  deltaTimeToNoteLength(info.ppqn, size, noteAr);
+  findEvents(numbersInText, hex, placement, noteAr, &amountOfNotes);
+  deltaTimeToNoteLength(info.ppqn, amountOfNotes, noteAr);
   insertMoods(moodArray, moods, amountOfMoods);
   findMode(noteAr, amountOfNotes, &info);
-  settingPoints(&mode, &tempo, &toneLength, &pitch, info, amountOfNotes, noteAr, &size);
+  settingPoints(&mode, &tempo, &toneLength, &pitch, info, amountOfNotes, noteAr, &amountOfNotes);
   weightingMatrix(moodArray, mode, tempo, toneLength, pitch, result, amountOfMoods);
 
   /* Print results */
@@ -209,6 +209,7 @@ int main(int argc, const char *argv[]){
 
   /*Clean up and close*/
   fclose(f);
+  free(placement);
   free(hex);
   free(noteAr);
 
@@ -329,8 +330,7 @@ int countPotentialNotes(int hex[], int amount){
   return res;
 }
 
-/**! \fn int fillSongData(globalMelodyInfo *info, int hex[], int numbersInText) 
-  *A function, that inserts ppqn and tempo to the info array
+/**A function, that inserts ppqn and tempo to the info array
   *@param *info a pointer to a structure containing the tempo and mode of the song
   *@param hex[] the array of integers read from the file
   *@param numbersInText the total amount of integers in the array
@@ -348,11 +348,11 @@ void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
 /**Searches the file for events and stores their placement in an array of eventPlacement structs
   *@param numbersInText the total amount of numbers in the MIDI-file
   *@param hex an array containing all the data from the MIDI-file
-  *@param placement an array of the eventPlacement structs, used to store the eventtype
+  *@param placement an array storing the places of each event
   *@param noteAr an array containing all the notes in the song
   */
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[],
-                                                               int *size, int *amountOfNotes){
+                                                               int *amountOfNotes){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
       programChange = 0, channelPressure = 0, pitchWheel = 0;
   
@@ -379,16 +379,15 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
                              break;
       default  :             break;
     }
-  findTicks(numbersInText, hex, placement, noteAr, noteOn, size);
+  findTicks(numbersInText, hex, placement, noteAr, noteOn);
 }
 
 /**Used to determine if an event with two parameters truly is an event-start
   *@param hex an array containing all values of the hexadecimals in the MIDI-file
   *@param place a pointer to the index of the found event in the hex-array
-  *@param j the place on which the event is found
+  *@param j the place on which the event is found in the hex-array
   *@param noteAr the array of notes in the song is filled here
   *@param amountOfNotes an integer, that counts the amount of notes
-  *@param notes an array containing all the notes of the song
   */
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes){
   int i = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME;
@@ -443,10 +442,8 @@ int isNextHexAnEvent(int hex[], int j){
   *@param placement an array of 
   *@param noteOn the total amount of note-on events in the MIDI-file
   *@param size the
-  *@param notes an array containing all notes of the song
   */
-void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn,
-               int *size){
+void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn){
   int tickCounter = 0, deltaCounter1 = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME,
                        deltaCounter2 = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
@@ -482,12 +479,14 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
         countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);   
     }
   }
-  
-  *size = tickCounter;
 }
 
-/**Processes event types which take two parameters, extracting deltatime and
-  *advancing the file pointer
+/**A function to count the deltatime ticks of a given event with two parameters
+  *@param hex an array containing all the data from the MIDI-file
+  *@param i a pointer to the place of the prosessed event, increased here to the start of next event
+  *@param deltaCounter the distance between eventstart and deltatime start
+  *@param noteAr is an array containing all notes of the MIDI-file
+  *@param tickCounter used as an index the correct note
   */
 void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
@@ -502,8 +501,12 @@ void countTicks1(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCo
   *i += deltaCounter;
 }
 
-/**Processes event types which take one parameter, extracting deltatime and
-  *advancing the file pointer
+/**A function to count the deltatime ticks of a given event with one parameter
+  *@param hex an array containing all the data from the MIDI-file
+  *@param i a pointer to the place of the prosessed event, increased here to the start of next event
+  *@param deltaCounter the distance between eventstart and deltatime start
+  *@param noteAr is an array containing all notes of the MIDI-file
+  *@param tickCounter used as an index the correct note
   */
 void countTicks2(int hex[], int *i, int deltaCounter, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
@@ -709,8 +712,8 @@ void weightingMatrix(moodWeighting moodArray[], int mode, int tempo, int toneLen
   *@param size is the size of the array, used to prevent a segmentation fault.
   *@param noteAr is a pointer to the beginning of the array containing all the notes.
   */
-void deltaTimeToNoteLength (int ppqn, int size, note *noteAr){
-  for (int i = 0; i < size; i++){
+void deltaTimeToNoteLength (int ppqn, int numberOfNotes, note *noteAr){
+  for (int i = 0; i < numberOfNotes; i++){
     double noteLength = ((double) (noteAr[i].ticks)) / ((double) (ppqn/8));
     
     if (noteLength < 1.5 && noteLength >= 0)
