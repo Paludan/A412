@@ -113,7 +113,7 @@ typedef struct{
 void fileError(FILE *);
 void intError(int *);
 void noteError(note *);
-void printDirectory(char*, DIR*);
+void printDirectory(DIR*);
 void chooseTrack(char*, DIR*);
 void printNote(note);
 int getHex(FILE*, int[]);
@@ -168,7 +168,7 @@ int main(int argc, const char *argv[]){
   
   /* User input and error check */
   if (argv[1] == NULL){
-    printDirectory(MIDIfile, dir);
+    printDirectory(dir);
     chooseTrack(MIDIfile, dir);
     f = fopen(MIDIfile, "r");  
     fileError(f);
@@ -188,7 +188,11 @@ int main(int argc, const char *argv[]){
   /* Arrays */
   note *noteAr = (note*) malloc(notes * sizeof(note));
   noteError(noteAr);
-  eventPlacement placement[numbersInText];
+  placement = (eventPlacement*) malloc(numbersInText * sizeof(eventPlacement));
+  if(eventPlacement == NULL){
+    printf("Error in allocating space for events\n");
+    exit(EXIT_FAILURE);
+  }
   int result[amountOfMoods];
 
   /* Find parameters, calculate points and processes points */
@@ -210,7 +214,8 @@ int main(int argc, const char *argv[]){
   return 0;
 }
 
-/**Error check for file openening
+/**Errorcheck for file openening, exits the program if an error is found
+  *@param file a pointer to the file the program is trying to open
   */
 void fileError(FILE *file){
   if(file == NULL){
@@ -219,7 +224,8 @@ void fileError(FILE *file){
   }
 }
 
-/**Error check for integer array allocation
+/**Error check for integer array allocation, exits program if an error is found
+  *@param integer a pointer to the array the program is trying to allokate
   */
 void intError(int *integer){
   if(integer == NULL){
@@ -228,7 +234,8 @@ void intError(int *integer){
   }
 }
 
-/**Error check for note struct array allocation
+/**Error check for note struct array allocation, exits program if an error is found
+  *@param noteAr a poubter to the array of note-structs the program is trying to allokate
   */
 void noteError(note *noteAr){
   if(noteAr == NULL){
@@ -238,9 +245,9 @@ void noteError(note *noteAr){
 }
 
 /**A function to read music directory and prompt user to choose file
-  *@param MIDIfile a pointer to a string containing the name of the chosen input file
-  *@param dir a pointer to a directory*/
-void printDirectory(char *MIDIfile, DIR *dir){
+  *@param dir a pointer to a directory
+  */
+void printDirectory(DIR *dir){
   struct dirent *musicDir;
   int musicNumber = -2;
 
@@ -263,7 +270,10 @@ void printDirectory(char *MIDIfile, DIR *dir){
   closedir(dir);
 }
 
-/**User choose which track to be analysed
+/**A function that opens the Music folder found in the program directory
+  *Also prompts for user input and scans for the desired song
+  *@param MIDIfile the name of the chosen MIDI-file
+  *@param dir a pointer to the directory in which the MIDI-files are found
   */
 void chooseTrack(char *MIDIfile, DIR *dir){
   struct dirent *musicDir;
@@ -334,7 +344,11 @@ void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
                      (hex[j+5]));
 }
 
-/**Searches the file for events and stores their placement in an array of eventPlacement structs 
+/**Searches the file for events and stores their placement in an array of eventPlacement structs
+  *@param numbersInText the total amount of numbers in the MIDI-file
+  *@param hex an array containing all the data from the MIDI-file
+  *@param placement an array of the eventPlacement structs, used to store the eventtype
+  *@param noteAr an array containing all the notes in the song
   */
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[],
                                                                int *size, int *amountOfNotes){
@@ -367,12 +381,13 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
 }
 
-/**Starts in the hex which are investigated and looks forward to find a perspective
-  *It goes to an assumed deltatime and finds the length of it.
-  *Thereafter it checks the next hex after the deltatime to make sure it is an event
-  *If that is the case it stores the hex which is investegated in the first place
-  *Furthermore if it is a noteOn event it stores the hex which is the note,
-  *processes the note and counts amount of notes
+/**Used to determine if an event with two parameters truly is an event-start
+  *@param hex an array containing all values of the hexadecimals in the MIDI-file
+  *@param place a pointer to the index of the found event in the hex-array
+  *@param j the place on which the event is found
+  *@param noteAr the array of notes in the song is filled here
+  *@param amountOfNotes an integer, that counts the amount of notes
+  *@param notes an array containing all the notes of the song
   */
 void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes, int notes[]){
   int i = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME;
@@ -390,6 +405,9 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
 }
 
 /**Does the same as insertPlacement1, but for the two events that only takes one parameter
+  *@param hex the array of all the decimals in the MIDI-file
+  *@param place 
+  *@param j the place on which the event is found
   */
 void insertPlacement2(int hex[], int *place, int j){
   int i = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
@@ -400,7 +418,10 @@ void insertPlacement2(int hex[], int *place, int j){
     *place = j;
 }
 
-/**Returns true if next hex is an event or false if not
+/**Returns a boolean value, used to check if the given place is an event
+  *@param hex an array of all decimals in the MIDI-file
+  *@param j the place where the function looks for the event
+  *@return returns 1 if it's an event, 0 if it's not.
   */
 int isNextHexAnEvent(int hex[], int j){
   switch (hex[j]){
@@ -416,7 +437,13 @@ int isNextHexAnEvent(int hex[], int j){
 }
 
 /**Analyses ticks for every noteOn event by a for loop which begins in the noteOn events start and
-  *searches for the end of the event
+  *searches untill the note-off event is found
+  *@param numbersInText the total amount of numbers in the MIDI-file
+  *@param hex an array containing all the decimals in the MIDI-file
+  *@param placement an array of 
+  *@param noteOn the total amount of note-on events in the MIDI-file
+  *@param size the
+  *@param notes an array containing all notes of the song
   */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn,
                int *size, int notes[]){
