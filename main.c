@@ -734,6 +734,8 @@ void deltaTimeToNoteLength (int ppqn, int numberOfNotes, note *noteAr){
 }
 
 /**A function to sort integers in ascending order, used by qsort
+  *@param a a constant void pointer used here to point to the tone value
+	*@param b a constant void pointer used here to point to the tone value of another tone
   */
 int sortTones(const void *a, const void *b){
   return (*(int *)a - *(int *)b);
@@ -916,6 +918,7 @@ int isInMajor(int toneLeap){
 
 /**Returns the amount of moods written in the moods text file
   *@param moods is a pointer to the file containing mood data 
+	*@return returns the amount of specified moods in the "moods.txt" file
   */
 int FindMoodAmount(FILE *moods){
   int i = 1;
