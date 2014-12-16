@@ -128,10 +128,10 @@ void notePoints(int*, note [], int);
 void insertMoods(moodWeighting [], FILE*, int);
 void weightingMatrix(moodWeighting [], int, int, int, int, int*, int);
 void findEvents(int, int [], eventPlacement [], note [], int*, int*);
-void insertPlacement1(int [], int*, int, note [], int*, int []);
+void insertPlacement1(int [], int*, int, note [], int*);
 void insertPlacement2(int [], int*, int);
 int isNextHexAnEvent(int [], int);
-void findTicks(int, int [], eventPlacement [], note [], int, int*, int []);
+void findTicks(int, int [], eventPlacement [], note [], int, int*);
 void countTicks1(int [], int*, int, note [], int*);
 void countTicks2(int [], int*, int, note [], int*);
 void deltaTimeToNoteLength(int, int, note*);
@@ -140,7 +140,7 @@ int isInMinor(int);
 int isInMajor(int);
 int sortToner(const void*, const void*);
 void findMode(note*, int, globalMelodyInfo*);
-void checkScalesForToneleaps(int [], int [], int, int, note []);
+void checkScalesForToneleaps(int [], int [], int, note[]);
 void checkMelodyScale(int [], int [], int, note [], int*);
 void returnToStruct(int, globalMelodyInfo *);
 int FindMoodAmount(FILE*);
@@ -160,6 +160,7 @@ int main(int argc, const char *argv[]){
   char MIDIfile[25];
   DIR *dir = 0;
   FILE *f;
+  eventPlacement *placement;
   amountOfMoods = FindMoodAmount(moods);
   moodWeighting moodArray[amountOfMoods];
   globalMelodyInfo info;
@@ -188,8 +189,8 @@ int main(int argc, const char *argv[]){
   /* Arrays */
   note *noteAr = (note*) malloc(notes * sizeof(note));
   noteError(noteAr);
-  placement = (eventPlacement*) malloc(numbersInText * sizeof(eventPlacement));
-  if(eventPlacement == NULL){
+  placement = (eventPlacement*) malloc(notes * sizeof(eventPlacement));
+  if(placement == NULL){
     printf("Error in allocating space for events\n");
     exit(EXIT_FAILURE);
   }
@@ -353,32 +354,32 @@ void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[],
                                                                int *size, int *amountOfNotes){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-      programChange = 0, channelPressure = 0, pitchWheel = 0, notes[numbersInText];
+      programChange = 0, channelPressure = 0, pitchWheel = 0;
   
   for(int j = 0; j < numbersInText; j++)
     switch (hex[j]){
       case NOTE_ON         : insertPlacement1(hex, &placement[noteOn++].noteOn, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case NOTE_OFF        : insertPlacement1(hex, &placement[noteOff++].noteOff, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case AFTER_TOUCH     : insertPlacement1(hex, &placement[afterTouch++].afterTouch, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case CONTROL_CHANGE  : insertPlacement1(hex, &placement[controlChange++].controlChange, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case PROGRAM_CHANGE  : insertPlacement2(hex, &placement[programChange++].programChange, j);
                              break;
       case CHANNEL_PRESSURE: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);
                              break;
       case PITCH_WHEEL     : insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       default  :             break;
     }
-  findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
+  findTicks(numbersInText, hex, placement, noteAr, noteOn, size);
 }
 
 /**Used to determine if an event with two parameters truly is an event-start
@@ -389,7 +390,7 @@ void findEvents(int numbersInText, int hex[], eventPlacement placement[], note n
   *@param amountOfNotes an integer, that counts the amount of notes
   *@param notes an array containing all the notes of the song
   */
-void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes, int notes[]){
+void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes){
   int i = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
   while(i < MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(j + i++)] > NOTE_OFF);
@@ -397,7 +398,6 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
   if(isNextHexAnEvent(hex, (j + i))){
     *place = j;
     if(hex[j] == NOTE_ON){
-      notes[*amountOfNotes] = hex[j + 1];
       fillNote(hex[j + 1], &noteAr[*amountOfNotes]);
       *amountOfNotes += 1;
     }   
@@ -446,14 +446,14 @@ int isNextHexAnEvent(int hex[], int j){
   *@param notes an array containing all notes of the song
   */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn,
-               int *size, int notes[]){
+               int *size){
   int tickCounter = 0, deltaCounter1 = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME,
                        deltaCounter2 = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
   for(int j = 0; j < noteOn; j++){
     for(int i = placement[j].noteOn; i < numbersInText; i++){
       if(hex[i] == NOTE_OFF){
-        if(hex[i + 1] == notes[j]){
+        if(hex[i + 1] == noteAr[j].noteValue){
           tickCounter++;
           break;
         }
@@ -461,7 +461,7 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
           countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
       else if(hex[i] == AFTER_TOUCH){
-        if(hex[i + 1] == notes[j] && hex[i + 2] == ZERO){
+        if(hex[i + 1] == noteAr[j].noteValue && hex[i + 2] == ZERO){
           tickCounter++;
           break;
         }
@@ -1001,7 +1001,7 @@ void printWeightingMatrix(moodWeighting moodArray[], int amountOfMoods){
 	*@param amountOfMoods ..?
 	*/
 void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, int toneLength,
-                              int pitch, int result[], int amountOfMoods){
+                              int pitch, int vectorMatrixResult[], int amountOfMoods){
   for(int i = 0; i < amountOfMoods; i++){
     printf(" %s", moodArray[i].name);
     for(int j = strlen(moodArray[i].name); j < 16; j++)
@@ -1038,10 +1038,10 @@ void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, in
       printf("%d = ", moodArray[i].pitch);
     else
       printf(" %d = ", moodArray[i].pitch);
-    if(result[i] < 0)
-      printf("%d\n", result[i]);
+    if(vectorMatrixResult[i] < 0)
+      printf("%d\n", vectorMatrixResult[i]);
     else
-      printf(" %d\n", result[i]);
+      printf(" %d\n", vectorMatrixResult[i]);
   }
 }
 
@@ -1052,7 +1052,7 @@ void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, in
 	*@param result is an array containing ??
   *@param amountOfMoonds is ??
   */
-void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[], int amountOfMoods){
+void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int vectorMatrixResult[], int amountOfMoods){
   int test = 0;
   if(!strcmp(moodArray[moodOfMelody].name, "Happy") && !strcmp(moodArray[0].name, "Happy") &&
      !strcmp(moodArray[1].name, "Sad")              && amountOfMoods == 2){
@@ -1061,7 +1061,7 @@ void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == ((result[moodOfMelody] / 2) + 26))
+      else if(test == ((vectorMatrixResult[moodOfMelody] / 2) + 26))
         printf("[]");
       else
         printf("-");
@@ -1078,7 +1078,7 @@ void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == ((int)(-((result[moodOfMelody]) / 2.4)) + 26))
+      else if(test == ((int)(-((vectorMatrixResult[moodOfMelody]) / 2.4)) + 26))
         printf("[]");
       else
         printf("-");
