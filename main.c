@@ -141,7 +141,7 @@ int isInMajor(int);
 int sortToner(const void*, const void*);
 void findMode(note*, int, globalMelodyInfo*);
 void checkScalesForToneleaps(int [], int [], int, int, note []);
-void insertNotes(int [], int [], int, note [], int*);
+void checkMelodyScale(int [], int [], int, note [], int*);
 void returnToStruct(int, globalMelodyInfo *);
 int FindMoodAmount(FILE*);
 void printResults(int, int, int, int, moodWeighting [], int [], int);
@@ -727,17 +727,21 @@ void checkScale(int scales[], int tone, int key){
   *@param info contains ppqn, tempo and mode
   */
 void findMode(note noteAr[], int totalNotes, globalMelodyInfo *info){
-  int majors[12] = {1}, minors[12] = {0}, mode = 0, tempNote = 0;
+  int majors[12] = {1}, minors[12] = {0}, mode = 0;
 
-  checkScalesForToneleaps(majors, minors, tempNote, totalNotes, noteAr);
-  insertNotes(majors, minors, totalNotes, noteAr, &mode);
+  checkScalesForToneleaps(majors, minors, totalNotes, noteAr);
+  checkMelodyScale(majors, minors, totalNotes, noteAr, &mode);
   returnToStruct(mode, info);
 }
 
 /**A function to check which major scales matches the tones of the song and open their relative minors
-  */
-void checkScalesForToneleaps(int majors[], int minors[], int tempNote, int totalNotes, note noteAr[]){
-  int x = 0, y = 0, z = 0;
+  *@param majors is an array containing all possible majorscales
+	*@param minors is an array containing all possible minorscales
+	*@param totalNotes is a variable with the value equal to the sum of all notes 
+	*@param noteAr is an array containing all notes
+	*/
+void checkScalesForToneleaps(int majors[], int minors[], int totalNotes, note noteAr[]){
+  int x = 0, y = 0, z = 0, tempNote = 0;
   for(x = 0; x < totalNotes; x++){
     tempNote = noteAr[x].tone;
     
@@ -759,8 +763,14 @@ void checkScalesForToneleaps(int majors[], int minors[], int tempNote, int total
 }
 
 /**Goes through all notes of the song and puts them into an array, 4 at a time
-  */
-void insertNotes(int majors[], int minors[], int totalNotes, note noteAr[], int *mode){
+  *@param majors is an array containing all possible majorscales
+	*@param minors is an array containing all possible minorscales
+	*@param totalNotes is a variable with the value equal to the sum of all notes
+	*@param noteAr is an array containing all the notes
+	*@param mode is an integer defining the scale. A positive value indicates a major scale
+  *and a negative value indicates a minor scale.
+	*/
+void checkMelodyScale(int majors[], int minors[], int totalNotes, note noteAr[], int *mode){
   int x = 0, y = 0, z = 0, bar[4], sizeBar = 4, tempSpan = 999, span = 999, keynote = 0;
   while(x < totalNotes){
     z = x;
