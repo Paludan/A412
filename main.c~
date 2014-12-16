@@ -113,7 +113,7 @@ typedef struct{
 void fileError(FILE *);
 void intError(int *);
 void noteError(note *);
-void printDirectory(char*, DIR*);
+void printDirectory(DIR*);
 void chooseTrack(char*, DIR*);
 void printNote(note);
 int getHex(FILE*, int[]);
@@ -128,10 +128,10 @@ void notePoints(int*, note [], int);
 void insertMoods(moodWeighting [], FILE*, int);
 void weightingMatrix(moodWeighting [], int, int, int, int, int*, int);
 void findEvents(int, int [], eventPlacement [], note [], int*, int*);
-void insertPlacement1(int [], int*, int, note [], int*, int []);
+void insertPlacement1(int [], int*, int, note [], int*);
 void insertPlacement2(int [], int*, int);
 int isNextHexAnEvent(int [], int);
-void findTicks(int, int [], eventPlacement [], note [], int, int*, int []);
+void findTicks(int, int [], eventPlacement [], note [], int, int*);
 void countTicks1(int [], int*, int, note [], int*);
 void countTicks2(int [], int*, int, note [], int*);
 void deltaTimeToNoteLength(int, int, note*);
@@ -140,7 +140,7 @@ int isInMinor(int);
 int isInMajor(int);
 int sortToner(const void*, const void*);
 void findMode(note*, int, globalMelodyInfo*);
-void checkScalesForToneleaps(int [], int [], int, int, note []);
+void checkScalesForToneleaps(int [], int [], int, note[]);
 void checkMelodyScale(int [], int [], int, note [], int*);
 void returnToStruct(int, globalMelodyInfo *);
 int FindMoodAmount(FILE*);
@@ -160,6 +160,7 @@ int main(int argc, const char *argv[]){
   char MIDIfile[25];
   DIR *dir = 0;
   FILE *f;
+  eventPlacement *placement;
   amountOfMoods = FindMoodAmount(moods);
   moodWeighting moodArray[amountOfMoods];
   globalMelodyInfo info;
@@ -168,7 +169,7 @@ int main(int argc, const char *argv[]){
   
   /* User input and error check */
   if (argv[1] == NULL){
-    printDirectory(MIDIfile, dir);
+    printDirectory(dir);
     chooseTrack(MIDIfile, dir);
     f = fopen(MIDIfile, "r");  
     fileError(f);
@@ -188,7 +189,11 @@ int main(int argc, const char *argv[]){
   /* Arrays */
   note *noteAr = (note*) malloc(notes * sizeof(note));
   noteError(noteAr);
-  eventPlacement placement[numbersInText];
+  placement = (eventPlacement*) malloc(notes * sizeof(eventPlacement));
+  if(placement == NULL){
+    printf("Error in allocating space for events\n");
+    exit(EXIT_FAILURE);
+  }
   int result[amountOfMoods];
 
   /* Find parameters, calculate points and processes points */
@@ -210,7 +215,8 @@ int main(int argc, const char *argv[]){
   return 0;
 }
 
-/**Error check for file openening
+/**Errorcheck for file openening, exits the program if an error is found
+  *@param file a pointer to the file the program is trying to open
   */
 void fileError(FILE *file){
   if(file == NULL){
@@ -219,7 +225,8 @@ void fileError(FILE *file){
   }
 }
 
-/**Error check for integer array allocation
+/**Error check for integer array allocation, exits program if an error is found
+  *@param integer a pointer to the array the program is trying to allokate
   */
 void intError(int *integer){
   if(integer == NULL){
@@ -228,7 +235,8 @@ void intError(int *integer){
   }
 }
 
-/**Error check for note struct array allocation
+/**Error check for note struct array allocation, exits program if an error is found
+  *@param noteAr a poubter to the array of note-structs the program is trying to allokate
   */
 void noteError(note *noteAr){
   if(noteAr == NULL){
@@ -238,9 +246,9 @@ void noteError(note *noteAr){
 }
 
 /**A function to read music directory and prompt user to choose file
-  *@param MIDIfile a pointer to a string containing the name of the chosen input file
-  *@param dir a pointer to a directory*/
-void printDirectory(char *MIDIfile, DIR *dir){
+  *@param dir a pointer to a directory
+  */
+void printDirectory(DIR *dir){
   struct dirent *musicDir;
   int musicNumber = -2;
 
@@ -263,7 +271,10 @@ void printDirectory(char *MIDIfile, DIR *dir){
   closedir(dir);
 }
 
-/**User choose which track to be analysed
+/**A function that opens the Music folder found in the program directory
+  *Also prompts for user input and scans for the desired song
+  *@param MIDIfile the name of the chosen MIDI-file
+  *@param dir a pointer to the directory in which the MIDI-files are found
   */
 void chooseTrack(char *MIDIfile, DIR *dir){
   struct dirent *musicDir;
@@ -334,47 +345,52 @@ void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
                      (hex[j+5]));
 }
 
-/**Searches the file for events and stores their placement in an array of eventPlacement structs 
+/**Searches the file for events and stores their placement in an array of eventPlacement structs
+  *@param numbersInText the total amount of numbers in the MIDI-file
+  *@param hex an array containing all the data from the MIDI-file
+  *@param placement an array of the eventPlacement structs, used to store the eventtype
+  *@param noteAr an array containing all the notes in the song
   */
 void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[],
                                                                int *size, int *amountOfNotes){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
-      programChange = 0, channelPressure = 0, pitchWheel = 0, notes[numbersInText];
+      programChange = 0, channelPressure = 0, pitchWheel = 0;
   
   for(int j = 0; j < numbersInText; j++)
     switch (hex[j]){
       case NOTE_ON         : insertPlacement1(hex, &placement[noteOn++].noteOn, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case NOTE_OFF        : insertPlacement1(hex, &placement[noteOff++].noteOff, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case AFTER_TOUCH     : insertPlacement1(hex, &placement[afterTouch++].afterTouch, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case CONTROL_CHANGE  : insertPlacement1(hex, &placement[controlChange++].controlChange, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       case PROGRAM_CHANGE  : insertPlacement2(hex, &placement[programChange++].programChange, j);
                              break;
       case CHANNEL_PRESSURE: insertPlacement2(hex, &placement[channelPressure++].channelPressure, j);
                              break;
       case PITCH_WHEEL     : insertPlacement1(hex, &placement[pitchWheel++].pitchWheel, j,
-                                              noteAr, amountOfNotes, notes);
+                                              noteAr, amountOfNotes);
                              break;
       default  :             break;
     }
-  findTicks(numbersInText, hex, placement, noteAr, noteOn, size, notes);
+  findTicks(numbersInText, hex, placement, noteAr, noteOn, size);
 }
 
-/**Starts in the hex which are investigated and looks forward to find a perspective
-  *It goes to an assumed deltatime and finds the length of it.
-  *Thereafter it checks the next hex after the deltatime to make sure it is an event
-  *If that is the case it stores the hex which is investegated in the first place
-  *Furthermore if it is a noteOn event it stores the hex which is the note,
-  *processes the note and counts amount of notes
+/**Used to determine if an event with two parameters truly is an event-start
+  *@param hex an array containing all values of the hexadecimals in the MIDI-file
+  *@param place a pointer to the index of the found event in the hex-array
+  *@param j the place on which the event is found
+  *@param noteAr the array of notes in the song is filled here
+  *@param amountOfNotes an integer, that counts the amount of notes
+  *@param notes an array containing all the notes of the song
   */
-void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes, int notes[]){
+void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOfNotes){
   int i = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
   while(i < MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(j + i++)] > NOTE_OFF);
@@ -382,7 +398,6 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
   if(isNextHexAnEvent(hex, (j + i))){
     *place = j;
     if(hex[j] == NOTE_ON){
-      notes[*amountOfNotes] = hex[j + 1];
       fillNote(hex[j + 1], &noteAr[*amountOfNotes]);
       *amountOfNotes += 1;
     }   
@@ -390,6 +405,9 @@ void insertPlacement1(int hex[], int *place, int j, note noteAr[], int *amountOf
 }
 
 /**Does the same as insertPlacement1, but for the two events that only takes one parameter
+  *@param hex the array of all the decimals in the MIDI-file
+  *@param place 
+  *@param j the place on which the event is found
   */
 void insertPlacement2(int hex[], int *place, int j){
   int i = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
@@ -400,7 +418,10 @@ void insertPlacement2(int hex[], int *place, int j){
     *place = j;
 }
 
-/**Returns true if next hex is an event or false if not
+/**Returns a boolean value, used to check if the given place is an event
+  *@param hex an array of all decimals in the MIDI-file
+  *@param j the place where the function looks for the event
+  *@return returns 1 if it's an event, 0 if it's not.
   */
 int isNextHexAnEvent(int hex[], int j){
   switch (hex[j]){
@@ -416,17 +437,23 @@ int isNextHexAnEvent(int hex[], int j){
 }
 
 /**Analyses ticks for every noteOn event by a for loop which begins in the noteOn events start and
-  *searches for the end of the event
+  *searches untill the note-off event is found
+  *@param numbersInText the total amount of numbers in the MIDI-file
+  *@param hex an array containing all the decimals in the MIDI-file
+  *@param placement an array of 
+  *@param noteOn the total amount of note-on events in the MIDI-file
+  *@param size the
+  *@param notes an array containing all notes of the song
   */
 void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn,
-               int *size, int notes[]){
+               int *size){
   int tickCounter = 0, deltaCounter1 = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME,
                        deltaCounter2 = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
   for(int j = 0; j < noteOn; j++){
     for(int i = placement[j].noteOn; i < numbersInText; i++){
       if(hex[i] == NOTE_OFF){
-        if(hex[i + 1] == notes[j]){
+        if(hex[i + 1] == noteAr[j].noteValue){
           tickCounter++;
           break;
         }
@@ -434,7 +461,7 @@ void findTicks(int numbersInText, int hex[], eventPlacement placement[], note no
           countTicks1(hex, &i, deltaCounter1, noteAr, &tickCounter);
       }
       else if(hex[i] == AFTER_TOUCH){
-        if(hex[i + 1] == notes[j] && hex[i + 2] == ZERO){
+        if(hex[i + 1] == noteAr[j].noteValue && hex[i + 2] == ZERO){
           tickCounter++;
           break;
         }
@@ -611,6 +638,7 @@ void lengthPoints(int *length, note noteAr[], int notes){
 }
 
 /**Changes the value of the integer octave depending on the average note value in the melody
+  *@param octave is a pointer to an integer containing 
   */
 void notePoints(int *octave, note noteAr[], int notes){
   int combined = 0;
@@ -882,6 +910,7 @@ int isInMajor(int toneLeap){
 }
 
 /**Returns the amount of moods written in the moods text file
+  *@param moods is a pointer to the file containing mood data 
   */
 int FindMoodAmount(FILE *moods){
   int i = 1;
@@ -963,9 +992,16 @@ void printWeightingMatrix(moodWeighting moodArray[], int amountOfMoods){
 }
 
 /**Prints the matrix vector product calculation for each mood and their results
-  */
+  *@param moodArray is an array containing the moods
+  *@param mode is an integer defining what mode the melody has 
+	*@param tempo is an integer defining the the amount of BPM
+	*@param toneLength is an integer defining the toneLengths in the song
+	*@param pitch is an integer defining the octaves in teh song
+	*@param result ..?
+	*@param amountOfMoods ..?
+	*/
 void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, int toneLength,
-                              int pitch, int result[], int amountOfMoods){
+                              int pitch, int vectorMatrixResult[], int amountOfMoods){
   for(int i = 0; i < amountOfMoods; i++){
     printf(" %s", moodArray[i].name);
     for(int j = strlen(moodArray[i].name); j < 16; j++)
@@ -1002,17 +1038,21 @@ void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, in
       printf("%d = ", moodArray[i].pitch);
     else
       printf(" %d = ", moodArray[i].pitch);
-    if(result[i] < 0)
-      printf("%d\n", result[i]);
+    if(vectorMatrixResult[i] < 0)
+      printf("%d\n", vectorMatrixResult[i]);
     else
-      printf(" %d\n", result[i]);
+      printf(" %d\n", vectorMatrixResult[i]);
   }
 }
 
 /**If there only is the two moods happy and sad it prints a scale on which there is indicated
   *if it is most happy or sad and how much
+	*@param moodArray is an array that contains the moods
+	*@param moodOfMelody is an integer that defines which mood the melody is
+	*@param result is an array containing ??
+  *@param amountOfMoonds is ??
   */
-void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[], int amountOfMoods){
+void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int vectorMatrixResult[], int amountOfMoods){
   int test = 0;
   if(!strcmp(moodArray[moodOfMelody].name, "Happy") && !strcmp(moodArray[0].name, "Happy") &&
      !strcmp(moodArray[1].name, "Sad")              && amountOfMoods == 2){
@@ -1021,7 +1061,7 @@ void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == ((result[moodOfMelody] / 2) + 26))
+      else if(test == ((vectorMatrixResult[moodOfMelody] / 2) + 26))
         printf("[]");
       else
         printf("-");
@@ -1038,7 +1078,7 @@ void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[
     while(test < 51){
       if(test == 25)
         printf("|");
-      else if(test == ((int)(-((result[moodOfMelody]) / 2.4)) + 26))
+      else if(test == ((int)(-((vectorMatrixResult[moodOfMelody]) / 2.4)) + 26))
         printf("[]");
       else
         printf("-");
@@ -1051,6 +1091,8 @@ void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int result[
 }
 
 /**Prints the mood of the melody into the console
+  *@param moodArray is an array that contains the moods
+ 	*@param moodOfMelody is an integer that defines what mood the melody has	
   */
 void printMoodOfMelody(moodWeighting moodArray[], int moodOfMelody){
   printf("\n The mood of the melody is %s\n", moodArray[moodOfMelody].name);

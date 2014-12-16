@@ -838,6 +838,8 @@ void checkMelodyScale(int majors[], int minors[], int totalNotes, note noteAr[],
 }
 
 /**outputs result directly to the info struct array
+  *@param the mode integer contains the point value of the mode result
+	*@param info is used to change the mode value
   */
 void returnToStruct(int mode, globalMelodyInfo *info){
   if(mode > 0)
@@ -923,26 +925,35 @@ int FindMoodAmount(FILE *moods){
   return i;
 }
 
-/**Prints relevant information about the song. Finds and prints the mood with the highest score,
-  *and in the case of using the default sad/happy scale, scales the values to fit on the 51
-  *point sliding scale
+/**Prints relevant information about the song. 
+  *@param the mode integer contains the point value of the mode result
+	*@param the tempo integer contains the point value of the tempo result
+	*@param the toneLength integer contains the point value of the toneLength result
+	*@param the pitch integer contains the point value of the pitch result
+  *@param moodArray contains the weighting matrix content
+	*@param vectorMatrixResult is an array containing the results from the vector matrix product
+  *@param amountOfMoods is an integer equal to the amount of moods in the moods.txt
   */
 void printResults(int mode, int tempo, int toneLength, int pitch, moodWeighting moodArray[],
-                  int result[], int amountOfMoods){
+                  int vectorMatrixResult[], int amountOfMoods){
   int moodOfMelody = 0;
   
   for(int i = 0; i < amountOfMoods; i++)
-    if(moodOfMelody < result[i])
+    if(moodOfMelody < vectorMatrixResult[i])
       moodOfMelody = i;
 
   printParameterVector(mode, tempo, toneLength, pitch);
   printWeightingMatrix(moodArray, amountOfMoods);
-  printVectorMatrixProduct(moodArray, mode, tempo, toneLength, pitch, result, amountOfMoods);
-  printHappySadScale(moodArray, moodOfMelody, result, amountOfMoods);
+  printVectorMatrixProduct(moodArray, mode, tempo, toneLength, pitch, vectorMatrixResult, amountOfMoods);
+  printHappySadScale(moodArray, moodOfMelody, vectorMatrixResult, amountOfMoods);
   printMoodOfMelody(moodArray, moodOfMelody);
 }
 
 /**Prints the parameter vector into the console
+  *@param the mode integer contains the point value of the mode result
+	*@param the tempo integer contains the point value of the tempo result
+	*@param the toneLength integer contains the point value of the toneLength result
+	*@param the pitch integer contains the point value of the pitch result
   */
 void printParameterVector(int mode, int tempo, int toneLength, int pitch){
   printf("\n\n\n");
@@ -957,7 +968,9 @@ void printParameterVector(int mode, int tempo, int toneLength, int pitch){
 }
 
 /**Prints the weighting matrix into the console
-  */
+  *@param moodArray contains the weighting matrix content
+  *@param amountOfMoods is an integer equal to the amount of moods in the moods.txt
+	*/
 void printWeightingMatrix(moodWeighting moodArray[], int amountOfMoods){
   printf("\n\n\n                             WEIGHTINGS\n");
   printf("                 Mode | Tempo | Tone length | Pitch\n");
@@ -996,9 +1009,9 @@ void printWeightingMatrix(moodWeighting moodArray[], int amountOfMoods){
   *@param mode is an integer defining what mode the melody has 
 	*@param tempo is an integer defining the the amount of BPM
 	*@param toneLength is an integer defining the toneLengths in the song
-	*@param pitch is an integer defining the octaves in teh song
-	*@param result ..?
-	*@param amountOfMoods ..?
+	*@param pitch is an integer defining the octaves in the song
+	*@param vectorMatrixResult is an array containing the results from the vector matrix product
+  *@param amountOfMoods is an integer equal to the amount of moods in the moods.txt
 	*/
 void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, int toneLength,
                               int pitch, int vectorMatrixResult[], int amountOfMoods){
@@ -1049,8 +1062,8 @@ void printVectorMatrixProduct(moodWeighting moodArray[], int mode, int tempo, in
   *if it is most happy or sad and how much
 	*@param moodArray is an array that contains the moods
 	*@param moodOfMelody is an integer that defines which mood the melody is
-	*@param result is an array containing ??
-  *@param amountOfMoonds is ??
+	*@param vectorMatrixResult is an array containing the results from the vector matrix product
+  *@param amountOfMoods is an integer equal to the amount of moods in the moods.txt
   */
 void printHappySadScale(moodWeighting moodArray[], int moodOfMelody, int vectorMatrixResult[], int amountOfMoods){
   int test = 0;
