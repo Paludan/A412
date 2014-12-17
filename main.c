@@ -215,7 +215,7 @@ int main(int argc, const char *argv[]){
 }
 
 /**Error check for integer array allocation, exits program if an error is found
-  *@param integer a pointer to the array the program is trying to allokate
+  *@param allocArray a void-pointer to the array or file the program processing
   */
 void checkForError(void *allocArray){
   if(allocArray == NULL){
