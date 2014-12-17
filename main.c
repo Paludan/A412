@@ -110,9 +110,7 @@ typedef struct{
 } eventPlacement;
 
 /*Prototypes*/
-void fileError(FILE *);
-void intError(int *);
-void noteError(note *);
+void checkForError(void *);
 void printDirectory(DIR*);
 void chooseTrack(char*, DIR*);
 int readAndInsertMIDIFile(FILE*, int[]);
@@ -156,7 +154,7 @@ int main(int argc, const char *argv[]){
   int numbersInText = 0, potentialNotes = 0, mode = 0, tempo = 0, toneLength = 0, pitch = 0,
       amountOfNotes = 0, amountOfMoods = 0;
   FILE* moods = fopen("moods.txt", "r");
-  fileError(moods);
+  checkForError((void*) moods);
   char MIDIfile[25];
   DIR *dir = 0;
   FILE *f;
@@ -165,18 +163,18 @@ int main(int argc, const char *argv[]){
   moodWeighting moodArray[amountOfMoods];
   globalMelodyInfo info;
   int *hex = (int *) malloc(CHARS * sizeof(int));
-  intError(hex);
+  checkForError((void*) hex);
   
   /* User input and error check */
   if (argv[1] == NULL){
     printDirectory(dir);
     chooseTrack(MIDIfile, dir);
     f = fopen(MIDIfile, "r");  
-    fileError(f);
+    checkForError((void*) f);
   }
   else if(argv[1] != NULL){
     f = fopen(argv[1],"r");
-    fileError(f);
+    checkForError((void*) f);
   }
     
   /* Reading the data from the file */
@@ -186,7 +184,7 @@ int main(int argc, const char *argv[]){
   
   /* Arrays */
   note *noteAr = (note*) malloc(potentialNotes * sizeof(note));
-  noteError(noteAr);
+  checkForError((void*) noteAr);
   placement = (eventPlacement*) malloc(potentialNotes * sizeof(eventPlacement));
   if(placement == NULL){
     printf("Error in allocating space for events\n");
@@ -216,32 +214,12 @@ int main(int argc, const char *argv[]){
   return 0;
 }
 
-/**Errorcheck for file openening, exits the program if an error is found
-  *@param file a pointer to the file the program is trying to open
-  */
-void fileError(FILE *file){
-  if(file == NULL){
-    perror("Error opening file");
-    exit(EXIT_FAILURE);
-  }
-}
-
 /**Error check for integer array allocation, exits program if an error is found
   *@param integer a pointer to the array the program is trying to allokate
   */
-void intError(int *integer){
-  if(integer == NULL){
-    printf("Memory allocation failed, bye!");
-    exit(EXIT_FAILURE);
-  }
-}
-
-/**Error check for note struct array allocation, exits program if an error is found
-  *@param noteAr a poubter to the array of note-structs the program is trying to allokate
-  */
-void noteError(note *noteAr){
-  if(noteAr == NULL){
-    printf("Memory allocation failed, bye!");
+void checkForError(void *allocArray){
+  if(allocArray == NULL){
+    printf("There was an error, exiting\n!");
     exit(EXIT_FAILURE);
   }
 }
@@ -287,7 +265,7 @@ void chooseTrack(char *MIDIfile, DIR *dir){
       if((musicDir = readdir (dir)) != NULL && i == (musicNumber))
         strcpy(MIDIfile, musicDir->d_name);
 
-    printf("\n You Choose \n %s\n Which gives these results\n", MIDIfile);
+    printf("\n You chose \n %s\n Which gives these results\n", MIDIfile);
   } 
   else{
     perror ("Failure while opening directory");
