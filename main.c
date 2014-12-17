@@ -162,8 +162,8 @@ int main(int argc, const char *argv[]){
   amountOfMoods = findMoodAmount(moods);
   moodWeighting moodArray[amountOfMoods];
   globalMelodyInfo info;
-  int *hex = (int *) malloc(CHARS * sizeof(int));
-  checkForError((void*) hex);
+  int *byteAr = (int *) malloc(CHARS * sizeof(int));
+  checkForError((void*) byteAr);
   
   /* User input and error check */
   if (argv[1] == NULL){
@@ -178,9 +178,9 @@ int main(int argc, const char *argv[]){
   }
     
   /* Reading the data from the file */
-  numbersInText = readAndInsertMIDIFile(f, hex);
-  fillSongData(&info, hex, numbersInText);
-  potentialNotes = countPotentialNotes(hex, numbersInText);
+  numbersInText = readAndInsertMIDIFile(f, byteAr);
+  fillSongData(&info, byteAr, numbersInText);
+  potentialNotes = countPotentialNotes(byteAr, numbersInText);
   
   /* Arrays */
   note *noteAr = (note*) malloc(potentialNotes * sizeof(note));
@@ -193,7 +193,7 @@ int main(int argc, const char *argv[]){
   int result[amountOfMoods];
 
   /* Load files, calculate points and processes points */
-  findEvents(numbersInText, hex, placement, noteAr, &amountOfNotes);
+  findEvents(numbersInText, byteAr, placement, noteAr, &amountOfNotes);
   deltaTimeToNoteLength(info.ppqn, amountOfNotes, noteAr);
   insertMoods(moodArray, moods, amountOfMoods);
   findMode(noteAr, amountOfNotes, &info);
@@ -208,7 +208,7 @@ int main(int argc, const char *argv[]){
   fclose(moods);
   closedir(dir);
   free(placement);
-  free(hex);
+  free(byteAr);
   free(noteAr);
 
   return 0;
@@ -275,17 +275,17 @@ void chooseTrack(char *MIDIfile, DIR *dir){
   chdir("./Music");
 }
 
-/**A function, that retrieves the hexadecimals from the files and
+/**A function, that retrieves the bytes from the MIDI-file and
   *also returns the number of bytes in the file
   *@param *f a pointer to the file the program is reading from
-  *@param hexAr[] an array of integers, that the information is stored in
+  *@param byteAr[] an array of integers, that the information is stored in
   *@return i the number of bytes in the file
   */
-int readAndInsertMIDIFile(FILE *f, int hexAr[]){
+int readAndInsertMIDIFile(FILE *f, int byteAr[]){
   int i = 0, c;
   
   while( (c = fgetc(f)) != EOF && i < CHARS){
-    hexAr[i] = c;
+    byteAr[i] = c;
     i++;
   }
 
@@ -293,15 +293,15 @@ int readAndInsertMIDIFile(FILE *f, int hexAr[]){
 }
 
 /**A function to count the number of notes in the entire song
-  *@param hex[] an array with the stored information from the file
+  *@param byteAr[] an array with the stored information from the file
   *@param amount an integer holding the total number of characters in the array
   *@return res the maximum number of possible notes in the file
   */
-int countPotentialNotes(int hex[], int amount){
+int countPotentialNotes(int byteAr[], int amount){
   int i = 0, res = 0;
   
   for(i = 0; i < amount; i++){
-    if(hex[i] == HEX_90){
+    if(byteAr[i] == HEX_90){
       res++;
     }
   }
@@ -311,99 +311,99 @@ int countPotentialNotes(int hex[], int amount){
 
 /**A function, that inserts ppqn and tempo to the info array
   *@param *info a pointer to a structure containing the tempo and mode of the song
-  *@param hex[] the array of integers read from the file
+  *@param byteAr[] the array of integers read from the file
   *@param numbersInText the total amount of integers in the array
   */
-void fillSongData(globalMelodyInfo *info, int hex[], int numbersInText){
-  info->ppqn = (hex[12] << CONVERT_SECOND_BYTE) + hex[13];
+void fillSongData(globalMelodyInfo *info, int byteAr[], int numbersInText){
+  info->ppqn = (byteAr[12] << CONVERT_SECOND_BYTE) + byteAr[13];
   
   for(int j = 0; j < numbersInText; j++)
     /* finds the tempo */
-    if(hex[j] == META_EVENT && hex[j+1] == TEMPO_EVENT_BYTE_1 && hex[j+2] == TEMPO_EVENT_BYTE_2)
-      info->tempo =  MICRO_SECONDS_PER_MINUTE/((hex[j+3] << CONVERT_THIRD_BYTE) | (hex[j+4] << CONVERT_SECOND_BYTE) |
-                     (hex[j+5]));
+    if(byteAr[j] == META_EVENT && byteAr[j+1] == TEMPO_EVENT_BYTE_1 && byteAr[j+2] == TEMPO_EVENT_BYTE_2)
+      info->tempo =  MICRO_SECONDS_PER_MINUTE/((byteAr[j+3] << CONVERT_THIRD_BYTE) | (byteAr[j+4] << CONVERT_SECOND_BYTE) |
+                     (byteAr[j+5]));
 }
 
 /**Searches the file for events and stores their placement in an array of eventPlacement structs
   *@param numbersInText the total amount of numbers in the MIDI-file
-  *@param hex an array containing all the data from the MIDI-file
+  *@param byteAr an array containing all the data from the MIDI-file
   *@param placement an array storing the places of each event
   *@param noteAr an array containing all the notes in the song
-  *@param amountOfNotes the number of hexadecimal 90'ies in the file
+  *@param amountOfNotes the maximum possible amount of notes in the song
   */
-void findEvents(int numbersInText, int hex[], eventPlacement placement[], note noteAr[],
+void findEvents(int numbersInText, int byteAr[], eventPlacement placement[], note noteAr[],
                                                                int *amountOfNotes){
   int noteOff = 0, noteOn = 0, afterTouch = 0, controlChange = 0,
       programChange = 0, channelPressure = 0, pitchWheel = 0;
   
   for(int j = 0; j < numbersInText; j++)
-    switch (hex[j]){
-      case NOTE_ON         : insertPlacementWhenTwoParameters(hex, &placement[noteOn++].noteOn, j,
+    switch (byteAr[j]){
+      case NOTE_ON         : insertPlacementWhenTwoParameters(byteAr, &placement[noteOn++].noteOn, j,
                                               noteAr, amountOfNotes);
                              break;
-      case NOTE_OFF        : insertPlacementWhenTwoParameters(hex, &placement[noteOff++].noteOff, j,
+      case NOTE_OFF        : insertPlacementWhenTwoParameters(byteAr, &placement[noteOff++].noteOff, j,
                                               noteAr, amountOfNotes);
                              break;
-      case AFTER_TOUCH     : insertPlacementWhenTwoParameters(hex, &placement[afterTouch++].afterTouch, j,
+      case AFTER_TOUCH     : insertPlacementWhenTwoParameters(byteAr, &placement[afterTouch++].afterTouch, j,
                                               noteAr, amountOfNotes);
                              break;
-      case CONTROL_CHANGE  : insertPlacementWhenTwoParameters(hex, &placement[controlChange++].controlChange, j,
+      case CONTROL_CHANGE  : insertPlacementWhenTwoParameters(byteAr, &placement[controlChange++].controlChange, j,
                                               noteAr, amountOfNotes);
                              break;
-      case PROGRAM_CHANGE  : insertPlacementWhenOneParameter(hex, &placement[programChange++].programChange, j);
+      case PROGRAM_CHANGE  : insertPlacementWhenOneParameter(byteAr, &placement[programChange++].programChange, j);
                              break;
-      case CHANNEL_PRESSURE: insertPlacementWhenOneParameter(hex, &placement[channelPressure++].channelPressure, j);
+      case CHANNEL_PRESSURE: insertPlacementWhenOneParameter(byteAr, &placement[channelPressure++].channelPressure, j);
                              break;
-      case PITCH_WHEEL     : insertPlacementWhenTwoParameters(hex, &placement[pitchWheel++].pitchWheel, j,
+      case PITCH_WHEEL     : insertPlacementWhenTwoParameters(byteAr, &placement[pitchWheel++].pitchWheel, j,
                                               noteAr, amountOfNotes);
                              break;
       default              : break;
     }
-  findTicks(numbersInText, hex, placement, noteAr, noteOn);
+  findTicks(numbersInText, byteAr, placement, noteAr, noteOn);
 }
 
 /**Used to determine if an event with two parameters truly is an event-start
-  *@param hex an array containing all values of the hexadecimals in the MIDI-file
-  *@param place a pointer to the index of the found event in the hex-array
-  *@param j the place on which the event is found in the hex-array
+  *@param byteAr an array containing all values of the bytes in the MIDI-file
+  *@param place a pointer to the index of the found event in the byte-array
+  *@param j the place on which the event is found in the byte-array
   *@param noteAr the array of notes in the song is stored here
   *@param amountOfNotes an integer, that counts the amount of notes
   */
-void insertPlacementWhenTwoParameters(int hex[], int *place, int j, note noteAr[], int *amountOfNotes){
+void insertPlacementWhenTwoParameters(int byteAr[], int *place, int j, note noteAr[], int *amountOfNotes){
   int i = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
-  while(i < MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(j + i++)] > NOTE_OFF);
+  while(i < MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END && byteAr[(j + i++)] > NOTE_OFF);
   
-  if(isNextByteAnEvent(hex, (j + i))){
+  if(isNextByteAnEvent(byteAr, (j + i))){
     *place = j;
-    if(hex[j] == NOTE_ON){
-      fillNote(hex[j + 1], &noteAr[*amountOfNotes]);
+    if(byteAr[j] == NOTE_ON){
+      fillNote(byteAr[j + 1], &noteAr[*amountOfNotes]);
       *amountOfNotes += 1;
     }   
   } 
 }
 
 /**Does the same as insertPlacementWhenTwoParameters, but for the two events that only takes one parameter
-  *@param hex the array of all the decimals in the MIDI-file
+  *@param byteAr the array of all the bytes in the MIDI-file
   *@param place 
   *@param j the place on which the event is found
   */
-void insertPlacementWhenOneParameter(int hex[], int *place, int j){
+void insertPlacementWhenOneParameter(int byteAr[], int *place, int j){
   int i = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
-  while(i < MAX_LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME_END && hex[(j + i++)] > NOTE_OFF);
+  while(i < MAX_LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME_END && byteAr[(j + i++)] > NOTE_OFF);
   
-  if(isNextByteAnEvent(hex, (j + i)))
+  if(isNextByteAnEvent(byteAr, (j + i)))
     *place = j;
 }
 
 /**Returns a boolean value, used to check if the given place is an event
-  *@param hex an array of all decimals in the MIDI-file
+  *@param byteAr an array of all decimals in the MIDI-file
   *@param j the place where the function looks for the event
   *@return returns 1 if it's an event, 0 if it's not.
   */
-int isNextByteAnEvent(int hex[], int j){
-  switch (hex[j]){
+int isNextByteAnEvent(int byteAr[], int j){
+  switch (byteAr[j]){
     case NOTE_ON         :
     case NOTE_OFF        :
     case AFTER_TOUCH     :
@@ -418,90 +418,90 @@ int isNextByteAnEvent(int hex[], int j){
 /**Analyses ticks for every noteOn event by a for loop which begins in the noteOn events start and
   *searches until the note-off event is found
   *@param numbersInText the total amount of numbers in the MIDI-file
-  *@param hex an array containing all the decimals in the MIDI-file
+  *@param byteAr an array containing all the decimals in the MIDI-file
   *@param placement an array of 
   *@param noteAr the array of notes in the song is stored here
   *@param noteOn the total amount of note-on events in the MIDI-file
   */
-void findTicks(int numbersInText, int hex[], eventPlacement placement[], note noteAr[], int noteOn){
+void findTicks(int numbersInText, int byteAr[], eventPlacement placement[], note noteAr[], int noteOn){
   int tickCounter = 0;
   
   for(int j = 0; j < noteOn; j++){
     for(int i = placement[j].noteOn; i < numbersInText; i++){
-      if(hex[i] == NOTE_OFF){
-        if(hex[i + 1] == noteAr[j].noteValue){
+      if(byteAr[i] == NOTE_OFF){
+        if(byteAr[i + 1] == noteAr[j].noteValue){
           tickCounter++;
           break;
         }
         else
-          countTicksWhenTwoParameters(hex, &i, noteAr, &tickCounter);
+          countTicksWhenTwoParameters(byteAr, &i, noteAr, &tickCounter);
       }
-      else if(hex[i] == AFTER_TOUCH){
-        if(hex[i + 1] == noteAr[j].noteValue && hex[i + 2] == ZERO){
+      else if(byteAr[i] == AFTER_TOUCH){
+        if(byteAr[i + 1] == noteAr[j].noteValue && byteAr[i + 2] == ZERO){
           tickCounter++;
           break;
         }
         else
-          countTicksWhenTwoParameters(hex, &i, noteAr, &tickCounter);
+          countTicksWhenTwoParameters(byteAr, &i, noteAr, &tickCounter);
       }
-      else if(hex[i] == CHANNEL_PRESSURE){
-        if(hex[i + 1] == ZERO){
+      else if(byteAr[i] == CHANNEL_PRESSURE){
+        if(byteAr[i + 1] == ZERO){
           tickCounter++;
           break;
         }  
         else
-          countTicksWhenOneParameter(hex, &i, noteAr, &tickCounter);
+          countTicksWhenOneParameter(byteAr, &i, noteAr, &tickCounter);
       }
-      else if(hex[i] == PROGRAM_CHANGE)
-        countTicksWhenOneParameter(hex, &i, noteAr, &tickCounter);
+      else if(byteAr[i] == PROGRAM_CHANGE)
+        countTicksWhenOneParameter(byteAr, &i, noteAr, &tickCounter);
       else
-        countTicksWhenTwoParameters(hex, &i, noteAr, &tickCounter);   
+        countTicksWhenTwoParameters(byteAr, &i, noteAr, &tickCounter);   
     }
   }
 }
 
 /**A function to count the deltatime ticks of a given event with two parameters
-  *@param hex an array containing all the data from the MIDI-file
+  *@param byteAr an array containing all the data from the MIDI-file
   *@param i a pointer to the place of the prosessed event, increased here to the start of next event
   *@param deltaCounter the distance between eventstart and deltatime start
   *@param noteAr is an array containing all notes of the MIDI-file
   *@param tickCounter used as an index the correct note
   */
-void countTicksWhenTwoParameters(int hex[], int *i, note noteAr[], int *tickCounter){
+void countTicksWhenTwoParameters(int byteAr[], int *i, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0, deltaCounter = LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
   while(deltaCounter < MAX_LENGTH_FROM_TWO_PARAMETER_EVENT_START_TO_DELTA_TIME_END &&
-        hex[(*i + deltaCounter)] > HEX_80)
-    tick += ((hex[(*i + deltaCounter++)] - HEX_80) << CONVERT_TO_TICKS);
+        byteAr[(*i + deltaCounter)] > HEX_80)
+    tick += ((byteAr[(*i + deltaCounter++)] - HEX_80) << CONVERT_TO_TICKS);
   
-  tick += hex[(*i + deltaCounter)];
+  tick += byteAr[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
   *i += deltaCounter;
 }
 
 /**A function to count the deltatime ticks of a given event with one parameter
-  *@param hex an array containing all the data from the MIDI-file
+  *@param byteAr an array containing all the data from the MIDI-file
   *@param i a pointer to the place of the prosessed event, increased here to the start of next event
   *@param deltaCounter the distance between eventstart and deltatime start
   *@param noteAr is an array containing all notes of the MIDI-file
   *@param tickCounter used as an index the correct note
   */
-void countTicksWhenOneParameter(int hex[], int *i, note noteAr[], int *tickCounter){
+void countTicksWhenOneParameter(int byteAr[], int *i, note noteAr[], int *tickCounter){
   noteAr[*tickCounter].ticks = 0;
   int tick = 0, deltaCounter = LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME;
   
   while(deltaCounter < MAX_LENGTH_FROM_ONE_PARAMETER_EVENT_START_TO_DELTA_TIME_END &&
-        hex[(*i + deltaCounter)] > HEX_80)
-    tick += ((hex[(*i + deltaCounter++)] - HEX_80) << CONVERT_TO_TICKS);
+        byteAr[(*i + deltaCounter)] > HEX_80)
+    tick += ((byteAr[(*i + deltaCounter++)] - HEX_80) << CONVERT_TO_TICKS);
   
-  tick += hex[(*i + deltaCounter)];
+  tick += byteAr[(*i + deltaCounter)];
   noteAr[*tickCounter].ticks += tick;
   *i += deltaCounter;
 }
 
 /**A function to fill out each of the structures of type note
-  *@param inputTone the value of the hexadecimal collected on the "tone"-spot
+  *@param inputTone the bytevalue of the collected on the "tone"-byte
   *@param note* a pointer to a note-structure
 */
 void fillNote(int inputTone, note *note){
