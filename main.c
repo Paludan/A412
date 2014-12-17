@@ -1,4 +1,4 @@
-/*@file
+/*Mood analysing of MIDI-files
  * Gruppe A412
  * Lee Paludan
  * Simon Madsen
@@ -196,7 +196,7 @@ int main(int argc, const char *argv[]){
   }
   int result[amountOfMoods];
 
-  /* Find parameters, calculate points and processes points */
+  /* Load files, calculate points and processes points */
   findEvents(numbersInText, hex, placement, noteAr, &amountOfNotes);
   deltaTimeToNoteLength(info.ppqn, amountOfNotes, noteAr);
   insertMoods(moodArray, moods, amountOfMoods);
@@ -319,7 +319,7 @@ int getHex(FILE *f, int hexAr[]){
 /**A function to count the number of notes in the entire song
   *@param hex[] an array with the stored information from the file
   *@param amount an integer holding the total number of characters in the array
-  *@return res the number of hexadecimal 90'ies in the file
+  *@return res the maximum number of possible notes in the file
   */
 int countPotentialNotes(int hex[], int amount){
   int i = 0, res = 0;
