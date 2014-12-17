@@ -134,11 +134,12 @@ void findTicks(int, int [], eventPlacement [], note [], int);
 void countTicksWhenTwoParameters(int [], int*, note [], int*);
 void countTicksWhenOneParameter(int [], int*, note [], int*);
 void deltaTimeToNoteLength(int, int, note*);
+void findMode(note*, int, globalMelodyInfo*);
+void checkScale(int[], int, int);
 int isInScale(int, int[], int);
 int isInMinor(int);
 int isInMajor(int);
 int sortToner(const void*, const void*);
-void findMode(note*, int, globalMelodyInfo*);
 void checkScalesForToneleaps(int [], int [], int, note[]);
 void checkMelodyScale(int [], int [], int, note [], int*);
 void returnToStruct(int, globalMelodyInfo *);
@@ -735,18 +736,6 @@ int sortTones(const void *a, const void *b){
   return (*(int *)a - *(int *)b);
 }
 
-/**Checks if the tone given is within the scale of the key given.
-  *@param scales An array containing the scalas
-  *@param tone An integer representing the tone to be checked
-  *@param key Integer representing the key the note is compared to
-  */
-void checkScale(int scales[], int tone, int key){
-  if(tone < key)
-    tone += 12;
-  
-  scales[key] = isInMajor(tone - key);
-}
-
 /**A function to find the mode of the song by first calculating the tone span over sets of notes
   *in the song and then comparing it to the definition of minor and major keys
   *@param noteAr An array of all the notes in the entire song
@@ -787,6 +776,18 @@ void checkScalesForToneleaps(int majors[], int minors[], int totalNotes, note no
       minors[z-3] = 1;
     }
   }
+}
+
+/**Checks if the tone given is within the scale of the key given.
+  *@param scales An array containing the scalas
+  *@param tone An integer representing the tone to be checked
+  *@param key Integer representing the key the note is compared to
+  */
+void checkScale(int scales[], int tone, int key){
+  if(tone < key)
+    tone += 12;
+  
+  scales[key] = isInMajor(tone - key);
 }
 
 /**Goes through all notes of the song and puts them into an array, 4 at a time
@@ -834,17 +835,6 @@ void checkMelodyScale(int majors[], int minors[], int totalNotes, note noteAr[],
       x++;
     }
   }
-}
-
-/**outputs result directly to the info struct array
-  *@param the mode integer contains the point value of the mode result
-	*@param info is used to change the mode value
-  */
-void returnToStruct(int mode, globalMelodyInfo *info){
-  if(mode > 0)
-    info->mode = major;
-  else if(mode < 0)
-    info->mode = minor;
 }
 
 /**A function to check if a given scale in given keytone corresponds with the tones in the rest
@@ -908,6 +898,17 @@ int isInMajor(int toneLeap){
       return 1;
   
   return 0;
+}
+
+/**outputs result directly to the info struct array
+  *@param the mode integer contains the point value of the mode result
+	*@param info is used to change the mode value
+  */
+void returnToStruct(int mode, globalMelodyInfo *info){
+  if(mode > 0)
+    info->mode = major;
+  else if(mode < 0)
+    info->mode = minor;
 }
 
 /**Returns the amount of moods written in the moods text file
